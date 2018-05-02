@@ -6,7 +6,7 @@
 					<div>
 						<p class="time">发布时间：{{tmp.publishTime|filterConvertDate}}
 							<span>
-								<span v-if="tmp.selectState == 10">正在进行</span>
+								<span class="colorGreen" v-if="tmp.selectState == 10">正在进行</span>
 								<span v-else>已结束</span>
 							</span>
 						</p>
@@ -16,7 +16,9 @@
 					<div class="mui-card-content-inner mui-navigate-right" @click="toDetail(tmp.selectId)">
 						<!--线路10-->
 						<div v-if="tmp.selectType == 10">
-							<h5>{{tmp.fromCity}}→{{tmp.goCity}}<img class="" src="" alt="" /></h5>
+							<h5>{{tmp.fromCity}}→{{tmp.goCity}}
+								<aby-icon-color class="mui-pull-right" type="nowlocation"></aby-icon-color>
+							</h5>
 							<p>出行时间： {{tmp.fromTime|filterConvertDate}}</p>
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
 							<p>天数：{{tmp.selectDays}}</p>
@@ -24,7 +26,9 @@
 						</div>
 						<!--酒店20-->
 						<div v-if="tmp.selectType == 20">
-							<h5>预定{{tmp.hotelAddress}}酒店<img class="" src="" alt="" /></h5>
+							<h5>预定{{tmp.hotelAddress}}酒店
+								<aby-icon-color class="mui-pull-right" type="hotel"></aby-icon-color>
+							</h5>
 							<p>入住时间：{{tmp.liveTime|filterConvertDate}}</p>
 							<p>离店时间：{{tmp.endTime}}</p>
 							<p>房间数：{{tmp.roomNum}}</p>
@@ -32,7 +36,9 @@
 						</div>
 						<!--机票30-->
 						<div v-if="tmp.selectType == 30">
-							<h5>{{tmp.fromCity}}→{{tmp.goCity}}<img class="" src="" alt="" /></h5>
+							<h5>{{tmp.fromCity}}→{{tmp.goCity}}
+								<aby-icon-color class="mui-pull-right" type="pticket"></aby-icon-color>
+							</h5>
 							<p>航程类型：{{tmp.ticketType}} </p>
 							<p>出发时间：{{tmp.fromTime|filterConvertDate}}</p>
 							<p>返程时间：{{tmp.endTime}}</p>
@@ -40,7 +46,9 @@
 						</div>
 						<!--机+酒40-->
 						<div v-if="tmp.selectType == 40">
-							<h5>预定{{tmp.goCity}}机票和酒店<img class="" src="" alt="" /></h5>
+							<h5>预定{{tmp.goCity}}机票和酒店
+								<aby-icon-color class="mui-pull-right" type="planhotel"></aby-icon-color>
+							</h5>
 							<p>出发地：{{tmp.fromCity}}</p>
 							<p>出发时间：{{tmp.fromTime|filterConvertDate}}</p>
 							<p>返程时间：{{tmp.endTime}}</p>
@@ -51,13 +59,21 @@
 						</div>
 						<!--景点50-->
 						<div v-if="tmp.selectType == 50">
-							<h5>预定{{tmp.scenicName}}门票<img class="" src="" alt="" /></h5>
+							<h5>预定{{tmp.scenicName}}门票
+								<aby-icon-color class="mui-pull-right" type="sticket"></aby-icon-color>
+							</h5>
 							<p>游玩时间：{{tmp.playScenicTime|filterConvertDate}}</p>
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
 						</div>
 						<!--导游60-->
 						<div v-if="tmp.selectType == 60">
-							<h5>寻找嘉兴导游<img class="" src="" alt="" /></h5><p>目的地：嘉兴</p><p>接团地：嘉兴 </p><p>出行时间：2018-7-21 </p><p>行程天数：3天 </p>
+							<h5>寻找嘉兴导游
+								<aby-icon-color class="mui-pull-right" type="guide"></aby-icon-color>
+							</h5>
+							<p>目的地：嘉兴</p>
+							<p>接团地：嘉兴 </p>
+							<p>出行时间：2018-7-21 </p>
+							<p>行程天数：3天 </p>
 						</div>
 					</div>
 				</div>
@@ -127,34 +143,48 @@
 </script>
 
 <style scoped>
-	.list-item{
-		margin: 10px;
-	}
 	.mui-card {
 		font-size: 14px;
-		margin: 0px;
+		margin: 10px!important;
 		border-radius: 0px;
 		background-color: #fff;
-		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+		-webkit-box-shadow: 0px 0px 3px 0px rgba(187, 187, 187, .6);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
-		line-height: 25px;
-		border-radius: 3px;
+		line-height: 20px;
+		border-radius: 4px;
+		box-shadow: 0px 0px 3px 0px rgba(187, 187, 187, .6);
+		border: 1px solid rgba(255, 255, 255, 1);
 	}
 	
 	.mui-card p {
 		margin: 0px;
 	}
 	
+	.mui-card h5 {
+		color: #232323;
+		font-weight: 500;
+	}
+	
+	.mui-media-body {
+		padding-right: 30px;
+	}
+	
+	.mui-card-footer {
+		color: #232323;
+	}
+	
 	.time span {
 		float: right;
 	}
-	.time img {
-		width: 12px;
-		height: 12px;
-		margin-right: 5px;
-	}
-	.mui-card-content-inner h5 img{
-		float: right;
+	
+	/*询价类型*/
+	
+	.ptype {
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		right: 10px;
+		top: 8px;
 	}
 	.purchase-btn-group{
 		text-align: right;
@@ -170,5 +200,13 @@
 		border-radius: 15px;
 		border: 1px solid #53D8CC;
 		color: #53D8CC;
+	}
+	.colorGreen{
+		color: #08C7B5;
+	}
+	/*图标大小*/
+	svg:not(:root){
+		width: 23px;
+		height: 23px;
 	}
 </style>

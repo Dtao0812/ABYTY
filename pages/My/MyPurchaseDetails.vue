@@ -4,8 +4,14 @@
 		<div slot="content" class="mui-content">
 			<div class="aby-detail" v-if="data">
 				<div class="aby-detail-header">
-					<aby-icon className="mui-pull-right" type="clock"></aby-icon>
-					<span :id="data.selectId"></span>
+					<span class="colorGreen" v-if="data.selectState == 10">正在进行</span>
+					<span v-else>已结束</span>
+					<aby-icon-color v-if="data.selectType == 10" class="mui-pull-right" type="nowlocation"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 20" class="mui-pull-right" type="hotel"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 30" class="mui-pull-right" type="pticket"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 40" class="mui-pull-right" type="planhotel"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 50" class="mui-pull-right" type="sticket"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 60" class="mui-pull-right" type="guide"></aby-icon-color>
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-content">
@@ -282,13 +288,6 @@
 				this.$refs.page.isLoading = false;
 			},(err)=>{this.$refs.page.isLoading = false;});
 		},
-		updated(){
-			//初始化倒计时
-			console.log(this.data)
-			if(this.data.selectState == 10){
-				console.log(this.$tool.countdown(this.data.outServTime, this.data.selectId));
-			}
-		}
 	}
 </script>
 
@@ -346,5 +345,9 @@
 	}
 	.aby-detail-btn span{
 		display: block;
+	}
+	svg:not(:root){
+		width: 23px;
+		height: 23px;
 	}
 </style>

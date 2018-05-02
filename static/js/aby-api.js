@@ -460,9 +460,12 @@ const User = {
 			}
 		}
 		//执行提交任务
+		console.log('files1:'+files);
+		console.log('requestData:'+JSON.stringify(requestData));
 		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
 			callBack && callBack(true);
 		}, function(err) {
+			console.log('err结果：'+err)
 			callBack && callBack(false);
 		});
 	}

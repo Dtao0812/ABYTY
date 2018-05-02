@@ -94,6 +94,7 @@ import PayGold from '../pages/Pay/PayGold.vue'
 import Scan from '../pages/Scanbarcode/Scan.vue'
 //专题模块
 import SpecialLine from '../pages/Special/line.vue'
+import SpecialHotel from '../pages/Special/hotel.vue'
 
 const router = new Router({
 	routes: [
@@ -179,6 +180,7 @@ const router = new Router({
 		{ name: 'scan',path: '/Scan',component: Scan },
 		//专题模块
 		{ name: 'specialLine',path: '/SpecialLine',component: SpecialLine },
+		{ name: 'specialHotel',path: '/SpecialHotel',component: SpecialHotel },
 	]
 })
 

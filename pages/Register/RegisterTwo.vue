@@ -36,9 +36,9 @@
 			}
 		},
 		methods: {
-			onSelectPicker(selected) {
-				this.selectTitle = this.cpBtypeName = selected.text;
-				this.cpBtype = selected.value;
+			onSelectPicker(e) {
+				this.selectTitle = this.cpBtypeName = e.selected.text;
+				this.cpBtype = e.selected.value;
 				this.popupVisible = false;
 			},
 			toNext() {

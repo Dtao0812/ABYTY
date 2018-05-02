@@ -34,9 +34,11 @@ var plusFun = function(){
 	
 	// android返回键监听
 	var androidBackFirst = null;
-	plus.key.addEventListener("backbutton", function() {
+	plus.key.addEventListener('backbutton',function(){
+		console.log(111111111111111)
 		var index = ['index', 'home', 'purchase', 'order','message', 'my'];
 		if(Vue.$tool.isInAarry(index, store.state.tabActive)){
+			console.log(1)
 			// 判断是否首页框架
 			if(!androidBackFirst){
 				androidBackFirst = new Date().getTime();//记录第一次按下回退键的时间
@@ -49,9 +51,10 @@ var plusFun = function(){
 				if(new Date().getTime() - androidBackFirst < 1000)plus.runtime.quit();
 			}
 		}else{
-			 router.back();
+			console.log(2)
+			history.go(-1);
 		}
-	});
+	},false)
 };
 
 if(window.plus) {

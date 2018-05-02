@@ -432,10 +432,6 @@ const User = {
 	setBasicInfo(requestInfo,callBack){
 		var requestData = {
 			act: 'CPU204',
-			osType : 2,
-			deviceId : store.state.deviceId,
-			version : store.state.version,
-			user_token : store.state.user_token,
 			cpBasic: {
 				cpId: requestInfo.cpId,
 				cpMidBrand: requestInfo.cpMidBrand,

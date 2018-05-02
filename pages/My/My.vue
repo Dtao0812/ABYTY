@@ -8,7 +8,7 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;">
 				<li class="mui-table-view-cell mui-media person">
-					<a href="#/homePage" class="mui-navigate-right">
+					<router-link class="mui-navigate-right" :to="{name:'homePage', params:{cpBtype: cpUserInfo.cpBasic.cpBtype, cpId: cpUserInfo.cpId, userId: cpUserInfo.userId}}">
 						<img class="mui-media-object mui-pull-left personpic" :src="cpUserInfo.cpBasic.cpLogo">
 						<!--组团-->
 						<img v-if="cpUserInfo.cpBasic.cpBtype==10" class="role" src="../../static/images/ico/ico_role_travel.png" />
@@ -19,7 +19,7 @@
 							{{cpUserInfo.userName}}
 							<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName}}</p>
 						</div>
-					</a>
+					</router-link>
 				</li>
 			</ul>
 			<!--菜单部分-->

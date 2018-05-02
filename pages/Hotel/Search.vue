@@ -17,7 +17,7 @@
 							<span></span>
 						</div>
 						<i class="mint-cell-allow-right"></i>
-						<div class="btnSelCity">
+						<div class="btnSelCity" style="display: none;">
 							<aby-icon type="nowlocation"></aby-icon>
 							<p>当前位置</p>
 						</div>
@@ -99,7 +99,7 @@
 	}
 	
 	.mint-cell-allow-right::after {
-		right: 120px;
+		right: 20px;
 		position: absolute;
 	}
 	

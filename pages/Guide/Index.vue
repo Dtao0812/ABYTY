@@ -2,7 +2,7 @@
 	<aby-pull>
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
-			<aby-icon slot="right" type="add" className="mui-pull-right" ></aby-icon>
+			<aby-icon slot="right" type="screen" className="mui-pull-right" ></aby-icon>
 		</aby-header>
 		<aby-navbar slot="navbar" @eventNavBack="eventBack" type="99" ref="navbar"></aby-navbar>
 		<aby-list slot="loadlist" ref="list" :list="lists"></aby-list>

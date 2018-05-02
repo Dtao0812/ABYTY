@@ -60,7 +60,5 @@ var plusFun = function(){
 if(window.plus) {
 	plusFun();
 } else { // 兼容老版本的plusready事件
-	document.addEventListener('plusready', function() {
-		plusFun();
-	}, false);
+	plusFun();
 }

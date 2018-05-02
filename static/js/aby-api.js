@@ -71,7 +71,7 @@ const Server = {
 	// 上传文件接口（手机app）
 	UploadFileByApp(apiName, files, data, sucesscallback, errorcallback, uploadingcallback) {
 		Vue.$tool.loading('正在提交...');
-		let apiUrl = AbyUrl + apiName;
+		let apiUrl = AbyUrl + 'aby/' + apiName;
 		let task = plus.uploader.createUpload(apiUrl, {
 				method: "POST"
 			},
@@ -236,7 +236,7 @@ const User = {
 	},
 	// 登录 - 自动登录（user_token）
 	autoLogin(successCallback, errorCallback){
-		let requestData = {act: 'CPU002',loading:requestInfo.loading,};
+		let requestData = {act: 'CPU002',loading:1,};
 		Server.getDataFromServer('cpUser',requestData,function(rtn){
 			store.commit('setUserInfo',rtn);
 		}, function(err){
@@ -406,6 +406,10 @@ const User = {
 	setMyInfo(requestInfo, callBack){
 		var requestData = {
 			act: 'CPU300',
+			osType : store.state.osType,
+			deviceId : store.state.deviceId,
+			version : store.state.version,
+			user_token : store.state.user_token,
 			cpUserInfo: {
 				userCuteName: requestInfo.userCuteName,
 				userPost: requestInfo.userPost,
@@ -432,6 +436,10 @@ const User = {
 	setBasicInfo(requestInfo,callBack){
 		var requestData = {
 			act: 'CPU204',
+			osType : store.state.osType,
+			deviceId : store.state.deviceId,
+			version : store.state.version,
+			user_token : store.state.user_token,
 			cpBasic: {
 				cpId: requestInfo.cpId,
 				cpMidBrand: requestInfo.cpMidBrand,

@@ -26,7 +26,7 @@
 					</a>
 				</li>
 			</ul>
-			<aby-list></aby-list>
+			<aby-list :list="chatList"></aby-list>
 		</div>
 	</div>
 </template>
@@ -38,9 +38,46 @@
 			AbyList
 		},
 		data() {
-			return {}
+			return {
+				chatList:[],//聊天列表
+			}
+		},
+		methods:{
+			init(){
+				this.getChatList();
+			},
+			// 获得聊天列表
+			getChatList(){
+				let list = [];
+				this.$abyDb.Im.get((res)=>{
+					if(res){
+						let info = res.value;
+						info.msgList = [];
+						info.noReadNum = 0;
+						info.sendUser = JSON.parse(info.content.extra);
+						let isAdd = true;
+						for(let i=0;i<list.length;i++){
+							if(list[i].targetId == info.targetId){
+								isAdd = false;
+								if(!info.isRead)list[i].noReadNum = list[i].noReadNum + 1;
+								list[i].msgList.push(info);
+							}
+						}
+						if(isAdd){
+							list.push(info);
+						}
+					}
+				});
+				this.chatList = list;
+			}
 		},
 		mounted() {
+			this.getChatList();
+			this.$parent.eventPageShow(this.$route.name);
+		},
+		activated() {
+			this.init();
+			// 底部导航栏
 			this.$parent.eventPageShow(this.$route.name);
 		},
 	}

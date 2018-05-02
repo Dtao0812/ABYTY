@@ -176,7 +176,7 @@ router.beforeEach((to, from, next) => {
 		[
 		 	'home','purchase','order','message','my',
 		 	'orderList','orderDetails','searchIndexResult','searchResult',
-		 	'agrList','chat',
+		 	'agrList','chat','purchaseDetails'
         ]; 
 	const fromKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, from.name);
 	const toKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, to.name);
@@ -225,7 +225,7 @@ router.beforeEach((to, from, next) => {
 	/*判断是否有权限访问*/
 	const userNotAuth = [
 		'index', 'home', 'purchase',
-		'login','registerOne','registerTwo','registerThree',
+		'login','registerOne','registerTwo','registerThree','setPassword',
 		'picExample','picWhy','picRegisteragre','picAuditType',
 	];//不需要验证的页面
 	

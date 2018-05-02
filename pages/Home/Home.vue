@@ -132,6 +132,17 @@
 			}
 		},
 		methods: {
+			init(){
+				if(this.$store.state.userId == '')return;
+				// 初始化数据库和融云服务器
+				this.$abyDb.Im.init((res)=>{
+					this.$abyApi.Chat.getNotReadMsg();
+					// 初始化融云
+					this.$abyApi.Chat.init();
+					// 接受融云消息
+					this.$abyApi.Chat.setReceiveMsgListener();
+				});
+			},
 			// 计算滚动条高度
 			handleScroll() {
 				this.scrollTop = document.getElementById("content").scrollTop;
@@ -157,14 +168,15 @@
 				this.$router.push({
 					name: 'msgSystem',
 				}); 
-			}
+			},
 		},
 		mounted() {
+			this.init();
 			this.$parent.eventPageShow(this.$route.name);
-
 			this.getGoodsList();
 		},
 		activated() {
+			this.init();
 			// 底部导航栏
 			this.getGoodsList();
 			this.$parent.eventPageShow(this.$route.name);

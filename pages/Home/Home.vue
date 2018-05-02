@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="home">
 		<aby-header title="" slot="header">
 			<div slot="back"></div>
 			<header-search slot="hSearch" disabled="true" @click.native="onSearch"></header-search>
@@ -63,7 +63,7 @@
 						<tr>
 							<td class="moduleHotel">
 								<img src="../../static/images/module/module_hotel_3x.png" />
-	
+
 							</td>
 							<td class="modulePlane">
 								<img src="../../static/images/module/module_plane_3x.png" />
@@ -88,10 +88,10 @@
 			</div>
 		</div>
 		<!--弹出框-->
-		<mt-popup v-model="popupPlus" popup-transition="popup-fade" class="mint-popup-1">
-	      <aby-icon class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="popupPlus=!popupPlus"></aby-icon>
-	      <aby-icon class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="popupPlus=!popupPlus"></aby-icon>
-	    </mt-popup>
+		<mt-popup v-model="popupPlus" popup-transition="popup-fade" position="top" class="mint-popup-1">
+			<p @click="toPublish"><aby-icon class="mui-icon mui-pull-right icon-plus" type="plus"></aby-icon>发布询价</p>
+			<p @click="toScan"><aby-icon class="mui-icon mui-pull-right icon-plus" type="plus"></aby-icon>扫一扫</p>
+		</mt-popup>
 	</div>
 
 </template>
@@ -134,14 +134,14 @@
 						data: ''
 					}
 				],
-				msgList:[]
+				msgList: []
 			}
 		},
 		methods: {
-			init(){
-				if(this.$store.state.userId == '')return;
+			init() {
+				if(this.$store.state.userId == '') return;
 				// 初始化数据库和融云服务器
-				this.$abyDb.Im.init((res)=>{
+				this.$abyDb.Im.init((res) => {
 					this.$abyApi.Chat.getNotReadMsg();
 					// 初始化融云
 					this.$abyApi.Chat.init();
@@ -173,8 +173,18 @@
 			toMsgList() {
 				this.$router.push({
 					name: 'msgSystem',
-				}); 
+				});
 			},
+			// 发布询价
+			toPublish(){
+				this.$router.push({
+					name:'purchasePublish'
+				});
+			},
+			// 扫一扫
+			toScan(){
+				
+			}
 		},
 		mounted() {
 			this.init();
@@ -187,6 +197,9 @@
 			this.getGoodsList();
 			this.$parent.eventPageShow(this.$route.name);
 		},
+		deactivated(){
+			this.popupPlus = false;
+		}
 	}
 </script>
 <style scoped>
@@ -305,12 +318,28 @@
 		background-color: #F0F0F0;
 	}
 	
-	.mint-popup-1{
-		top: 55px;
+	.mint-popup-1 {
+		top: 60px;
 		right: 0;
+		left: auto;
 		width: 100px;
 	}
-	.Router .v-modal{
-		background: rgba(0,0,0,0);
+	
+	.mint-popup-1::before {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		border: solid transparent;
+		border-top-width: medium;
+		border-right-width: medium;
+		border-bottom-width: medium;
+		border-left-width: medium;
+		border-bottom-color: transparent;
+		border-width: 10px;
+		border-bottom-color: #fff;
+		content: "";
+		position: absolute;
+		top: -20px;
+		right: 10px;
 	}
 </style>

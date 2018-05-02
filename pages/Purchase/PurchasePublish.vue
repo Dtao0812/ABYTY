@@ -669,7 +669,7 @@
 		width: 95px;
 	}
 	.mui-input-row{
-		height: 60px;
+		height: 60px!important;
 		line-height: 60px;
 		padding-top: 10px;
 	}

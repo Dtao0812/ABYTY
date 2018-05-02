@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="aby-bg-white">
 		<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @click="goBack(page)"></div>
 		<mt-search class="searchPanel" v-model="value" cancel-text="取消" @keyup.enter.native="onSearch" placeholder="搜索">
 			<div class="type-page-item  keyWordBtn" v-for="(li,i) in list" :key="i">
@@ -10,10 +10,10 @@
 			<br style="clear: both;" />
 		</mt-search>
 		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab"></aby-tab>
-		<div>
-			<h5>搜索历史</h5>
+		<div class="history">
+			<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete"></aby-icon></h5>
 			<div>
-				<span v-for="s in searchList" @click="onRecord(s)">{{s}}</span>
+				<span class="tip" v-for="s in searchList" @click="onRecord(s)">{{s}}</span>
 			</div>
 		</div>
 	</div>
@@ -48,9 +48,9 @@
 		methods: {
 			//返回上一页
 			goBack(page) {
-				if(page){
+				if(page) {
 					this.$router.go(-page)
-				}else{
+				} else {
 					this.$router.back();
 				}
 			},
@@ -132,7 +132,8 @@
 	.blue {
 		color: #99cb22!important;
 	}
-	.mui-action-back{
+	
+	.mui-action-back {
 		background-color: #FFFFFF;
 		height: 44px;
 		line-height: 39px;
@@ -144,4 +145,25 @@
 		z-index: 99;
 	}
 	
+	.history {
+		padding: 10px 15px 20px 15px;
+	}
+	
+	.history h5 {
+		margin-bottom: 10px;
+	}
+	
+	.history .tip {
+		background-color: #F0F0F0;
+		border-radius: 15px;
+		font-size: 14px;
+		padding: 5px 10px;
+		margin-right: 15px;
+		margin-top: 10px;
+	}
+	
+	.icodelete {
+		font-size: 15px;
+		background-color: #FFFFFF!important;
+	}
 </style>

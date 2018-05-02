@@ -16,7 +16,7 @@
 				</li>
 			</ul>
 			<div class="space"></div>
-			<aby-tab v-if="cpInfo.cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" slot="tab">
+			<aby-tab v-if="cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" slot="tab">
 				<div v-for="(li,i) in tabListTravel" :key="i" :slot="li.id">
 					<aby-information v-if="li.type=='infor'" :list="li.data"></aby-information>
 					<aby-contacts v-if="li.type=='contacts'" :list="li.data"></aby-contacts>
@@ -47,6 +47,7 @@
 		data() {
 			return {
 				cpInfo: this.$route.params, //路由传回参数
+				cpBtype: '',
 				cpUserInfo:this.$store.state.cpUserInfo,
 				basicInfo: {},
 				pageNum: 1,
@@ -107,6 +108,7 @@
 					res.cpUserInfo.cpBasic.cpHeadPhone = this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpHeadPhone);
 					res.cpUserInfo.cpBasic.cpTel = this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpTel);
 					this.tabListTravel[0].data = res.cpUserInfo.cpBasic;
+					this.cpBtype = res.cpUserInfo.cpBasic.cpBtype;
 				});
 			},
 			getDownProList() { //调产品下拉（地接）
@@ -141,6 +143,7 @@
 					res.cpBasic.cpHeadPhone = this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpHeadPhone);
 					res.cpBasic.cpTel = this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpTel);
 					this.tabListLocal[1].data = res.cpBasic;
+					this.cpBtype = res.cpBasic.cpBtype;
 				});
 			},
 			getBasicStaffList(data) { //调员工
@@ -149,7 +152,7 @@
 				reqInfo.cpId = this.cpInfo.cpId;
 				this.$abyApi.User.getBasicStaffList(reqInfo, (res) => {
 //					console.log('联系人：' + JSON.stringify(res));
-					if(this.cpInfo.cpBtype == 10) {
+					if(this.cpBtype == 10) {
 						this.tabListTravel[1].data = res.cpUserList;
 					}else{
 						this.tabListLocal[2].data = res.cpUserList;
@@ -157,7 +160,8 @@
 				})
 			},
 			initPageInfo() {
-				if(this.cpInfo.cpBtype == 10) {
+				console.log('cpBtype:'+this.cpBtype)
+				if(this.cpBtype == 10) {
 					this.getBasicInfo();
 					this.getBasicStaffList();
 				} else {

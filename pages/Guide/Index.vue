@@ -1,10 +1,10 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
-			<aby-icon slot="right" type="screen" className="mui-pull-right" ></aby-icon>
+			<aby-icon slot="right" type="screen" className="mui-pull-right" @click.native="toCityList"></aby-icon>
 		</aby-header>
-		<aby-navbar slot="navbar" @eventNavBack="eventBack" type="99" ref="navbar"></aby-navbar>
+		<aby-navbar slot="navbar" @eventNavBack="eventBack" noSearch="true" noScreen="true" type="99" ref="navbar"></aby-navbar>
 		<aby-list slot="loadlist" ref="list" :list="lists"></aby-list>
 	</aby-pull>
 </template>
@@ -18,7 +18,10 @@
 		},
 		data() {
 			return {
-				isShowSearch:false,title:'导游',pageNum:1,orderBy:1,lists:[],where:{}
+				isShowSearch:false,title:'导游',pageNum:1,orderBy:1,lists:[],
+				where:{
+					cityName: this.$route.params.cityName||''
+				},
 			}
 		},
 		methods: {
@@ -33,6 +36,7 @@
 				reqInfo.where = this.where;
 				
 				this.$abyApi.Guide.getGuiderList(reqInfo,(res)=>{
+					this.$refs.pull.closeLoading();
 					this.lists = res.userlist;
 					callback && callback(true);
 				},(err)=>{
@@ -60,6 +64,15 @@
 					this.where.sStarlevel = e.value;
 				}
 				this.getPullDown();
+			},
+			// 打开城市检索
+			toCityList(){
+				this.$router.push({
+					name: 'cityList',
+					params: {
+						pageUrl: this.$route.name,
+					}
+				});
 			}
 		},
 		mounted() {

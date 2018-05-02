@@ -10,7 +10,7 @@
 				</div>
 				<div class="qrcode">
 					<img :src="barcode" >
-					<img v-show="!barcode" src=""/>
+					<img v-show="!barcode" src="../../static/images/ico/ico-code.png"/>
 					<h5>扫一扫，查看店铺产品</h5>
 				</div>
 			</div>

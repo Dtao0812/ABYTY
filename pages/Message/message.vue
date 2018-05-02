@@ -49,26 +49,28 @@
 			// 获得聊天列表
 			getChatList(){
 				let list = [];
-				this.$abyDb.Im.get((res)=>{
-					if(res){
-						let info = res.value;
-						info.msgList = [];
-						info.noReadNum = 0;
-						info.sendUser = JSON.parse(info.content.extra);
-						let isAdd = true;
-						for(let i=0;i<list.length;i++){
-							if(list[i].targetId == info.targetId){
-								isAdd = false;
-								if(!info.isRead)list[i].noReadNum = list[i].noReadNum + 1;
-								list[i].msgList.push(info);
+				this.$abyDb.Im.init((res)=>{
+					this.$abyDb.Im.get((res)=>{
+						if(res){
+							let info = res.value;
+							info.msgList = [];
+							info.noReadNum = 0;
+							info.sendUser = JSON.parse(info.content.extra);
+							let isAdd = true;
+							for(let i=0;i<list.length;i++){
+								if(list[i].targetId == info.targetId){
+									isAdd = false;
+									if(!info.isRead)list[i].noReadNum = list[i].noReadNum + 1;
+									list[i].msgList.push(info);
+								}
+							}
+							if(isAdd){
+								list.push(info);
 							}
 						}
-						if(isAdd){
-							list.push(info);
-						}
-					}
-				});
-				this.chatList = list;
+					});
+					this.chatList = list;
+				})
 			}
 		},
 		mounted() {

@@ -11,7 +11,7 @@
 		</mt-search>
 		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab"></aby-tab>
 		<div class="history">
-			<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete"></aby-icon></h5>
+			<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete" @click.native="clearSearch"></aby-icon></h5>
 			<div>
 				<span class="tip" v-for="s in searchList" @click="onRecord(s)">{{s}}</span>
 			</div>
@@ -102,6 +102,11 @@
 			eventTab(e) {
 				this.tabSelect = e.type;
 				this.tabSelectId = e.id;
+			},
+			// 清空搜索记录
+			clearSearch(){
+				this.searchList = [];
+				this.$tool.localStorage.clearSerch();
 			}
 		},
 		mounted() {

@@ -2,8 +2,7 @@
 	<div class="page">
 		<aby-header title="" slot="header" page="2">
 			<aby-back @click.native="goBack" slot="back"></aby-back>
-			<header-search slot="hSearch" :placeholder="keyword" @eventSearch="eventSearchBack"></header-search>
-			<aby-fonts slot="right" class="aby-mui-bar mui-pull-right" title="搜索" @click.native="onSearch"></aby-fonts>
+			<header-search slot="hSearch" :placeholder="keyword" disabled="true" @click.native="toSearch"></header-search>
 		</aby-header>
 		<div class="mui-content">
 			<aby-tab slot="navbar_1" :list="tabList" @eventTabBack="eventTab" :actSelect="tabSelectId" class="aby-top-fixed">
@@ -109,9 +108,9 @@
 			eventTab(e) {
 				this.tabSelect = e.type;
 			},
-			// 搜索按钮
-			onSearch(){
-				this.getList();
+			// 搜索框
+			toSearch(){
+				this.$router.push({ name: 'searchIndex' });
 			},
 			getList(){
 				let reqInfo = {};

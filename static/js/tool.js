@@ -235,7 +235,7 @@ let localStorage = {
 		return info;
 	},
 	remove(title) {
-		window.localStorage.remove(title);
+		window.localStorage.removeItem(title);
 	},
 	// 保存搜索记录
 	setSearch(val) {

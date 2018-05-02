@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
 		</aby-header>
@@ -38,6 +38,7 @@
 				reqInfo.where = this.where;
 
 				this.$abyApi.Sport.getSportsListByKeyWord(reqInfo, (res) => {
+					this.$refs.pull.closeLoading();
 					this.lists = res.scenicList;
 					callback && callback(true);
 				}, (err) => {

@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="headerTitle" slot="header">
 		</aby-header>
 		<aby-list slot="loadlist" ref="list" @eventOrder="eventOrderBack" :list="orderList" :identityType="where.identityType"></aby-list>
@@ -47,6 +47,7 @@
 				reqInfo.where = this.where;
 				reqInfo.keyWord = this.keyWord;
 				this.$abyApi.Order.getList(reqInfo, (res) => {
+					this.$refs.pull.closeLoading();
 					res.data.forEach((v, i) => {
 						res.data[i].orderSummary = JSON.parse(v.orderSummary);
 					})

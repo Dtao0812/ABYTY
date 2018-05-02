@@ -88,6 +88,8 @@ import Chat from '../pages/Chat/Chat.vue'
 //支付
 import PayWay from '../pages/Pay/PayWay.vue'
 import PayGold from '../pages/Pay/PayGold.vue'
+//扫一扫
+import Scan from '../pages/Scanbarcode/Scan.vue'
 
 const router = new Router({
 	routes: [
@@ -168,6 +170,8 @@ const router = new Router({
 		//支付
 		{ name: 'payWay',path: '/PayWay',component: PayWay },
 		{ name: 'payGold',path: '/PayGold',component: PayGold },
+		//其他
+		{ name: 'scan',path: '/Scan',component: Scan },
 	]
 })
 

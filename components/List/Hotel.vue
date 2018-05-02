@@ -7,9 +7,10 @@
 					<img class="mui-media-object mui-pull-left aby-img" :src="li.hFaceImg">
 					<div class="mui-media-body aby-list">
 						<p class="aby-list-title">{{li.hName}}</p>
-						<p class="mui-ellipsis">{{li.hAddress}}</p>
+						<p class="mui-ellipsis">
+							<aby-icon type="nowlocation" class="icolocation"></aby-icon>{{li.hAddress}}</p>
 						<p class="mui-ellipsis aby-list-company">
-							<aby-icon className="mui-pull-right" type="shop"></aby-icon>
+							<aby-icon type="business" class="icobusiness"></aby-icon>
 							{{li.cpName}}
 						</p>
 						<p class="mui-ellipsis aby-list-data">
@@ -67,5 +68,13 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	.icolocation{
+		font-size: 13px;
+		margin-right: 3px;
+		margin-left: -1px;
+	}
+	.icobusiness{
+		font-size: 12px;
+	}
 </style>

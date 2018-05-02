@@ -80,6 +80,8 @@ import MyGold from '../pages/My/MyGold.vue'
 
 //店铺主页
 import HomePage from '../pages/HomePage/HomePage.vue'
+//个人资料编辑页面
+import Edit from '../pages/Homepage/Edit.vue'
 //消息中心
 import MsgSystem from '../pages/Message/MsgSystem.vue'
 import MsgDetail from '../pages/Message/MsgDetail.vue'
@@ -145,6 +147,7 @@ const router = new Router({
 		{ name: 'myCollection',path: '/myCollection', component: MyCollection},
 		{ name: 'myProduct',path: '/myProduct', component: MyProduct},
 		{ name: 'myGold',path: '/MyGold', component: MyGold},
+		{ name: 'edit',path: '/edit', component: Edit},
 		// 搜索
 		{ name: 'search',path: '/search',component: Search },
 		{ name: 'searchResult',path: '/searchResult',component: SearchResult },

@@ -375,7 +375,7 @@ const User = {
 		};
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
 	},
-	// 获得企业信息
+	// 企业 - 个人主页
 	getBasciInfo(requestInfo, successCallback, errorCallback){
 		let requestData = {
 			loading:requestInfo.loading,
@@ -384,6 +384,88 @@ const User = {
 		};
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
 	},
+	//企业 - 详情（其他企业，没有法人）
+	getBasicNotLegal(requestInfo, successCallback, errorCallback){
+		var requestData = {
+			loading:requestInfo.loading,
+			act: 'CPU103',
+			cpId: requestInfo.cpId
+		};
+		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
+	},
+	//企业 - 员工列表
+	getBasicStaffList(requestInfo, successCallback, errorCallback){
+		var requestData = {
+			loading:requestInfo.loading,
+			act: 'CPU104',
+			cpId: requestInfo.cpId
+		};
+		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
+	},
+	//个人 - 更新名片
+	setMyInfo(requestInfo, callBack){
+		var requestData = {
+			act: 'CPU300',
+			cpUserInfo: {
+				userCuteName: requestInfo.userCuteName,
+				userPost: requestInfo.userPost,
+				userName: requestInfo.userName
+			}
+		};
+		let files = [];
+		for(let i = 0; i < requestInfo.files.length; i++) {
+			if(requestInfo.files[i].src.substr(0, 4) != "http") {
+				files.push({
+					name: requestInfo.files[i].id,
+					path: requestInfo.files[i].src
+				});
+			}
+		}
+		//执行提交任务
+		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
+			callBack && callBack(true);
+		}, function(err) {
+			callBack && callBack(false);
+		});
+	},
+	//企业 - 更新数据（我的）
+	setBasicInfo(requestInfo,callBack){
+		var requestData = {
+			act: 'CPU204',
+			osType : 2,
+			deviceId : store.state.deviceId,
+			version : store.state.version,
+			user_token : store.state.user_token,
+			cpBasic: {
+				cpId: requestInfo.cpId,
+				cpMidBrand: requestInfo.cpMidBrand,
+				cpStype: requestInfo.cpStype,
+				cpAddress: requestInfo.cpAddress,
+				cpIntro: requestInfo.cpIntro,
+				cpTel: requestInfo.cpTel,
+				cpHeadName: requestInfo.cpHeadName,
+				cpHeadPhone: requestInfo.cpHeadPhone,
+				cpBizScope: requestInfo.cpBizScope,
+				cpRoute: requestInfo.cpRoute,
+				weixin: requestInfo.weixin
+			}
+		};
+		let files = [];
+		for(let i = 0; i < requestInfo.files.length; i++) {
+			if(requestInfo.files[i].src.substr(0, 4) != "http") {
+				files.push({
+					name: requestInfo.files[i].id,
+					path: requestInfo.files[i].src
+				});
+			}
+		}
+		//执行提交任务
+		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
+			callBack && callBack(true);
+		}, function(err) {
+			callBack && callBack(false);
+		});
+	}
 };
 
 /******************************      Project 产品模块      *****************************/
@@ -470,6 +552,18 @@ const Project = {
 		};
 		Server.getDataFromServer('cpProduct',requestData,successCallback, errorCallback);
 	},
+	//产品 - 列表 （个人主页）
+	getMyProList(requestInfo, successCallback, errorCallback){
+		var requestData = {
+			loading:requestInfo.loading,
+			act: 'CPG200',
+			pageNum: requestInfo.pageNum,
+			where: requestInfo.where,
+			keyWord: requestInfo.keyWord,
+			cpId: requestInfo.cpId,
+		}; 
+		Server.getDataFromServer('cpGoods',requestData,successCallback, errorCallback);
+	}
 };
 
 /******************************      Supplier 供应商模块      *****************************/

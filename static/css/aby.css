@@ -262,7 +262,7 @@ body {
 	display: -webkit-box;
 	-webkit-box-orient: vertical!important;
 	color: #333333!important;
-	font-size: 14px!important;
+	font-size: 15px!important;
 	line-height: 20px!important;
 	text-align: justify;
 }
@@ -304,6 +304,7 @@ body {
 
 small {
 	font-weight: 400;
+	font-size: 50%;
 }
 
 .mui-navigate-right:after,
@@ -421,7 +422,7 @@ small {
 .aby-list-price {
 	color: #FF9800;
 	float: right;
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: initial;
 }
 

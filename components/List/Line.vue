@@ -8,13 +8,13 @@
 					<div class="mui-media-body aby-list">
 						<p class="aby-list-title-2">【{{item.mTitle}}】{{item.sTitle}}</p>
 						<p class="mui-ellipsis aby-list-company">
-							<aby-icon className="mui-pull-right" type="shop"></aby-icon>
+							<aby-icon type="business" class="icobusiness"></aby-icon>
 							{{item.cpName}}
 						</p>
 						<p class="mui-ellipsis aby-list-data">
 							<span v-if="item.groupType!=='不限'">{{item.groupType}}</span>
 							<span>浏览（{{item.readCnt}}）</span>
-							<span class="aby-list-price"><small>￥</small>{{item.dPrice}}起</span>
+							<span class="aby-list-price"><small>￥</small>{{item.dPrice}}<small>起</small></span>
 						</p>
 					</div>
 				</a>
@@ -119,5 +119,8 @@
 		border-radius: 15px;
 		border: 1px solid #53D8CC;
 		color: #53D8CC;
+	}
+	.icobusiness{
+		font-size: 12px;
 	}
 </style>

@@ -6,10 +6,8 @@
 			<aby-banner pageType="3"></aby-banner>
 			<div class="">
 				<div class="mint-cell">
-					<span class="mint-cell-mask"></span>
-					<div class="mint-cell-left"></div>
 					<div class="mint-cell-wrapper">
-						<div class="mint-cell-title" @click.native="onSelectCity">
+						<div class="mint-cell-title" @click="onSelectCity">
 							<span class="mint-cell-text">
 								<aby-icon type="hotelcity" class="icohotel"></aby-icon>
 								入住城市</span>
@@ -19,12 +17,10 @@
 							<span></span>
 						</div>
 						<i class="mint-cell-allow-right"></i>
-						<div class="btnSelCity">
+						<div class="btnSelCity" style="display: none;">
 							<aby-icon type="nowlocation"></aby-icon>
 							<p>当前位置</p>
 						</div>
-						<!--<aby-button title="当前位置" size="small" @click.native="onSelectCity">
-						</aby-button>-->
 					</div>
 					<div class="mint-cell-right"></div>
 				</div>
@@ -103,7 +99,7 @@
 	}
 	
 	.mint-cell-allow-right::after {
-		right: 120px;
+		right: 20px;
 		position: absolute;
 	}
 	

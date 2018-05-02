@@ -1,5 +1,8 @@
 <template>
-	<div class="aby-loading"><mt-spinner type="double-bounce"></mt-spinner></div>
+	<div class="aby-loading">
+		<!--<mt-spinner type="double-bounce"></mt-spinner>-->
+		<img src="../../static/images/load/load_white_jb.gif" />
+	</div>
 </template>
 
 <script>
@@ -15,8 +18,11 @@
 		height: 100%;
 		width: 100%;
 		background-color: #FFFFFF;
-		padding-top: 50%;
-		padding-left: 45%;
+		padding-top: 45%;
+		padding-left: 0%;
 		text-align: center;
+	}
+	.aby-loading img{
+		width: 25%;
 	}
 </style>

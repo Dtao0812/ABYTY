@@ -125,6 +125,18 @@
 	margin-bottom: 0px;
 }
 
+.aby-input-default input::-webkit-input-placeholder {
+	color: #DDDDDD;
+}
+
+.aby-input-default input::-moz-input-placeholder {
+	color: #DDDDDD;
+}
+
+.aby-input-default input::-ms-input-placeholder {
+	color: #DDDDDD;
+}
+
 .field .inLabel {
 	font-size: 14px;
 	color: #999999;

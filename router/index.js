@@ -92,6 +92,11 @@ import PayWay from '../pages/Pay/PayWay.vue'
 import PayGold from '../pages/Pay/PayGold.vue'
 //扫一扫
 import Scan from '../pages/Scanbarcode/Scan.vue'
+//专题模块
+import SpecialLine from '../pages/Special/Line.vue'
+import SpecialHotel from '../pages/Special/Hotel.vue'
+import SpecialPlane from '../pages/Special/Plane.vue'
+import SpecialSuppliers from '../pages/Special/Suppliers.vue'
 
 const router = new Router({
 	routes: [
@@ -175,6 +180,11 @@ const router = new Router({
 		{ name: 'payGold',path: '/PayGold',component: PayGold },
 		//其他
 		{ name: 'scan',path: '/Scan',component: Scan },
+		//专题模块
+		{ name: 'specialLine',path: '/SpecialLine',component: SpecialLine },
+		{ name: 'specialHotel',path: '/SpecialHotel',component: SpecialHotel },
+		{ name: 'specialPlane',path: '/SpecialPlane',component: SpecialPlane },
+		{ name: 'specialSuppliers',path: '/specialSuppliers',component: SpecialSuppliers },
 	]
 })
 

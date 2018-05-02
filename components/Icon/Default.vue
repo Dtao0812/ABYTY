@@ -216,7 +216,9 @@
 					//订单消息
 					case 'msgorder':this.iconClass = 'aby-icon-msgorder ' + this.className;break;
 					//时钟
-					case 'clock':this.iconClass = 'aby-icon-clock' + this.className;break;
+					case 'clock':this.iconClass = 'aby-icon-clock ' + this.className;break;
+					//hot
+					case 'hot':this.iconClass = 'aby-icon-hot ' + this.className;break;
 					
 					default: this.iconClass = this.classname;
 				}

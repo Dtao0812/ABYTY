@@ -15,6 +15,9 @@
 		height: 100%;
 		width: 100%;
 	}
+	.aby-detail{
+		padding: 0;
+	}
 </style>
 <script>
 	export default {
@@ -26,6 +29,7 @@
 			}
 		},
 		mounted() {
+			document.getElementById("myiframe").height = document.body.scrollHeight;
 		},
 		methods: {}
 	}

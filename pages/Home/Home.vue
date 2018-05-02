@@ -185,12 +185,17 @@
 			// 扫一扫
 			toScan(){
 				
+			},
+			// 自动登录
+			autoLogin(){
+				this.$abyApi.User.autoLogin();
 			}
 		},
 		mounted() {
 			this.init();
 			this.$parent.eventPageShow(this.$route.name);
 			this.getGoodsList();
+			this.autoLogin();
 		},
 		activated() {
 			this.init();

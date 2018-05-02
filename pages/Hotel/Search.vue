@@ -10,7 +10,9 @@
 					<div class="mint-cell-left"></div>
 					<div class="mint-cell-wrapper">
 						<div class="mint-cell-title" @click.native="onSelectCity">
-							<span class="mint-cell-text"><i class="mintui mintui-more"></i>入住城市</span>
+							<span class="mint-cell-text">
+								<aby-icon type="hotelcity" class="icohotel"></aby-icon>
+								入住城市</span>
 							<span class="mint-cell-label aby-font-Black">{{cityName}}</span>
 						</div>
 						<div class="mint-cell-value is-link">
@@ -28,7 +30,7 @@
 				</div>
 				<div class="mint-cell">
 					<div class="mint-searchbar-inner">
-						<i class="mintui mintui-search"></i>
+						<aby-icon type="search" class="icosearch"></aby-icon>
 						<input type="search" v-model="keyword" placeholder="请输入搜索关键字" class="mint-searchbar-core">
 					</div>
 				</div>
@@ -112,5 +114,15 @@
 	.btnSelCity p{
 		font-size: 12px;
 		margin-top: 10px;
+	}
+	.icohotel{
+		font-size: 15px;
+	}
+	.icosearch{
+		font-size: 25px;
+		color: #707070!important;
+	}
+	.mint-searchbar-core{
+		padding: 10px 5px;
 	}
 </style>

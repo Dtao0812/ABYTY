@@ -6,7 +6,10 @@
 				<a href="javascript:;">
 					<img class="mui-media-object mui-pull-left aby-img-guide" :src="item.aac007">
 					<div class="mui-media-body aby-list">
-						<p class="aby-list-title">{{item.aac003}}</p>
+						<p class="aby-list-title">{{item.aac003}}
+						<img v-if="item.aac004==1&&item.aac201==2" class="icorealname" src="../../static/images/ico/ico_realman_2x.png" />
+						<img v-if="item.aac004==0&&item.aac201==2" class="icorealname" src="../../static/images/ico/ico_realwoman_2x.png" />
+						</p>
 						<p class="mui-ellipsis">
 							<aby-icon className="mui-pull-right" type="location"></aby-icon>
 							{{item.aac204}}
@@ -47,5 +50,8 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	.icorealname{
+		height: 12px;
+	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" disabled="true" @click.native="toSearch" slot="hSearch"></header-search>
 		</aby-header>
@@ -31,6 +31,7 @@
 				reqInfo.pageNum = 1;
 				reqInfo.loading = 1;
 				this.$abyApi.Project.getLineListByKeyWord(reqInfo,(res)=>{
+					this.$refs.pull.closeLoading();
 					this.lists = res.proList;
 					callback && callback(true);
 				},(err)=>{

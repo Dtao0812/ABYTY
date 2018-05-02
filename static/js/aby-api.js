@@ -959,6 +959,7 @@ const Chat = {
 						break;
 					//其他设备登陆
 					case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
+						console.log('其他设备登陆')
 						store.commit('setStateInfo', {title:'isConnectChat',value:false});
 						break;
 					//域名不正确

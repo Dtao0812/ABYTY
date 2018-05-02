@@ -14,7 +14,6 @@
 					</a>
 				</li>
 			</ul>
-			<h5 class="mui-content-padded"></h5>
 			<div class="mui-card">
 				<form class="mui-input-group">
 					<div class="mui-input-row">

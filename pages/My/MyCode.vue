@@ -10,23 +10,27 @@
 				</div>
 				<div class="qrcode">
 					<img :src="barcode" >
-					<img v-show="!barcode" src=""/>
+					<img v-show="!barcode" src="../../static/images/ico/ico-code.png"/>
 					<h5>扫一扫，查看店铺产品</h5>
 				</div>
 			</div>
 			<div class="share">
-				<h5 class="mui-content-padded h5title">分享到社交平台</h5>
+				<h5 class="mui-content-padded h5title"><span>分享到社交平台</span></h5>
+				<div class="divPanel" id="qq" channelid="qq" ex="qq">
+					<aby-icon-color type="qq" id="qqFriend"></aby-icon-color>
+					<!--<span>qq好友</span>-->
+				</div>
+				<div class="divPanel" id="qq" channelid="" ex="">
+					<aby-icon-color type="qqspace" id="qqSpace"></aby-icon-color>
+					<!--<span>qq空间</span>-->
+				</div>
 				<div class="divPanel" id="WXSceneSession" channelid='weixin' ex="WXSceneSession">
-					<img src="" id="WXSceneSession">
-					<span>微信好友</span>
+					<aby-icon-color type="wechat" id="WXSceneSession"></aby-icon-color>
+					<!--<span>微信好友</span>-->
 				</div>
 				<div class="divPanel" id="WXSceneTimeline" channelid='weixin' ex="WXSceneTimeline">
-					<img src="" id="WXSceneTimeline">
-					<span>朋友圈</span>
-				</div>
-				<div class="divPanel" id="qq" channelid="qq" ex="qq">
-					<img src="" id="qqFriend">
-					<span>qq好友</span>
+					<aby-icon-color type="firends" id="WXSceneTimeline"></aby-icon-color>
+					<!--<span>朋友圈</span>-->
 				</div>
 			</div>
 		</div>
@@ -142,7 +146,7 @@
 /*底部分享*/
 
 .divPanel {
-	width: 33%;
+	width: 25%;
 	text-align: center;
 	float: left;
 	font-size: 11px;
@@ -155,5 +159,9 @@
 
 .divPanel span {
 	display: block;
+}
+svg:not(:root){
+	width: 35px;
+	height: 35px;
 }
 </style>

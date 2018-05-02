@@ -3,7 +3,7 @@
 		<!--导游列表-->
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list" :key="i">
-				<a href="javascript:;">
+				<a href="javascript:;" @click="toHomePage(item)">
 					<img class="mui-media-object mui-pull-left aby-img-guide" :src="item.cpLogo">
 					<div class="mui-media-body aby-list">
 						<p class="aby-list-title">{{item.cpName}}</p>
@@ -30,7 +30,16 @@
 			return {}
 		},
 		methods:{
-			
+			// 公司主页
+			toHomePage(li){
+				this.$router.push({
+					name:"homePage",
+					params:{
+						userId: li.userId,
+						cpId: li.cpId
+					}
+				})
+			}
 		},
 		mounted(){
 			

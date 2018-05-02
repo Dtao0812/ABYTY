@@ -1,10 +1,11 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
 		</aby-header>
 		<aby-tab :list="goodsList" @eventTabBack="eventTab" page="myProduct" slot="loadlist">
 			<div v-for="(li,i) in goodsList" :key="i" :slot="li.id">
+				<div class="space"></div>
 				<list-line v-if="li.type=='linePutaway'" :list="li.data" :proState="proState" page="myProduct" @eventLineBack="eventLine"></list-line>
 				<list-line v-if="li.type=='lineNoPutaway'" :list="li.data" :proState="proState" page="myProduct" @eventLineBack="eventLine"></list-line>
 			</div>
@@ -53,6 +54,7 @@
 				reqInfo.pageNum = 1;
 				if(this.proState == 1){
 					this.$abyApi.Project.getMyPro(reqInfo, {proState:1}, (res) => {
+						this.$refs.pull.closeLoading();
 						this.goodsList[0].data = res.proList;
 						callback && callback(true);
 					},(err)=>{
@@ -66,9 +68,6 @@
 						callback && callback(false);
 					})
 				}
-				
-				
-				
 			},
 			getPullUp(callback){
 				let reqInfo = {};
@@ -89,8 +88,6 @@
 						callback && callback(false);
 					})
 				}
-				
-				
 			},
 			// tab点击返回监听
 			eventTab(e){

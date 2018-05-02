@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="headerTitle" slot="header">
 		</aby-header>
 		<aby-list slot="loadlist" ref="list" @eventAgr="eventAgrBack" :identityType="identityType" :list="list"></aby-list>
@@ -35,6 +35,7 @@
 				reqInfo.pageNum = this.pageNum = 1;
 				if(this.identityType == 'buyer'){
 					this.$abyApi.Order.getCollAgrList(reqInfo, (res) => {
+						this.$refs.pull.closeLoading();
 						this.list = res.data;
 						callback && callback(true);
 					}, (err) => {

@@ -18,9 +18,9 @@
 					</div>
 				</div>
 				<div class="mui-card-footer">
-					<router-link class="mui-card-link fontGray linkLeft" :to="{ name: 'accountAlter', params: {userId: tmp.userId} }"><aby-icon type="edit"></aby-icon>修改</router-link>
-					<span v-show="tmp.userStatus == 0" class="mui-card-link fontRed" @click="disable(tmp.userId)"><aby-icon class="btn-forbid" type="forbidden"></aby-icon>停用</span>
-					<span v-show="tmp.userStatus == 1" class="mui-card-link fontBlue" @click="onOperation(tmp.userId)"><aby-icon class="btn-enable" type="enable"></aby-icon>启用</span>
+					<router-link class="mui-card-link fontGray linkLeft" :to="{ name: 'accountAlter', params: {userId: tmp.userId} }"><aby-icon class="marRt" type="edit"></aby-icon>修改</router-link>
+					<span v-show="tmp.userStatus == 0" class="mui-card-link fontRed" @click="disable(tmp.userId)"><aby-icon class="btn-forbid marRt" type="forbidden"></aby-icon>停用</span>
+					<span v-show="tmp.userStatus == 1" class="mui-card-link fontBlue" @click="onOperation(tmp.userId)"><aby-icon class="btn-enable marRt" type="enable"></aby-icon>启用</span>
 				</div>
 			</div>
 			<aby-button class="btnFixed" title="增加子账号" @click.native="onAdd"></aby-button>
@@ -189,5 +189,8 @@
 	}
 	.btn-enable{/*启用图标颜色*/
 		color: #08C7B5;
+	}
+	.marRt{
+		margin-right: 5px;
 	}
 </style>

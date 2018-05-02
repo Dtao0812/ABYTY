@@ -747,7 +747,7 @@ small {
 	width: 100%;
 	vertical-align: bottom;
 }
-.aby-special .faceTip{
+.faceTip{
 	position: absolute;
 	width: 35px;
 }
@@ -765,7 +765,7 @@ small {
 .aby-special .mui-card-footer:before {
     background-color: #FFFFFF;
 }
-.aby-special .mui-card-footer .look {
+.aby-special .mui-card-footer .look{
     background-color: #FF605D;
     color: #FFFFFF;
     font-size: 11px;

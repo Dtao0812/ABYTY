@@ -304,6 +304,7 @@ body {
 
 small {
 	font-weight: 400;
+	font-size: 50%;
 }
 
 .mui-navigate-right:after,
@@ -421,7 +422,7 @@ small {
 .aby-list-price {
 	color: #FF9800;
 	float: right;
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: initial;
 }
 

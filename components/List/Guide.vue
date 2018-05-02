@@ -11,7 +11,7 @@
 						<img v-if="item.aac004==0&&item.aac201==2" class="icorealname" src="../../static/images/ico/ico_realwoman_2x.png" />
 						</p>
 						<p class="mui-ellipsis">
-							<aby-icon className="mui-pull-right" type="location"></aby-icon>
+							<aby-icon type="nowlocation" class="icolocation"></aby-icon>
 							{{item.aac204}}
 						</p>
 						<p class="mui-ellipsis">
@@ -53,5 +53,10 @@
 <style scoped>
 	.icorealname{
 		height: 12px;
+	}
+	.icolocation{
+		font-size: 13px;
+		margin-right: 1px;
+		margin-left: -1px;
 	}
 </style>

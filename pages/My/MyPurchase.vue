@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header title="我的询价" slot="header"></aby-header>
 		<aby-list @getPullDown="getPullDown" slot="loadlist" ref="loadlist" :list="lists"></aby-list>
 	</aby-pull>
@@ -27,6 +27,7 @@
 				reqInfo.loading = 1; //不显示接口加载动画
 				reqInfo.pageNum = 1;
 				this.$abyApi.Select.getMyPublishList(reqInfo, (res)=>{
+					this.$refs.pull.closeLoading();
 					this.lists = res.cpSelectList;
 					callback && callback(true);
 				},(err)=>{

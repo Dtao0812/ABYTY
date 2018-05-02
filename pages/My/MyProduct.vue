@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
 		</aby-header>
@@ -53,6 +53,7 @@
 				reqInfo.pageNum = 1;
 				if(this.proState == 1){
 					this.$abyApi.Project.getMyPro(reqInfo, {proState:1}, (res) => {
+						this.$refs.pull.closeLoading();
 						this.goodsList[0].data = res.proList;
 						callback && callback(true);
 					},(err)=>{
@@ -66,9 +67,6 @@
 						callback && callback(false);
 					})
 				}
-				
-				
-				
 			},
 			getPullUp(callback){
 				let reqInfo = {};
@@ -89,8 +87,6 @@
 						callback && callback(false);
 					})
 				}
-				
-				
 			},
 			// tab点击返回监听
 			eventTab(e){

@@ -6,6 +6,7 @@
 				<div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }" @scroll="paperScroll" id="wrapper">
 					<slot name="navbar"><div style="padding-top: 45px;"></div></slot>
 					<slot name="explain"></slot>
+					<slot name="loading"><div v-if="isLoading"><aby-loading></aby-loading></div></slot>
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
 						<div style="min-height: 500px;">
 							<slot name="loadlist"></slot>
@@ -27,6 +28,7 @@
 			return {
 				pageId: '',
 				list: [],
+				isLoading:true,
 				// 下拉
 				topStatus: '',
 				wrapperHeight: 0,
@@ -85,6 +87,9 @@
 					});
 				}, 1500);
 			},
+			closeLoading(){
+				this.isLoading = false;
+			}
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;

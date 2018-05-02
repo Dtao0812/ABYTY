@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<!--<header-search v-if="isShowSearch" slot="hSearch"></header-search>-->
 		</aby-header>
@@ -61,7 +61,7 @@
 				reqInfo.pageNum = 1;
 				reqInfo.keyWord = '',
 				this.$abyApi.All.getCollections(reqInfo, (res) => {
-					console.log('res:'+JSON.stringify(res))
+					this.$refs.pull.closeLoading();
 					this.goodsList[0].data = res.lineList;
 					this.goodsList[1].data = res.hotelList;
 					this.goodsList[2].data = res.sportList;

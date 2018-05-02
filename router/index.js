@@ -178,7 +178,7 @@ router.beforeEach((to, from, next) => {
 		[
 		 	'home','purchase','order','message','my',
 		 	'orderList','orderDetails','searchIndexResult','searchResult',
-		 	'agrList','chat','purchaseDetails'
+		 	'agrList','chat','purchaseDetails','payWay'
         ]; 
 	const fromKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, from.name);
 	const toKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, to.name);

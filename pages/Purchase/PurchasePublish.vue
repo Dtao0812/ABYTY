@@ -477,6 +477,7 @@
 			// 发布采购
 			onSelect() {
 				let reqInfo = {};
+				if(!this.$tool.formValidation.phoneVerfication(this.publishInfo.contactPhone))return this.$toast("请填写正确的手机号");
 				reqInfo.selectType = this.publishInfo.selectType;
 				reqInfo.contactPhone = this.publishInfo.contactPhone;
 				reqInfo.selectDesc = this.publishInfo.pDesc;
@@ -487,6 +488,7 @@
 					if(this.publishInfo.goCity == '')return this.$toast("目的地不能为空");
 					if(this.publishInfo.fromTime == '')return this.$toast("请选择出发时间");
 					if(this.publishInfo.selectDays == '')return this.$toast("请输入行程天数");
+					if(this.publishInfo.selectDays <= 0)return this.$toast("行程天数不能小于0");
 					if(this.publishInfo.peopleNum == '')return this.$toast("请输入成人数量");
 					reqInfo.fromCity = this.publishInfo.fromCity;
 					reqInfo.goCity = this.publishInfo.goCity;
@@ -530,7 +532,6 @@
 					if(this.publishInfo.fromTime == '')return this.$toast("请选择出发时间");
 					if(this.publishInfo.ticketType == '往返' &&this.publishInfo.backTime == '')return this.$toast("请选择返程时间");
 					if(this.publishInfo.peopleNum == '')return this.$toast("请输入成人数量");
-					if(this.publishInfo.hotelAddress == '')return this.$toast("请输入酒店地址");
 					if(this.publishInfo.liveTime == '')return this.$toast("请选择入住时间");
 					if(this.publishInfo.leaveTime == '')return this.$toast("请选择离店时间");
 					if(this.publishInfo.roomNum == 0)return this.$toast("请输入预定房间数");
@@ -541,7 +542,6 @@
 					reqInfo.peopleNum = this.publishInfo.peopleNum;
 					reqInfo.childNum = this.publishInfo.childNum;
 					reqInfo.ticketType = this.publishInfo.ticketType;
-					reqInfo.hotelAddress = this.publishInfo.hotelAddress;
 					reqInfo.liveTime = this.publishInfo.liveTime;
 					reqInfo.leaveTime = this.publishInfo.leaveTime;
 					reqInfo.roomNum = this.publishInfo.roomNum;
@@ -560,14 +560,15 @@
 					if(this.publishInfo.pbTitle == '')return this.$toast("请填写标题");
 					if(this.publishInfo.pbRoadLine == '')return this.$toast("请选择目的地");
 					if(this.publishInfo.pbAddress == '')return this.$toast("请选择接团地点");
-					if(this.publishInfo.pbDateTime == '')return this.$toast("请选择日期");
+					if(this.publishInfo.selectDays == '')return this.$toast("请选择日期");
 					if(this.publishInfo.pbDays == '')return this.$toast("请填写天数");
+					if(this.publishInfo.pbDays <= 0)return this.$toast("天数不能小于0");
 					if(this.publishInfo.pbDayFee == '')return this.$toast("请填写导服费");
 					if(this.publishInfo.pbDepositFee == '')return this.$toast("请填写定金");
 					reqInfo.pbTitle = this.publishInfo.pbTitle;
 					reqInfo.pbRoadLine = this.publishInfo.pbRoadLine;
 					reqInfo.pbAddress = this.publishInfo.pbAddress;
-					reqInfo.pbDateTime = this.publishInfo.pbDateTime;
+					reqInfo.pbDateTime = this.publishInfo.selectDays;
 					reqInfo.pbDays = this.publishInfo.pbDays;
 					reqInfo.pbDayFee = this.publishInfo.pbDayFee;
 					reqInfo.pbDepositFee = this.publishInfo.pbDepositFee;
@@ -622,6 +623,25 @@
 				textAlign: 'center'
 			}];
 			this.typeList = slots2;
+			
+			// 获得交通方式
+			this.$abyApi.Sys.getDict('trafficType','',(res)=>{
+				let dlist = []
+				for(let i=0,len=res.dicList.length;i<len;i++){
+					if(i == 0)this.publishInfo.trafficType = res.dicList[i].dicName;
+					let info = {};
+					info.text = res.dicList[i].dicName;
+					info.value = res.dicList[i].dicValue;
+					dlist.push(info);
+				}
+				let slots = [{
+					flex: 1,
+					values: dlist,
+					className: 'slot1',
+					textAlign: 'center'
+				}];
+				this.trafficTypeList = slots;
+			});
 		},
 	}
 </script>

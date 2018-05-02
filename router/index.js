@@ -92,6 +92,8 @@ import PayWay from '../pages/Pay/PayWay.vue'
 import PayGold from '../pages/Pay/PayGold.vue'
 //扫一扫
 import Scan from '../pages/Scanbarcode/Scan.vue'
+//专题模块
+import SpecialLine from '../pages/Special/line.vue'
 
 const router = new Router({
 	routes: [
@@ -175,6 +177,8 @@ const router = new Router({
 		{ name: 'payGold',path: '/PayGold',component: PayGold },
 		//其他
 		{ name: 'scan',path: '/Scan',component: Scan },
+		//专题模块
+		{ name: 'specialLine',path: '/SpecialLine',component: SpecialLine },
 	]
 })
 

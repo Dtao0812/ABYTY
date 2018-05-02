@@ -681,3 +681,9 @@
 .aby-icon-clock:before {
 	content: '\e68e';
 }
+
+/*hot图标*/
+
+.aby-icon-hot:before {
+	content: '\e69c';
+}

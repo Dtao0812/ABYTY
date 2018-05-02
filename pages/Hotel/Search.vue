@@ -9,7 +9,7 @@
 					<span class="mint-cell-mask"></span>
 					<div class="mint-cell-left"></div>
 					<div class="mint-cell-wrapper">
-						<div class="mint-cell-title">
+						<div class="mint-cell-title" @click.native="onSelectCity">
 							<span class="mint-cell-text"><i class="mintui mintui-more"></i>入住城市</span>
 							<span class="mint-cell-label aby-font-Black">{{cityName}}</span>
 						</div>
@@ -17,7 +17,7 @@
 							<span></span>
 						</div>
 						<i class="mint-cell-allow-right"></i>
-						<div class="btnSelCity" @click="onSelectCity">
+						<div class="btnSelCity">
 							<aby-icon type="nowlocation"></aby-icon>
 							<p>当前位置</p>
 						</div>

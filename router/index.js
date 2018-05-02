@@ -16,6 +16,7 @@ import My from '../pages/My/My.vue'
 //设置
 import Setting from '../pages/Setting/Setting.vue'
 import SetPassword from '../pages/Setting/SetPassword.vue'
+import Feedback from '../pages/Setting/Feedback.vue'
 //产品
 import Project from '../pages/Project/Index.vue'
 //景点门票
@@ -130,6 +131,7 @@ const router = new Router({
 		
 		{ name: 'setting',path: '/setting',component: Setting },
 		{ name: 'setPassword',path: '/setPassword',component: SetPassword },
+		{ name: 'feedback',path: '/Feedback',component: Feedback },
 		// 我的
 		{ name: 'myCode',path: '/myCode', component: MyCode},
 		{ name: 'accountList',path: '/accountList', component: AccountList},

@@ -6,26 +6,28 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;">
 				<li class="mui-table-view-cell mui-media">
-					<img @click="onGetPhone" class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo">
+					<img @click="onGetPhone" class="mui-media-object mui-pull-left" :src="cpUserInfo.cpLogo">
 					<div class="mui-media-body">
-						{{cpUserInfo.userName}}
-						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName}}</p>
+						{{cpUserInfo.cpHeadName}}
+						<p class='mui-ellipsis'>{{cpUserInfo.cpName}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/example/ID.jpg" />
 						<img class="aby-img-Authentication" src="../../static/images/example/ID.jpg" />
 					</div>
 				</li>
 			</ul>
 			<div class="space"></div>
-			<aby-tab v-if="cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" slot="tab">
+			<aby-tab v-if="cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" actSelect="0" slot="tab">
 				<div v-for="(li,i) in tabListTravel" :key="i" :slot="li.id">
-					<aby-information v-if="li.type=='infor'" :list="li.data"></aby-information>
+					<aby-information v-if="userId&&li.type=='infor'" :list="li.data"></aby-information>
+					<all-information v-if="!userId&&li.type=='infor'" :list="li.data"></all-information>
 					<aby-contacts v-if="li.type=='contacts'" :list="li.data"></aby-contacts>
 				</div>
 			</aby-tab>
-			<aby-tab v-else @eventTabBack="eventTab" :list="tabListLocal" page="homepage" slot="tab">
+			<aby-tab v-else @eventTabBack="eventTab" :list="tabListLocal" page="homepage" actSelect="1" slot="tab">
 				<div v-for="(li,i) in tabListLocal" :key="i" :slot="li.id">
 					<aby-list v-if="li.type=='line'" :list="li.data"></aby-list>
-					<aby-information v-if="li.type=='infor'" :list="li.data"></aby-information>
+					<aby-information v-if="userId&&li.type=='infor'" :list="li.data"></aby-information>
+					<all-information v-if="!userId&&li.type=='infor'" :list="li.data"></all-information>
 					<aby-contacts v-if="li.type=='contacts'" :list="li.data"></aby-contacts>
 				</div>
 			</aby-tab>
@@ -35,21 +37,23 @@
 </template>
 
 <script>
-	import AbyInformation from './Informatica.vue'
+	import AbyInformation from './Informatica.vue'//个人主页资料
+	import AllInformation from './InformaticaAll.vue'//供应商主页资料
 	import AbyContacts from './Contacts.vue'
 	import AbyList from '../../components/List/Line.vue'
 	export default {
 		components: {
 			AbyInformation,
+			AllInformation,
 			AbyContacts,
 			AbyList
 		},
 		data() {
 			return {
-				cpInfo: this.$route.params, //路由传回参数
-				cpBtype: '',
-				cpUserInfo:this.$store.state.cpUserInfo,
-				basicInfo: {},
+				userId: this.$store.state.userId,
+				cpId: this.$store.state.cpId,
+				cpBtype: this.$store.state.cpBtype,
+				cpUserInfo: {},
 				pageNum: 1,
 				tabListTravel: [{ //组团社
 						id: 'infor',
@@ -102,13 +106,16 @@
 			getBasicInfo() { //调基本资料（组团）
 				let reqInfo = {};
 				reqInfo.loading = 1;
-				reqInfo.userId = this.cpInfo.userId;
+				reqInfo.userId = this.userId;
+				console.log(reqInfo)
 				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
-//					console.log('组团：'+JSON.stringify(res))
-					res.cpUserInfo.cpBasic.cpHeadPhone = this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpHeadPhone);
-					res.cpUserInfo.cpBasic.cpTel = this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpTel);
+					res.cpUserInfo.cpBasic.cpHeadPhone = res.cpUserInfo.cpBasic.cpHeadPhone?this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpHeadPhone):'';
+					res.cpUserInfo.cpBasic.cpTel = res.cpUserInfo.cpBasic.cpTel?this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpTel):'';
 					this.tabListTravel[0].data = res.cpUserInfo.cpBasic;
-					this.cpBtype = res.cpUserInfo.cpBasic.cpBtype;
+					this.cpUserInfo.cpLogo = res.cpUserInfo.cpBasic.cpLogo;
+					this.cpUserInfo.cpHeadName = res.cpUserInfo.cpBasic.cpHeadName;
+					this.cpUserInfo.cpName = res.cpUserInfo.cpBasic.cpName;
+					console.log('组团：'+JSON.stringify(this.tabListTravel[0].data))
 				});
 			},
 			getDownProList() { //调产品下拉（地接）
@@ -117,9 +124,8 @@
 				proInfo.pageNum = 1;
 				proInfo.where = {};
 				proInfo.keyWord = '',
-					proInfo.cpId = this.cpInfo.cpId;
+					proInfo.cpId = this.cpId;
 				this.$abyApi.Project.getMyProList(proInfo, (res) => {
-//					console.log(res)
 					this.tabListLocal[0].data = res.proList
 				});
 			},
@@ -129,7 +135,7 @@
 				proInfo.pageNum = this.pageNum = ++this.pageNum;
 				proInfo.where = {};
 				proInfo.keyWord = '',
-					proInfo.cpId = this.cpInfo.cpId;
+					proInfo.cpId = this.cpId;
 				this.$abyApi.Project.getMyProList(proInfo, (res) => {
 					this.tabListLocal[0].data = this.tabListLocal[0].data.concat(res.proList);
 				});
@@ -137,21 +143,23 @@
 			getBasicNotLegal() { //调基本资料（地接）
 				let reqInfo = {};
 				reqInfo.loading = 1;
-				reqInfo.cpId = this.cpInfo.cpId;
+				reqInfo.cpId = this.cpId;
 				this.$abyApi.User.getBasicNotLegal(reqInfo, (res) => {
-//					console.log('地接：' + JSON.stringify(res))
-					res.cpBasic.cpHeadPhone = this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpHeadPhone);
-					res.cpBasic.cpTel = this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpTel);
+					console.log('地接：'+JSON.stringify(res))
+					this.cpUserInfo.cpLogo = res.cpBasic.cpLogo;
+					this.cpUserInfo.cpHeadName = res.cpBasic.cpHeadName;
+					this.cpUserInfo.cpName = res.cpBasic.cpName;
+					res.cpBasic.cpHeadPhone = res.cpBasic.cpHeadPhone? this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpHeadPhone): '';
+					res.cpBasic.cpTel = res.cpBasic.cpTel?this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpTel):'';
 					this.tabListLocal[1].data = res.cpBasic;
-					this.cpBtype = res.cpBasic.cpBtype;
+					console.log('地接'+JSON.stringify(this.tabListLocal[1].data))
 				});
 			},
 			getBasicStaffList(data) { //调员工
 				let reqInfo = {};
 				reqInfo.loading = 1;
-				reqInfo.cpId = this.cpInfo.cpId;
+				reqInfo.cpId = this.cpId;
 				this.$abyApi.User.getBasicStaffList(reqInfo, (res) => {
-//					console.log('联系人：' + JSON.stringify(res));
 					if(this.cpBtype == 10) {
 						this.tabListTravel[1].data = res.cpUserList;
 					}else{
@@ -160,8 +168,8 @@
 				})
 			},
 			initPageInfo() {
-				console.log('cpBtype:'+this.cpBtype)
-				if(this.cpBtype == 10) {
+				let cpBtype = this.cpBtype;
+				if(cpBtype == 10) {
 					this.getBasicInfo();
 					this.getBasicStaffList();
 				} else {
@@ -175,30 +183,9 @@
 			},
 		},
 		mounted() {
-			this.initPageInfo()
+			this.initPageInfo();
 		},
-		activated() {
-			
-		},
-		beforeRouteEnter(to, from, next) {
-			if(from.name == 'my') {
-				next(vm => {
-					vm.initPageInfo()
-				})
-			}else{
-				next()
-			}
-		},
-		beforeRouteLeave(to, from, next) {
-			if(to.name == 'my') {
-				to.meta.noKeepAlive = true;
-				from.meta.noKeepAlive = false;
-			} else {
-				to.meta.noKeepAlive = true;
-				from.meta.noKeepAlive = false;
-			}
-			next();
-		},
+		
 	}
 </script>
 

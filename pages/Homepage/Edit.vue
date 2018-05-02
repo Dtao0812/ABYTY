@@ -107,14 +107,7 @@
 			setBasicInfo(){
 				this.$abyApi.User.setBasicInfo(this.basicInfo, (res)=>{
 					this.$tool.toast("提交成功");
-					this.$router.push({
-						name: 'homePage',
-						params: {
-							upDateTitle: this.title,
-							upDateTextMsg: this.textMsg,
-							upHtmlId: this.htmlId
-						}
-					})
+					this.$router.replace({name: 'homePage'})
 				},(err)=>{
 					this.$tool.toast(err);
 				})

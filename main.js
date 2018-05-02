@@ -67,8 +67,8 @@ Vue.component('aby-field',AbyField)
 Vue.component('aby-loading',AbyLoading)
 Vue.component('aby-date-picker',AbyDatePicker)
 
-require('./static/js/web.js')
-//require('./static/js/app.js')
+//require('./static/js/web.js')
+require('./static/js/app.js')
 
 /*
  * Vue过滤器方法

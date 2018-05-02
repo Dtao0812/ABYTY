@@ -24,18 +24,17 @@ var plusFun = function(){
 		store.commit('setStateInfo',{title:'version',value:wgtinfo.version})
 	});
 	
-	var AVCaptureDevice = plus.ios.importClass("AVCaptureDevice");
-	var Status = AVCaptureDevice.authorizationStatusForMediaType("vide");
-	if(3 != Status) {
-		Vue.$tool.confirm('请在【设置->隐私->相机】中设置允许使用相机', (e)=> {
-			Vue.$router.back();
-		});
-	}
+//	var AVCaptureDevice = plus.ios.importClass("AVCaptureDevice");
+//	var Status = AVCaptureDevice.authorizationStatusForMediaType("vide");
+//	if(3 != Status) {
+//		Vue.$tool.confirm('请在【设置->隐私->相机】中设置允许使用相机', (e)=> {
+//			Vue.$router.back();
+//		});
+//	}
 	
 	// android返回键监听
 	var androidBackFirst = null;
 	plus.key.addEventListener('backbutton',function(){
-		console.log(111111111111111)
 		var index = ['index', 'home', 'purchase', 'order','message', 'my'];
 		if(Vue.$tool.isInAarry(index, store.state.tabActive)){
 			console.log(1)
@@ -51,7 +50,6 @@ var plusFun = function(){
 				if(new Date().getTime() - androidBackFirst < 1000)plus.runtime.quit();
 			}
 		}else{
-			console.log(2)
 			history.go(-1);
 		}
 	},false)
@@ -60,5 +58,7 @@ var plusFun = function(){
 if(window.plus) {
 	plusFun();
 } else { // 兼容老版本的plusready事件
-	plusFun();
+	document.addEventListener('plusready', function() {
+		plusFun();
+	}, false);
 }

@@ -161,26 +161,47 @@
 	display: block;
 	width: 120%;
 }
+
+
 /*搜索框*/
-.searchPanel .mint-searchbar{
+
+.searchPanel .mint-searchbar {
 	background-color: #FFFFFF;
-	padding: 8px 10px 8px 0px;margin-left: 35px;
+	padding: 8px 10px 8px 0px;
+	margin-left: 35px;
 }
+
 .searchPanel input[type=search] {
-    font-size: 14px;
-    height: 30px;
-    text-align: left;
-    background-color: rgba(0,0,0,0);
-    margin-bottom: 0px;
-    padding-left: 5px;
+	font-size: 14px;
+	height: 30px;
+	text-align: left;
+	background-color: rgba(0, 0, 0, 0);
+	margin-bottom: 0px;
+	padding-left: 5px;
 }
+
 .searchPanel .mint-searchbar-inner {
-    background-color: #EEEEEE;
-    border-radius: 15px;
-    padding: 4px 0px;
+	background-color: #EEEEEE;
+	border-radius: 15px;
+	padding: 4px 0px;
 }
-.searchPanel .mintui-search{
+
+.searchPanel .mintui-search {
 	font-size: 18px;
 	color: #707070;
 	padding-left: 10px;
+}
+
+
+/*意见反馈*/
+
+.contact input[type=tel] {
+	border: none;
+	margin-bottom: 0px;
+	padding: 10px 5px;
+	font-size: 14px;
+}
+.contact textarea{
+	padding: 5px 5px;
+	font-size: 14px;
 }

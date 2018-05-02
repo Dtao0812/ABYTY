@@ -62,8 +62,9 @@
 						};
 						break;
 					case 'cpHeadPhone'://手机
-						if(this.isNull(this.textMsg)){
+						if(!this.isNull(this.textMsg)){
 							this.$tool.toast("数据不能为空！")
+							return
 						}
 						this.basicInfo.cpHeadPhone = this.$abyApi.Crypto.EnCrypt(this.textMsg);
 						this.setBasicInfo();
@@ -104,10 +105,9 @@
 				
 			},
 			setBasicInfo(){
-				console.log('basicInfo:'+JSON.stringify(this.basicInfo))
 				this.$abyApi.User.setBasicInfo(this.basicInfo, (res)=>{
-					console.log('拿到了数据：'+res);
-					this.$router.replace({
+					this.$tool.toast("提交成功");
+					this.$router.push({
 						name: 'homePage',
 						params: {
 							upDateTitle: this.title,

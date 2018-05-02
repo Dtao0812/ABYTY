@@ -350,4 +350,7 @@
 		width: 23px;
 		height: 23px;
 	}
+	.purchase-finish-btn{
+		color: #08C7B5;
+	}
 </style>

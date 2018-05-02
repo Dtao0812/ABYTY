@@ -16,7 +16,7 @@
 				</li>
 				<router-link class="linkBlue" :to="{ name: 'accountAlter', params: {userId: pageInfo.userId,lable: 'detail'} }" replace><img class="picLink" src="" />修改</router-link>
 			</ul>
-			<h5 class="mui-content-padded"></h5>
+			<h5 class="space"></h5>
 			<div class="mui-card">
 				<form class="mui-input-group">
 					<div class="mui-input-row verificationCode">

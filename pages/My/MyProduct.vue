@@ -5,6 +5,7 @@
 		</aby-header>
 		<aby-tab :list="goodsList" @eventTabBack="eventTab" page="myProduct" slot="loadlist">
 			<div v-for="(li,i) in goodsList" :key="i" :slot="li.id">
+				<div class="space"></div>
 				<list-line v-if="li.type=='linePutaway'" :list="li.data" :proState="proState" page="myProduct" @eventLineBack="eventLine"></list-line>
 				<list-line v-if="li.type=='lineNoPutaway'" :list="li.data" :proState="proState" page="myProduct" @eventLineBack="eventLine"></list-line>
 			</div>

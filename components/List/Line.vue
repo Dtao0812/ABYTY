@@ -1,8 +1,8 @@
 <template>
 	<div class="list-item">
 		<!--线路产品列表-->
-		<ul class="mui-table-view">
-			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list" :key="i">
+		<ul class="mui-table-view" v-for="(item,i) in list" :key="i">
+			<li class="mui-table-view-cell mui-media" >
 				<a href="javascript:;" @click="toDetail(item)">
 					<img class="mui-media-object mui-pull-left aby-img" :src="item.proImage">
 					<div class="mui-media-body aby-list">
@@ -24,7 +24,9 @@
 					<span class="purchase-delete-btn" :proId="item.proId" @click="onDelete">删除</span>
 				</div>
 			</li>
+			<div class="space" v-if="pageType == 'myProduct'"></div>
 		</ul>
+		
 	</div>
 </template>
 

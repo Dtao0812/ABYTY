@@ -3,7 +3,7 @@
 		<aby-header title="" slot="header">
 			<div slot="back"></div>
 			<header-search slot="hSearch" disabled="true" @click.native="onSearch"></header-search>
-			<aby-icon slot="right" class="mui-icon mui-pull-right icon-plus" type="plus"></aby-icon>
+			<aby-icon slot="right" class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="popupPlus=!popupPlus"></aby-icon>
 		</aby-header>
 		<aby-banner pageType="1"></aby-banner>
 		<div class="mui-content content">
@@ -87,6 +87,11 @@
 				<span></span>我是有底线的<span></span>
 			</div>
 		</div>
+		<!--弹出框-->
+		<mt-popup v-model="popupPlus" popup-transition="popup-fade" class="mint-popup-1">
+	      <aby-icon class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="popupPlus=!popupPlus"></aby-icon>
+	      <aby-icon class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="popupPlus=!popupPlus"></aby-icon>
+	    </mt-popup>
 	</div>
 
 </template>
@@ -109,6 +114,7 @@
 		data() {
 			return {
 				scrollTop: '',
+				popupPlus: false,
 				goodsList: [{
 						id: 'line',
 						title: '精选线路',
@@ -297,5 +303,14 @@
 		color: #AAAAAA;
 		font-size: 12px;
 		background-color: #F0F0F0;
+	}
+	
+	.mint-popup-1{
+		top: 55px;
+		right: 0;
+		width: 100px;
+	}
+	.Router .v-modal{
+		background: rgba(0,0,0,0);
 	}
 </style>

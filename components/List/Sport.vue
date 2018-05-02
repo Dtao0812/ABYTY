@@ -9,7 +9,7 @@
 						<p class="aby-list-title">{{item.sName}}</p>
 						<p class="mui-ellipsis">{{item.sStarlevel}}</p>
 						<p class="mui-ellipsis aby-list-company">
-							<aby-icon className="mui-pull-right" type="shop"></aby-icon>
+							<aby-icon type="business" class="icobusiness"></aby-icon>
 							{{item.cpName}}
 						</p>
 						<p class="mui-ellipsis aby-list-data">
@@ -67,5 +67,8 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	.icobusiness{
+		font-size: 12px;
+	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<aby-page>
 		<aby-header title="帐号状态" slot="header">
-			<aby-fonts slot="right" class="aby-mui-bar" className="mui-pull-right" title="切换帐号"></aby-fonts>
+			<aby-fonts slot="right" class="aby-mui-bar" className="mui-pull-right" @click.native="toLogin" title="切换帐号"></aby-fonts>
 		</aby-header>
 		<div slot="content" class="mui-content">
 			<div class="divStatus">
@@ -45,6 +45,11 @@
 				if(this.auditState === 2 || this.auditState === '' || this.auditState === 4){
 					this.$router.push({ name: 'registerTwo' });
 				}
+			},
+			//切换帐号
+			toLogin(){
+				this.$store.commit("clearState");
+				this.$router.push({ name: 'login' });
 			}
 		},
 		mounted() {

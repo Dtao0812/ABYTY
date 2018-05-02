@@ -24,7 +24,7 @@ const state = {
 	isConnectChat:'',//是否连接聊天服务器
 	isConnectDb:false,//是否连接本地数据库
 	
-	loginState: false,//登录状态
+	loginState: window.localStorage.getItem('user_token')?true:false,//登录状态
 	user_token: window.localStorage.getItem('user_token')?window.localStorage.getItem('user_token'):'',//用户token
 	/*用户基本信息*/
 	cpUserInfo: '',userId: '',userName: '',userType: '',userPhone: '',
@@ -76,6 +76,7 @@ const mutations = {
 	},
 	// 清空用户基本信息
 	clearState(state){
+		window.localStorage.removeItem('user_token');
 		state.loginState = false;
 		state.user_token = state.chat_token = state.cpUserInfo = 
 		state.userId = state.userName = state.userType = state.userPhone = 

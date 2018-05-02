@@ -297,13 +297,18 @@
 					})
 				}else if(btnObj.id == 5){
 					// 去支付
-					
+					this.$store.push({
+						name:"payWay",
+						params:{
+							orderId: liObj.id,
+						}
+					})
 				}else if(btnObj.id == 6){
 					// 申请退款
 					this.$router.push({
 						name: 'refundApply',
 						params: {
-							orderId: li.id,
+							orderId: liObj.id,
 							identityType:this.identityType
 						}
 					});
@@ -312,7 +317,7 @@
 					this.$router.push({
 						name: 'refundDetail',
 						params: {
-							orderId: li.id,
+							orderId: liObj.id,
 							identityType:this.identityType
 						}
 					});

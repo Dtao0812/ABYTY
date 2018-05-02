@@ -11,13 +11,18 @@
 
 <script>
 	export default {
+		computed: {
+			chatNum() {
+				return this.$store.state.chatNum;
+			}
+		},
 		data() {
 			return {
 				tabDatas: [{
 						name: "首页",
 						isActive: true,
 						icon: "mui-icon aby-icon-home-selected",
-						actIcon:"mui-icon aby-icon-home",
+						actIcon: "mui-icon aby-icon-home",
 						toUrl: "home",
 						badgeNum: 0
 					},
@@ -26,7 +31,7 @@
 						isActive: false,
 						icon: "mui-icon aby-icon-purchase-selected",
 						toUrl: "purchase",
-						actIcon:"mui-icon aby-icon-purchase",
+						actIcon: "mui-icon aby-icon-purchase",
 						badgeNum: 0
 					},
 					{
@@ -34,7 +39,7 @@
 						isActive: false,
 						icon: "mui-icon aby-icon-order-selected",
 						toUrl: "order",
-						actIcon:"mui-icon aby-icon-order",
+						actIcon: "mui-icon aby-icon-order",
 						badgeNum: 0
 					},
 					{
@@ -42,7 +47,7 @@
 						isActive: false,
 						icon: "mui-icon aby-icon-msg-selected",
 						toUrl: "message",
-						actIcon:"mui-icon aby-icon-msg",
+						actIcon: "mui-icon aby-icon-msg",
 						badgeNum: 0
 					},
 					{
@@ -50,7 +55,7 @@
 						isActive: false,
 						icon: "mui-icon aby-icon-my-selected",
 						toUrl: "my",
-						actIcon:"mui-icon aby-icon-my",
+						actIcon: "mui-icon aby-icon-my",
 						badgeNum: 0
 					}
 				]
@@ -67,7 +72,13 @@
 					this.tabDatas[index].isActive = urlName === value.toUrl ? true : false;
 				})
 			},
-
+		},
+		mounted() {
+		},
+		watch: {
+			chatNum(val) {
+				this.tabDatas[3].badgeNum = val;
+			}
 		},
 	}
 </script>

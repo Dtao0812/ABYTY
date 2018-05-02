@@ -1,22 +1,21 @@
 <template>
 	<aby-page>
 		<aby-header slot="header">
-			<div slot="title">
-				<h1 class="mui-title">李小白</h1>
-				<h6 class="business">南京爱伴游网络科技有限公司</h6>
+			<div slot="title" v-if="userInfo != ''">
+				<h1 class="mui-title">{{userInfo.cpBasic.cpCorpName}}</h1>
+				<h6 class="business">{{userInfo.cpBasic.cpName}}</h6>
 			</div>
 			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" slot="right" type="chatsetting"></aby-icon>
 		</aby-header>
-		<div class="mui-content" slot="content">
-			<div id='msg-list'>
+		<div class="mui-content" slot="content" id="content">
+			<div id='msg-list' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
 				<div class="msg-item" v-for="(li,i) in msgList" :key="i" :class="li.messageDirection == 1 ? 'msg-item-self' : ''">
 					<img class="msg-user-img msg-user mui-icon selfHead" :src="li.sendUser.userFace" alt="" />
 					<div class="msg-content">
-						<div class="msg-content-inner" v-if="li.content.messageName=='TextMessage'">
-							{{toFaceHtml(li.content.content)}}
+						<div class="msg-content-inner" v-if="li.content.messageName=='TextMessage'" v-html="$abyApi.Chat.emojiToHTML(li.content.content)">
 						</div>
 						<div class="msg-content-inner" v-if="li.content.messageName=='ImageMessage'">
-							<img :src="li.content.content" id="imgMessage" data-preview-src="${item.content.imageUri}" data-preview-group="1">
+							<img :src="li.content.imageUri" id="imgMessage" :data-preview-src="li.content.imageUri" data-preview-group="1">
 						</div>
 						<div class="msg-content-arrow"></div>
 					</div>
@@ -31,7 +30,7 @@
 					<textarea v-model="msgtext" @focus="focus" type="text" class='input-text'></textarea>
 				</div>
 				<label class="footer-right">
-					<aby-icon class="mui-icon icon-face" type="chatface" @click.native="onFace"></aby-icon>
+					<aby-icon class="mui-icon faceClass" :type="faceIcon" @click.native="onFace"></aby-icon>
 					<aby-icon class="mui-icon icon-plus" type="chatplus" @click.native="onMore" v-show="msgtext==''"></aby-icon>
 					<aby-icon class="mui-icon icon-face" type="hotel" @click.native="onSend" v-show="msgtext!=''"></aby-icon>
 				</label>
@@ -45,14 +44,13 @@
 </template>
 
 <script>
-	require('../../static/lib/RongImLib/RongEmoji-2.2.6.min.js')
-	require('../../static/lib/RongImLib/RongIMLib-2.3.1.min.js')
 	export default {
 		components: {
 		},
 		data() {
 			return {
 				isShowFace:false,//是否显示表情
+				faceIcon:'chatface',//表情图标
 				isShowMore:false,//是否显示更多按钮
 				faceArr:[],
 				msgtext:'',//消息内容
@@ -63,26 +61,29 @@
 		},
 		methods:{
 			init(){
-				// 初始化融云
-				RongIMLib.RongIMEmoji.init();
-				let emijiArrr = RongIMLib.RongIMEmoji.emojis;// 获取表情列表
-				var emojiArrHtml = "";
-				for(var i in emijiArrr) {
-					emojiArrHtml = emojiArrHtml + emijiArrr[i].innerHTML;
-				}
-				this.faceArr = emojiArrHtml;
+				this.userId = this.$route.params.userId;
+				this.userInfo = [];
+				this.msgList = [];
+				this.msgtext = '';
+				this.getUserInfo();
+				this.getChatLog();
+			},
+			paperScroll(){
+				let tpScrollTop = document.getElementById('msg-list').scrollTop;
 			},
 			// 表情转换
 			toFaceHtml(data){
-				return abyChat.receiveEmojiMsg(data);
+				return this.$abyApi.Chat.emojiToHTML(data);
 			},
 			// 点击表情按钮
 			onFace(){
 				if(this.isShowFace){
+					this.faceIcon = 'chatface';
 					this.$refs.footer.className = '';
 					this.isShowFace = false;
 					this.isShowMore = false;
 				}else{
+					this.faceIcon = 'chatkeyboard';
 					this.$refs.footer.className = 'editFooter';
 					this.isShowFace = true;
 					this.isShowMore = false;
@@ -103,14 +104,8 @@
 			// 表情选择
 			onFaceTip(e){
 				let emoji = e.target.parentNode.getAttribute("name");
-				emoji = RongIMLib.RongIMEmoji.symbolToEmoji(emoji);
+				emoji = this.$abyApi.Chat.htmlToEmoji(emoji);
 				this.msgtext = this.msgtext + emoji;
-			},
-			// 点击相机
-			onCamera(){
-				this.$tool.getPhoto((file) => {
-					
-				});
 			},
 			// 输入框获得焦点
 			focus(){
@@ -118,9 +113,32 @@
 				this.isShowFace = false;
 				this.isShowMore = false;
 			},
-			// 发送消息
+			// 点击相机
+			onCamera(){
+				this.$tool.getPhoto((file) => {
+					this.$abyApi.Chat.uploadFile(file,(res)=>{
+						let imgMsg = this.$abyApi.Chat.imgToRongIm(res.imageInfo.base64, res.imageInfo.imageUri);
+						this.RongImSend(imgMsg);
+					})
+				});
+			},
+			// 点击发送按钮
 			onSend(){
+				let txtMsg = this.msgtext.replace(new RegExp('\n', 'gm'), '<br/>');
+				let sendMsg = this.$abyApi.Chat.textToRongIm(txtMsg);
+				sendMsg.sendLoading = 'sending';
+				this.RongImSend(sendMsg);
 				this.msgtext = '';
+				this.$refs.footer.className = '';
+				this.isShowFace = false;
+				this.isShowMore = false;
+			},
+			// 发送消息
+			RongImSend(msg){
+				this.$abyApi.Chat.sendMessage(this.userId,msg,(res)=>{
+					res.sendUser = JSON.parse(res.content.extra);
+					this.msgList = this.msgList.concat(res);
+				});
 			},
 			// 获得用户信息
 			getUserInfo(){
@@ -128,11 +146,55 @@
 				this.$abyApi.User.getBasciInfo(reqInfo,(res)=>{
 					this.userInfo = res.cpUserInfo;
 				});
+			},
+			// 获得聊天记录
+			getChatLog(){
+				let list = [];
+				this.$abyDb.Im.get((res)=>{
+					if(res){
+						let info = res.value;
+						info.sendUser = JSON.parse(info.content.extra);
+						if(info.targetId == this.userId){
+							list.push(info);
+							// 更新已读状态
+							this.$abyDb.Im.updateIsRead(info.targetId);
+						}
+					}
+				});
+				this.msgList = list;
 			}
 		},
 		mounted() {
-			this.init();
+			// 初始化融云
+			this.$abyApi.Chat.init();
+			// 接受融云消息
+			this.$abyApi.Chat.setReceiveMsgListener((res)=>{
+				this.msgList = this.msgList.concat(res);
+			});
+			// 获取表情列表
+			let emijiArrr = this.$abyApi.Chat.getEmojis();
+			var emojiArrHtml = "";
+			for(var i in emijiArrr) {
+				emojiArrHtml = emojiArrHtml + emijiArrr[i].innerHTML;
+			}
+			this.faceArr = emojiArrHtml;
+			
+			this.msgList = this.$abyApi.Chat.getImLog(this.userId);
 		},
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				vm.init()
+			})
+		},
+		watch:{
+			msgList(val){
+				let obj = document.getElementById('msg-list');
+				if(obj){
+					obj.scrollTop = obj.scrollHeight;
+					document.getElementById("content").scrollTop = obj.scrollHeight;
+				}
+			}
+		}
 	}
 </script>
 

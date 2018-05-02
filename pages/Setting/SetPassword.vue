@@ -34,7 +34,7 @@
 				newPassword:'',newPassword_confirm:'',code:'',verifyCode:'',
 				isShowPhoneDiv:true,
 				isShowPhone:this.$store.state.userPhone?false:true,
-				isShowPwd:false
+				isShowPwd:this.$store.state.userPhone?true:false,
 			}
 		},
 		methods: {
@@ -77,7 +77,9 @@
 				}
 			}
 		},
-		mounted() {},
+		mounted() {
+			console.log(this.isShowPhone)
+		},
 	}
 </script>
 

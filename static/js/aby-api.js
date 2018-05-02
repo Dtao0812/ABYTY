@@ -6,11 +6,12 @@ import store from '../../vuex/store'
 // 引入自定义
 import cryptoJS from '../lib/crypt/crypto-js.js'
 
-
 /******************************      公共函数       *****************************/
 // 加密函数
 const authKey = '@WSXvfr4^YHN,ki8';
 const authVi = '!QAZCDE#5tgbmju7';
+// 融云key
+const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
 //const AbyUrl = 'http://114.215.202.155/';
 const AbyUrl = 'http://www.ai-by.com/';
@@ -827,6 +828,244 @@ const Order = {
 };
 
 
+/******************************      Chat 聊天模块      *****************************/
+const Chat = {
+	// 初始化融云聊天
+	init(callBack){
+		RongIMLib.RongIMClient.init(RongIMKey, RongIMLib.WebSQLDataProvider);//初始化融云
+		RongIMLib.RongIMEmoji.init();//初始化表情库
+		//连接服务器
+		this.connect({
+			successCallBack: function(proMsg) {
+				callBack && callBack(proMsg);
+			},
+			errorCallBack: function(errorMsg) {
+				Vue.$tool.toast(errorMsg);
+			}
+		});
+		//设置链接状态监听器
+		RongIMLib.RongIMClient.setConnectionStatusListener({
+			onChanged: function(status) {
+				switch(status) {
+					//链接成功
+					case RongIMLib.ConnectionStatus.CONNECTED:
+						store.commit('setStateInfo', {title:'isConnectChat',value:true});
+						break;
+					//正在链接
+					case RongIMLib.ConnectionStatus.CONNECTING:
+						store.commit('setStateInfo', {title:'isConnectChat',value:false});
+						break;
+					//重新链接
+					case RongIMLib.ConnectionStatus.DISCONNECTED:
+						store.commit('setStateInfo', {title:'isConnectChat',value:false});
+						break;
+					//其他设备登陆
+					case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
+						store.commit('setStateInfo', {title:'isConnectChat',value:false});
+						break;
+					//域名不正确
+					case RongIMLib.ConnectionStatus.DOMAIN_INCORRECT:
+						store.commit('setStateInfo', {title:'isConnectChat',value:false});
+						break;
+					//网络不可用
+					case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
+						store.commit('setStateInfo', {title:'isConnectChat',value:false});
+						break;
+				}
+			}
+		});
+	},
+	// 连接融云服务器
+	connect(callBack){
+		if(store.state.isConnect)return;
+		RongIMLib.RongIMClient.connect(store.state.chat_token, {
+			onSuccess: function(userId) {
+				store.commit('setStateInfo', {title:'isConnectChat',value:true});
+				callBack.successCallBack(userId);
+			},
+			onTokenIncorrect: function() {
+				store.commit('setStateInfo', {title:'isConnectChat',value:false});
+				callBack.errorCallBack("链接聊天服务器出错，token无效");
+			},
+			onError: function(errorCode) {
+				store.commit('setStateInfo', {title:'isConnectChat',value:false});
+				var info = '';
+				switch(errorCode) {
+					case RongIMLib.ErrorCode.TIMEOUT:
+						info = '超时';
+						break;
+					case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+						info = '未知错误';
+						break;
+					case RongIMLib.ErrorCode.UNACCEPTABLE_PaROTOCOL_VERSION:
+						info = '不可接受的协议版本';
+						break;
+					case RongIMLib.ErrorCode.IDENTIFIER_REJECTED:
+						info = 'appkey不正确';
+						break;
+					case RongIMLib.ErrorCode.SERVER_UNAVAILABLE:
+						info = '服务器不可用';
+						break;
+				}
+				callBack.errorCallBack(errorCode);
+			}
+		});
+	},
+	// 消息监听器
+	setReceiveMsgListener(callBack){
+        RongIMLib.RongIMClient.setOnReceiveMessageListener({
+            // 接收到的消息
+            onReceived: function (message) {
+            	if(message.content.messageName == "ImageMessage" || message.content.messageName == "TextMessage"){
+            		message.sendUser = JSON.parse(message.content.extra);
+            		message.isRead = false;
+            		Chat.setImLog(message,message.targetId);
+            		
+            		callBack && callBack(message);
+            	}
+                // 判断消息类型
+                switch(message.messageType){
+                	case RongIMLib.RongIMClient.MessageType.TextMessage:
+       					//message接受到的消息（包含发送的信息，也可以在extra中添加要传递的值，如：时间等）
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.ImageMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.DiscussionNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.LocationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.RichContentMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.DiscussionNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.InformationNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.ContactNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.ProfileNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.CommandNotificationMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.CommandMessage:
+                        break;
+                    case RongIMLib.RongIMClient.MessageType.UnknownMessage:
+                        break;
+                    default:
+                    // 自定义消息
+                }
+            }
+
+        });
+	},
+	/*
+	 * 发送消息 
+	 * targetId 对方userId
+	 * messageContent 消息内容
+	 */
+	sendMessage(targetId,messageContent,successCallBack,errorCallBack){
+		messageContent.extra = JSON.stringify({
+			userId: store.state.cpUserInfo.userId,
+			userName: store.state.cpUserInfo.userName,
+			cpId: store.state.cpUserInfo.cpBasic.cpId,
+			cpName: store.state.cpUserInfo.cpBasic.cpName,
+			userFace: store.state.cpUserInfo.cpBasic.cpLogo,
+		});
+		RongIMLib.RongIMClient.getInstance().sendMessage(RongIMLib.ConversationType.PRIVATE, targetId, messageContent, {
+			// 发送消息成功
+			onSuccess: function(message) {
+				message.isRead = true;
+				Chat.setImLog(message);
+				//message 为发送的消息对象并且包含服务器返回的消息唯一Id和发送消息时间戳
+				successCallBack && successCallBack(message);
+			},
+			onError: function(errorCode, message) {
+				var info = '';
+				switch(errorCode) {
+					case RongIMLib.ErrorCode.TIMEOUT:
+						info = '超时';
+						break;
+					case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+						info = '未知错误';
+						break;
+					case RongIMLib.ErrorCode.REJECTED_BY_BLACKLIST:
+						info = '在黑名单中，无法向对方发送消息';
+						break;
+					case RongIMLib.ErrorCode.NOT_IN_DISCUSSION:
+						info = '不在讨论组中';
+						break;
+					case RongIMLib.ErrorCode.NOT_IN_GROUP:
+						info = '不在群组中';
+						break;
+					case RongIMLib.ErrorCode.NOT_IN_CHATROOM:
+						info = '不在聊天室中';
+						break;
+					default:
+						info = "发送失败，未知错误：" + errorCode;
+						break;
+				}
+				Vue.$tool.toast(info);
+				errorCallBack && errorCallBack(info);
+			}
+		});
+	},
+	// 上传文件
+	uploadFile(file, successCallback, errorCallback){
+		let requestData = { act: 'IM2000' };
+		let files = [];
+		files.push({
+			name: "chat",
+			path: file,
+		});
+		Server.UploadFileByApp("cpIM", files, requestData, successCallback, errorCallback);
+	},
+	// 获得表情库
+	getEmojis(){
+		return RongIMLib.RongIMEmoji.emojis;
+	},
+	// 表情转换html
+	emojiToHTML(emoji){
+		return RongIMLib.RongIMEmoji.emojiToHTML(emoji);
+	},
+	// html转换表情
+	htmlToEmoji(emoji){
+		return RongIMLib.RongIMEmoji.symbolToEmoji(emoji);
+	},
+	// 消息内容转换
+	textToRongIm(text){
+		return RongIMLib.TextMessage.obtain(text);
+	},
+	// 图片转内容
+	imgToRongIm(img){
+		return RongIMLib.ImageMessage.obtain(img);
+	},
+	// 本地缓存聊天记录
+	setImLog(msg,userId){
+		Vue.$abyDb.Im.insert(msg);
+		this.getNotReadMsg();
+	},
+	//　获得本地缓存聊天记录
+	getImLog(userId){
+		let log = window.localStorage.getItem('im_userId_'+userId);
+		if(log){
+			return JSON.parse(log);
+		}
+		return [];
+	},
+	// 获得未读消息数 
+	getNotReadMsg(){
+		Vue.$abyDb.Im.get((res)=>{
+			if(res && !res.value.isRead){
+				let info = {}
+				info.title = 'chatNum';
+				info.value = res.value.messageUId;
+				store.commit("setChatNum",info);
+			}
+		},(e)=>{
+			console.log(e)
+		})
+	},
+};
+
 /******************************      All 多接口统一获取      *****************************/
 const All = {
 	// 获得首页精选模块
@@ -943,5 +1182,5 @@ const All = {
 }
 
 export default {
-	Server,User,Crypto,Sys,Project,Sport,Guide,General,Hotel,All,Select,Order,Supplier
+	Server,User,Crypto,Sys,Project,Sport,Guide,General,Hotel,All,Select,Order,Supplier,Chat
 }

@@ -1,12 +1,12 @@
 <template>
 	<ul class="mui-table-view space">
-		<li class="mui-table-view-cell mui-media" @click="toDetail">
+		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
-				<img class="mui-media-object mui-pull-left" src="../../static/images/logo/logo.png">
-				<span class="mui-badge mui-badge-danger">2</span>
+				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
+				<span class="mui-badge mui-badge-danger" v-show="li.noReadNum!=0">{{li.noReadNum}}</span>
 				<div class="mui-media-body">
-					李小白
-					<p class='mui-ellipsis'>南京爱伴游网络科技有限公司</p>
+					{{li.sendUser.userName}}
+					<p class='mui-ellipsis'>{{li.sendUser.cpName}}</p>
 				</div>
 			</a>
 		</li>
@@ -26,7 +26,7 @@
 				this.$router.push({
 					name: 'chat',
 					params: {
-
+						userId:li.sendUser.userId
 					}
 				});
 			}

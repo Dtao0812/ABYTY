@@ -9,19 +9,27 @@ const state = {
 	routeChain: [],
 	tabActive:'',
 	
+	sysNum:0,//系统消息
+	chatNum:0,//聊天消息
+	chatList:[],//聊天id
+	
+	
 	abyTel:'025-68132329',//客服电话
 	
-	loginState: false,
 	osType: window.localStorage.getItem('osType')?window.localStorage.getItem('osType'):'',
 	deviceId: window.localStorage.getItem('deviceId')?window.localStorage.getItem('deviceId'):'',
 	version: window.localStorage.getItem('version')?window.localStorage.getItem('version'):'',
-	chat_token:'',
 	
-	user_token: window.localStorage.getItem('user_token')?window.localStorage.getItem('user_token'):'',
+	chat_token:'',//聊天token
+	isConnectChat:'',//是否连接聊天服务器
+	isConnectDb:false,//是否连接本地数据库
 	
+	loginState: false,//登录状态
+	user_token: window.localStorage.getItem('user_token')?window.localStorage.getItem('user_token'):'',//用户token
+	/*用户基本信息*/
 	cpUserInfo: '',userId: '',userName: '',userType: '',userPhone: '',
-	
-	cpId: '',cpBtype: '',cpBasic:'',
+	/*企业基本信息*/
+	cpBasic:'',cpId: '',cpBtype: '',
 }
 
 // 同步加载
@@ -64,12 +72,7 @@ const mutations = {
 	},
 	// 单独设置基本信息
 	setStateInfo(state,info){
-		switch(info.title){
-			case 'deviceId':state.deviceId = info.value;break;
-			case 'version':state.version = info.value;break;
-			case 'osType':state.osType = info.value;break;
-			case 'tabActive':state.tabActive = info.value;break;
-		}
+		state[info.title] = info.value;
 	},
 	// 清空用户基本信息
 	clearState(state){
@@ -79,6 +82,28 @@ const mutations = {
 		state.cpId = state.cpBasic = state.cpBtype = '';
 		state.routeChain = [];
 		state.pageDirection = 'fade';
+	},
+	// 设置聊天未读消息
+	setChatNum(state,info){
+		let isadd = true;
+		for(let i=0;i<state.chatList.length;i++){
+			if(state.chatList[i] == info.value)isadd = false;
+		}
+		if(isadd){
+			state.chatList = state.chatList.concat(info.value);
+		}
+		state[info.title] = state.chatList.length;
+	},
+	// 删除聊天未读消息
+	delChatNum(state,info){
+		let newList = [];
+		for(let i=0;i<state.chatList.length;i++){
+			if(state.chatList[i] != info.value){
+				newList.push(state.chatList[i]);
+			}
+		}
+		state.chatList = newList;
+		state[info.title] = state.chatList.length;
 	}
 	
 }

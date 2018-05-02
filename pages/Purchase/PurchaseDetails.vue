@@ -245,7 +245,7 @@
 					</ul>
 				</div>
 				<div class="aby-detail-line"></div>
-				<div class="aby-detail-operation mui-text-center aby-font-blue">
+				<div class="aby-detail-operation mui-text-center aby-font-blue" @click="toChat(data.publisher.userId)">
 					<aby-icon type="rob"></aby-icon>
 					抢单
 				</div>
@@ -268,18 +268,41 @@
 			}
 		},
 		methods: {
-
+			init(){
+				this.selectId = this.$route.params.selectId;
+				this.data = '';
+				
+				let reqInfo = {};
+				reqInfo.loading = 1;
+				reqInfo.selectId = this.selectId;
+				this.$abyApi.Select.getPublishDetail(reqInfo, (res) => {
+					this.data = res.cpSelect;
+					this.$refs.page.isLoading = false;
+				}, (err) => {
+					this.$refs.page.isLoading = false;
+				});
+			},
+			// 聊天
+			toChat(userId){
+				this.$router.push({
+					name:'chat',
+					params:{
+						userId: userId
+					}
+				});
+			}
 		},
 		mounted() {
-			let reqInfo = {};
-			reqInfo.loading = 1;
-			reqInfo.selectId = this.selectId;
-			this.$abyApi.Select.getPublishDetail(reqInfo, (res) => {
-				this.data = res.cpSelect;
-				this.$refs.page.isLoading = false;
-			}, (err) => {
-				this.$refs.page.isLoading = false;
-			});
+			this.init();
+		},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'purchase') {
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
 		},
 	}
 </script>

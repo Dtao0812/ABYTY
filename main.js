@@ -8,6 +8,8 @@ require('./index.js')
 // 引入第三方
 import Moment from 'moment'
 import axios from 'axios'
+require('./static/lib/RongImLib/RongIMLib-2.3.0.min.js')
+require('./static/lib/RongImLib/RongEmoji-2.2.6.min.js')
 
 // 引入框架css
 import 'mint-ui/lib/style.css'
@@ -25,6 +27,7 @@ import './static/css/icon.css'
 import AbyTool from './static/js/tool.js'
 import AbyApi from './static/js/aby-api.js'
 import AbyIcons from './static/js/iconfont.js'
+import AbyDb from './static/js/aby-db.js'
 
 
 
@@ -49,6 +52,7 @@ Vue.config.productionTip = false
 // 自定义全局组件
 Vue.$tool = Vue.prototype.$tool = AbyTool
 Vue.$abyApi = Vue.prototype.$abyApi = AbyApi
+Vue.$abyDb = Vue.prototype.$abyDb = AbyDb
 Vue.component('aby-page', AbyPage)
 Vue.component('aby-header', AbyHeader)
 Vue.component('aby-picker', AbyPicker)

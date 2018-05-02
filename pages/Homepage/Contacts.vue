@@ -2,13 +2,13 @@
 	<div class="contacts">
 		<!--联系人信息-->
 		<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;">
-			<li class="mui-table-view-cell mui-media">
-				<img class="mui-media-object mui-pull-left" src="../../static/images/ico/ico_wechat.png">
+			<li class="mui-table-view-cell mui-media" v-for="li in list">
+				<img class="mui-media-object mui-pull-left" :src="li.userFace">
 				<div class="mui-media-body mui-ellipsis">
-					杜小甫
-					<p class='mui-ellipsis'>总经理</p>
+					{{li.userCuteName}}
+					<p class='mui-ellipsis'>{{li.userPost}}</p>
 					<div class="divContact">
-						<i class="mui-icon mui-icon-phone"></i>
+						<i @click="$tool.dialTelToApp(li.userPhone)" class="mui-icon mui-icon-phone" ></i>
 						<i class="mui-icon mui-icon-chatbubble"></i>
 					</div>
 				</div>
@@ -18,6 +18,25 @@
 </template>
 
 <script>
+	export default {
+		components: {},
+		name: 'contract',
+		props: ['list'],
+		data() {
+			return {
+				tabList: this.list,
+			}
+		},
+		methods: {
+		},
+		mounted() {
+		},
+		watch: {  
+		    list(val){
+		    	this.list = val;
+		    }  
+		}
+	}
 </script>
 
 <style scoped>

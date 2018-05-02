@@ -3,7 +3,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './vuex/store'
-require('./index.js')
+require('./index.js') 
 
 // 引入第三方
 import Moment from 'moment'

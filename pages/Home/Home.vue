@@ -89,8 +89,9 @@
 		</div>
 		<!--弹出框-->
 		<mt-popup v-model="popupPlus" popup-transition="popup-fade" position="top" class="mint-popup-1">
-			<p @click="toPublish"><aby-icon class="mui-icon mui-pull-right icon-plus" type="plus"></aby-icon>发布询价</p>
-			<p @click="toScan"><aby-icon class="mui-icon mui-pull-right icon-plus" type="plus"></aby-icon>扫一扫</p>
+			<p @click="toPublish" class="aby-font-Black"><aby-icon class="mui-icon icon-plus" type="publishpurchase"></aby-icon>发布询价</p>
+			<div class="line"></div>
+			<p @click="toScan" class="aby-font-Black"><aby-icon class="mui-icon icon-plus" type="scan"></aby-icon>扫一扫</p>
 		</mt-popup>
 	</div>
 
@@ -319,10 +320,21 @@
 	}
 	
 	.mint-popup-1 {
-		top: 60px;
-		right: 0;
+		top: 55px;
+		right: -55px;
 		left: auto;
-		width: 100px;
+		width: 110px;
+		padding: 10px 10px 0px 10px;
+	}
+	.mint-popup-1 .mui-icon{
+		font-size: 20px;
+		margin-right: 8px;
+		color: #707070;
+		vertical-align: middle;
+	}
+	.mint-popup-1 p
+	{
+		font-size: 15px;
 	}
 	
 	.mint-popup-1::before {
@@ -341,5 +353,9 @@
 		position: absolute;
 		top: -20px;
 		right: 10px;
+	}
+	.mint-popup-1 .line{
+		border-bottom: 1px solid #F0F0F0;
+		margin-bottom: 10px;
 	}
 </style>

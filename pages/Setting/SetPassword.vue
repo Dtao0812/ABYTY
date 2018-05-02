@@ -4,10 +4,10 @@
 		<div class="mui-content aby-bg-white" slot="content">
 			<div class="row-input" v-if="isShowPhone">
 				<aby-field modelId="userPhone" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入注册手机号" type="tel">
-					<i slot="allowRight"></i>
+					<aby-icon id="iconLabel" type="loginid" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 				<aby-field modelId="verycode" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入验证码" type="number">
-					<i slot="allowRight"></i>
+					<aby-icon id="iconLabel" type="vcode" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 				<input type="button" class="mui-btn btnVerificationCode" id="btnVerificationCode" @click="onGetVerifyCode" value="获取验证码">
 			</div>

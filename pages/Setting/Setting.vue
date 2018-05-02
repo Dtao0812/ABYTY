@@ -10,7 +10,7 @@
 			<h5 class="mui-content-padded"></h5>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell" id="editPwd">
-					<router-link :to="{ name: 'setPassword' }" class="mui-navigate-right">意见反馈</router-link>
+					<router-link :to="{ name: 'feedback' }" class="mui-navigate-right">意见反馈</router-link>
 				</li>
 			</ul>
 			<h5 class="mui-content-padded"></h5>

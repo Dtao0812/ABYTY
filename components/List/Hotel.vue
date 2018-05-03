@@ -27,30 +27,29 @@
 
 <script>
 	export default {
-		components: {
-		},
+		components: {},
 		props: ['list'],
 		data() {
-			return {
-			}
+			return {}
 		},
 		methods: {
 			//查看详情
-			toDetail(li){
-				if(this.$store.state.loginState){
+			toDetail(li) {
+				if(this.$store.state.loginState) {
 					let reqInfo = {};
 					reqInfo.hId = li.hId;
 					reqInfo.loading = 1;
-					this.$abyApi.Hotel.getDetail(reqInfo,(res)=>{
+					this.$abyApi.Hotel.getDetail(reqInfo, (res) => {
 						this.$router.push({
 							name: 'webView',
 							params: {
 								title: li.hName,
-								url: res.hotelInfo.detailUrl
+								url: res.hotelInfo.detailUrl,
+								cpId: li.cpId
 							}
 						});
 					})
-				}else{
+				} else {
 					this.$router.push({
 						name: 'login',
 					});
@@ -58,23 +57,24 @@
 			}
 		},
 		mounted() {
-			
+
 		},
-		watch: {  
-		    list(val){
-		    	this.list = val;
-		    }  
-		}  
+		watch: {
+			list(val) {
+				this.list = val;
+			}
+		}
 	}
 </script>
 
 <style scoped>
-	.icolocation{
+	.icolocation {
 		font-size: 13px;
 		margin-right: 3px;
 		margin-left: -1px;
 	}
-	.icobusiness{
+	
+	.icobusiness {
 		font-size: 12px;
 	}
 </style>

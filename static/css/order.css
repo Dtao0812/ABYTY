@@ -4,7 +4,6 @@
 	padding: 10px 10px 20px 10px;
 	margin: 0;
 }
-
 .aby-detail-line {
 	background-image: url(../images/line/line_3x.png);
 	height: 15px;
@@ -27,6 +26,15 @@
 	background-size: 10px 1px;
 	background-repeat: repeat-x;*/
 }
+.aby-detail-linegray100 {
+	background-image: url(../images/line/line_gray_3x.png);
+	height: 15px;
+	background-color: #FFFFFF;
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
 
 .aby-detail-content,
 .aby-detail-header,
@@ -35,6 +43,10 @@
 .aby-detail-total {
 	background-color: #FFFFFF;
 	padding: 5px 17px 17px 17px;
+}
+.aby-detail-total {
+	padding-bottom: 0px;
+	padding-right: 0px;
 }
 
 .aby-detail-content .mui-media-object {
@@ -73,7 +85,7 @@
 }
 
 .aby-detail-total {
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .aby-detail-publisher {
@@ -97,7 +109,7 @@
 }
 
 .aby-line-vertical {
-	border-right: 1px solid #BBBBBB;
+	border-right: 1px solid #DDDDDD;
 	height: 20px;
 	position: absolute;
 	margin-left: 50%;

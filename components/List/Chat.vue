@@ -1,5 +1,5 @@
 <template>
-	<ul class="mui-table-view space">
+	<ul class="mui-table-view">
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
 				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">

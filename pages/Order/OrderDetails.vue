@@ -47,8 +47,8 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact"><img src="../../static/images/btn/btnDelRed.png" slot="imgs"></aby-button>
-					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.buyerPhone)"><img src="../../static/images/btn/btnDelRed.png" slot="imgs"></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.buyerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
 			</div>
@@ -66,8 +66,8 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact"><img src="../../static/images/btn/btnDelRed.png" slot="imgs"></aby-button>
-					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.sellerPhone)"><img src="../../static/images/btn/btnDelRed.png" slot="imgs"></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.sellerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">产品标题</div>
-						<div class="mui-media-body aby-list-title-2">{{info.orderInfo.proTitle}}</div>
+						<div class="mui-media-body">{{info.orderInfo.proTitle}}</div>
 					</li>
 					<!--基于产品订单详情Start-->
 					<li class="mui-table-view-cell mui-media">
@@ -106,7 +106,7 @@
 					</li>
 					<!--基于产品订单详情End-->
 				</ul>
-				<div class="aby-detail-line"></div>
+				<div class="aby-detail-linegray100"></div>
 				<div class="aby-detail-total mui-text-right">
 					合计<span class="aby-detail-price">￥{{info.strPayment}}</span>
 				</div>

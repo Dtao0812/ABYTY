@@ -2,7 +2,7 @@
 	<div class="list-item" style="top: 40px;">
 		<!--导游列表-->
 		<ul class="mui-table-view">
-			<li class="mui-table-view-cell mui-media" v-for="(item,i) in lists">
+			<li class="mui-table-view-cell mui-media" v-for="(item,i) in lists" @click="toDetail(item.aac001)">
 				<a href="javascript:;">
 					<img class="mui-media-object mui-pull-left aby-img-guide" :src="item.aac007">
 					<div class="mui-media-body aby-list">
@@ -38,7 +38,14 @@
 			}
 		},
 		methods: {
-			
+			toDetail(pbId){
+				this.$router.push({
+					name: "guidePage",
+					params: {
+						pbId: pbId
+					}
+				})
+			}
 		},
 		mounted() {
 		},

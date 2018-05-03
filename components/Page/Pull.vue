@@ -10,6 +10,7 @@
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
 						<div style="min-height: 500px;">
 							<slot name="loadlist"></slot>
+							<br style="clear:both"/>
 						</div>
 					</mt-loadmore>
 						
@@ -87,9 +88,14 @@
 					});
 				}, 1500);
 			},
+			// 关闭加载动画
 			closeLoading(){
 				this.isLoading = false;
-			}
+			},
+			// 禁止上推
+			disableLoadBottom(){
+				this.allLoaded = true;
+			},
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;

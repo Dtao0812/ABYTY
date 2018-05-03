@@ -26,6 +26,7 @@ import Hotel from '../pages/Hotel/Index.vue'
 import HotelSearch from '../pages/Hotel/Search.vue'
 //导游
 import Guide from '../pages/Guide/Index.vue'
+import GuidePage from '../pages/Guide/Detail.vue'
 //注册登录
 import Login from '../pages/Login/Login.vue'
 import RegisterOne from '../pages/Register/RegisterOne.vue'
@@ -80,6 +81,8 @@ import MyGold from '../pages/My/MyGold.vue'
 
 //店铺主页
 import HomePage from '../pages/HomePage/HomePage.vue'
+//导游主页
+import GuidePage from '../pages/HomePage/GuidePage.vue'
 //个人资料编辑页面
 import Edit from '../pages/Homepage/Edit.vue'
 //消息中心
@@ -93,6 +96,7 @@ import PayGold from '../pages/Pay/PayGold.vue'
 //扫一扫
 import Scan from '../pages/Scanbarcode/Scan.vue'
 //专题模块
+import SpecialHot from '../pages/Special/Hot.vue'
 import SpecialLine from '../pages/Special/Line.vue'
 import SpecialHotel from '../pages/Special/Hotel.vue'
 import SpecialPlane from '../pages/Special/Plane.vue'
@@ -165,6 +169,7 @@ const router = new Router({
 		{ name: 'sport',path: '/sport',component: Sport },
 		
 		{ name: 'guide',path: '/guide',component: Guide },
+		{ name: 'guidePage',path: '/guidePage',component: GuidePage },
 		
 		{ name: 'webView',path: '/webView',component: WebView },
 		
@@ -181,6 +186,7 @@ const router = new Router({
 		//其他
 		{ name: 'scan',path: '/Scan',component: Scan },
 		//专题模块
+		{ name: 'specialHot',path: '/SpecialHot',component: SpecialHot },
 		{ name: 'specialLine',path: '/SpecialLine',component: SpecialLine },
 		{ name: 'specialHotel',path: '/SpecialHotel',component: SpecialHotel },
 		{ name: 'specialPlane',path: '/SpecialPlane',component: SpecialPlane },
@@ -195,7 +201,7 @@ router.beforeEach((to, from, next) => {
 		[
 		 	'home','purchase','order','message','my',
 		 	'orderList','orderDetails','searchIndexResult','searchResult',
-		 	'agrList','chat','purchaseDetails','payWay',
+		 	'agrList','chat','purchaseDetails','payWay','webView'
         ]; 
 	const fromKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, from.name);
 	const toKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, to.name);

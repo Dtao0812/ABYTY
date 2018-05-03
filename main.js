@@ -91,6 +91,16 @@ Vue.filter('filterNull', function(str){
 	}
 	return str;
 })
+//如果返回数据为'1',则为男
+Vue.filter('isSex', function(data){
+	if(data == 0){
+		return '女'
+	}else if(data == '1'){
+		return '男'
+	}else{
+		return data;
+	}
+})
 
 // 时间转换为标准时间（YYYY-MM-DD）
 Vue.filter('filterConvertDate',function(timestamp){
@@ -110,6 +120,12 @@ Vue.filter('filterConvertDateFromNow',function(date){
 	Moment.locale('zh-cn');
 	return Moment(date, "YYYYMMDD").fromNow();
 });
+//计算年龄
+Vue.filter('countAge', function(date){
+	Moment.locale('zh-cn');
+	var countAge = Moment(date, "YYYYMMDD").fromNow().split('年')[0];
+	return countAge; 
+})
 
 new Vue({
 	el: '#app',

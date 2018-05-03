@@ -161,7 +161,7 @@
 	}
 	
 	.li-active {
-		color: #2AC845;
+		color: #08C7B5;
 	}
 	
 	.mui-slider-indicator .mui-icon {

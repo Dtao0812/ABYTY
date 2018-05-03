@@ -3,7 +3,8 @@
 		<!--订单列表-->
 		<div class="mui-card space" v-for="(li,i) in list" :key="i">
 			<div class="mui-card-header mui-card-media">
-				<img src="../../static/images/logo/logo.png">
+				<!--不同类型图标type值不一样 线路：line 机票：pticket 酒店：hotel 导游：guide 机+酒：planhotel-->
+				<aby-icon-color type="line"></aby-icon-color>
 				<div class="mui-media-body">
 					{{li.orderTypeDesc}}｜{{li.orderCode}}
 					<span class="state">{{li.orderStateDesc}}</span>
@@ -198,13 +199,18 @@
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
 	}
 	
-	.mui-card-media img {
+	.mui-card-media svg {
 		width: 20px;
 		height: 20px;
+		position: absolute;
+	}
+	.mui-card-header .mui-card-media{
+		padding-left: 15px!important;
+		padding-right: 15px!important;
 	}
 	
 	.mui-card-header.mui-card-media .mui-media-body {
-		margin-left: 30px;
+		margin-left: 25px;
 	}
 	
 	.mui-card-content {
@@ -227,7 +233,7 @@
 	}
 	
 	.mui-card-content-inner {
-		padding: 10px;
+		padding: 10px 15px;
 	}
 	
 	.mui-card-content-inner h5 {
@@ -237,7 +243,7 @@
 	.mui-card-content-inner .price {
 		position: absolute;
 		float: right;
-		right: 10px;
+		right: 15px;
 	}
 	
 	.mui-card-header.mui-card-media .mui-media-body {
@@ -247,7 +253,7 @@
 	
 	.mui-card-footer {
 		float: right;
-		padding: 10px;
+		padding: 10px 15px;
 	}
 	
 	.mui-card-footer button {

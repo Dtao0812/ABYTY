@@ -13,10 +13,10 @@
 			</div>
 			<div class="row-input" v-if="isShowPwd">
 				<aby-field modelId="newPassword" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请设置新密码" type="password">
-					<i slot="allowRight"></i>
+					<aby-icon id="iconLabel" type="pwd" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 				<aby-field modelId="newPassword_confirm" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请重复新密码" type="password">
-					<i slot="allowRight"></i>
+					<aby-icon id="iconLabel" type="pwd" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 			</div>
 			<div class="row-button">

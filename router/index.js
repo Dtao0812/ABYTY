@@ -93,6 +93,7 @@ import PayGold from '../pages/Pay/PayGold.vue'
 //扫一扫
 import Scan from '../pages/Scanbarcode/Scan.vue'
 //专题模块
+import SpecialHot from '../pages/Special/Hot.vue'
 import SpecialLine from '../pages/Special/Line.vue'
 import SpecialHotel from '../pages/Special/Hotel.vue'
 import SpecialPlane from '../pages/Special/Plane.vue'
@@ -181,6 +182,7 @@ const router = new Router({
 		//其他
 		{ name: 'scan',path: '/Scan',component: Scan },
 		//专题模块
+		{ name: 'specialHot',path: '/SpecialHot',component: SpecialHot },
 		{ name: 'specialLine',path: '/SpecialLine',component: SpecialLine },
 		{ name: 'specialHotel',path: '/SpecialHotel',component: SpecialHotel },
 		{ name: 'specialPlane',path: '/SpecialPlane',component: SpecialPlane },

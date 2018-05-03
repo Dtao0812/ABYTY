@@ -109,7 +109,7 @@
 	    min-height: 44px;
 	    padding-top: 15px;
 	    margin-top: 10px;
-	    border-top: 1px solid #ddd;
+	    border-top: 1px solid #F0F0F0;
 	    font-size: 14px;
 	}
 	.purchase-delete-btn{

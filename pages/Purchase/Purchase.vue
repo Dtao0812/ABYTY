@@ -254,7 +254,7 @@
 		position: absolute;
 		width: 24px;
 		height: 24px;
-		right: 10px;
+		right: 0px;
 		top: 8px;
 	}
 </style>

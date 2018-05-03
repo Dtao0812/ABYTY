@@ -226,7 +226,7 @@
 				<div v-else>
 					<div class="aby-detail-linegray" v-if="data.selectDesc!=null||''"></div>
 					<div class="aby-detail-remarks" v-if="data.selectDesc">
-						<p>备注</p>
+						<p class="title">备注</p>
 						<p>{{data.selectDesc}}</p>
 					</div>
 				</div>
@@ -314,7 +314,10 @@
 		padding: 10px;
 		margin: 0;
 	}
-	
+	.aby-detail .title{
+		color: #AAAAAA;
+		font-size: 13px;
+	}
 	.aby-detail-header,
 	.aby-detail-operation,
 	.aby-detail-remarks {

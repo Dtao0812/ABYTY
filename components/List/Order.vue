@@ -10,9 +10,9 @@
 					<span class="state">{{li.orderStateDesc}}</span>
 				</div>
 			</div>
-			<div class="mui-card-content aby-font-Black" @click="toDetail(li)">
+			<div class="mui-card-content" @click="toDetail(li)">
 				<div class="mui-card-content-inner">
-					<h5 class="mui-ellipsis">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
+					<h5 class="mui-ellipsis aby-font-Black">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
 					<p>{{li.goData}} {{li.orderSummary.goCity}}出发</p>
 					<p>{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt!=0">{{li.orderSummary.childCnt}}儿童</span></p>
 				</div>
@@ -204,7 +204,7 @@
 		height: 20px;
 		position: absolute;
 	}
-	.mui-card-header .mui-card-media{
+	.mui-card-header .mui-card-media,.mui-card-header{
 		padding-left: 15px!important;
 		padding-right: 15px!important;
 	}
@@ -237,7 +237,7 @@
 	}
 	
 	.mui-card-content-inner h5 {
-		padding-right: 70px;
+		padding-right: 80px;
 	}
 	
 	.mui-card-content-inner .price {

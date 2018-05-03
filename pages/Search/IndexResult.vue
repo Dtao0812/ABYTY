@@ -114,9 +114,9 @@
 				this.$abyApi.Project.getLineListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
-						this.$refs.pull[0].closeLoading();
 						this.tabList[0].data = res.proList;
 						this.noContent = res.proList.length=0;
+						this.$refs.pull[0].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
@@ -135,9 +135,9 @@
 				this.$abyApi.Supplier.getSupplierListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
-						this.$refs.pull[1].closeLoading();
 						this.tabList[1].data = res.cpBasicList;
 						this.noContent = res.cpBasicList.length=0;
+						this.$refs.pull[1].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉

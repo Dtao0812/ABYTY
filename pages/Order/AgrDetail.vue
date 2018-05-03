@@ -108,8 +108,8 @@
 				</li>
 			</ul>
 			<div class="operation">
-				<div class="mui-col-xs-2">
-					<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">联系</span>
+				<div class="mui-col-xs-2" @click="toChat">
+					<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">聊天</span>
 				</div>
 				<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">
 					<aby-icon class="mui-icon" type="call"></aby-icon><span class="icotext">联系</span>
@@ -146,6 +146,11 @@
 			}
 		},
 		methods: {
+			init() {
+				this.agreementId = this.$route.params.agreementId,
+				this.identityType = this.$route.params.identityType,
+				this.getDetail();
+			},
 			// 获得详情
 			getDetail() {
 				this.$abyApi.Order.getAgreementDetail(this.agreementId, (res) => {
@@ -182,9 +187,27 @@
 					}
 				});
 			},
+			// 打开聊天界面
+			toChat(){
+				this.$router.push({
+					name: 'chat',
+					params: {
+						userId:this.identityType == 'seller' ? this.info.buyerInfo.userId : this.info.sellerInfo.userId
+					}
+				});
+			}
 		},
 		mounted() {
 			this.getDetail();
+		},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'agrList') {
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
 		},
 	}
 </script>

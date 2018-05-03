@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
 			<!--<header-search v-if="isShowSearch" slot="hSearch"></header-search>-->
 		</aby-header>
@@ -60,7 +60,7 @@
 				reqInfo.pageNum = 1;
 				reqInfo.keyWord = '',
 				this.$abyApi.All.getCollections(reqInfo, (res) => {
-//					console.log('res:'+JSON.stringify(res))
+					this.$refs.pull.closeLoading();
 					this.goodsList[0].data = res.lineList;
 					this.goodsList[1].data = res.hotelList;
 					this.goodsList[2].data = res.sportList;
@@ -74,7 +74,6 @@
 				reqInfo.pageNum = this.pageNum = ++this.pageNum;
 				reqInfo.keyWord = '',
 				this.$abyApi.All.getCollections(reqInfo, (res) => {
-					console.log('res:'+JSON.stringify(res))
 					this.goodsList[0].data = this.goodsList[0].data.concat(res.lineList);
 					this.goodsList[1].data = this.goodsList[1].data.concat(res.hotelList);
 					this.goodsList[2].data = this.goodsList[2].data.concat(res.sportList);
@@ -83,14 +82,7 @@
 					callback && callback(false);
 				})
 			},
-//			eventBack(e){
-////				this.lists = [];
-////				this.orderBy = e.value;
-//				this.getPullDown();
-//			}
-			// tab点击返回监听
 			eventTab(e){
-				console.log(e.id)
 			}
 		},
 		mounted() {

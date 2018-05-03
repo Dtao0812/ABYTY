@@ -10,6 +10,7 @@
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
 						<div style="min-height: 500px;">
 							<slot name="loadlist"></slot>
+							<div v-if="noContent">暂无内容</div>
 							<br style="clear:both"/>
 						</div>
 					</mt-loadmore>
@@ -70,8 +71,11 @@
 			},
 			// 下拉
 			loadTop() {
+				console.log(1111)
 				setTimeout(() => {
 					this.$parent.getPullDown((ret) => {
+						console.log(ret)
+						if(ret == 0)this.noContent = true;
 						this.$refs.loadmore.onTopLoaded();
 					});
 				}, 2500);

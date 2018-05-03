@@ -33,7 +33,7 @@
 				this.$abyApi.Project.getLineListByKeyWord(reqInfo,(res)=>{
 					this.$refs.pull.closeLoading();
 					this.lists = res.proList;
-					callback && callback(true);
+					callback && callback(res.proList.length);
 				},(err)=>{
 					callback && callback(false);
 				});

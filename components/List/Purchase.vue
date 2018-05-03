@@ -1,5 +1,6 @@
 <template>
 	<div class="list-items">
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<div class="list-item" v-for="tmp in lists">
 			<div class="mui-card space">
 				<div class="mui-card-header mui-card-media">

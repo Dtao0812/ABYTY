@@ -1,6 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--线路产品列表-->
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<ul class="mui-table-view" v-for="(item,i) in list" :key="i">
 			<li class="mui-table-view-cell mui-media" >
 				<a href="javascript:;" @click="toDetail(item)">

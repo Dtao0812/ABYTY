@@ -1,7 +1,7 @@
 <template>
 	<div class="list-items">
 		<aby-no-content v-if="list.length==0"></aby-no-content>
-		<div class="list-item" v-for="tmp in lists">
+		<div class="list-item" v-for="tmp in list">
 			<div class="mui-card space">
 				<div class="mui-card-header mui-card-media">
 					<div>
@@ -68,13 +68,13 @@
 						</div>
 						<!--导游60-->
 						<div v-if="tmp.selectType == 60">
-							<h5>寻找嘉兴导游
+							<h5>{{tmp.pbTitle}}
 								<aby-icon-color class="mui-pull-right" type="guide"></aby-icon-color>
 							</h5>
-							<p>目的地：嘉兴</p>
-							<p>接团地：嘉兴 </p>
-							<p>出行时间：2018-7-21 </p>
-							<p>行程天数：3天 </p>
+							<p>目的地：{{tmp.pbRoadLine}}</p>
+							<p>接团地：{{tmp.pbAddress}} </p>
+							<p>出行时间：{{tmp.selectDays}} </p>
+							<p>行程天数：{{tmp.pbDays}}天 </p>
 						</div>
 					</div>
 				</div>
@@ -103,7 +103,6 @@
 		props: ['list'],
 		data() {
 			return {
-				lists: this.list
 			}
 		},
 		methods: {
@@ -137,7 +136,7 @@
 		},
 		watch: {
 			list(val) {
-				this.lists = val;
+				this.list = val;
 			}
 		}
 	}

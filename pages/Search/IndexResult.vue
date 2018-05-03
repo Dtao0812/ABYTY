@@ -7,10 +7,10 @@
 		<div class="mui-content">
 			<aby-tab slot="navbar_1" :list="tabList" @eventTabBack="eventTab" :actSelect="tabSelectId" class="aby-top-fixed">
 				<div v-for="(li,i) in tabList" :key="i" :slot="li.id">
-					<aby-infoinite @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='line'" :tabkey="i">
+					<aby-infoinite ref="pull" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='line'" :tabkey="i">
 						<list-line slot="loadlist" :list="li.data"></list-line>
 					</aby-infoinite>
-					<aby-infoinite @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='supplier'" :tabkey="i">
+					<aby-infoinite ref="pull" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='supplier'" :tabkey="i">
 						<list-supplier slot="loadlist" :list="li.data"></list-supplier>
 					</aby-infoinite>
 				</div>
@@ -63,37 +63,6 @@
 				this.keyword = this.$route.params.keyword;
 				this.tabSelect = this.$route.params.tabSelect||'line';
 				this.tabSelectId = this.$route.params.tabSelectId||0;
-				if(this.$route.params.tabSelect == 'line'){
-					this.tabList = [
-						{
-							id:0,
-							title: '产品',
-							type: 'line',
-							data: []
-						},
-						{
-							id:1,
-							title: '供应商',
-							type: 'supplier',
-							data: []
-						}
-					];
-				}else{
-					this.tabList = [
-						{
-							id:1,
-							title: '供应商',
-							type: 'supplier',
-							data: []
-						},
-						{
-							id:0,
-							title: '产品',
-							type: 'line',
-							data: []
-						},
-					];
-				}
 				this.getList();
 			},
 			// 重写back方法
@@ -140,13 +109,14 @@
 					this.getSupplierList(reqInfo,2,(res)=>{callback && callback(res)});
 				}
 			},
-			// 获取线路详情
+			// 获取线路列表
 			getLineList(info,pullType,callback){
 				this.$abyApi.Project.getLineListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
 						this.tabList[0].data = res.proList;
 						this.noContent = res.proList.length=0;
+						this.$refs.pull[0].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
@@ -167,6 +137,7 @@
 						// 下拉
 						this.tabList[1].data = res.cpBasicList;
 						this.noContent = res.cpBasicList.length=0;
+						this.$refs.pull[1].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉

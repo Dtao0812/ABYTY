@@ -122,9 +122,13 @@
 			webUrl(val) {}
 		},
 		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.init()
-			})
+			if(from.name != 'homePage' && from.name != 'chat') {
+				next(vm => {
+					vm.init();
+				})
+			}else{
+				next()
+			}
 		},
 	}
 </script>

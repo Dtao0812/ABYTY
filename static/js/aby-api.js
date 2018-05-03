@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -55,7 +55,7 @@ const Server = {
 				if(res.data.errorcode === 0){
 					successCallback && successCallback(res.data);
 				}else{
-					Vue.$tool.toast(res.data.msg);
+					if(data.loading != 1)Vue.$tool.toast(res.data.msg);
 					errorCallback && errorCallback(res.data.msg);
 				}
 			}else{
@@ -119,7 +119,7 @@ const Server = {
 		data.user_token = store.state.user_token;
 		// 拦截器 - 请求前
 		instance.interceptors.request.use(function (response) {
-			if(response.data.loading !== 1)Vue.$tool.loading(response.data.loadTitle||'加载中...');
+			if(JSON.parse(response.data).loading != 1)Vue.$tool.loading(response.data.loadTitle||'加载中...');
 			
 			// 对响应数据做点什么
 			return response;
@@ -776,6 +776,7 @@ const Order = {
 	// 获得订单数量
 	getNum(requestInfo, successCallback, errorCallback){
 		let requestData = {
+			loading:1,
 			params:requestInfo
 		}; 
 		Server.getDataFromServerPayment('storder/ORDER008.action',requestData,(res)=>{

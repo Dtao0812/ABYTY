@@ -2,7 +2,9 @@
 	<div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
 		<div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0" style="margin-bottom: 60px;">
 			<div id="list" style="min-height: 500px; padding-bottom: 60px;">
-				<slot name="loading"><aby-loading v-show="isLoading"></aby-loading></slot>
+				<slot name="loading">
+					<aby-loading v-show="isLoading"></aby-loading>
+				</slot>
 				<slot name="loadlist"></slot>
 				<p v-show="loading" class="page-infinite-loading">
 					<mt-spinner type="fading-circle"></mt-spinner>
@@ -21,7 +23,7 @@
 				loading: false,
 				allLoaded: false,
 				wrapperHeight: 0,
-				isLoading:true,
+				isLoading: true,
 			};
 		},
 		methods: {
@@ -29,12 +31,18 @@
 				this.isLoading = false;
 				this.loading = true;
 				setTimeout(() => {
-					this.$emit("eventinfiniterBack",this.type,(res)=>{
+					this.$emit("eventinfiniterBack", this.type, (res) => {
 						this.loading = !res;
 					});
 				}, 1500);
 				this.loading = false;
-			}
+			},
+			// 关闭加载动画
+			closeLoading() {
+				setTimeout(() => {
+					this.isLoading = false;
+				}, 1500)
+			},
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;

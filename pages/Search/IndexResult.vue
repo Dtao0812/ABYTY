@@ -146,12 +146,11 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[0].data = res.proList;
-						this.isNull = res.proList.length>0;
-						callback && callback(this.isNull);
+						this.noContent = res.proList.length=0;
+						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.proList.length == 0){
-							console.log(res.proList.length)
 							this.$toast("没有更多内容了！")
 							callback && callback(false)
 						}else{
@@ -167,8 +166,8 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[1].data = res.cpBasicList;
-						this.isNull = res.cpBasicList.length>0;
-						callback && callback(this.isNull);
+						this.noContent = res.cpBasicList.length=0;
+						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.cpBasicList.length == 0){

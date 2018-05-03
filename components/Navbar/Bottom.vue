@@ -14,6 +14,9 @@
 		computed: {
 			chatNum() {
 				return this.$store.state.chatNum;
+			},
+			orderNum(){
+				return this.$store.state.orderNum;
 			}
 		},
 		data() {
@@ -78,6 +81,9 @@
 		watch: {
 			chatNum(val) {
 				this.tabDatas[3].badgeNum = val;
+			},
+			orderNum(val){
+				this.tabDatas[2].badgeNum = val;
 			}
 		},
 	}

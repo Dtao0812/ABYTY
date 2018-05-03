@@ -159,7 +159,9 @@
 			// tab点击返回监听
 			eventTab(e) {
 				this.identityType = e.type;
-				this.getOrderNum();
+				if(this.$store.state.cpBtype != 10){
+					this.getOrderNum();
+				}
 			},
 			// 获得订单数量
 			getOrderNum() {

@@ -139,15 +139,23 @@
 		},
 		methods: {
 			init() {
-				if(this.$store.state.userId == '') return;
-				// 初始化数据库和融云服务器
-				this.$abyDb.Im.init((res) => {
-					this.$abyApi.Chat.getNotReadMsg();
-					// 初始化融云
-					this.$abyApi.Chat.init();
-					// 接受融云消息
-					this.$abyApi.Chat.setReceiveMsgListener();
+				this.$abyApi.User.autoLogin((res)=>{
+					// 初始化数据库和融云服务器
+					this.$abyDb.Im.init((res) => {
+						this.$abyApi.Chat.getNotReadMsg();
+						// 初始化融云
+						this.$abyApi.Chat.init();
+						// 接受融云消息
+						this.$abyApi.Chat.setReceiveMsgListener();
+					});
+					// 初始化订单消息
+					if(this.$store.state.cpBtype != 10){
+						this.$abyApi.Order.getNum('seller');
+					}
+					this.$abyApi.Order.getNum('buyer');
 				});
+				this.$parent.eventPageShow(this.$route.name);
+				this.getGoodsList();
 			},
 			// 计算滚动条高度
 			handleScroll() {
@@ -192,15 +200,9 @@
 		},
 		mounted() {
 			this.init();
-			this.$parent.eventPageShow(this.$route.name);
-			this.getGoodsList();
-			this.autoLogin();
 		},
 		activated() {
 			this.init();
-			// 底部导航栏
-			this.getGoodsList();
-			this.$parent.eventPageShow(this.$route.name);
 		},
 		deactivated(){
 			this.popupPlus = false;

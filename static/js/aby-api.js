@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-const AbyUrl = 'http://114.215.202.155/';
-//const AbyUrl = 'http://www.ai-by.com/';
+//const AbyUrl = 'http://114.215.202.155/';
+const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -107,7 +107,7 @@ const Server = {
 	// 获得java支付接口
 	getDataFromServerPayment(apiName, data, successCallback, errorCallback) {
 		let instance = axios.create({
-			baseURL: 'http://114.215.202.155:8088/stOrderWebApi/',
+			baseURL: AbyUrl + 'stOrderWebApi/',
 			timeout: 1000,
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -239,8 +239,10 @@ const User = {
 		let requestData = {act: 'CPU002',loading:1,};
 		Server.getDataFromServer('cpUser',requestData,function(rtn){
 			store.commit('setUserInfo',rtn);
+			successCallback && successCallback(rtn);
 		}, function(err){
 			store.commit('clearState');
+			errorCallback && errorCallback(err)
 		});
 	},
 	// 获取验证码
@@ -776,7 +778,13 @@ const Order = {
 		let requestData = {
 			params:requestInfo
 		}; 
-		Server.getDataFromServerPayment('storder/ORDER008.action',requestData,successCallback, errorCallback);
+		Server.getDataFromServerPayment('storder/ORDER008.action',requestData,(res)=>{
+			let info = {};
+			info.title = requestInfo;
+			info.value = res.data.hasPayNum + res.data.refundingOrderNum + res.data.waitConfirmLineNum + res.data.waitConfirmNum + res.data.waitConfrimDisNum + res.data.waitPayNum;
+			store.commit("setOrderNum",info);
+			successCallback && successCallback(res)
+		}, errorCallback);
 	},
 	// 获得收到的协议列表
 	getCollAgrList(requestInfo, successCallback, errorCallback){

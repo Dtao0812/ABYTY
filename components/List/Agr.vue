@@ -1,5 +1,6 @@
 <template>
 	<div class="list-item">
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<ul class="mui-table-view" v-for="(li,i) in list" :key="i">
 			<li class="mui-table-view-cell mui-media" v-if="identityType == 'seller'" @click="toDetail(li)">
 				<img class="mui-media-object mui-pull-left" :src="li.buyerInfo.cpLogo" >

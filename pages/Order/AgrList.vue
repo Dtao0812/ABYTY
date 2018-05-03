@@ -15,7 +15,7 @@
 		data() {
 			return {
 				headerTitle: '',
-				identityType: '',
+				identityType: this.$route.params.identityType,
 				pageNum: 1,
 				list: [],
 			}
@@ -43,6 +43,7 @@
 					});
 				}else{
 					this.$abyApi.Order.getOutAgrList(reqInfo, (res) => {
+						this.$refs.pull.closeLoading();
 						this.list = res.data;
 						callback && callback(true);
 					}, (err) => {
@@ -76,6 +77,15 @@
 		},
 		mounted() {
 			this.init();
+		},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'order') {
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
 		},
 	}
 </script>

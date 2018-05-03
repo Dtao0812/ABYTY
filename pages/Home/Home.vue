@@ -29,7 +29,8 @@
 					</router-link>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-					<router-link :to="{ name:'guide' }">
+					<!--<router-link :to="{ name:'guide' }">-->
+					<router-link :to="{ name:'guidePage' }">
 						<img src="../../static/images/btn/btn_guide_3x.png" />
 						<div class="mui-media-body">导游</div>
 					</router-link>

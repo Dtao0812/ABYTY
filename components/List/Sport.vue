@@ -25,31 +25,30 @@
 
 <script>
 	export default {
-		components: {
-		},
-		name:"listSport",
+		components: {},
+		name: "listSport",
 		props: ['list'],
 		data() {
-			return {
-			}
+			return {}
 		},
 		methods: {
 			//查看详情
-			toDetail(li){
-				if(this.$store.state.loginState){
+			toDetail(li) {
+				if(this.$store.state.loginState) {
 					let reqInfo = {};
 					reqInfo.sId = li.sId;
 					reqInfo.loading = 1;
-					this.$abyApi.Sport.getDetail(reqInfo,(res)=>{
+					this.$abyApi.Sport.getDetail(reqInfo, (res) => {
 						this.$router.push({
 							name: 'webView',
 							params: {
 								title: li.sName,
-								url: res.scenicInfo.detailUrl
+								url: res.scenicInfo.detailUrl,
+								cpId: li.cpId
 							}
 						});
 					})
-				}else{
+				} else {
 					this.$router.push({
 						name: 'login',
 					});
@@ -57,18 +56,18 @@
 			}
 		},
 		mounted() {
-			
+
 		},
-		watch: {  
-		    list(val){
-		    	this.list = val;
-		    }  
-		}  
+		watch: {
+			list(val) {
+				this.list = val;
+			}
+		}
 	}
 </script>
 
 <style scoped>
-	.icobusiness{
+	.icobusiness {
 		font-size: 12px;
 	}
 </style>

@@ -7,7 +7,8 @@
 				<img class="face" :src="li.cpLogo" />
 				<h4 class="aby-list-title mui-ellipsis">{{li.hName}}</h4>
 				<p class="aby-list-company mui-ellipsis">{{li.hAddress}}</p>
-				<p class="aby-list-company mui-ellipsis"><aby-icon type="business" class="icobusiness"></aby-icon>{{li.cpName}}</p>
+				<p class="aby-list-company mui-ellipsis">
+					<aby-icon type="business" class="icobusiness"></aby-icon>{{li.cpName}}</p>
 				<p class="aby-list-data"><span>{{li.hStarlevel}}</span><span>浏览({{li.readCnt}})</span></p>
 			</div>
 			<div class="mui-card-footer">
@@ -20,30 +21,29 @@
 
 <script>
 	export default {
-		components: {
-		},
+		components: {},
 		props: ['list'],
 		data() {
-			return {
-			}
+			return {}
 		},
 		methods: {
 			//查看详情
-			toDetail(li){
-				if(this.$store.state.loginState){
+			toDetail(li) {
+				if(this.$store.state.loginState) {
 					let reqInfo = {};
 					reqInfo.hId = li.hId;
 					reqInfo.loading = 1;
-					this.$abyApi.Hotel.getDetail(reqInfo,(res)=>{
+					this.$abyApi.Hotel.getDetail(reqInfo, (res) => {
 						this.$router.push({
 							name: 'webView',
 							params: {
 								title: li.hName,
-								url: res.hotelInfo.detailUrl
+								url: res.hotelInfo.detailUrl,
+								cpId: li.cpId
 							}
 						});
 					})
-				}else{
+				} else {
 					this.$router.push({
 						name: 'login',
 					});
@@ -51,13 +51,13 @@
 			}
 		},
 		mounted() {
-			
+
 		},
-		watch: {  
-		    list(val){
-		    	this.list = val;
-		    }  
-		}  
+		watch: {
+			list(val) {
+				this.list = val;
+			}
+		}
 	}
 </script>
 

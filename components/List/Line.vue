@@ -49,7 +49,8 @@
 					name: 'webView',
 					params: {
 						title: li.mTitle,
-						url: proUrl
+						url: proUrl,
+						cpId:li.cpId
 					}
 				});
 			},

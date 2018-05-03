@@ -5,8 +5,8 @@
 				<img class="mui-media-object mui-pull-left aby-img-guide" :src="li.cpLogo">
 				<div class="mui-media-body aby-list">
 					<p class="aby-list-title mui-ellipsis">{{li.cpName}}</p>
-					<p class="mui-ellipsis" v-if="li.cpRoute.length>0">
-						营业范围：{{li.cpRoute|filterListToString}}
+					<p class="mui-ellipsis">
+						营业范围：{{li.cpRoute}}
 					</p>
 					<p class="mui-ellipsis">
 						<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>{{li.cpCityName}}

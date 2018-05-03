@@ -86,6 +86,7 @@ const mutations = {
 		state.cpId = state.cpBasic = state.cpBtype = '';
 		state.routeChain = [];
 		state.pageDirection = 'fade';
+		console.log(state)
 	},
 	// 设置聊天未读消息
 	setChatNum(state,info){

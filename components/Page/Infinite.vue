@@ -34,7 +34,11 @@
 					});
 				}, 1500);
 				this.loading = false;
-			}
+			},
+			// 关闭加载动画
+			closeLoading(){
+				this.isLoading = false;
+			},
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;

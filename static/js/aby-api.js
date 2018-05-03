@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -55,7 +55,7 @@ const Server = {
 				if(res.data.errorcode === 0){
 					successCallback && successCallback(res.data);
 				}else{
-					Vue.$tool.toast(res.data.msg);
+					if(data.loading != 1)Vue.$tool.toast(res.data.msg);
 					errorCallback && errorCallback(res.data.msg);
 				}
 			}else{

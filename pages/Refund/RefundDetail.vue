@@ -78,7 +78,7 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">产品标题</div>
-						<div class="mui-media-body aby-list-title-2">{{info.orderInfo.proTitle}}</div>
+						<div class="mui-media-body">{{info.orderInfo.proTitle}}</div>
 					</li>
 					<!--基于产品订单详情Start-->
 					<li class="mui-table-view-cell mui-media">

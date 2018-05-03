@@ -249,6 +249,7 @@
 		background-color: #FFFFFF;
 		text-align: center;
 		font-size: 14px;
+		border-top: 1px solid #F0F0F0;
 	}
 	
 	.operation .mui-col-xs-2,

@@ -26,6 +26,7 @@ import Hotel from '../pages/Hotel/Index.vue'
 import HotelSearch from '../pages/Hotel/Search.vue'
 //导游
 import Guide from '../pages/Guide/Index.vue'
+import GuidePage from '../pages/Guide/Detail.vue'
 //注册登录
 import Login from '../pages/Login/Login.vue'
 import RegisterOne from '../pages/Register/RegisterOne.vue'
@@ -166,6 +167,7 @@ const router = new Router({
 		{ name: 'sport',path: '/sport',component: Sport },
 		
 		{ name: 'guide',path: '/guide',component: Guide },
+		{ name: 'guidePage',path: '/guidePage',component: GuidePage },
 		
 		{ name: 'webView',path: '/webView',component: WebView },
 		

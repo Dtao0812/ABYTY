@@ -20,7 +20,7 @@
 		data() {
 			return {
 				tabList: this.list,
-				selected: this.actSelect||0,
+				selected: parseInt(this.actSelect)||0,
 				pageType: this.page
 			}
 		},

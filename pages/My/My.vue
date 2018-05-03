@@ -70,7 +70,8 @@
 		data() {
 			return {
 				cpUserInfo:this.$store.state.cpUserInfo,
-				abyTel:this.$store.state.abyTel
+				abyTel:this.$store.state.abyTel,
+				toHomePageInfo: {}
 			}
 		},
 		methods:{
@@ -80,8 +81,15 @@
 			onDialTel() {
 				this.$tool.dialTelToApp(this.tel);
 			},
+			init(){
+				this.toHomePageInfo.cpBtype = this.$store.state.cpUserInfo.cpBasic.cpBtype;
+				this.toHomePageInfo.cpId = this.$store.state.cpUserInfo.cpId;
+				this.toHomePageInfo.userId = this.$store.state.cpUserInfo.userId;
+				this.$store.commit('setHomePage', this.toHomePageInfo);
+			}
 		},
 		mounted() {
+			this.init();
 			this.$parent.eventPageShow(this.$route.name);
 		},
 		activated() {

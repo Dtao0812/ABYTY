@@ -105,6 +105,11 @@ const mutations = {
 		}
 		state.chatList = newList;
 		state[info.title] = state.chatList.length;
+	},
+	setHomePage(state,info){
+		state.userId = info.userId;
+		state.cpId = info.cpId;
+		state.cpBtype = info.cpBtype;
 	}
 	
 }

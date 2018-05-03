@@ -2,17 +2,17 @@
 	<div class="information">
 		<div v-if="list.cpBtype == 10">
 			<!--企业信息-->
-			<mt-cell title="公司地址" is-link :to="{name:'edit', params: {title: '公司地址', textMsg: list.cpAddress, htmlId: 'cpAddress'}}" >
-				<span>{{list.cpAddress}}</span>
+			<mt-cell title="公司地址" is-link :to="{name:'edit', params: {title: '公司地址', textMsg: list.cpAddress, htmlId: 'cpAddress'}}" replace>
+				<span>{{list.cpAddress|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="联系人姓名" is-link :to="{name:'edit', params: {title: '联系人姓名', textMsg: list.cpHeadName, htmlId: 'cpHeadName'}}">
-				<span>{{list.cpHeadName}}</span>
+			<mt-cell title="联系人姓名" is-link :to="{name:'edit', params: {title: '联系人姓名', textMsg: list.cpHeadName, htmlId: 'cpHeadName'}}" replace>
+				<span>{{list.cpHeadName|filterNull}}</span>
 			</mt-cell>
 			<mt-cell title="联系人电话" is-link :to="{name:'edit', params: {title: '联系人电话', textMsg: list.cpHeadPhone, htmlId: 'cpHeadPhone'}}">
-				<span>{{list.cpHeadPhone}}</span>
+				<span>{{list.cpHeadPhone|filterNull}}</span>
 			</mt-cell>
 			<mt-cell title="固定电话" is-link :to="{name:'edit', params: {title: '固定电话', textMsg: list.cpTel, htmlId: 'cpTel'}}">
-				<span>{{list.cpTel}}</span>
+				<span>{{list.cpTel|filterNull}}</span>
 			</mt-cell>
 			<div class="space"></div>
 			<mt-cell title="公司介绍" :label="list.cpIntro" is-link :to="{name:'edit', params: {title: '公司介绍', textMsg: list.cpIntro, htmlId: 'cpIntro'}}" class="aby-area"></mt-cell>
@@ -21,22 +21,22 @@
 			<!--企业信息-->
 			<mt-cell title="业务范围" is-link :to="{name:'edit', params: {title: '业务范围', textMsg: list.cpBizScope, htmlId: 'cpBizScope'}}">
 				<!--<span class="mui-ellipsis-2">{{list.cpBizScope|filterListToString}}</span>-->
-				<span class="mui-ellipsis-2">{{list.cpBizScope}}</span>
+				<span class="mui-ellipsis-2">{{list.cpBizScope|filterListToString}}</span>
 			</mt-cell>
 			<mt-cell title="主营线路" is-link :to="{name:'edit', params: {title: '主营线路', textMsg: list.cpRoute, htmlId: 'cpRoute'}}">
-				<span class="mui-ellipsis-2">{{list.cpRoute}}</span>
+				<span class="mui-ellipsis-2">{{list.cpRoute|filterListToString}}</span>
 			</mt-cell>
 			<mt-cell title="公司地址" is-link :to="{name:'edit', params: {title: '公司地址', textMsg: list.cpAddress, htmlId: 'cpAddress'}}">
-				<span>{{list.cpAddress}}</span>
+				<span>{{list.cpAddress|filterNull}}</span>
 			</mt-cell>
 			<mt-cell title="联系人" is-link :to="{name:'edit', params: {title: '联系人', textMsg: list.cpCorpName, htmlId: 'cpCorpName'}}">
-				<span>{{list.cpCorpName}}</span>
+				<span>{{list.cpCorpName|filterNull}}</span>
 			</mt-cell>
 			<mt-cell title="联系电话" is-link :to="{name:'edit', params: {title: '联系电话', textMsg: list.cpHeadPhone, htmlId: 'cpHeadPhone'}}">
-				<span>{{list.cpHeadPhone}}</span>
+				<span>{{list.cpHeadPhone|filterNull}}</span>
 			</mt-cell>
 			<mt-cell title="固定电话" is-link :to="{name:'edit', params: {title: '固定电话', textMsg: list.cpTel, htmlId: 'cpTel'}}">
-				<span>{{list.cpTel}}</span>
+				<span>{{list.cpTel|filterNull}}</span>
 			</mt-cell>
 			<mt-cell v-if="list.depositType == 0" title="保证金" is-link>
 				<span>您尚未交纳质保金，点击交纳</span>
@@ -68,34 +68,6 @@
 		    	this.lists = val;
 		    },
 		},
-		activated(){
-			let upHtmlId = this.$route.params.upHtmlId?this.$route.params.upHtmlId:'';
-			let upDateTextMsg = this.$route.params.upDateTextMsg?this.$route.params.upDateTextMsg:'';
-			if(upHtmlId == 'cpAddress'){
-				this.list.cpAddress = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpHeadName'){
-				this.list.cpHeadName = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpHeadPhone'){
-				this.list.cpHeadPhone = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpTel'){
-				this.list.cpTel = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpBizScope'){
-				this.list.cpBizScope = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpRoute'){
-				this.list.cpRoute = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpCorpName'){
-				this.list.cpCorpName = upDateTextMsg;
-			}
-			if(upHtmlId == 'cpIntro'){
-				this.list.cpIntro = upDateTextMsg;
-			}
-		}
 	}
 </script>
 

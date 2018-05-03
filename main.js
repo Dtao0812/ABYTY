@@ -77,11 +77,21 @@ require('./static/js/app.js')
 // 将数组转字符串
 Vue.filter('filterListToString',function(data){
 	let item = '';
-	data.forEach((v,i)=>{
-		item += v + ',';
-	});
+	if(data){
+		data.forEach((v,i)=>{
+			item += v + ',';
+		});
+	}
 	return item === '' ? '未设置' : item.substr(0,item.length-1);
 });
+//空字符串——'未设置'
+Vue.filter('filterNull', function(str){
+	if(str == '' || str == null){
+		str = '未设置'
+	}
+	return str;
+})
+
 // 时间转换为标准时间（YYYY-MM-DD）
 Vue.filter('filterConvertDate',function(timestamp){
 	var prmdate = new Date(parseInt(timestamp));

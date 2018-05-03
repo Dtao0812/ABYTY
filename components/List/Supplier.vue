@@ -32,18 +32,19 @@
 		methods:{
 			// 公司主页
 			toHomePage(li){
-				this.$router.push({
-					name:"homePage",
-					params:{
-						userId: li.userId,
-						cpId: li.cpId
-					}
-				})
+				this.$store.commit('setHomePage', li);
+				this.$router.push({name:"homePage"})
 			}
 		},
 		mounted(){
 			
-		}
+		},
+		beforeRouteLeave(to, from, next) {
+			if(to.name == 'homePage') {
+				to.meta.noKeepAlive = false;
+			};
+			next();
+		},
 	}
 </script>
 

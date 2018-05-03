@@ -81,8 +81,6 @@ import MyGold from '../pages/My/MyGold.vue'
 
 //店铺主页
 import HomePage from '../pages/HomePage/HomePage.vue'
-//导游主页
-import GuidePage from '../pages/HomePage/GuidePage.vue'
 //个人资料编辑页面
 import Edit from '../pages/Homepage/Edit.vue'
 //消息中心

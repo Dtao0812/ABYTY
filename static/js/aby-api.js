@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -583,6 +583,24 @@ const Supplier = {
 			where: requestInfo.where,
 		}; 
 		Server.getDataFromServer('cpUser',requestData,successCallback, errorCallback);
+	},
+	// 优质供应商
+	getGoodsLocalList(requestInfo, successCallback, errorCallback){
+		let requestData = {
+			loading:requestInfo.loading,
+			act: 'CPI002',
+			pageNum: requestInfo.pageNum,
+		}; 
+		Server.getDataFromServer('cpIndex',requestData,successCallback, errorCallback);
+	},
+	// 优质机票供应商
+	getPlaneList(requestInfo, successCallback, errorCallback){
+		let requestData = {
+			loading:requestInfo.loading,
+			act: 'CPI009',
+			pageNum: requestInfo.pageNum,
+		}; 
+		Server.getDataFromServer('cpIndex',requestData,successCallback, errorCallback);
 	},
 };
 

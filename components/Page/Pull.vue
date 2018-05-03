@@ -87,9 +87,14 @@
 					});
 				}, 1500);
 			},
+			// 关闭加载动画
 			closeLoading(){
 				this.isLoading = false;
-			}
+			},
+			// 禁止上推
+			disableLoadBottom(){
+				this.allLoaded = true;
+			},
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;

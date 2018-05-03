@@ -52,22 +52,21 @@
 					<tbody>
 						<tr>
 							<td rowspan="2" class="moduleSale">
-								<img src="../../static/images/module/module_sale_3x.png" />
+								<router-link :to="{ name:'specialHot' }"><img src="../../static/images/module/module_sale_3x.png" /></router-link>
 							</td>
 							<td class="moduleSupplier">
-								<img src="../../static/images/module/module_supplier_3x.png" />
+								<router-link :to="{ name:'specialSuppliers' }"><img src="../../static/images/module/module_supplier_3x.png" /></router-link>
 							</td>
 							<td class="moduleLine">
-								<img src="../../static/images/module/module_line_3x.png" />
+								<router-link :to="{ name:'specialLine' }"><img src="../../static/images/module/module_line_3x.png" /></router-link>
 							</td>
 						</tr>
 						<tr>
 							<td class="moduleHotel">
-								<img src="../../static/images/module/module_hotel_3x.png" />
-
+								<router-link :to="{ name:'specialHotel' }"><img src="../../static/images/module/module_hotel_3x.png" /></router-link>
 							</td>
 							<td class="modulePlane">
-								<img src="../../static/images/module/module_plane_3x.png" />
+								<router-link :to="{ name:'specialPlane' }"><img src="../../static/images/module/module_plane_3x.png" /></router-link>
 							</td>
 						</tr>
 					</tbody>

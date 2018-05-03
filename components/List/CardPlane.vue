@@ -2,17 +2,17 @@
 	<div class="list-item">
 		<!--机票供应商列表-->
 		<ul class="mui-table-view">
-			<li class="mui-table-view-cell mui-media">
+			<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(item)">
 				<a>
 					<img class="faceTip" src="../../static/images/ico/ico_sale.png" />
-					<img class="mui-media-object mui-pull-left aby-img-guide" src="../../static/images/example/card.jpg">
+					<img class="mui-media-object mui-pull-left aby-img-guide" :src="li.cpLogo">
 					<div class="mui-media-body aby-list">
-						<p class="aby-list-title">南京在路上旅行社</p>
-						<p class="mui-ellipsis aby-list-data">
-							经营范围：陕西、甘肃、青海、宁夏
+						<p class="aby-list-title">{{li.cpName}}</p>
+						<p class="mui-ellipsis" v-if="li.cpRoute.length>0">
+							营业范围：{{li.cpRoute|filterListToString}}
 						</p>
 						<p class="mui-ellipsis aby-list-data">
-							联系人：未设置
+							联系人：{{li.cpHeadName}}
 						</p>
 						<p>
 							<span class="look  mui-pull-right"><aby-icon type="hot" class="icohot"></aby-icon>立即联系</span>
@@ -26,17 +26,25 @@
 
 <script>
 	export default {
-		components: {},
+		components: {
+		},
+		props: ['list'],
 		data() {
-			return {
-				
+			return {}
+		},
+		methods:{
+			// 公司主页
+			toHomePage(li){
+				this.$router.push({
+					name:"homePage",
+					params:{
+						userId: li.userId,
+						cpId: li.cpId
+					}
+				})
 			}
 		},
-		methods: {
-			
-		},
-		mounted() {},
-		watch: {
+		mounted(){
 			
 		}
 	}

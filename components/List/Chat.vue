@@ -1,12 +1,19 @@
 <template>
-	<ul class="mui-table-view space">
+	<ul class="mui-table-view">
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
-				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
-				<span class="mui-badge mui-badge-danger" v-show="li.noReadNum!=0">{{li.noReadNum}}</span>
-				<div class="mui-media-body">
-					{{li.sendUser.userName}}
-					<p class='mui-ellipsis'>{{li.sendUser.cpName}}</p>
+				<img class="mui-media-object mui-pull-left aby-img-guide" src="../../static/images/example/card.jpg">
+				<div class="mui-media-body aby-list">
+					<p class="aby-list-title mui-ellipsis">南京在路上旅行社有限公司</p>
+					<p class="mui-ellipsis">
+						经营范围：陕西、甘肃、青海、宁夏
+					</p>
+					<p class="mui-ellipsis">
+						<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>南京市
+					</p>
+					<p>
+						<span class="look  mui-pull-right"><aby-icon type="hot" class="icohot"></aby-icon>立即联系</span>
+					</p>
 				</div>
 			</a>
 		</li>

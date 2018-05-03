@@ -63,6 +63,7 @@
 		width: 32px;
 		height: 32px;
 		margin-left: 10px;
+		margin-top: 3px;
 	}
 	
 </style>

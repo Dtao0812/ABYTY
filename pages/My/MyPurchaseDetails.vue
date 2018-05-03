@@ -221,7 +221,7 @@
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-remarks">
 					<p>备注</p>
-					<p>{{data.selectDesc}}</p>
+					<p class="aby-font-Black">{{data.selectDesc}}</p>
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-publisher">

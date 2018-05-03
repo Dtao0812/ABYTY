@@ -8,8 +8,8 @@
 					{{li.userCuteName}}
 					<p class='mui-ellipsis'>{{li.userPost}}</p>
 					<div class="divContact">
-						<i @click="$tool.dialTelToApp(li.userPhone)" class="mui-icon mui-icon-phone" ></i>
-						<i class="mui-icon mui-icon-chatbubble"></i>
+						<aby-icon-color class="icocall" type="call-circle" @click="$tool.dialTelToApp(li.userPhone)"></aby-icon-color>
+						<aby-icon-color class="icochat" type="chat-circle"></aby-icon-color>
 					</div>
 				</div>
 			</li>
@@ -58,6 +58,12 @@
 	}
 	.mui-media-body p{
 		font-size: 12px;
+	}
+	.icocall,.icochat{
+		width: 32px;
+		height: 32px;
+		margin-left: 10px;
+		margin-top: 3px;
 	}
 	
 </style>

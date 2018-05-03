@@ -29,7 +29,7 @@
 				this.$abyApi.Select.getMyPublishList(reqInfo, (res)=>{
 					this.$refs.pull.closeLoading();
 					this.lists = res.cpSelectList;
-					callback && callback(true);
+					callback && callback(res.cpSelectList.length);
 				},(err)=>{
 					callback && callback(false);
 				});

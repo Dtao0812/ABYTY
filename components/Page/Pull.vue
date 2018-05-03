@@ -72,6 +72,7 @@
 			loadTop() {
 				setTimeout(() => {
 					this.$parent.getPullDown((ret) => {
+						if(ret == 0)this.noContent = true;
 						this.$refs.loadmore.onTopLoaded();
 					});
 				}, 2500);
@@ -94,7 +95,9 @@
 			},
 			// 禁止上推
 			disableLoadBottom(){
-				this.allLoaded = true;
+				setTimeout(()=>{
+					this.allLoaded = true;
+				},1500)
 			},
 		},
 		mounted() {

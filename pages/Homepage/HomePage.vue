@@ -10,8 +10,8 @@
 					<div class="mui-media-body">
 						{{cpUserInfo.cpHeadName}}
 						<p class='mui-ellipsis'>{{cpUserInfo.cpName}}</p>
-						<img class="aby-img-Authentication" src="../../static/images/example/ID.jpg" />
-						<img class="aby-img-Authentication" src="../../static/images/example/ID.jpg" />
+						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
+						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>
 				</li>
 			</ul>

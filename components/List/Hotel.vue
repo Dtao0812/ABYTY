@@ -1,6 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--酒店产品列表-->
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i">
 				<a href="javascript:;" @click="toDetail(li)">

@@ -227,6 +227,10 @@
 					case 'chatsetting':
 						this.iconClass = '#icon-liaotianyoushangjiao';
 						break;
+						//发送
+					case 'chatsend':
+						this.iconClass = '#icon-fasong1';
+						break;
 						//注册、登录-------------------------------------------------------------------------------
 						//姓名
 					case 'name':

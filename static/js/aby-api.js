@@ -55,7 +55,7 @@ const Server = {
 				if(res.data.errorcode === 0){
 					successCallback && successCallback(res.data);
 				}else{
-					Vue.$tool.toast(res.data.msg);
+					if(data.loading != 1)Vue.$tool.toast(res.data.msg);
 					errorCallback && errorCallback(res.data.msg);
 				}
 			}else{
@@ -107,7 +107,7 @@ const Server = {
 	// 获得java支付接口
 	getDataFromServerPayment(apiName, data, successCallback, errorCallback) {
 		let instance = axios.create({
-			baseURL: 'http://114.215.202.155:8088/stOrderWebApi/',
+			baseURL: AbyUrl + 'stOrderWebApi/',
 			timeout: 1000,
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -119,7 +119,7 @@ const Server = {
 		data.user_token = store.state.user_token;
 		// 拦截器 - 请求前
 		instance.interceptors.request.use(function (response) {
-			if(response.data.loading !== 1)Vue.$tool.loading(response.data.loadTitle||'加载中...');
+			if(JSON.parse(response.data).loading != 1)Vue.$tool.loading(response.data.loadTitle||'加载中...');
 			
 			// 对响应数据做点什么
 			return response;
@@ -239,8 +239,10 @@ const User = {
 		let requestData = {act: 'CPU002',loading:1,};
 		Server.getDataFromServer('cpUser',requestData,function(rtn){
 			store.commit('setUserInfo',rtn);
+			successCallback && successCallback(rtn);
 		}, function(err){
 			store.commit('clearState');
+			errorCallback && errorCallback(err)
 		});
 	},
 	// 获取验证码
@@ -783,9 +785,16 @@ const Order = {
 	// 获得订单数量
 	getNum(requestInfo, successCallback, errorCallback){
 		let requestData = {
+			loading:1,
 			params:requestInfo
 		}; 
-		Server.getDataFromServerPayment('storder/ORDER008.action',requestData,successCallback, errorCallback);
+		Server.getDataFromServerPayment('storder/ORDER008.action',requestData,(res)=>{
+			let info = {};
+			info.title = requestInfo;
+			info.value = res.data.hasPayNum + res.data.refundingOrderNum + res.data.waitConfirmLineNum + res.data.waitConfirmNum + res.data.waitConfrimDisNum + res.data.waitPayNum;
+			store.commit("setOrderNum",info);
+			successCallback && successCallback(res)
+		}, errorCallback);
 	},
 	// 获得收到的协议列表
 	getCollAgrList(requestInfo, successCallback, errorCallback){

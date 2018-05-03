@@ -8,6 +8,7 @@
 		</aby-header>
 		<div slot="navbar"></div>
 		<div class="list-item" slot="loadlist" ref="loadlist">
+			<aby-no-content v-if="list.length==0"></aby-no-content>
 			<div class="mui-card space" v-for="(li,i) in list">
 				<div class="mui-card-header mui-card-media">
 					<img :src="li.publisher.cpLogo">
@@ -254,7 +255,7 @@
 		position: absolute;
 		width: 24px;
 		height: 24px;
-		right: 10px;
+		right: 0px;
 		top: 8px;
 	}
 </style>

@@ -133,6 +133,8 @@
 					case 'chatpic':this.iconClass = 'aby-icon-chatpic ' + this.className;break;
 					//聊天设置
 					case 'chatsetting':this.iconClass = 'aby-icon-chatsetting ' + this.className;break;
+					//发送
+					case 'chatsend':this.iconClass = '.aby-icon-send ' + this.className;break;
 					//注册、登录-------------------------------------------------------------------------------
 					//姓名
 					case 'name':this.iconClass = 'aby-icon-name ' + this.className;break;

@@ -32,7 +32,7 @@
 				<label class="footer-right">
 					<aby-icon class="mui-icon faceClass" :type="faceIcon" @click.native="onFace"></aby-icon>
 					<aby-icon class="mui-icon icon-plus" type="chatplus" @click.native="onMore" v-show="msgtext==''"></aby-icon>
-					<aby-icon class="mui-icon icon-face" type="hotel" @click.native="onSend" v-show="msgtext!=''"></aby-icon>
+					<aby-icon class="mui-icon icon-face" type="chatsend" @click.native="onSend" v-show="msgtext!=''"></aby-icon>
 				</label>
 			</footer>
 			<div class="tool_panel" v-show="isShowFace" v-html="faceArr" @click="onFaceTip($event)"></div>

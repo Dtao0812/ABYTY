@@ -12,6 +12,9 @@ const state = {
 	sysNum:0,//系统消息
 	chatNum:0,//聊天消息
 	chatList:[],//聊天id
+	orderNum:0,//订单未读数
+	buyer:0,//买家订单
+	seller:0,//卖家订单
 	
 	
 	abyTel:'025-68132329',//客服电话
@@ -110,6 +113,11 @@ const mutations = {
 		state.userId = info.userId;
 		state.cpId = info.cpId;
 		state.cpBtype = info.cpBtype;
+	},
+	//设置订单未读数量
+	setOrderNum(state,info){
+		state[info.title] = info.value;
+		state.orderNum = state.buyer + state.seller;
 	}
 	
 }

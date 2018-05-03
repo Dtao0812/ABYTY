@@ -1,18 +1,24 @@
 <template>
 	<div class="list-item">
 		<!--订单列表-->
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<div class="mui-card space" v-for="(li,i) in list" :key="i">
 			<div class="mui-card-header mui-card-media">
 				<!--不同类型图标type值不一样 线路：line 机票：pticket 酒店：hotel 导游：guide 机+酒：planhotel-->
-				<aby-icon-color type="line"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 10" type="line"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 20" type="hotel"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 30" type="pticket"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 40" type="planhotel"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 50" type="sticket"></aby-icon-color>
+				<aby-icon-color v-if="li.orderType == 60" type="guide"></aby-icon-color>
 				<div class="mui-media-body">
 					{{li.orderTypeDesc}}｜{{li.orderCode}}
 					<span class="state">{{li.orderStateDesc}}</span>
 				</div>
 			</div>
-			<div class="mui-card-content aby-font-Black" @click="toDetail(li)">
+			<div class="mui-card-content" @click="toDetail(li)">
 				<div class="mui-card-content-inner">
-					<h5 class="mui-ellipsis">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
+					<h5 class="mui-ellipsis aby-font-Black">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
 					<p>{{li.goData}} {{li.orderSummary.goCity}}出发</p>
 					<p>{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt!=0">{{li.orderSummary.childCnt}}儿童</span></p>
 				</div>
@@ -204,7 +210,7 @@
 		height: 20px;
 		position: absolute;
 	}
-	.mui-card-header .mui-card-media{
+	.mui-card-header .mui-card-media,.mui-card-header{
 		padding-left: 15px!important;
 		padding-right: 15px!important;
 	}
@@ -237,7 +243,7 @@
 	}
 	
 	.mui-card-content-inner h5 {
-		padding-right: 70px;
+		padding-right: 80px;
 	}
 	
 	.mui-card-content-inner .price {

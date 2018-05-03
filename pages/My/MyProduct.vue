@@ -56,7 +56,7 @@
 					this.$abyApi.Project.getMyPro(reqInfo, {proState:1}, (res) => {
 						this.$refs.pull.closeLoading();
 						this.goodsList[0].data = res.proList;
-						callback && callback(true);
+						callback && callback(res.proList.length);
 					},(err)=>{
 						callback && callback(false);
 					});

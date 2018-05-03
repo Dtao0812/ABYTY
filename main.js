@@ -46,6 +46,7 @@ import AbyNavbar from './components/Navbar/Default.vue'
 import AbyTab from './components/Navbar/Tab.vue'
 import AbyField from './components/Field/Default.vue'
 import AbyLoading from './components/Loading/Default.vue'
+import AbyNoContent from './components/Icon/NoContent.vue'
 
 Vue.config.productionTip = false
 
@@ -66,6 +67,7 @@ Vue.component('aby-tab',AbyTab)
 Vue.component('aby-field',AbyField)
 Vue.component('aby-loading',AbyLoading)
 Vue.component('aby-date-picker',AbyDatePicker)
+Vue.component('aby-no-content',AbyNoContent)
 
 //require('./static/js/web.js')
 require('./static/js/app.js')

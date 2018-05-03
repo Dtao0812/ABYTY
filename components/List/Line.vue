@@ -1,6 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--线路产品列表-->
+		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<ul class="mui-table-view" v-for="(item,i) in list" :key="i">
 			<li class="mui-table-view-cell mui-media" >
 				<a href="javascript:;" @click="toDetail(item)">
@@ -108,7 +109,7 @@
 	    min-height: 44px;
 	    padding-top: 15px;
 	    margin-top: 10px;
-	    border-top: 1px solid #ddd;
+	    border-top: 1px solid #F0F0F0;
 	    font-size: 14px;
 	}
 	.purchase-delete-btn{

@@ -797,3 +797,12 @@ small {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+/*数字选择框*/
+.mui-numbox{
+	border: solid 1px #DDDDDD;
+	background-color: #FFFFFF;
+}
+.mui-numbox .mui-numbox-input {
+    border-right: solid 1px #DDDDDD!important;
+    border-left: solid 1px #DDDDDD!important;
+}

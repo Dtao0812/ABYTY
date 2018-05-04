@@ -6,7 +6,7 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;">
 				<li class="mui-table-view-cell mui-media">
-					<img @click="onGetPhone" class="mui-media-object mui-pull-left" :src="cpUserInfo.cpLogo">
+					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpLogo">
 					<div class="mui-media-body">
 						{{cpUserInfo.cpHeadName}}
 						<p class='mui-ellipsis'>{{cpUserInfo.cpName}}</p>
@@ -16,14 +16,14 @@
 				</li>
 			</ul>
 			<div class="space"></div>
-			<aby-tab v-if="cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" actSelect="0" slot="tab">
+			<aby-tab v-show="cpBtype == 10" @eventTabBack="eventTab" :list="tabListTravel" page="homepage" actSelect="0" slot="tab">
 				<div v-for="(li,i) in tabListTravel" :key="i" :slot="li.id">
 					<aby-information v-if="userId&&li.type=='infor'" :list="li.data"></aby-information>
 					<all-information v-if="!userId&&li.type=='infor'" :list="li.data"></all-information>
 					<aby-contacts v-if="li.type=='contacts'" :list="li.data"></aby-contacts>
 				</div>
 			</aby-tab>
-			<aby-tab v-else @eventTabBack="eventTab" :list="tabListLocal" page="homepage" actSelect="1" slot="tab">
+			<aby-tab v-show="cpBtype != 10" @eventTabBack="eventTab" :list="tabListLocal" page="homepage" actSelect="1" slot="tab">
 				<div v-for="(li,i) in tabListLocal" :key="i" :slot="li.id">
 					<aby-list v-if="li.type=='line'" :list="li.data"></aby-list>
 					<aby-information v-if="userId&&li.type=='infor'" :list="li.data"></aby-information>
@@ -50,9 +50,9 @@
 		},
 		data() {
 			return {
-				userId: this.$store.state.userId,
-				cpId: this.$store.state.cpId,
-				cpBtype: this.$store.state.cpBtype,
+				userId: this.$store.state.userIdHome,
+				cpId: this.$store.state.cpIdHome,
+				cpBtype: '',
 				cpUserInfo: {},
 				pageNum: 1,
 				tabListTravel: [{ //组团社
@@ -93,29 +93,41 @@
 			console.log('homepageCreat')
 		},
 		methods: {
-			onGetPhone(e){//上传图片
-//				this.$tool.getPhoto(function(file) {
-//					this.basicInfo.files = [];
-//					e.target.src = file;
-//					var img = {};
-//					img.id = 'cpImg';
-//					img.src = file;
-//					this.basicInfo.files.push(img);
-//				}, function(e) {});
-			},
-			getBasicInfo() { //调基本资料（组团）
+			getBasicInfo() { //调基本资料（个人）
 				let reqInfo = {};
 				reqInfo.loading = 1;
 				reqInfo.userId = this.userId;
-				console.log(reqInfo)
 				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
 					res.cpUserInfo.cpBasic.cpHeadPhone = res.cpUserInfo.cpBasic.cpHeadPhone?this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpHeadPhone):'';
 					res.cpUserInfo.cpBasic.cpTel = res.cpUserInfo.cpBasic.cpTel?this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.cpBasic.cpTel):'';
-					this.tabListTravel[0].data = res.cpUserInfo.cpBasic;
 					this.cpUserInfo.cpLogo = res.cpUserInfo.cpBasic.cpLogo;
 					this.cpUserInfo.cpHeadName = res.cpUserInfo.cpBasic.cpHeadName;
 					this.cpUserInfo.cpName = res.cpUserInfo.cpBasic.cpName;
-					console.log('组团：'+JSON.stringify(this.tabListTravel[0].data))
+					this.cpBtype = res.cpUserInfo.cpBasic.cpBtype;
+					if(this.cpBtype == 10){
+						this.tabListTravel[0].data = res.cpUserInfo.cpBasic;
+					}else{
+						this.tabListLocal[1].data = res.cpUserInfo.cpBasic;
+					}
+				});
+			},
+			getBasicNotLegal() { //调基本资料（其他）
+				let reqInfo = {};
+				reqInfo.loading = 1;
+				reqInfo.cpId = this.cpId;
+				console.log('reqInfo:'+JSON.stringify(reqInfo))
+				this.$abyApi.User.getBasicNotLegal(reqInfo, (res) => {
+					this.cpUserInfo.cpLogo = res.cpBasic.cpLogo;
+					this.cpUserInfo.cpHeadName = res.cpBasic.cpHeadName;
+					this.cpUserInfo.cpName = res.cpBasic.cpName;
+					res.cpBasic.cpHeadPhone = res.cpBasic.cpHeadPhone? this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpHeadPhone): '';
+					res.cpBasic.cpTel = res.cpBasic.cpTel?this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpTel):'';
+					this.cpBtype = res.cpBasic.cpBtype;
+					if(this.cpBtype == 10){
+						this.tabListTravel[0].data = res.cpBasic;
+					}else{
+						this.tabListLocal[1].data = res.cpBasic;
+					}
 				});
 			},
 			getDownProList() { //调产品下拉（地接）
@@ -140,25 +152,11 @@
 					this.tabListLocal[0].data = this.tabListLocal[0].data.concat(res.proList);
 				});
 			},
-			getBasicNotLegal() { //调基本资料（地接）
+			getBasicStaffList() { //调员工
 				let reqInfo = {};
 				reqInfo.loading = 1;
 				reqInfo.cpId = this.cpId;
-				this.$abyApi.User.getBasicNotLegal(reqInfo, (res) => {
-					console.log('地接：'+JSON.stringify(res))
-					this.cpUserInfo.cpLogo = res.cpBasic.cpLogo;
-					this.cpUserInfo.cpHeadName = res.cpBasic.cpHeadName;
-					this.cpUserInfo.cpName = res.cpBasic.cpName;
-					res.cpBasic.cpHeadPhone = res.cpBasic.cpHeadPhone? this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpHeadPhone): '';
-					res.cpBasic.cpTel = res.cpBasic.cpTel?this.$abyApi.Crypto.DeCrypt(res.cpBasic.cpTel):'';
-					this.tabListLocal[1].data = res.cpBasic;
-					console.log('地接'+JSON.stringify(this.tabListLocal[1].data))
-				});
-			},
-			getBasicStaffList(data) { //调员工
-				let reqInfo = {};
-				reqInfo.loading = 1;
-				reqInfo.cpId = this.cpId;
+				console.log(reqInfo.cpId)
 				this.$abyApi.User.getBasicStaffList(reqInfo, (res) => {
 					if(this.cpBtype == 10) {
 						this.tabListTravel[1].data = res.cpUserList;
@@ -167,23 +165,28 @@
 					}
 				})
 			},
-			initPageInfo() {
-				let cpBtype = this.cpBtype;
-				if(cpBtype == 10) {
-					this.getBasicInfo();
-					this.getBasicStaffList();
-				} else {
+			eventTab(e) {
+				if(e.id == 'line'){
 					this.getDownProList();
-					this.getBasicNotLegal();
+				};
+				if(e.id == 'infor'){
+					if(this.userId){
+						this.getBasicInfo();
+					}else{
+						this.getBasicNotLegal();
+					}
+				};
+				if(e.id == 'contacts'){
 					this.getBasicStaffList();
 				}
 			},
-			eventTab(e) {
-				console.log('e:' + JSON.stringify(e.id))
-			},
 		},
 		mounted() {
-			this.initPageInfo();
+			if(this.userId){
+				this.getBasicInfo();
+			}else{
+				this.getBasicNotLegal();
+			}
 		},
 		
 	}

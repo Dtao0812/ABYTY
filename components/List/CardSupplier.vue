@@ -34,12 +34,9 @@
 		methods:{
 			// 公司主页
 			toHomePage(li){
+				this.$store.commit('setHomePage', li);
 				this.$router.push({
 					name:"homePage",
-					params:{
-						userId: li.userId,
-						cpId: li.cpId
-					}
 				})
 			},
 		},
@@ -55,5 +52,19 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	.look {
+		background-color: #FF605D;
+		color: #FFFFFF;
+		font-size: 12px;
+		padding: 2px 5px;
+		border-radius: 5px;
+	}
+	
+	.look .mui-icon {
+		font-size: 10px;
+	}
+	.iconowlocation{
+		font-size: 12px;
+	}
 </style>

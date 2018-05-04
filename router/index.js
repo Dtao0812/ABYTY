@@ -84,7 +84,8 @@ import HomePage from '../pages/HomePage/HomePage.vue'
 //个人资料编辑页面
 import Edit from '../pages/Homepage/Edit.vue'
 //消息中心
-import MsgSystem from '../pages/Message/MsgSystem.vue'
+import MsgList from '../pages/Message/MsgList.vue'
+import TravelList from '../pages/Message/TravelList.vue'
 import MsgDetail from '../pages/Message/MsgDetail.vue'
 //聊天
 import Chat from '../pages/Chat/Chat.vue'
@@ -172,8 +173,9 @@ const router = new Router({
 		{ name: 'webView',path: '/webView',component: WebView },
 		
 		{ name: 'homePage',path: '/HomePage',component: HomePage },
-		
-		{ name: 'msgSystem',path: '/MsgSystem',component: MsgSystem },
+		//消息
+		{ name: 'msgList',path: '/MsgList',component: MsgList },
+		{ name: 'travelList',path: '/TravelList',component: TravelList },
 		{ name: 'msgDetail',path: '/MsgDetail',component: MsgDetail },
 		
 		//聊天

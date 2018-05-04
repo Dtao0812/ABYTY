@@ -5,23 +5,23 @@
 		</aby-header>
 		<div class="content">
 			<ul class="mui-table-view space">
-				<li class="mui-table-view-cell mui-media">
+				<li class="mui-table-view-cell mui-media" v-if="messageList.msgNum != 0" @click="toMsgList">
 					<a>
 						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/ico_msgsys_3x.png">
-						<span class="mui-badge mui-badge-danger">2</span>
+						<span class="mui-badge mui-badge-danger">{{messageList.msgNum}}</span>
 						<div class="mui-media-body">
 							系统消息
-							<p class='mui-ellipsis'>您收到一条新的订单</p>
+							<p class='mui-ellipsis'></p>
 						</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media">
+				<li class="mui-table-view-cell mui-media" v-if="messageList.travelNum!=0" @click="toTravelList">
 					<a>
-						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/ico_msginfo_3x.png">
-						<span class="mui-badge mui-badge-danger">2</span>
+						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/msg_interactMsg.png">
+						<span class="mui-badge mui-badge-danger">{{messageList.travelNum}}</span>
 						<div class="mui-media-body">
-							系统消息
-							<p class='mui-ellipsis'>您收到一条新的订单</p>
+							旅游咨询
+							<p class='mui-ellipsis'></p>
 						</div>
 					</a>
 				</li>
@@ -41,6 +41,22 @@
 			return {
 				chatList:[],//聊天列表
 			}
+		},
+		computed: {
+			// 系统消息
+			messageList() {
+				let info = {};
+				info.msgNum = 0;
+				info.travelNum = 0;
+				this.$store.state.messageList.forEach((v,i)=>{
+					if(v.id == 'travel'){
+						info.travelNum = v.num;
+					}else{
+						info.msgNum = info.msgNum + v.num;
+					}
+				});
+				return info;
+			},
 		},
 		methods:{
 			init(){
@@ -71,6 +87,18 @@
 					});
 					this.chatList = list;
 				})
+			},
+			// 消息列表
+			toMsgList(){
+				this.$router.push({
+					name:"msgList"
+				})
+			},
+			// 旅游咨询列表
+			toTravelList(){
+				this.$router.push({
+					name:"travelList"
+				})
 			}
 		},
 		mounted() {
@@ -82,6 +110,8 @@
 			// 底部导航栏
 			this.$parent.eventPageShow(this.$route.name);
 		},
+		watch:{
+		}
 	}
 </script>
 <style scoped>

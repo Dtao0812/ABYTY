@@ -36,12 +36,11 @@
 				</li>
 			</ul>
 			<!--消息部分-->
-			<ul class="mui-table-view aby-sysMsg">
+			<ul class="mui-table-view aby-sysMsg" v-show="homeMsgType">
 				<li class="mui-table-view-cell mui-media space" @click="toMsgList">
 					<img class="mui-media-object mui-pull-left imgMsg" src="../../static/images/ico/ico_msgbar_3x.png">
 					<div class="mui-media-body aby-font-Black mui-navigate-right">
-						<p class='mui-ellipsis'>· 您有一条新的订单</p>
-						<p class='mui-ellipsis'>· 供应商推荐：猜你对以下供应商感兴趣</p>
+						<p class='mui-ellipsis' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}</p>
 					</div>
 				</li>
 			</ul>
@@ -137,6 +136,12 @@
 				msgList: []
 			}
 		},
+		computed: {
+			// 是否有系统消息
+			homeMsgType() {
+				return this.$store.state.homeMsgType;
+			},
+		},
 		methods: {
 			init() {
 				this.$abyApi.User.autoLogin((res)=>{
@@ -148,14 +153,18 @@
 						// 接受融云消息
 						this.$abyApi.Chat.setReceiveMsgListener();
 					});
+					// 初始化系统消息
+					this.$abyDb.Msg.init((res)=>{
+						this.$abyApi.Sys.getMsgList();
+						this.$abyApi.Sys.getMsgNum();
+					})
 					// 初始化订单消息
-					if(this.$store.state.cpBtype != 10){
-						this.$abyApi.Order.getNum('seller');
-					}
 					this.$abyApi.Order.getNum('buyer');
+					if(this.$store.state.cpBtype != 10)this.$abyApi.Order.getNum('seller');
 				});
 				this.$parent.eventPageShow(this.$route.name);
 				this.getGoodsList();
+				this.getHomeMsgList();
 			},
 			// 计算滚动条高度
 			handleScroll() {
@@ -171,6 +180,12 @@
 					this.goodsList[2].data = res.hotelList;
 				})
 			},
+			// 获得首页消息列表
+			getHomeMsgList(){
+				this.$abyApi.Sys.getMsgListLoad((res)=>{
+					this.msgList = res;
+				});
+			},
 			// 搜索框点击
 			onSearch() {
 				this.$router.replace({
@@ -180,7 +195,7 @@
 			// 消息通知
 			toMsgList() {
 				this.$router.push({
-					name: 'msgSystem',
+					name: 'msgList',
 				});
 			},
 			// 发布询价
@@ -199,13 +214,18 @@
 			}
 		},
 		mounted() {
-			this.init();
+			this.getHomeMsgList();
 		},
 		activated() {
 			this.init();
 		},
 		deactivated(){
 			this.popupPlus = false;
+		},
+		watch:{
+			msgList(val){
+				this.msgList = val;
+			}
 		}
 	}
 </script>

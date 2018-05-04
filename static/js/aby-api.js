@@ -214,8 +214,53 @@ const  Sys = {
 			dicPValue: dicPValue
 		};
 		Server.getDataFromServer('sysdict',requestData,successCallback, errorCallback);
+	},
+	// 获得消息列表
+	getMsgList(msgType, successCallback, errorCallback){
+		let requestData = {
+			loading:1,
+			act: 'CPG001',
+			msgType: msgType,
+		};
+		Server.getDataFromServer('cpMsgCenter',requestData,(rtn)=>{
+			if(rtn.msgList.length > 0){
+				// 保存本地消息
+				for(let i=0,len=rtn.msgList.length;i<len;i++){
+					Vue.$abyDb.Msg.insert(rtn.msgList[i]);
+				}
+				Sys.getMsgNum();
+			}
+			successCallback && successCallback(rtn)
+		}, errorCallback);
+	},
+	// 获得消息数
+	getMsgNum(){
+		Vue.$abyDb.Msg.get((res)=>{
+			if(res && res.value.isRead == 0){
+				let info = {}
+				info.title = res.value.msgType;
+				info.value = res.value.msgId;
+				store.commit("setMsgNum",info);
+			}
+		},(e)=>{
+			console.log(e)
+		})
+	},
+	// 获取本地消息列表
+	getMsgListLoad(successCallback, errorCallback){
+		let list = [];
+		Vue.$abyDb.Msg.get((res)=>{
+			if(res){
+				list.push(res.value);
+			}
+		},(e)=>{
+			console.log(e)
+			errorCallback && errorCallback(e)
+		})
+		successCallback && successCallback(list);
 	}
 };
+
 
 
 /******************************      User 用户模块       *****************************/

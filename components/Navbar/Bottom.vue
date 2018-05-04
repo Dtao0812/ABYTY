@@ -12,12 +12,14 @@
 <script>
 	export default {
 		computed: {
-			chatNum() {
-				return this.$store.state.chatNum;
-			},
+			// 订单
 			orderNum(){
 				return this.$store.state.orderNum;
-			}
+			},
+			// 消息中心消息
+			messageNum() {
+				return this.$store.state.messageNum;
+			},
 		},
 		data() {
 			return {
@@ -79,12 +81,13 @@
 		mounted() {
 		},
 		watch: {
-			chatNum(val) {
+			messageNum(val) {
 				this.tabDatas[3].badgeNum = val;
 			},
 			orderNum(val){
 				this.tabDatas[2].badgeNum = val;
-			}
+			},
+			
 		},
 	}
 </script>

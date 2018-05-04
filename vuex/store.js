@@ -9,13 +9,20 @@ const state = {
 	routeChain: [],
 	tabActive:'',
 	
-	sysNum:0,//系统消息
-	chatNum:0,//聊天消息
+	chatNum:0,//聊天消息数
 	chatList:[],//聊天id
 	orderNum:0,//订单未读数
 	buyer:0,//买家订单
 	seller:0,//卖家订单
-	
+	messageNum:0,// 消息中心总消息数
+	messageList:[
+		{ id:'system',num:0,list:[] },//系统消息
+		{ id:'select',num:0,list:[] },//采购消息
+		{ id:'hotel_order',num:0,list:[] },//订单消息
+		{ id:'travel',num:0,list:[] },//旅游咨询消息
+	],//消息
+	homeMsgType:false,//首页消息状态
+	messageType:false,//消息中心状态
 	
 	abyTel:'025-68132329',//客服电话
 	
@@ -99,7 +106,7 @@ const mutations = {
 		state[info.title] = state.chatList.length;
 	},
 	// 删除聊天未读消息
-	delChatNum(state,info){
+	removeChatNum(state,info){
 		let newList = [];
 		for(let i=0;i<state.chatList.length;i++){
 			if(state.chatList[i] != info.value){
@@ -118,6 +125,60 @@ const mutations = {
 	setOrderNum(state,info){
 		state[info.title] = info.value;
 		state.orderNum = state.buyer + state.seller;
+	},
+	// 设置消息数量
+	setMsgNum(state,info){
+		for(let i=0;i<state.messageList.length;i++){
+			let isadd = false;
+			if(state.messageList[i].id == info.title)isadd = true;
+			for(let x=0;x<state.messageList[i].list.length;x++){
+				if(state.messageList[i].list[x] == info.value)isadd = false;
+			}
+			if(isadd){
+				state.messageList[i].list = state.messageList[i].list.concat(info.value);
+				state.messageList[i].num = state.messageList[i].list.length;
+			}
+		}
+		
+		let messageNum = 0;
+		let homeNum = 0;
+		// 首页只计算系统消息、订单消息、询价消息
+		for(let i=0;i<state.messageList.length;i++){
+			messageNum += state.messageList[i].num;
+			if(state.messageList[i].id != 'travel')homeNum += state.messageList[i].num;
+		}
+		state.messageType = messageNum>0;
+		state.homeMsgType = homeNum>0;
+		state.messageNum = messageNum + state.chatNum;
+	},
+	// 删除消息数量
+	removeMsgNum(state,info){
+		for(let i=0;i<state.messageList.length;i++){
+			let isdel = false;
+			let newList = [];
+			for(let x=0;x<state.messageList[i].list.length;x++){
+				if(state.messageList[i].list[x] == info.value){
+					isdel = true;
+				}else{
+					newList.push(state.messageList[i].list[x]);
+				}
+			}
+			if(isdel){
+				state.messageList[i].list = newList;
+				state.messageList[i].num = state.messageList[i].list.length;
+			}
+		}
+		
+		let messageNum = 0;
+		let homeNum = 0;
+		// 首页只计算系统消息、订单消息、询价消息
+		for(let i=0;i<state.messageList.length;i++){
+			messageNum += state.messageList[i].num;
+			if(state.messageList[i].id != 'travel')homeNum += state.messageList[i].num;
+		}
+		state.messageType = messageNum>0;
+		state.homeMsgType = homeNum>0;
+		state.messageNum = messageNum + state.chatNum;
 	}
 	
 }

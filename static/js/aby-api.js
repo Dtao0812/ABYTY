@@ -471,6 +471,15 @@ const User = {
 		}, function(err) {
 			callBack && callBack(false);
 		});
+	},
+	//导游 - 名片（个人）
+	getGuiderInfo(requestInfo, successCallback, errorCallback){
+		var requestData = {
+			loading:requestInfo.loading,
+			act: '11008',
+			aac001: requestInfo.aac001
+		};
+		Server.getDataFromServer('user', requestData, successCallback, errorCallback)
 	}
 };
 

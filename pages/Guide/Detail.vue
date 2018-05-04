@@ -3,13 +3,15 @@
 		<aby-header title="Ta的名片" slot="header"></aby-header>
 		<div class="mui-content guidepage" slot="content">
 			<div class="panelTop">
-				<div class="face"></div>
+				<div class="face">
+					<img id="bookface" :src="list.aac502"/>
+				</div>
 				<div class="info">
-					<img class="photo" src="../../static/images/logo/logo_fang.png" />
-					<p class="name">李小白</p>
-					<p class="city"><aby-icon type="nowlocation"></aby-icon>南京市</p>
+					<img class="photo" :src="list.aac007" />
+					<p class="name">{{list.aac005}}</p>
+					<p class="city"><aby-icon type="nowlocation"></aby-icon>{{list.aac204}}</p>
 					<aby-icon-color type="chat-circle" class="btnMsg"></aby-icon-color>
-					<aby-icon-color type="call-circle" class="btnCall"></aby-icon-color>
+					<aby-icon-color @click.native="$tool.dialTelToApp(list.aac002)" type="call-circle" class="btnCall"></aby-icon-color>
 				</div>
 			</div>
 			<div class="spaceTitle">
@@ -17,41 +19,47 @@
 			</div>
 			<div class="panelContent">
 				<mt-cell title="个人标签">
-					<span><i class="tip">旅行</i></span>
+					<span v-for="li in list.vsTags"><i class="tip">{{li}}</i></span>
 				</mt-cell>
 				<mt-cell title="语言">
-					<span>中文</span>
+					<span>{{list.vsLanguges | filterListToString}}</span>
 				</mt-cell>
 				<mt-cell title="从业时间" class="space">
-					<span>2年</span>
+					<span>{{list.vsJobYears||'未设置'}}年</span>
 				</mt-cell>
 				<mt-cell title="业务范围">
-					<span>全陪、地陪、景点讲解</span>
+					<span>{{list.vsBranched | filterListToString}}</span>
 				</mt-cell>
 				<mt-cell title="职业性质">
-					<span>兼职导游</span>
+					<span>{{list.vsJobType||'未设置'}}</span>
 				</mt-cell>
 				<mt-cell title="技术等级">
-					<span>初级导游</span>
+					<span>{{list.vsSkillLevel||'未设置'}}</span>
 				</mt-cell>
 				<div class="space"></div>
 				<mt-cell title="熟悉线路">
-					<span>南京、上海</span>
+					<span>{{list.vsRoadLines||'未设置'}}</span>
 				</mt-cell>
 				<mt-cell title="服务费用">
-					<span>200元/天</span>
+					<span>{{list.vsServFee || '未设置'}}元/天</span>
 				</mt-cell>
 				<mt-cell title="自我介绍" class="space">
-					<span>200元/天</span>
+					<span>{{list.vsIntroSelf || '未设置'}}</span>
 				</mt-cell>
-				<div class="spaceTitle">
+				<div class="spaceTitle" >
 					<h4>TA和游客的精彩瞬间</h4>
 				</div>
 				<div class="imglist">
 					<!--图片为空的时候显示-->
-					<p>Ta很懒，没有添加精彩瞬间~</p>
-					<img src="../../static/images/example/ID.jpg" />
-					<img src="../../static/images/example/ID.jpg" />
+					<div v-if="list.vsLeadPics == ''">
+						<p >Ta很懒，没有添加精彩瞬间~</p>
+					</div>
+					<div v-else v-for="li in list.vsLeadPics">
+						<p>{{li.imgDesc}}</p>
+						<img :src="li.imgUrl" />
+					</div>
+					
+					<!--<img src="../../static/images/example/ID.jpg" />-->
 				</div>
 			</div>
 		</div>
@@ -59,6 +67,41 @@
 </template>
 
 <script>
+	export default {
+		components: {
+			
+		},
+		data() {
+			return {
+				pbId: this.$route.params.pbId,
+				list: ''
+			}
+		},
+		methods: {
+			getPageInfo(){
+				let reqInfo = {};
+				reqInfo.loading = 1;
+				reqInfo.aac001 = this.pbId;
+				this.$abyApi.User.getGuiderInfo(reqInfo, (res)=>{
+					console.log('导游信息：'+JSON.stringify(res));
+					res.userinfo.aac002 = this.$abyApi.Crypto.DeCrypt(res.userinfo.aac002)
+					this.list = res.userinfo;
+				})
+			},
+			setImgSize(){//设置横幅图片3：2
+				var imgArr = document.getElementById("bookface");
+				imgArr.style.height = 2*document.body.clientWidth / 3 + "px";
+			},
+			clickZan(){//点赞
+				
+			}
+		},
+		mounted() {
+			this.getPageInfo();
+			this.setImgSize();
+		},
+		created() {}
+	}
 </script>
 
 <style scoped>
@@ -66,12 +109,14 @@
 	
 	.face {
 		width: 100vw;
-		height: 43.75vw !important;
-		background-image: url(../../static/images/example/card.jpg);
+		/*height: 43.75vw !important;*/
+		/*background-image: url(../../static/images/example/card.jpg);*/
 		background-size: 100%;
 		background-position: center;
 	}
-	
+	.face img{
+		width: 100%;
+	}
 	.info {
 		width: 100vw;
 		height: 60px;

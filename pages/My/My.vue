@@ -8,7 +8,7 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;">
 				<li class="mui-table-view-cell mui-media person">
-					<router-link class="mui-navigate-right" :to="{name:'homePage', params:{cpBtype: cpUserInfo.cpBasic.cpBtype, cpId: cpUserInfo.cpId, userId: cpUserInfo.userId}}">
+					<a class="mui-navigate-right" @click="toHomePage">
 						<img class="mui-media-object mui-pull-left personpic" :src="cpUserInfo.cpBasic.cpLogo">
 						<!--组团-->
 						<img v-if="cpUserInfo.cpBasic.cpBtype==10" class="role" src="../../static/images/ico/ico_role_travel.png" />
@@ -19,7 +19,7 @@
 							{{cpUserInfo.userName}}
 							<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName}}</p>
 						</div>
-					</router-link>
+					</a>
 				</li>
 			</ul>
 			<!--菜单部分-->
@@ -81,15 +81,16 @@
 			onDialTel() {
 				this.$tool.dialTelToApp(this.tel);
 			},
-			init(){
-				this.toHomePageInfo.cpBtype = this.$store.state.cpUserInfo.cpBasic.cpBtype;
-				this.toHomePageInfo.cpId = this.$store.state.cpUserInfo.cpId;
-				this.toHomePageInfo.userId = this.$store.state.cpUserInfo.userId;
+			toHomePage(){
+				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
+				this.toHomePageInfo.userId = this.cpUserInfo.userId;
 				this.$store.commit('setHomePage', this.toHomePageInfo);
+				this.$router.push({
+					name:"homePage",
+				})
 			}
 		},
 		mounted() {
-			this.init();
 			this.$parent.eventPageShow(this.$route.name);
 		},
 		activated() {

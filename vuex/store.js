@@ -33,6 +33,8 @@ const state = {
 	cpUserInfo: '',userId: '',userName: '',userType: '',userPhone: '',
 	/*企业基本信息*/
 	cpBasic:'',cpId: '',cpBtype: '',
+	/*公司主页*/
+	userIdHome:'',cpIdHome:'',
 }
 
 // 同步加载
@@ -110,9 +112,9 @@ const mutations = {
 		state[info.title] = state.chatList.length;
 	},
 	setHomePage(state,info){
-		state.userId = info.userId;
-		state.cpId = info.cpId;
-		state.cpBtype = info.cpBtype;
+		state.userIdHome = info.userId;
+		state.cpIdHome = info.cpId;
+//		state.cpBtypeHome = info.cpBtype;
 	},
 	//设置订单未读数量
 	setOrderNum(state,info){

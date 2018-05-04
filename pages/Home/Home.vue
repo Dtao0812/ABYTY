@@ -139,6 +139,7 @@
 		computed: {
 			// 是否有系统消息
 			homeMsgType() {
+				this.getHomeMsgList();
 				return this.$store.state.homeMsgType;
 			},
 		},
@@ -214,7 +215,6 @@
 			}
 		},
 		mounted() {
-			this.getHomeMsgList();
 		},
 		activated() {
 			this.init();

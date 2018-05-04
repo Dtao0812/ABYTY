@@ -1,6 +1,6 @@
 <template>
 	<div class="list-items">
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<div class="list-item" v-for="tmp in list">
 			<div class="mui-card space">
 				<div class="mui-card-header mui-card-media">
@@ -103,6 +103,7 @@
 		props: ['list'],
 		data() {
 			return {
+				noContent:false
 			}
 		},
 		methods: {
@@ -136,6 +137,7 @@
 		},
 		watch: {
 			list(val) {
+				this.noContent = val.length == 0;
 				this.list = val;
 			}
 		}

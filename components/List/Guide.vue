@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item" style="top: 40px;">
 		<!--导游列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in lists" @click="toDetail(item.aac001)">
 				<a href="javascript:;">
@@ -36,6 +36,7 @@
 		data() {
 			return {
 				lists:[],
+				noContent:false
 			}
 		},
 		methods: {
@@ -52,6 +53,7 @@
 		},
 		watch: {  
 		    list(val){
+		    	this.noContent = val.length == 0;
 		    	this.lists = val;
 		    }  
 		}  

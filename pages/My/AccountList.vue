@@ -2,25 +2,18 @@
 	<aby-page>
 		<aby-header title="子账号管理" slot="header"></aby-header>
 		<div class="mui-content" slot="content">
-			<div class="mui-card" v-for="tmp in lists">
+			<div class="mui-card space" v-for="tmp in lists">
 				<div class="mui-card-content" @click="onLookAccount(tmp.userId)" v-bind:cpUser-id="tmp.userId">
 					<div class="mui-card-content-inner mui-navigate-right">
-						<div class="mui-col-xs-3 pic">
-							<img class="picList" :src="tmp.userFace" />
-						</div>
-						<div class="mui-col-xs-9 name fontNameTitle">
-							{{tmp.userName}}
-						</div>
-						<div class="mui-col-xs-9 job">
-							{{tmp.userPost}}
-						</div>
-						<br style="clear: both;" />
+						<img class="picList pic" :src="tmp.userFace" />
+						<h4 class="name aby-list-title">{{tmp.userName}}</h4>
+						<p class="job">{{tmp.userPost}}</p>
 					</div>
 				</div>
 				<div class="mui-card-footer">
-					<router-link class="mui-card-link fontGray linkLeft" :to="{ name: 'accountAlter', params: {userId: tmp.userId} }"><aby-icon class="marRt" type="edit"></aby-icon>修改</router-link>
+					<router-link class="mui-card-link aby-font-gray linkLeft" :to="{ name: 'accountAlter', params: {userId: tmp.userId} }"><aby-icon class="marRt" type="edit"></aby-icon>修改</router-link>
 					<span v-show="tmp.userStatus == 0" class="mui-card-link fontRed" @click="disable(tmp.userId)"><aby-icon class="btn-forbid marRt" type="forbidden"></aby-icon>停用</span>
-					<span v-show="tmp.userStatus == 1" class="mui-card-link fontBlue" @click="onOperation(tmp.userId)"><aby-icon class="btn-enable marRt" type="enable"></aby-icon>启用</span>
+					<span v-show="tmp.userStatus == 1" class="mui-card-link aby-font-blue" @click="onOperation(tmp.userId)"><aby-icon class="marRt" type="enable"></aby-icon>启用</span>
 				</div>
 			</div>
 			<aby-button class="btnFixed" title="增加子账号" @click.native="onAdd"></aby-button>
@@ -91,8 +84,6 @@
 </script>
 <style scoped>
 	.mui-content {
-		background-color: #FFFFFF;
-		/*#efeff4;*/
 		-webkit-overflow-scrolling: touch;
 		font-size: 15px;
 		color: #333333;
@@ -100,8 +91,8 @@
 	/*列表头像尺寸-圆*/
 	
 	.picList {
-		width: 60px;
-		height: 60px;
+		width: 45px;
+		height: 45px;
 		border-radius: 50%;
 		vertical-align: bottom;
 	}
@@ -110,9 +101,6 @@
 	.picLink {
 		width: 20px;
 		margin-right: 8px;
-	}
-	.fontGray {
-		color: #808080;
 	}
 	.btnFixed {
 		position: fixed!important;
@@ -126,28 +114,23 @@
     	margin: 0 5%;
 	}
 	
-	.pic,
-	.name,
-	.job {
+	.pic {
 		float: left;
 	}
 	
 	.pic {
 		text-align: left;
-		padding: 0px;
+		margin-right: 10px;
+		
 	}
 	
 	.name,
 	.job {
 		padding: 0px;
+		margin: 0px;
 	}
-	
-	.name {
-		padding-top: 6px;
-	}
-	
-	.job {
-		padding-top: 5px;
+	.name{
+		margin-top: 4px;
 	}
 	/*卡片样式*/
 	
@@ -175,7 +158,7 @@
 	}
 	
 	.mui-card-footer {
-		border-top: 1px solid #DDDDDD;
+		border-top: 1px solid #F0F0F0;
 	}
 	
 	.linkLeft {
@@ -184,13 +167,8 @@
 	.fontRed{
 		color: red;
 	}
-	.fontBlue{
-		color: #08C7B5;
-	}
-	.btn-enable{/*启用图标颜色*/
-		color: #08C7B5;
-	}
 	.marRt{
 		margin-right: 5px;
+		font-size: 16px;
 	}
 </style>

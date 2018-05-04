@@ -1,6 +1,6 @@
 <template>
 	<ul class="mui-table-view">
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(li)">
 			<a>
 				<img class="mui-media-object mui-pull-left aby-img-guide" :src="li.cpLogo">
@@ -27,7 +27,9 @@
 		},
 		props: ['list'],
 		data() {
-			return {}
+			return {
+				noContent:false
+			}
 		},
 		methods:{
 			// 公司主页
@@ -40,9 +42,29 @@
 		},
 		mounted(){
 			
-		}
+		},
+		watch: {  
+		    list(val){
+		    	this.noContent = val.length == 0;
+		    	this.list = val;
+		    }  
+		}  
 	}
 </script>
 
-<style>
+<style scoped>
+	.look {
+		background-color: #FF605D;
+		color: #FFFFFF;
+		font-size: 12px;
+		padding: 2px 5px;
+		border-radius: 5px;
+	}
+	
+	.look .mui-icon {
+		font-size: 10px;
+	}
+	.iconowlocation{
+		font-size: 12px;
+	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--酒店产品列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i">
 				<a href="javascript:;" @click="toDetail(li)">
@@ -31,7 +31,9 @@
 		components: {},
 		props: ['list'],
 		data() {
-			return {}
+			return {
+				noContent:false
+			}
 		},
 		methods: {
 			//查看详情
@@ -62,6 +64,7 @@
 		},
 		watch: {
 			list(val) {
+				this.noContent = val.length == 0;
 				this.list = val;
 			}
 		}

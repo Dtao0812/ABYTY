@@ -24,7 +24,7 @@
 <style scoped>
 	.nocontent{
 		text-align: center;
-		padding: 20px 10px;
+		padding: 30px 10px;
 	}
 	.nocontent img{
 		width: 80px;

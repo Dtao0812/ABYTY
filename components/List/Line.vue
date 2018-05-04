@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--线路产品列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view" v-for="(item,i) in list" :key="i">
 			<li class="mui-table-view-cell mui-media" >
 				<a href="javascript:;" @click="toDetail(item)">
@@ -39,7 +39,8 @@
 		props: ['list', 'page', 'proState'],
 		data() {
 			return {
-				pageType: this.page
+				pageType: this.page,
+				noContent:false
 			}
 		},
 		methods: {
@@ -97,6 +98,7 @@
 		},
 		watch: {  
 		    list(val){
+		    	this.noContent = val.length == 0;
 		    	this.list = val;
 		    }  
 		}  

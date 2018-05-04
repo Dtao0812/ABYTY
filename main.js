@@ -3,7 +3,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './vuex/store'
-require('./index.js') 
+require('./index.js')
 
 // 引入第三方
 import Moment from 'moment'
@@ -28,9 +28,6 @@ import AbyTool from './static/js/tool.js'
 import AbyApi from './static/js/aby-api.js'
 import AbyIcons from './static/js/iconfont.js'
 import AbyDb from './static/js/aby-db.js'
-
-
-
 
 // 引入自定义组件
 import AbyPage from './components/Page/Default.vue'
@@ -57,17 +54,17 @@ Vue.$abyDb = Vue.prototype.$abyDb = AbyDb
 Vue.component('aby-page', AbyPage)
 Vue.component('aby-header', AbyHeader)
 Vue.component('aby-picker', AbyPicker)
-Vue.component('aby-icon',AbyIcon)
-Vue.component('aby-icon-color',AbyIconColor)
-Vue.component('aby-fonts',AbyFonts)
-Vue.component('aby-button',AbyButton)
-Vue.component('aby-navbar',AbyNavbar)
-Vue.component('aby-pull',AbyPull)
-Vue.component('aby-tab',AbyTab)
-Vue.component('aby-field',AbyField)
-Vue.component('aby-loading',AbyLoading)
-Vue.component('aby-date-picker',AbyDatePicker)
-Vue.component('aby-no-content',AbyNoContent)
+Vue.component('aby-icon', AbyIcon)
+Vue.component('aby-icon-color', AbyIconColor)
+Vue.component('aby-fonts', AbyFonts)
+Vue.component('aby-button', AbyButton)
+Vue.component('aby-navbar', AbyNavbar)
+Vue.component('aby-pull', AbyPull)
+Vue.component('aby-tab', AbyTab)
+Vue.component('aby-field', AbyField)
+Vue.component('aby-loading', AbyLoading)
+Vue.component('aby-date-picker', AbyDatePicker)
+Vue.component('aby-no-content', AbyNoContent)
 
 //require('./static/js/web.js')
 require('./static/js/app.js')
@@ -77,18 +74,18 @@ require('./static/js/app.js')
  * 命名规则：filterFunName
  */
 // 将数组转字符串
-Vue.filter('filterListToString',function(data){
+Vue.filter('filterListToString', function(data) {
 	let item = '';
-	if(data){
-		data.forEach((v,i)=>{
+	if(data) {
+		data.forEach((v, i) => {
 			item += v + ',';
 		});
 	}
-	return item === '' ? '未设置' : item.substr(0,item.length-1);
+	return item === '' ? '未设置' : item.substr(0, item.length - 1);
 });
 //空字符串——'未设置'
-Vue.filter('filterNull', function(str){
-	if(str == '' || str == null){
+Vue.filter('filterNull', function(str) {
+	if(str == '' || str == null) {
 		str = '未设置'
 	}
 	return str;
@@ -105,7 +102,7 @@ Vue.filter('isSex', function(data){
 })
 
 // 时间转换为标准时间（YYYY-MM-DD）
-Vue.filter('filterConvertDate',function(timestamp){
+Vue.filter('filterConvertDate', function(timestamp) {
 	var prmdate = new Date(parseInt(timestamp));
 	var nowDate = new Date();
 	var nTime = new Date(parseInt(timestamp));
@@ -118,7 +115,7 @@ Vue.filter('filterConvertDate',function(timestamp){
 	return nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2);
 });
 // 计算时间
-Vue.filter('filterConvertDateFromNow',function(date){
+Vue.filter('filterConvertDateFromNow', function(date) {
 	Moment.locale('zh-cn');
 	return Moment(date, "YYYYMMDD").fromNow();
 });
@@ -133,7 +130,11 @@ new Vue({
 	el: '#app',
 	router,
 	store,
-	components: {App},
-	template: '<App/>'
+	components: {
+		App
+	},
+	template: '<App/>',
+	created() {
+		document.body.removeChild(document.getElementById('Loading'))
+	}
 });
-

@@ -56,18 +56,5 @@
 </script>
 
 <style scoped>
-	.look {
-		background-color: #FF605D;
-		color: #FFFFFF;
-		font-size: 12px;
-		padding: 2px 5px;
-		border-radius: 5px;
-	}
 	
-	.look .mui-icon {
-		font-size: 10px;
-	}
-	.iconowlocation{
-		font-size: 12px;
-	}
 </style>

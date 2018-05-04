@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--订单列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<div class="mui-card space" v-for="(li,i) in list" :key="i">
 			<div class="mui-card-header mui-card-media">
 				<!--不同类型图标type值不一样 线路：line 机票：pticket 酒店：hotel 导游：guide 机+酒：planhotel-->
@@ -48,7 +48,8 @@
 					{id:9,title:'取消退款',size:'small',bclass:'aby-button-line-blue'},
 					{id:10,title:'确认完成',size:'small',bclass:'aby-button-line-blue'},
 					{id:11,title:'删除',size:'small',bclass:'aby-button-line-default'},
-				]
+				],
+				noContent:false
 			}
 		},
 		methods: {
@@ -193,6 +194,7 @@
 		},
 		watch: {
 			list(val) {
+				this.noContent = val.length == 0;
 				this.list = val;
 			}
 		},

@@ -8,7 +8,7 @@
 		</aby-header>
 		<div slot="navbar"></div>
 		<div class="list-item" slot="loadlist" ref="loadlist">
-			<aby-no-content v-if="list.length==0"></aby-no-content>
+			<aby-no-content v-if="noContent"></aby-no-content>
 			<div class="mui-card space" v-for="(li,i) in list">
 				<div class="mui-card-header mui-card-media">
 					<img :src="li.publisher.cpLogo">
@@ -90,6 +90,7 @@
 		data() {
 			return {
 				list: [],
+				noContent:false,
 				pageNum: 1,
 				where: {},
 				selectType: '',
@@ -163,6 +164,7 @@
 				});
 			},
 			eventBack(e) {
+				this.$refs.pull.showLoading();
 				this.lists = [];
 				this.scrollTop = 0;
 				this.pageNum = 1;
@@ -212,6 +214,12 @@
 			// 底部导航栏
 			this.$parent.eventPageShow(this.$route.name);
 		},
+		watch: {
+			list(val) {
+				this.noContent = val.length == 0;
+				this.list = val;
+			}
+		}
 	}
 </script>
 <style scoped>

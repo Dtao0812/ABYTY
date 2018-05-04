@@ -1,7 +1,7 @@
 <template>
 	<div class="card-item">
 		<!--线路产品-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<div class="mui-card aby-special" v-for="(li,i) in list" :key="i">
 			<div class="mui-card-content">
 				<img v-if="li.isClear == 1" class="faceTip" src="../../static/images/ico/ico_sale.png" />
@@ -25,6 +25,7 @@
 		props: ['list', 'page', 'proState'],
 		data() {
 			return {
+				noContent:false
 			}
 		},
 		methods: {
@@ -45,6 +46,7 @@
 		},
 		watch: {  
 		    list(val){
+		    	this.noContent = val.length == 0;
 		    	this.list = val;
 		    }  
 		}  

@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--导游列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list" :key="i">
 				<a href="javascript:;" @click="toHomePage(item)">
@@ -28,7 +28,9 @@
 		},
 		props: ['list'],
 		data() {
-			return {}
+			return {
+				noContent:false
+			}
 		},
 		methods:{
 			// 公司主页
@@ -46,6 +48,12 @@
 			};
 			next();
 		},
+		watch: {
+			list(val) {
+				this.noContent = val.length == 0;
+				this.list = val;
+			}
+		}
 	}
 </script>
 

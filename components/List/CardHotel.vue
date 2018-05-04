@@ -1,7 +1,7 @@
 <template>
 	<div class="card-item">
 		<!--酒店产品-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<div class="mui-card aby-special" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<div class="mui-card-content">
 				<img class="faceTip" src="../../static/images/ico/ico_sale.png" />
@@ -25,7 +25,9 @@
 		components: {},
 		props: ['list'],
 		data() {
-			return {}
+			return {
+				noContent:false,
+			}
 		},
 		methods: {
 			//查看详情
@@ -56,6 +58,7 @@
 		},
 		watch: {
 			list(val) {
+				this.noContent = val.length == 0;
 				this.list = val;
 			}
 		}

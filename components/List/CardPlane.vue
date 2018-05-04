@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item">
 		<!--机票供应商列表-->
-		<aby-no-content v-if="list.length==0"></aby-no-content>
+		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(item)">
 				<a>
@@ -31,7 +31,9 @@
 		},
 		props: ['list'],
 		data() {
-			return {}
+			return {
+				noContent:false
+			}
 		},
 		methods:{
 			// 公司主页
@@ -47,7 +49,13 @@
 		},
 		mounted(){
 			
-		}
+		},
+		watch: {  
+		    list(val){
+		    	this.noContent = val.length == 0;
+		    	this.list = val;
+		    }  
+		}  
 	}
 </script>
 

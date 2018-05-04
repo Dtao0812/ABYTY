@@ -1,6 +1,5 @@
 <template>
 	<ul class="mui-table-view">
-		<aby-no-content v-if="list.length==0"></aby-no-content>
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
 				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
@@ -35,11 +34,11 @@
 		mounted() {
 
 		},
-		watch: {
-			list(val) {
-				this.list = val;
-			}
-		}
+		watch: {  
+		    list(val){
+		    	this.list = val;
+		    }  
+		}  
 	}
 </script>
 

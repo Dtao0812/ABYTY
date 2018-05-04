@@ -6,7 +6,7 @@
 				<div class="mui-card-content" @click="onLookAccount(tmp.userId)" v-bind:cpUser-id="tmp.userId">
 					<div class="mui-card-content-inner mui-navigate-right">
 						<img class="picList pic" :src="tmp.userFace" />
-						<p class="name fontNameTitle">{{tmp.userName}}</p>
+						<h4 class="name aby-list-title">{{tmp.userName}}</h4>
 						<p class="job">{{tmp.userPost}}</p>
 					</div>
 				</div>
@@ -128,6 +128,9 @@
 	.job {
 		padding: 0px;
 		margin: 0px;
+	}
+	.name{
+		margin-top: 4px;
 	}
 	/*卡片样式*/
 	

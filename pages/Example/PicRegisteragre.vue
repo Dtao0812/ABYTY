@@ -1,6 +1,6 @@
 <template>
 	<aby-page>
-		<aby-header title="为什么要传照片" slot="header"></aby-header>
+		<aby-header title="注册协议" slot="header"></aby-header>
 		<div slot="content" class="mui-content">
 			<h5 class="mui-content-padded"></h5>
 			<h4>呱啦啦同业注册协议</h4>

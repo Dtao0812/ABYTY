@@ -305,7 +305,12 @@ let countAge = function(datetime){
         var Y = new Date().getFullYear();   
         return Y-r[1];   
     }  
-}
+};
+
+//拷贝内容
+let copyContent = function(e){
+	
+};
 
 export default {
 	isInAarry,
@@ -324,5 +329,6 @@ export default {
 	pad,
 	localStorage,
 	getNowFormatDate,
-	getFormatDate
+	getFormatDate,
+	copyContent
 }

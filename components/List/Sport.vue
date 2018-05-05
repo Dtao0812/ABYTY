@@ -2,7 +2,7 @@
 	<div class="list-item">
 		<!--景点产品列表-->
 		<aby-no-content v-if="noContent"></aby-no-content>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" v-if="list.length>0">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list">
 				<a href="javascript:;" @click="toDetail(item)">
 					<img class="mui-media-object mui-pull-left aby-img" :src="item.sFaceImg">

@@ -25,6 +25,13 @@
 			}
 		},
 		methods: {
+			init(){
+				this.$refs.pull.showLoading();
+				this.pageNum = 1;
+				this.orderBy = 1;
+				this.lists = [];
+				this.getPullDown();
+			},
 			scroll(top){
 				this.isShowSearch = top >= 40?true:false;
 				this.title = top >= 40?'':'导游';
@@ -78,7 +85,16 @@
 		mounted() {
 			this.getPullDown();
 		},
-		created() {}
+		created() {},
+		beforeRouteEnter(to, from, next) {
+			if(from.name != 'guidePage') {
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
+		},
 	}
 </script>
 

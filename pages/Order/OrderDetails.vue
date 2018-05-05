@@ -9,8 +9,8 @@
 					<p v-if="info.orderState==0">买家还有<span id="countDownTimestamp" style="display: inline-block;">{{info.countDownTimestamp}}</span>完成支付，超时将自动关闭</p>
 					<p v-if="info.orderState==1">买家已付款，等待发团日期发团</p>
 					<p v-if="info.orderState==2">等待买家确认完成，还有<span id="waitConfirmDownTimestamp" style="display: inline-block;">{{info.countDownTimestamp}}</span>自动确认</p>
-					<p v-if="info.orderState==3">完成时间：{{data.endTime | filterConvertDate}}</p>
-					<p v-if="info.orderState==4">订单已被取消，取消时间：{{data.closeTime | filterConvertDate}}</p>
+					<p v-if="info.orderState==3">完成时间：{{info.endTime | filterConvertDate}}</p>
+					<p v-if="info.orderState==4">订单已被取消，取消时间：{{info.closeTime | filterConvertDate}}</p>
 					<p v-if="info.orderState==5">订单超时，已自动关闭</p>
 					<p v-if="info.orderState==6">如有疑问可拨打采购商电话<br />如果存在争议可直接联系呱啦啦客服介入调解。</p>
 					<p v-if="info.orderState==7">您已同意退款，退款金额:￥{{info.refundAmount}}（订单金额-{{info.serviceFee}}退款手续费），将于2-7个工作日退回到买家付款账户。<br />退款时间：{{info.refundDealTime|filterConvertDate}}</p>
@@ -21,7 +21,7 @@
 					<p v-if="info.orderState==0">您有<span id="countDownTimestamp" style="display: inline-block;">{{info.countDownTimestamp}}</span><br />完成支付，如果超时将自动关闭</p>
 					<p v-if="info.orderState==1">订单已支付，等待发团日期发团</p>
 					<p v-if="info.orderState==2">旅游团已发出，行程结束后记得确认付款喔～还有<span><span id="waitConfirmDownTimestamp" style="display: inline-block;">{{info.waitConfirmDownTimestamp}}</span></span>自动确认</p>
-					<p v-if="info.orderState==3">完成时间：{{data.endTime | filterConvertDate}}</p>
+					<p v-if="info.orderState==3">完成时间：{{info.endTime | filterConvertDate}}</p>
 					<p v-if="info.orderState==4">供应商已取消了您的订单</p>
 					<p v-if="info.orderState==5">订单超时，已自动关闭</p>
 					<p v-if="info.orderState==6">已提交退款申请给供应商，若供应商1个工作日内未处理将转交呱啦啦客服介入处理</p>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
 					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.buyerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
@@ -113,7 +113,7 @@
 			</div>
 			<div class="aby-detail-content" v-else>
 				<ul class="mui-table-view">
-					<li class="mui-table-view-cell mui-media">
+					<li class="mui-table-view-cell mui-media" @click="toAgrDetail">
 						<div class="mui-media-object mui-pull-left">订单协议</div>
 						<div class="mui-media-body">
 							<a class="mui-navigate-right menu">
@@ -207,6 +207,7 @@
 				orderId:this.$route.params.orderId,
 				identityType:this.$route.params.identityType,
 				page:this.$route.params.page,
+				agreementId:'',
 				pageNum:1,
 				serviceFee: '',
 				btnList:[
@@ -228,6 +229,7 @@
 		methods: {
 			init(){
 				this.orderId = this.$route.params.orderId;
+				this.agreementId = this.$route.params.agreementId||'';
 				this.info = '';
 				this.getDetail();
 			},
@@ -370,6 +372,29 @@
 						this.serviceFee = rtn.data;
 					})
 				})
+			},
+			//聊天
+			toChat(){
+				this.$router.push({
+					name: 'chat',
+					params: {
+						userId:this.identityType == 'seller' ? this.info.buyerId : this.info.sellerId
+					}
+				});
+			},
+			//查看协议详情
+			toAgrDetail(){
+				if(this.agreementId != ''){
+					this.$router.back();
+				}else{
+					this.$router.push({
+						name: 'agrDetail',
+						params: {
+							agreementId: this.info.orderInfo.proid,
+							identityType: this.identityType
+						}
+					});
+				}
 			}
 		},
 		mounted() {
@@ -383,7 +408,7 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name == 'orderList') {
+			if(from.name=='orderList'){
 				next(vm => {
 					vm.init()
 				})

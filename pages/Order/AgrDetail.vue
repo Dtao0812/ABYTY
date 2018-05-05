@@ -142,13 +142,15 @@
 				invoiceName:'',// 开票抬头
 				invoiceNumer:'',// 税号
 				invoiceContent:'',// 发票内容
-				tel:'',//联系电话
+				tel:'',//联系电话,
+				orderId:'',
 			}
 		},
 		methods: {
 			init() {
-				this.agreementId = this.$route.params.agreementId,
-				this.identityType = this.$route.params.identityType,
+				this.agreementId = this.$route.params.agreementId||'';
+				this.identityType = this.$route.params.identityType||'';
+				this.orderId = this.$route.params.orderId||'';
 				this.getDetail();
 			},
 			// 获得详情
@@ -178,14 +180,18 @@
 			},
 			// 查看订单详情
 			toOrderDetail(){
-				this.$router.push({
-					name: 'orderDetails',
-					params: {
-						identityType: this.identityType,
-						orderId: this.info.orderId,
-						page: 'agrDetail',
-					}
-				});
+				if(this.orderId != ''){
+					this.$router.back()
+				}else{
+					this.$router.push({
+						name: 'orderDetails',
+						params: {
+							identityType: this.identityType,
+							orderId: this.info.orderId,
+							page: 'agrDetail',
+						}
+					});
+				}
 			},
 			// 打开聊天界面
 			toChat(){
@@ -201,13 +207,9 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name == 'agrList') {
-				next(vm => {
-					vm.init()
-				})
-			}else{
-				next()
-			}
+			next(vm => {
+				vm.init()
+			})
 		},
 	}
 </script>

@@ -2,7 +2,7 @@
 	<div class="list-item" style="top: 40px;">
 		<!--导游列表-->
 		<aby-no-content v-if="noContent"></aby-no-content>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" v-if="list.length>0">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in lists" @click="toDetail(item.aac001)">
 				<a href="javascript:;">
 					<img class="mui-media-object mui-pull-left aby-img-guide" :src="item.aac007">
@@ -56,7 +56,7 @@
 		    	this.noContent = val.length == 0;
 		    	this.lists = val;
 		    }  
-		}  
+		},
 	}
 </script>
 

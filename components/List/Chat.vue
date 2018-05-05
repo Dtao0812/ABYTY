@@ -1,5 +1,5 @@
 <template>
-	<ul class="mui-table-view">
+	<ul class="mui-table-view" v-if="list.length>0">
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
 				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
@@ -21,7 +21,7 @@
 			return {}
 		},
 		methods: {
-			//查看详情
+			//聊天页面
 			toDetail(li) {
 				this.$router.push({
 					name: 'chat',

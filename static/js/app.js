@@ -3,6 +3,8 @@ import store from '../../vuex/store'
 import router from '../../router'
 
 var plusFun = function() {
+	plus.screen.lockOrientation("portrait-primary"); //禁止横屏显示
+	
 	//是Android端
 	if(Vue.$tool.browser.versions.android) {
 		window.localStorage.setItem('osType', 1);

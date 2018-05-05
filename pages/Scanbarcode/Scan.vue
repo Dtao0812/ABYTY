@@ -19,19 +19,27 @@
 <script>
 	export default {
 		data() {
-			return {}
+			return {
+				scan:''
+			}
 		},
 		methods: {
 			init(){
 				plus.navigator.setStatusBarBackground("#000000");
-
-				let AVCaptureDevice = plus.ios.importClass("AVCaptureDevice");
-				let Status = AVCaptureDevice.authorizationStatusForMediaType("vide");
-				if(3 != Status) {
-					this.$tool.alert('请在设置中设置允许使用相机',(e)=> {
-						this.onBack();
-					});
-				}
+				
+//				let os = this.$tool.browser.versions();
+//				if(os.android){
+//					
+//				}else{
+//					let AVCaptureDevice = plus.ios.importClass("AVCaptureDevice");
+//					let Status = AVCaptureDevice.authorizationStatusForMediaType("vide");
+//					if(3 != Status) {
+//						this.$tool.alert('请在设置中设置允许使用相机',(e)=> {
+//							this.onBack();
+//						});
+//					}
+//				}
+				
 				// 开始扫描
 				this.barCode();
 			},
@@ -41,9 +49,9 @@
 					frameColor: "#FFFFFF",
 					scanbarColor: "#FFFFFF"
 				}; //边框属性，中间线属性，背景色
-				scan = new plus.barcode.Barcode('bcid', "", styles);
-				scan.onmarked = this.onmarked;
-				scan.start({
+				this.scan = new plus.barcode.Barcode('bcid', "", styles);
+				this.scan.onmarked = this.onmarked;
+				this.scan.start({
 					conserve: true,
 				});
 			},
@@ -61,6 +69,7 @@
 				this.$abyApi.User.doScanBarcode(reqInfo,(res)=>{
 					this.$toast("扫描登录成功！")
 					setTimeout(()=>{
+						this.scan.close();
 						this.onBack();
 					},1500);
 				})
@@ -71,7 +80,9 @@
 				this.$router.back();
 			}
 		},
-		mounted() {},
+		mounted() {
+			this.init();
+		},
 	}
 </script>
 

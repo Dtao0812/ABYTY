@@ -32,7 +32,7 @@
 			<ul class="mui-table-view mui-table-view-chevron space" v-if="cpUserInfo.cpBasic.cpBtype==20">
 				<li class="mui-table-view-cell mui-media">
 					<router-link class="menu mui-navigate-right" :to="{name:'myGold'}">
-						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的保证金
+						<aby-icon-color class="ptype" type="mygold"></aby-icon-color>我的质保金
 						<span class="give-warn" v-show="cpUserInfo.cpBasic.depositType == 0">未交纳<i></i></span>
 					</router-link>
 				</li>
@@ -146,5 +146,10 @@
 	}
 	.onDialTel{
 		margin-bottom: 60px!important;
+	}
+	.give-warn{
+		color: #dd524d;
+		float: right;
+		margin-right: -25px;
 	}
 </style>

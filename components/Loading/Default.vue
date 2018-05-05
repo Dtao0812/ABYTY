@@ -2,6 +2,7 @@
 	<div class="aby-loading">
 		<!--<mt-spinner type="double-bounce"></mt-spinner>-->
 		<img src="../../static/images/load/load_white_jb.gif" />
+		<p>拼命加载中...</p>
 	</div>
 </template>
 
@@ -23,6 +24,9 @@
 		text-align: center;
 	}
 	.aby-loading img{
-		width: 25%;
+		width: 20%;
+	}
+	.aby-loading p{
+		margin-top: 10px;
 	}
 </style>

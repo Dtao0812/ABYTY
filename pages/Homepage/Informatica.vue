@@ -19,13 +19,13 @@
 		</div>
 		<div v-else>
 			<!--企业信息-->
-			<mt-cell title="业务范围" is-link :to="{name:'edit', params: {title: '业务范围', textMsg: list.cpBizScope, htmlId: 'cpBizScope'}}">
+			<!--<mt-cell title="业务范围" is-link :to="{name:'edit', params: {title: '业务范围', textMsg: list.cpBizScope, htmlId: 'cpBizScope'}}">-->
 				<!--<span class="mui-ellipsis-2">{{list.cpBizScope|filterListToString}}</span>-->
-				<span class="mui-ellipsis-2">{{list.cpBizScope|filterListToString}}</span>
+				<!--<span class="mui-ellipsis-2">{{list.cpBizScope|filterListToString}}</span>
 			</mt-cell>
 			<mt-cell title="主营线路" is-link :to="{name:'edit', params: {title: '主营线路', textMsg: list.cpRoute, htmlId: 'cpRoute'}}">
 				<span class="mui-ellipsis-2">{{list.cpRoute|filterListToString}}</span>
-			</mt-cell>
+			</mt-cell>-->
 			<mt-cell title="公司地址" is-link :to="{name:'edit', params: {title: '公司地址', textMsg: list.cpAddress, htmlId: 'cpAddress'}}">
 				<span>{{list.cpAddress|filterNull}}</span>
 			</mt-cell>
@@ -41,6 +41,10 @@
 			<mt-cell v-if="list.depositType == 0" title="保证金" is-link>
 				<span>您尚未交纳质保金，点击交纳</span>
 			</mt-cell>
+			<div class="space"></div>
+			<mt-cell title="主营线路" :label="list.cpRoute|filterListToString" is-link :to="{name:'edit', params: {title: '主营线路', textMsg: list.cpRoute, htmlId: 'cpRoute'}}" class="aby-area"></mt-cell>
+			<div class="space"></div>
+			<mt-cell title="业务范围" :label="list.cpBizScope|filterListToString" is-link :to="{name:'edit', params: {title: '业务范围', textMsg: list.cpBizScope, htmlId: 'cpBizScope'}}" class="aby-area"></mt-cell>
 			<div class="space"></div>
 			<mt-cell title="公司介绍" :label="list.cpIntro" is-link :to="{name:'edit', params: {title: '公司介绍', textMsg: list.cpIntro, htmlId: 'cpIntro'}}" class="aby-area"></mt-cell>
 		</div>
@@ -79,5 +83,8 @@
 		background-color: #08C7B5;
 		width: 90%;
     	margin: 30px 5%;
+	}
+	.mint-cell-value span{
+		line-height: 18px!important;
 	}
 </style>

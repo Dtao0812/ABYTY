@@ -40,3 +40,7 @@
 .aby-area .mint-cell-wrapper {
     padding-right: 0px;
 }
+
+.mint-cell-label{
+	line-height: 20px;
+}

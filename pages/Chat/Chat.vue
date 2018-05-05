@@ -30,14 +30,17 @@
 					<textarea v-model="msgtext" @focus="focus" type="text" class='input-text'></textarea>
 				</div>
 				<label class="footer-right">
-					<aby-icon class="mui-icon faceClass" :type="faceIcon" @click.native="onFace"></aby-icon>
+					<aby-icon class="mui-icon icon-face" :type="faceIcon" @click.native="onFace"></aby-icon>
 					<aby-icon class="mui-icon icon-plus" type="chatplus" @click.native="onMore" v-show="msgtext==''"></aby-icon>
-					<aby-icon class="mui-icon icon-face" type="chatsend" @click.native="onSend" v-show="msgtext!=''"></aby-icon>
+					<aby-icon class="mui-icon icon-send aby-font-blue" type="chatsend" @click.native="onSend" v-show="msgtext!=''"></aby-icon>
 				</label>
 			</footer>
 			<div class="tool_panel" v-show="isShowFace" v-html="faceArr" @click="onFaceTip($event)"></div>
 			<div class="tool_else_panel" v-show="isShowMore">
-				<aby-icon class="mui-icon icon-face" type="chatpic" @click.native="onCamera"></aby-icon>图片
+				<div class="btnPanel">
+					<aby-icon class="mui-icon" type="chatpic" @click.native="onCamera"></aby-icon>
+					<p>图片</p>
+				</div>
 			</div>
 		</div>
 	</aby-page>
@@ -236,8 +239,17 @@
 	}
 	
 	.icon-face,
-	.icon-plus {
-		font-size: 28px;
+	.icon-plus,
+	.icon-send {
+		font-size: 32px;
+		margin-top: -2px;
+	}
+	.icon-face,
+	.icon-plus{
+		color: #707070!important;
+	}
+	.icon-send {
+		font-weight: 500;
 	}
 	
 	.icon-chatsetting {
@@ -246,6 +258,24 @@
 		position: absolute;
 		right: 10px;
 		top: 0px;
+	}
+	
+	.btnPanel{
+		width: 24%;
+		text-align: center;
+		float: left;
+		padding: 10px;
+	}
+	.btnPanel .mui-icon{
+		border: 1px solid #DDDDDD;
+		background-color: #FFFFFF;
+		padding: 10px;
+		border-radius: 8px;
+		margin-bottom: 5px;
+		color: #707070;
+	}
+	.btnPanel p{
+		font-size: 12px;
 	}
 	
 	footer {

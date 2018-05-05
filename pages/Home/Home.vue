@@ -217,6 +217,7 @@
 			}
 		},
 		mounted() {
+//			this.popupPlus = this.$store.state.isFirst;
 		},
 		activated() {
 			this.init();

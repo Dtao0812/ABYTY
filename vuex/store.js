@@ -25,6 +25,7 @@ const state = {
 	messageType:false,//消息中心状态
 	
 	abyTel:'025-68132329',//客服电话
+	isFirst:window.localStorage.getItem('isFirst')?false:true,//是否第一次加载
 	
 	osType: window.localStorage.getItem('osType')?window.localStorage.getItem('osType'):'',
 	deviceId: window.localStorage.getItem('deviceId')?window.localStorage.getItem('deviceId'):'',

@@ -3,8 +3,8 @@
 		<aby-header title="Ta的名片" slot="header"></aby-header>
 		<div class="mui-content guidepage" slot="content">
 			<div class="panelTop">
-				<div class="face">
-					<img id="bookface" :src="list.aac502"/>
+				<div class="face" :style="'background-image:url('+list.aac502+')'">
+					<!--<img id="bookface" :src="list.aac502"/>-->
 				</div>
 				<div class="info">
 					<img class="photo" :src="list.aac007" />
@@ -109,7 +109,7 @@
 	
 	.face {
 		width: 100vw;
-		/*height: 43.75vw !important;*/
+		height: 43.75vw !important;
 		/*background-image: url(../../static/images/example/card.jpg);*/
 		background-size: 100%;
 		background-position: center;
@@ -180,6 +180,7 @@
 		font-size: 12px;
 		padding: 3px 8px;
 		border-radius: 15px;
+		margin-left: 3px;
 	}
 	.btnMsg,.btnCall{
 		position: absolute;

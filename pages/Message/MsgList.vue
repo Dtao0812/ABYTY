@@ -7,7 +7,7 @@
 					<div class="mui-card-content-inner">
 						<h5>
 							<!--消息未读红点-->
-							<mt-badge size="small" type="error" class="aby-badge-nonum"></mt-badge>
+							<mt-badge v-if="li.isRead==0" size="small" type="error" class="aby-badge-nonum"></mt-badge>
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
 							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 						</h5>

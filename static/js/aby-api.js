@@ -367,6 +367,15 @@ const User = {
 			callBack && callBack(false);
 		});
 	},
+	// 扫描二维码
+	doScanBarcode(requestInfo, successCallback, errorCallback){
+		let requestData = {
+			loading:requestInfo.loading,
+			act: 'CPU007',
+			barcodeValue: requestInfo.barcodeValue,
+		};
+		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
+	},
 	//获取店铺二维码信息
 	get_myCode(requestInfo, successCallback, errorCallback){
 		let requestData = {

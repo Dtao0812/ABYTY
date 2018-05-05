@@ -806,3 +806,13 @@ small {
     border-right: solid 1px #DDDDDD!important;
     border-left: solid 1px #DDDDDD!important;
 }
+
+/*蒙版教程*/
+.aby-course{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999999;
+	height: 100%;
+}

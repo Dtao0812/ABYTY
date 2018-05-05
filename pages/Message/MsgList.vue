@@ -6,8 +6,10 @@
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
 						<h5>
-							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
+							<!--消息未读红点-->
+							<mt-badge size="small" type="error" class="aby-badge-nonum"></mt-badge>
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
+							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 						</h5>
 						<h4 v-html="li.msgContent"></h4>
 					</div>

@@ -3,8 +3,11 @@
 		<div class="mint-search">
 			<div class="mint-searchbar">
 				<div class="mint-searchbar-inner">
-					<aby-icon type="search" class="aby-font-gray"></aby-icon>
-					<input type="search" :placeholder="inputPlaceholder" v-model="searchValue" :disabled="inputDisabled" class="mint-searchbar-core">
+					<form>
+						<aby-icon type="search" class="aby-font-gray"></aby-icon>
+						<input type="search" id="search" :placeholder="inputPlaceholder" v-model="searchValue" :disabled="inputDisabled" class="mint-searchbar-core">
+					</form>
+					
 				</div> 
 			</div> 
 		</div>
@@ -21,8 +24,17 @@
 				searchValue: ''
 			}
 		},
-		methods: {},
-		mounted() {},
+		methods: {
+			
+		},
+		mounted() {
+			document.getElementById("search").addEventListener('keydown', function(e) {
+				if(e.keyCode == 13) {
+					e.preventDefault();
+					this.searchValue();
+				}
+			}, false);
+		},
 		watch: {
 			searchValue(val) {
 				this.searchValue = val;

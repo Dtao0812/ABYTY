@@ -2,24 +2,22 @@
 	<aby-page>
 		<aby-header title="旅游咨询" slot="header"></aby-header>
 		<div class="mui-content" slot="content">
-			<div class="timepanel">
-				<span class="time">5分钟前</span>
-			</div>		
-			<div class="mui-card space">
-				<div class="mui-card-content">
-					<div class="mui-card-content-inner">
-						<div class="cardface">
-							<img class="bookface" src="../../static/images/example/card.jpg" />
-							<p class="tipTitle aby-list-title-2">咨询标题咨询标题咨询标题咨询标题咨询标题咨询标题</p>
+			<div v-for="li in list">
+				<div class="timepanel">
+					<span class="time">{{li.publishTime|filterConvertDate}}</span>
+				</div>		
+				<div class="mui-card space" v-for="(x,i) in li.msgContent" :key="i">
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner" v-if="i==0" @click="toDetail(x)">
+							<div class="cardface">
+								<img class="bookface" :src="x.coverImg" />
+								<p class="tipTitle aby-list-title-2">{{x.title}}</p>
+							</div>
 						</div>
-					</div>
-					<div class="carditem">
-						<p class="itemtitle mui-ellipsis-2">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
-						<img class="itemimg" src="../../static/images/example/card.jpg" />
-					</div>
-					<div class="carditem">
-						<p class="itemtitle mui-ellipsis-2">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
-						<img class="itemimg" src="../../static/images/example/card.jpg" />
+						<div class="carditem" v-else @click="toDetail(x)">
+							<p class="itemtitle mui-ellipsis-2">{{x.title}}</p>
+							<img class="itemimg" :src="x.coverImg" />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -28,6 +26,42 @@
 </template>
 
 <script>
+	export default {
+		components: {},
+		props: [],
+		data() {
+			return {
+				list:[],
+			}
+		},
+		methods: {
+			// 获得消息列表
+			getMsgList(){
+				this.$abyApi.Sys.getMsgListLoad((res)=>{
+					let nList = [];
+					res.forEach((v)=>{
+						if(v.msgType == 'travel')nList.push(v);
+					})
+					this.list = nList;
+				});
+			},
+			// 详情
+			toDetail(obj){
+				this.$router.push({
+					name:'webView',
+					params:{
+						url:obj.url,
+						title:obj.title
+					}
+				});
+			}
+		},
+		mounted() {
+			this.getMsgList();
+		},
+		watch: {
+		}
+	}
 </script>
 
 <style scoped>

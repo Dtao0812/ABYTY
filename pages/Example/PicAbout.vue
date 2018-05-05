@@ -18,8 +18,8 @@
 			</div>
 			<div class="about-bottom">
 				<div class="agreements">
-					<a id="cooperationAgreement">注册协议</a> |
-					<a id="paymentAgreement">服务协议</a>
+					<router-link :to="{name:'picRegisteragre'}">注册协议</router-link> |
+					<a id="paymentAgreement" @click="toAgr">服务协议</a>
 				</div>
 				<div class="copyright">
 					<p class="item">南京爱伴游网络科技有限公司&nbsp;版权所有</p>
@@ -38,7 +38,18 @@
 				versionTxt: 'V' + this.$store.state.version || '',
 			}
 		},
-		methods: {},
+		methods: {
+			// 服务协议
+			toAgr(){
+				this.$router.push({
+					name:'webView',
+					params:{
+						url:'http://m.ai-by.com/wap/agreement/paymentAgreement.html',
+						title:'服务协议'
+					}
+				})
+			}
+		},
 		mounted() {},
 	}
 </script>

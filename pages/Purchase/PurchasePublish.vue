@@ -320,7 +320,6 @@
 					pbRoadLine:'',// 目的地
 					pbAddress:'',// 接团地点
 					pbDateTime:'',// 日期
-					pbDays:'',// 天数
 					pbDayFee:'',// 导服费
 					pbDepositFee:'',// 定金
 					pbBranched:'',// 业务范围
@@ -560,16 +559,16 @@
 					if(this.publishInfo.pbTitle == '')return this.$toast("请填写标题");
 					if(this.publishInfo.pbRoadLine == '')return this.$toast("请选择目的地");
 					if(this.publishInfo.pbAddress == '')return this.$toast("请选择接团地点");
-					if(this.publishInfo.selectDays == '')return this.$toast("请选择日期");
-					if(this.publishInfo.pbDays == '')return this.$toast("请填写天数");
-					if(this.publishInfo.pbDays <= 0)return this.$toast("天数不能小于0");
+					if(this.publishInfo.fromTime == '')return this.$toast("请选择日期");
+					if(this.publishInfo.selectDays == '')return this.$toast("请填写天数");
+					if(this.publishInfo.selectDays <= 0)return this.$toast("天数不能小于0");
 					if(this.publishInfo.pbDayFee == '')return this.$toast("请填写导服费");
 					if(this.publishInfo.pbDepositFee == '')return this.$toast("请填写定金");
 					reqInfo.pbTitle = this.publishInfo.pbTitle;
 					reqInfo.pbRoadLine = this.publishInfo.pbRoadLine;
 					reqInfo.pbAddress = this.publishInfo.pbAddress;
-					reqInfo.pbDateTime = this.publishInfo.selectDays;
-					reqInfo.pbDays = this.publishInfo.pbDays;
+					reqInfo.pbDateTime = this.publishInfo.fromTime;
+					reqInfo.pbDays = this.publishInfo.selectDays;
 					reqInfo.pbDayFee = this.publishInfo.pbDayFee;
 					reqInfo.pbDepositFee = this.publishInfo.pbDepositFee;
 					reqInfo.pbBranched = this.publishInfo.pbBranched;

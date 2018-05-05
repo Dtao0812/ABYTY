@@ -45,10 +45,12 @@
 				this.$tool.dialTelToApp(this.tel);
 			},
 			onLogExit() {
-				this.$store.commit('clearState');
-				this.$router.push({
-					name: 'home'
-				});
+				this.$tool.confirm("您确定要退出登录吗？退出后所有信息都会自动清空！",(res)=>{
+					this.$store.commit('clearState');
+					this.$router.push({
+						name: 'home'
+					});
+				})
 			}
 		},
 		mounted() {},

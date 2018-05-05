@@ -183,7 +183,7 @@
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">订单编号</div>
 						<div class="mui-media-body">{{info.orderCode}}
-							<aby-button type="default" title="复制" class="aby-button-cope mui-pull-right"></aby-button>
+							<!--<aby-button type="default" title="复制" class="aby-button-cope mui-pull-right"></aby-button>-->
 						</div>
 
 					</li>
@@ -395,7 +395,8 @@
 						}
 					});
 				}
-			}
+			},
+			
 		},
 		mounted() {
 			this.getDetail();
@@ -408,13 +409,14 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name=='orderList'){
+			if(from.params.agreementId == ''){
 				next(vm => {
 					vm.init()
 				})
 			}else{
 				next()
 			}
+			
 		},
 	}
 </script>

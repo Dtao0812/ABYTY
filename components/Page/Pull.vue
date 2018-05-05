@@ -8,7 +8,7 @@
 					<slot name="explain"></slot>
 					<slot name="loading"><div v-if="isLoading"><aby-loading></aby-loading></div></slot>
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
-						<div style="min-height: 500px;">
+						<div id="loadDiv">
 							<slot name="loadlist"></slot>
 							<br style="clear:both"/>
 						</div>
@@ -107,6 +107,7 @@
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
 			document.getElementById('wrapper').scrollTop = 0;
+			document.getElementById("loadDiv").style.minHeight = document.documentElement.clientHeight;
 		},
 		activated() {
 			document.getElementById('wrapper').scrollTop = this.$parent.scrollTop;

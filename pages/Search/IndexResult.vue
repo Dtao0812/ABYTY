@@ -49,7 +49,6 @@
 				pageNumLine: 0,
 				pageNumSupplier: 0,
 				orderBy: 1,
-				lists: [],
 				type: '',//搜索类型
 				keyword: '',//关键字
 				tabSelectId:'',// tab默认选中
@@ -59,6 +58,9 @@
 		methods: {
 			scroll(top) {},
 			init(){
+				this.$refs.pull.showLoading();
+				this.tabList[0].data = [];
+				this.tabList[1].data = [];
 				this.type = this.$route.params.type;
 				this.keyword = this.$route.params.keyword;
 				this.tabSelect = this.$route.params.tabSelect||'line';

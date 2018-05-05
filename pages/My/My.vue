@@ -15,11 +15,11 @@
 						<!--地接-->
 						<img v-if="cpUserInfo.cpBasic.cpBtype==20" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						<!--机票-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_plane.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						<!--酒店-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_hotel.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						<!--景点-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_spot.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						
 						<div class="mui-media-body">
 							{{cpUserInfo.userName}}
@@ -32,7 +32,7 @@
 			<ul class="mui-table-view mui-table-view-chevron space" v-if="cpUserInfo.cpBasic.cpBtype==20">
 				<li class="mui-table-view-cell mui-media">
 					<router-link class="menu mui-navigate-right" :to="{name:'myGold'}">
-						<aby-icon-color class="ptype" type="mygold"></aby-icon-color>我的质保金
+						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的保证金
 						<span class="give-warn" v-show="cpUserInfo.cpBasic.depositType == 0">未交纳<i></i></span>
 					</router-link>
 				</li>
@@ -66,9 +66,9 @@
 					</router-link>
 				</li>
 			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space">
+			<ul class="mui-table-view mui-table-view-chevron space onDialTel">
 				<li class="mui-table-view-cell mui-media menu">
-					<span @click="onDialTel" class="mui-navigate-right">
+					<span @click="$tool.dialTelToApp(abyTel)" class="mui-navigate-right">
 						<aby-icon-color class="ptype" type="service"></aby-icon-color>联系客服
 					</span>
 				</li>
@@ -96,9 +96,6 @@
 			toUrl(){
 				this.$router.push({name:'setting'});
 			},
-			onDialTel() {
-				this.$tool.dialTelToApp(this.abyTel);
-			},
 			toHomePage(){
 				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
 				this.toHomePageInfo.userId = this.cpUserInfo.userId;
@@ -117,9 +114,6 @@
 	}
 </script>
 <style scoped>
-	.content{
-		padding-bottom: 100px;
-	}
 	.mui-table-view-cell {
 		padding-top: 15px;
 		padding-bottom: 15px;
@@ -150,10 +144,7 @@
 		font-size: 18px;
 		line-height: 23px;
 	}
-	/*未缴纳*/
-	.give-warn{
-		float: right;
-		margin-right: -30px;
-		color: #E6343E;
+	.onDialTel{
+		margin-bottom: 60px!important;
 	}
 </style>

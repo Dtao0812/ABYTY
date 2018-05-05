@@ -10,7 +10,7 @@
 					<img class="photo" :src="list.aac007" />
 					<p class="name">{{list.aac005}}</p>
 					<p class="city"><aby-icon type="nowlocation"></aby-icon>{{list.aac204}}</p>
-					<aby-icon-color type="chat-circle" class="btnMsg"></aby-icon-color>
+					<aby-icon-color @click.native="toChatDetail()" type="chat-circle" class="btnMsg"></aby-icon-color>
 					<aby-icon-color @click.native="$tool.dialTelToApp(list.aac002)" type="call-circle" class="btnCall"></aby-icon-color>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 				reqInfo.loading = 1;
 				reqInfo.aac001 = this.pbId;
 				this.$abyApi.User.getGuiderInfo(reqInfo, (res)=>{
-					console.log('导游信息：'+JSON.stringify(res));
+//					console.log('导游信息：'+JSON.stringify(res));
 					res.userinfo.aac002 = this.$abyApi.Crypto.DeCrypt(res.userinfo.aac002)
 					this.list = res.userinfo;
 				})
@@ -92,8 +92,8 @@
 				var imgArr = document.getElementById("bookface");
 				imgArr.style.height = 2*document.body.clientWidth / 3 + "px";
 			},
-			clickZan(){//点赞
-				
+			toChatDetail(userId){
+				this.$tool.alert('亲 聊天功能还没开放喔~')
 			}
 		},
 		mounted() {

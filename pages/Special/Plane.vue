@@ -19,6 +19,9 @@
 			}
 		},
 		methods: {
+			init(){
+				this.getPullDown();
+			},
 			scroll(top) {},
 			getPullDown(callback) {
 				let reqInfo = {};
@@ -52,7 +55,16 @@
 		mounted() {
 			this.getPullDown();
 		},
-		watch: {}
+		watch: {},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'home') {
+				next(vm => {
+					vm.init();
+				})
+			}else{
+				next()
+			}
+		},
 	}
 </script>
 

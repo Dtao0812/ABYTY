@@ -56,7 +56,6 @@
 			},
 		},
 		mounted() {
-			console.log(this.$abyApi.Crypto.DeCrypt('x7fafXn7dVPLtl2Q5opROQ=='))
 		},
 	}
 </script>

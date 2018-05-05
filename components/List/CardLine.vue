@@ -2,7 +2,7 @@
 	<div class="card-item">
 		<!--线路产品-->
 		<aby-no-content v-if="noContent"></aby-no-content>
-		<div class="mui-card aby-special" v-for="(li,i) in list" :key="i">
+		<div class="mui-card aby-special" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<div class="mui-card-content">
 				<img v-if="li.isClear == 1" class="faceTip" src="../../static/images/ico/ico_sale.png" />
 				<img class="face" :src="li.proImage" />

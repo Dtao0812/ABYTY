@@ -11,7 +11,8 @@
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
 							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 						</h5>
-						<p class="aby-font-Black" v-html="li.msgContent"></p>
+						<p v-if="li.msgType=='hotel_order'" v-html="li.msgContent"></p>
+						<p v-if="li.msgType=='interactMsg'" v-text="li.msgTitle"></p>
 					</div>
 				</div>
 			</div>

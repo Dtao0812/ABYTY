@@ -75,11 +75,15 @@
 			}
 		},
 		methods:{
+			init(){
+				this.$parent.eventPageShow(this.$route.name);
+				this.cpUserInfo = this.$store.state.cpUserInfo;
+			},
 			toUrl(){
 				this.$router.push({name:'setting'});
 			},
 			onDialTel() {
-				this.$tool.dialTelToApp(this.tel);
+				this.$tool.dialTelToApp(this.abyTel);
 			},
 			toHomePage(){
 				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
@@ -88,14 +92,13 @@
 				this.$router.push({
 					name:"homePage",
 				})
-			}
+			},
 		},
 		mounted() {
-			this.$parent.eventPageShow(this.$route.name);
+			
 		},
 		activated() {
-			// 底部导航栏
-			this.$parent.eventPageShow(this.$route.name);
+			this.init();
 		},
 	}
 </script>

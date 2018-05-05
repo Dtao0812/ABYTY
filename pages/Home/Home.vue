@@ -207,7 +207,9 @@
 			},
 			// 扫一扫
 			toScan(){
-				
+				this.$router.push({
+					name: 'scan',
+				});
 			},
 			// 自动登录
 			autoLogin(){

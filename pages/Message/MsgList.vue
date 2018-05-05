@@ -7,12 +7,12 @@
 					<div class="mui-card-content-inner">
 						<h5>
 							<!--消息未读红点-->
-							<mt-badge size="small" type="error" class="aby-badge-nonum"></mt-badge>
+							<mt-badge v-if="li.isRead==0" size="small" type="error" class="aby-badge-nonum"></mt-badge>
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
 							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 						</h5>
 						<h4 v-if="li.msgType=='hotel_order'" v-html="li.msgContent"></h4>
-						<h4 v-if="li.msgType=='interactMsg'" v-text="li.msgTitle"></h4>
+						<h4 v-else v-text="li.msgTitle"></h4>
 					</div>
 				</div>
 			</div>

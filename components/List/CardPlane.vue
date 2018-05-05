@@ -2,7 +2,7 @@
 	<div class="list-item">
 		<!--机票供应商列表-->
 		<aby-no-content v-if="noContent"></aby-no-content>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" v-if="list.length>0">
 			<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(item)">
 				<a>
 					<img class="faceTip" src="../../static/images/ico/ico_sale.png" />

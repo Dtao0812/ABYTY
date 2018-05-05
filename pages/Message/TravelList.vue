@@ -1,28 +1,25 @@
 <template>
 	<aby-page>
-		<aby-header title="系统通知" slot="header"></aby-header>
+		<aby-header title="旅游咨询" slot="header"></aby-header>
 		<div class="mui-content" slot="content">
+			<div class="timepanel">
+				<span class="time">5分钟前</span>
+			</div>		
 			<div class="mui-card space">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<h5>
-							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
-							收到新协议<span class="time">09:55</span>
-						</h5>
-						<h4>收到新协议《华东五市出行合同》</h4>
-						<p>南京牛气冲天旅行社</p>
+						<div class="cardface">
+							<img class="bookface" src="../../static/images/example/card.jpg" />
+							<p class="tipTitle aby-list-title-2">咨询标题咨询标题咨询标题咨询标题咨询标题咨询标题</p>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="mui-card space">
-				<div class="mui-card-content">
-					<div class="mui-card-content-inner">
-						<h5>
-							<aby-icon class="mui-icon icon-sys" type="msgsystem"></aby-icon>
-							供应商推荐<span class="time">09:55</span>
-						</h5>
-						<h4 class="mui-ellipsis">猜您对以下供应商感兴趣</h4>
-						<p class="mui-ellipsis">南京牛气冲天旅行社，南京在路上旅行社有限公司</p>
+					<div class="carditem">
+						<p class="itemtitle mui-ellipsis-2">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
+						<img class="itemimg" src="../../static/images/example/card.jpg" />
+					</div>
+					<div class="carditem">
+						<p class="itemtitle mui-ellipsis-2">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>
+						<img class="itemimg" src="../../static/images/example/card.jpg" />
 					</div>
 				</div>
 			</div>
@@ -34,52 +31,68 @@
 </script>
 
 <style scoped>
-	.time {
-		margin-left: 20px;
+	.cardface {
+		position: relative;
 	}
-	.icon-order,.icon-sys{
-		font-size: 20px;
+	
+	.bookface {
+		width: 100%;
+		vertical-align: bottom;
+	}
+	
+	.tipTitle {
 		position: absolute;
-		left: 10px;
-		margin-top: 2px;
-	}
-	.icon-sys {
-		color: #FF9800;		
-	}
-	.icon-order {
-		color: #52B2E5;
-	}
-	
-	.mui-card {
-		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+		padding: 5px 10px;
+		background-color: rgba(0, 0, 0, .6);
+		width: 100%;
+		color: #FFFFFF!important;
+		font-weight: 400!important;
+		height: 50px;
+		margin-top: -50px;
 	}
 	
-	.mui-card-content-inner {
+	.carditem {
+		padding: 5px 0px;
+		margin-top: 10px;
+		margin-left: 10px;
+		margin-right: 10px;
+		position: relative;
+		border-bottom: 1px solid #F0F0F0;
+	}
+	
+	.mui-card-content-inner{
+		padding-bottom: 0px!important;
 		padding: 10px;
 	}
 	
-	.mui-card-content-inner h5,
-	.mui-card-content-inner h4,
-	.mui-card-content-inner p {
-		padding-left: 25px;
+	.itemtitle {
+		padding-right: 70px;
+		color: #232323;
 	}
 	
-	.mui-card-content-inner h5 {
-		line-height: 24px;
-		vertical-align: middle;
-		color: #AAAAAA;
+	.itemimg {
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		right: 0px;
+		top: 0px;
+	}
+	.timepanel{
+		text-align: center;
+		padding: 15px 0px 0px 0px;
 	}
 	
-	.mui-card-content-inner h4 {
-		font-size: 14px;
-		font-weight: 500;
+	.time {
+		background-color: rgba(0,0,0,.3);
+		color: #FFFFFF;
+		padding: 3px 5px;
+		border-radius: 3px;
 	}
 	
-	.mui-card-content-inner p {
-		font-size: 12px;
-		color: #AAAAAA;
-		padding-bottom: 0px;
-		margin-bottom: 0px;
+	.mui-card {
+		margin: 10px!important;
+		border-radius: 4px;
+		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
 	}
 </style>

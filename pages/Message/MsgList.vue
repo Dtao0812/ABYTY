@@ -9,7 +9,8 @@
 							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
 						</h5>
-						<h4 v-html="li.msgContent"></h4>
+						<h4 v-if="li.msgType=='hotel_order'" v-html="li.msgContent"></h4>
+						<h4 v-if="li.msgType=='interactMsg'" v-text="li.msgTitle"></h4>
 					</div>
 				</div>
 			</div>

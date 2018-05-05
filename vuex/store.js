@@ -95,6 +95,15 @@ const mutations = {
 		state.cpId = state.cpBasic = state.cpBtype = '';
 		state.routeChain = [];
 		state.pageDirection = 'fade';
+		state.orderNum = state.chatNum = state.buyer = 
+		state.seller = state.messageNum = 0;
+		state.messageList = [
+			{ id:'system',num:0,list:[] },
+			{ id:'select',num:0,list:[] },
+			{ id:'hotel_order',num:0,list:[] },
+			{ id:'travel',num:0,list:[] },
+		];
+		state.homeMsgType = state.messageType = false;
 	},
 	// 设置聊天未读消息
 	setChatNum(state,info){

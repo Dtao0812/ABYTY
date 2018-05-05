@@ -66,6 +66,7 @@
 				});
 			},
 			eventBack(e) {
+				this.$refs.pull.showLoading();
 				this.lists = [];
 				if(e.tabid === 1) {
 					this.orderBy = e.value;

@@ -258,7 +258,15 @@ const  Sys = {
 			errorCallback && errorCallback(e)
 		})
 		successCallback && successCallback(list);
-	}
+	},
+	// 意见反馈
+	setFeedContent(requestInfo,successCallback, errorCallback){
+		let requestData = {
+			act: 'CPAD0000',
+			adviceInfo: requestInfo,
+		};
+		Server.getDataFromServer('cpUser',requestData,successCallback, errorCallback);
+	},
 };
 
 

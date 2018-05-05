@@ -5,7 +5,7 @@
 				<h1 class="mui-title">{{userInfo.cpBasic.cpCorpName}}</h1>
 				<h6 class="business">{{userInfo.cpBasic.cpName}}</h6>
 			</div>
-			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" slot="right" type="chatsetting"></aby-icon>
+			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" @click.native="toHomePage" slot="right" type="chatsetting"></aby-icon>
 		</aby-header>
 		<div class="mui-content" slot="content" id="content">
 			<div id='msg-list' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
@@ -19,7 +19,7 @@
 						</div>
 						<div class="msg-content-arrow"></div>
 					</div>
-					<span class="mui-spinner sendStatus"></span> 
+					<span class="mui-spinner sendStatus"></span>
 					<div class="mui-item-clear"></div>
 				</div>
 			</div>
@@ -45,22 +45,21 @@
 
 <script>
 	export default {
-		components: {
-		},
+		components: {},
 		data() {
 			return {
-				isShowFace:false,//是否显示表情
-				faceIcon:'chatface',//表情图标
-				isShowMore:false,//是否显示更多按钮
-				faceArr:[],
-				msgtext:'',//消息内容
-				userId:'',//用户ID
-				userInfo:'',//用户信息
-				msgList:[],//消息列表
+				isShowFace: false, //是否显示表情
+				faceIcon: 'chatface', //表情图标
+				isShowMore: false, //是否显示更多按钮
+				faceArr: [],
+				msgtext: '', //消息内容
+				userId: '', //用户ID
+				userInfo: '', //用户信息
+				msgList: [], //消息列表
 			}
 		},
-		methods:{
-			init(){
+		methods: {
+			init() {
 				this.userId = this.$route.params.userId;
 				this.userInfo = [];
 				this.msgList = [];
@@ -68,21 +67,21 @@
 				this.getUserInfo();
 				this.getChatLog();
 			},
-			paperScroll(){
+			paperScroll() {
 				let tpScrollTop = document.getElementById('msg-list').scrollTop;
 			},
 			// 表情转换
-			toFaceHtml(data){
+			toFaceHtml(data) {
 				return this.$abyApi.Chat.emojiToHTML(data);
 			},
 			// 点击表情按钮
-			onFace(){
-				if(this.isShowFace){
+			onFace() {
+				if(this.isShowFace) {
 					this.faceIcon = 'chatface';
 					this.$refs.footer.className = '';
 					this.isShowFace = false;
 					this.isShowMore = false;
-				}else{
+				} else {
 					this.faceIcon = 'chatkeyboard';
 					this.$refs.footer.className = 'editFooter';
 					this.isShowFace = true;
@@ -90,40 +89,40 @@
 				}
 			},
 			// 点击更多按钮
-			onMore(){
-				if(this.isShowMore){
+			onMore() {
+				if(this.isShowMore) {
 					this.$refs.footer.className = '';
 					this.isShowFace = false;
 					this.isShowMore = false;
-				}else{
+				} else {
 					this.$refs.footer.className = 'editFooter';
 					this.isShowFace = false;
 					this.isShowMore = true;
 				}
 			},
 			// 表情选择
-			onFaceTip(e){
+			onFaceTip(e) {
 				let emoji = e.target.parentNode.getAttribute("name");
 				emoji = this.$abyApi.Chat.htmlToEmoji(emoji);
 				this.msgtext = this.msgtext + emoji;
 			},
 			// 输入框获得焦点
-			focus(){
+			focus() {
 				this.$refs.footer.className = '';
 				this.isShowFace = false;
 				this.isShowMore = false;
 			},
 			// 点击相机
-			onCamera(){
+			onCamera() {
 				this.$tool.getPhoto((file) => {
-					this.$abyApi.Chat.uploadFile(file,(res)=>{
+					this.$abyApi.Chat.uploadFile(file, (res) => {
 						let imgMsg = this.$abyApi.Chat.imgToRongIm(res.imageInfo.base64, res.imageInfo.imageUri);
 						this.RongImSend(imgMsg);
 					})
 				});
 			},
 			// 点击发送按钮
-			onSend(){
+			onSend() {
 				let txtMsg = this.msgtext.replace(new RegExp('\n', 'gm'), '<br/>');
 				let sendMsg = this.$abyApi.Chat.textToRongIm(txtMsg);
 				sendMsg.sendLoading = 'sending';
@@ -134,27 +133,29 @@
 				this.isShowMore = false;
 			},
 			// 发送消息
-			RongImSend(msg){
-				this.$abyApi.Chat.sendMessage(this.userId,msg,(res)=>{
+			RongImSend(msg) {
+				this.$abyApi.Chat.sendMessage(this.userId, msg, (res) => {
 					res.sendUser = JSON.parse(res.content.extra);
 					this.msgList = this.msgList.concat(res);
 				});
 			},
 			// 获得用户信息
-			getUserInfo(){
-				let reqInfo = { userId:this.userId };
-				this.$abyApi.User.getBasciInfo(reqInfo,(res)=>{
+			getUserInfo() {
+				let reqInfo = {
+					userId: this.userId
+				};
+				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
 					this.userInfo = res.cpUserInfo;
 				});
 			},
 			// 获得聊天记录
-			getChatLog(){
+			getChatLog() {
 				let list = [];
-				this.$abyDb.Im.get((res)=>{
-					if(res){
+				this.$abyDb.Im.get((res) => {
+					if(res) {
 						let info = res.value;
 						info.sendUser = JSON.parse(info.content.extra);
-						if(info.targetId == this.userId){
+						if(info.targetId == this.userId) {
 							list.push(info);
 							// 更新已读状态
 							this.$abyDb.Im.updateIsRead(info.targetId);
@@ -162,13 +163,23 @@
 					}
 				});
 				this.msgList = list;
+			},
+			// 查看对方主页
+			toHomePage() {
+				this.$router.push({
+					name: "homePage",
+					params: {
+						userId: this.userId,
+						cpId: this.userInfo.cpBasic.cpId
+					}
+				});
 			}
 		},
 		mounted() {
 			// 初始化融云
 			this.$abyApi.Chat.init();
 			// 接受融云消息
-			this.$abyApi.Chat.setReceiveMsgListener((res)=>{
+			this.$abyApi.Chat.setReceiveMsgListener((res) => {
 				this.msgList = this.msgList.concat(res);
 			});
 			// 获取表情列表
@@ -178,7 +189,7 @@
 				emojiArrHtml = emojiArrHtml + emijiArrr[i].innerHTML;
 			}
 			this.faceArr = emojiArrHtml;
-			
+
 			this.msgList = this.$abyApi.Chat.getImLog(this.userId);
 		},
 		beforeRouteEnter(to, from, next) {
@@ -186,10 +197,10 @@
 				vm.init()
 			})
 		},
-		watch:{
-			msgList(val){
+		watch: {
+			msgList(val) {
 				let obj = document.getElementById('msg-list');
-				if(obj){
+				if(obj) {
 					obj.scrollTop = obj.scrollHeight;
 					document.getElementById("content").scrollTop = obj.scrollHeight;
 				}
@@ -407,17 +418,19 @@
 		padding-top: 6px;
 		color: rgba(0, 135, 250, 1);
 	}
+	
 	.tool_else_panel,
 	.tool_panel {
-	    position: fixed;
-	    bottom: 0;
-	    left: 0;
-	    right: 0;
-	    padding: 2px;
-	    width: 100%;
-	    height: 150px;
-	    overflow-y: scroll;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 2px;
+		width: 100%;
+		height: 150px;
+		overflow-y: scroll;
 	}
+	
 	.editFooter {
 		bottom: 150px!important;
 		position: fixed!important;

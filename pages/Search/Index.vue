@@ -105,8 +105,10 @@
 			},
 			// 清空搜索记录
 			clearSearch(){
-				this.searchList = [];
-				this.$tool.localStorage.clearSerch();
+				this.$tool.confirm('您确定要清空搜索记录吗？',(res)=>{
+					this.searchList = [];
+					this.$tool.localStorage.clearSerch();
+				});
 			}
 		},
 		mounted() {

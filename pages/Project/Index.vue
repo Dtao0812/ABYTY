@@ -51,6 +51,7 @@
 				});
 			},
 			eventBack(e){
+				this.$refs.pull.showLoading();
 				this.lists = [];
 				this.orderBy = e.value;
 				this.getPullDown();

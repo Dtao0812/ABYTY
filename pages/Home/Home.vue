@@ -92,7 +92,7 @@
 			<p @click="toScan" class="aby-font-Black"><aby-icon class="mui-icon icon-plus" type="scan"></aby-icon>扫一扫</p>
 		</mt-popup>
 		<!--蒙版教程-->
-		<img class="aby-course" src="../../static/images/course/course_home_3x.jpg"/>
+		<img class="aby-course" v-if="isShowCourse" @click="onCourse" src="../../static/images/course/course_home_3x.jpg"/>
 	</div>
 
 </template>
@@ -116,6 +116,7 @@
 			return {
 				scrollTop: '',
 				popupPlus: false,
+				isShowCourse:false,//是否显示教程蒙板
 				goodsList: [{
 						id: 'line',
 						title: '精选线路',
@@ -216,10 +217,15 @@
 			// 自动登录
 			autoLogin(){
 				this.$abyApi.User.autoLogin();
+			},
+			// 蒙板点击
+			onCourse(){
+				this.isShowCourse = false;
+				window.localStorage.setItem('isFirst',1);
 			}
 		},
 		mounted() {
-//			this.popupPlus = this.$store.state.isFirst;
+			this.isShowCourse = this.$store.state.isFirst;
 		},
 		activated() {
 			this.init();

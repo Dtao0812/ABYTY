@@ -30,6 +30,15 @@
 			}
 		},
 		methods: {
+			init(){
+				this.$refs.pull.showLoading();
+				this.pageNum = 1;
+				this.orderBy = 1;
+				this.keyword = this.$route.params.keyword||'';
+				this.where.cityName = this.$route.params.cityName||'';
+				this.lists = [];
+				this.getPullDown();
+			},
 			scroll(top) {
 				this.isShowSearch = top >= 40 ? true : false;
 				this.title = top >= 40 ? '' : '酒店';
@@ -81,7 +90,16 @@
 		mounted() {
 			this.getPullDown();
 		},
-		created() {}
+		created() {},
+		beforeRouteEnter(to, from, next) {
+			if(from.name != 'webView') {
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
+		},
 	}
 </script>
 

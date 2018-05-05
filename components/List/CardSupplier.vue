@@ -1,5 +1,5 @@
 <template>
-	<ul class="mui-table-view">
+	<ul class="mui-table-view" v-if="list.length>0">
 		<aby-no-content v-if="noContent"></aby-no-content>
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(li)">
 			<a>

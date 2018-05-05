@@ -9,7 +9,9 @@
 							<!--消息未读红点-->
 							<mt-badge v-if="li.isRead==0" size="small" type="error" class="aby-badge-nonum"></mt-badge>
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
-							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
+							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'hotel_order'" type="msgorder"></aby-icon>
+							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'interactMsg'" type="interaction"></aby-icon>
+							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'system'" type="msgsystem"></aby-icon>
 						</h5>
 						<p v-if="li.msgType=='hotel_order'" v-html="li.msgContent"></p>
 						<p v-if="li.msgType=='interactMsg'" v-text="li.msgTitle"></p>
@@ -81,6 +83,21 @@
 					});
 				}else if(info.msgType == 'system'){
 					// 系统消息
+					this.$router.push({
+						name:'msgDetail',
+						params:{
+							data: li
+						}
+					});
+				}else if(li.msgType == 'product'){
+					// 产品通知
+					this.$router.push({
+						name:'webView',
+						params:{
+							title: info.specialTitle,
+							url: info.specialUrl,
+						}
+					});
 				}
 			}
 		},

@@ -2,7 +2,7 @@
 	<div class="list-item">
 		<!--景点产品列表-->
 		<aby-no-content v-if="noContent"></aby-no-content>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" v-if="list.length>0">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list">
 				<a href="javascript:;" @click="toDetail(item)">
 					<img class="mui-media-object mui-pull-left aby-img" :src="item.sFaceImg">
@@ -15,7 +15,7 @@
 						</p>
 						<p class="mui-ellipsis aby-list-data">
 							<span>浏览（{{item.readCnt}}）</span>
-							<span class="aby-list-price"><small>￥</small>{{item.sPrice}}起</span>
+							<span class="aby-list-price"><small>￥</small>{{item.sPrice}}<small>起</small></span>
 						</p>
 					</div>
 				</a>

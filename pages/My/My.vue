@@ -14,6 +14,12 @@
 						<img v-if="cpUserInfo.cpBasic.cpBtype==10" class="role" src="../../static/images/ico/ico_role_travel.png" />
 						<!--地接-->
 						<img v-if="cpUserInfo.cpBasic.cpBtype==20" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<!--机票-->
+						<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<!--酒店-->
+						<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<!--景点-->
+						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						
 						<div class="mui-media-body">
 							{{cpUserInfo.userName}}
@@ -23,28 +29,36 @@
 				</li>
 			</ul>
 			<!--菜单部分-->
-			<ul class="mui-table-view mui-table-view-chevron space">
+			<ul class="mui-table-view mui-table-view-chevron space" v-if="cpUserInfo.cpBasic.cpBtype==20">
 				<li class="mui-table-view-cell mui-media">
-					<a class="menu mui-navigate-right" href="#/myProduct">
-						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的产品库
-					</a>
+					<router-link class="menu mui-navigate-right" :to="{name:'myGold'}">
+						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的保证金
+						<span class="give-warn" v-show="cpUserInfo.cpBasic.depositType == 0">未交纳<i></i></span>
+					</router-link>
 				</li>
 			</ul>
 			<ul class="mui-table-view mui-table-view-chevron space">
 				<li class="mui-table-view-cell mui-media">
-					<a class="menu mui-navigate-right" href="#/myPurchase">
+					<router-link class="menu mui-navigate-right" :to="{name:'myProduct'}">
+						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的产品库
+					</router-link>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron space">
+				<li class="mui-table-view-cell mui-media">
+					<router-link class="menu mui-navigate-right" :to="{name:'myPurchase'}">
 						<aby-icon-color class="ptype" type="myinquiry"></aby-icon-color>我的询价
-					</a>
+					</router-link>
 				</li>
 				<li class="mui-table-view-cell mui-media">
-					<a class="menu mui-navigate-right" href="#/myCollection">
+					<router-link class="menu mui-navigate-right" :to="{name:'myCollection'}">
 						<aby-icon-color class="ptype" type="mycollection"></aby-icon-color>我的收藏
-					</a>
+					</router-link>
 				</li>
 				<li class="mui-table-view-cell mui-media">
-					<a class="menu mui-navigate-right" href="#/myCode">
+					<router-link class="menu mui-navigate-right" :to="{name:'myCode'}">
 						<aby-icon-color class="ptype" type="mycode"></aby-icon-color>店铺二维码
-					</a>
+					</router-link>
 				</li>
 				<li class="mui-table-view-cell mui-media">
 					<router-link class="menu mui-navigate-right" :to="{name:'accountList'}">

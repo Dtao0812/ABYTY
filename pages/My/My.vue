@@ -66,9 +66,9 @@
 					</router-link>
 				</li>
 			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space">
+			<ul class="mui-table-view mui-table-view-chevron space onDialTel">
 				<li class="mui-table-view-cell mui-media menu">
-					<span @click="onDialTel" class="mui-navigate-right">
+					<span @click="$tool.dialTelToApp(abyTel)" class="mui-navigate-right">
 						<aby-icon-color class="ptype" type="service"></aby-icon-color>联系客服
 					</span>
 				</li>
@@ -95,9 +95,6 @@
 			},
 			toUrl(){
 				this.$router.push({name:'setting'});
-			},
-			onDialTel() {
-				this.$tool.dialTelToApp(this.abyTel);
 			},
 			toHomePage(){
 				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
@@ -146,5 +143,8 @@
 	.aby-icon-setting{
 		font-size: 18px;
 		line-height: 23px;
+	}
+	.onDialTel{
+		margin-bottom: 60px!important;
 	}
 </style>

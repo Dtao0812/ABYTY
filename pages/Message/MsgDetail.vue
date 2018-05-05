@@ -1,14 +1,14 @@
 <template>
 	<aby-page>
 		<aby-header title="详情" slot="header"></aby-header>
-		<div class="mui-content" slot="content">
+		<div class="mui-content" slot="content" v-if="data!=''">
 			<div class="divtitle">
-				呱啦啦新版本推出啦！
+				{{data.msgTitle}}
 			</div>
 			<div class="divcontent">
-				<p><label>消息类型</label>系统消息</p>
-				<p><label>时间</label>2018-05-05 11:31</p>
-				<p><label>详情</label>呱啦啦新版本app推出啦，大家赶紧登录appstore下载吧，新版内容酷炫，功能优化，等等等。。</p>
+				<p><label>消息类型</label>{{data.msgTypeName}}</p>
+				<p><label>时间</label>{{data.publishTime|filterConvertDate}}</p>
+				<p><label>详情</label>{{data.msgContent}}</p>
 			</div>
 		</div>
 	
@@ -17,6 +17,21 @@
 </template>
 
 <script>
+	export default {
+		components: {},
+		props: [],
+		data() {
+			return {
+				data:this.$router.params.data||'',
+			}
+		},
+		methods: {
+		},
+		mounted() {
+		},
+		watch: {
+		}
+	}
 </script>
 
 <style scoped>

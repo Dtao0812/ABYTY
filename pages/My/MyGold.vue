@@ -2,27 +2,29 @@
 	<aby-page>
 		<aby-header slot="header" title="我的质保金"></aby-header>
 		<div class="mui-content" slot="content">
-			<ul class="mui-table-view space">
+			<ul class="mui-table-view space" v-if="depositType == 1">
 				<li class="mui-table-view-cell mui-media goldTotal">
 					<div class="mui-media-body">
 						<p>我的质保金总额</p>
-						<p class="aby-detail-price"><small>￥</small>0.00</p>
+						<p class="aby-detail-price"><small>￥</small>{{totalPrice}}</p>
 					</div>
 				</li>
 			</ul>
-			<p class="tipNoGold">您尚未交纳质保金，请点击交纳按钮</p>
-			<ul class="mui-table-view space">
-				<li class="mui-table-view-cell mui-media goldTotal">
-					<div class="mui-media-body">
-						<p>交纳金额</p>
-						<p class="aby-detail-price"><small>￥</small>10000.00</p>
-						<div class="btnPay">交纳</div>
-					</div>
-				</li>
-			</ul>
-			<div class="mui-input-row mui-checkbox mui-left">
-				<label>同意<a>《质保金保障服务协议》</a></label>
-				<input name="checkbox" value="" type="checkbox" checked>
+			<div v-if="depositType==0">
+				<p class="tipNoGold">您尚未交纳质保金，请点击交纳按钮</p>
+				<ul class="mui-table-view space">
+					<li class="mui-table-view-cell mui-media goldTotal">
+						<div class="mui-media-body">
+							<p>交纳金额</p>
+							<p class="aby-detail-price"><small>￥</small>{{totalPrice}}</p>
+							<div class="btnPay" @click="toPay">交纳</div>
+						</div>
+					</li>
+				</ul>
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>同意<a>《质保金保障服务协议》</a></label>
+					<input name="checkbox" value="" type="checkbox" checked>
+				</div>
 			</div>
 			<div class="safe">
 				<img src="../../static/images/ico/ico_pay_tl_3x.png" />
@@ -33,6 +35,48 @@
 </template>
 
 <script>
+	export default {
+		components: {},
+		data() {
+			return {
+				depositType: 0, //质保金状态
+				preDeposit: '', //总金额,
+				poundage: '', //手续费,
+				totalPrice: '', //质保金金额,
+			}
+		},
+		methods: {
+			// 获得质保金状态
+			getDeposit() {
+				let reqInfo = {};
+				reqInfo.loading = 1;
+				reqInfo.userId = this.$store.state.userId;
+				this.$abyApi.User.getDepositType(reqInfo, (res) => {
+					this.depositType = res.cpBasic.depositType;
+					this.preDeposit = res.cpBasic.preDeposit;
+					this.poundage = res.cpBasic.poundage;
+					this.totalPrice = res.cpBasic.totalPrice;
+				});
+			},
+			// 支付
+			toPay(){
+				this.$router.push({
+					name:'payGold',
+					params:{
+						preDeposit: this.preDeposit,
+						poundage: this.poundage,
+						totalPrice: this.totalPrice
+					}
+				})
+			}
+		},
+		mounted() {
+			this.getDeposit();
+		},
+		activated() {
+			this.getDeposit();
+		},
+	}
 </script>
 
 <style scoped>
@@ -70,7 +114,8 @@
 	.mui-radio.mui-left label {
 		padding-left: 50px;
 	}
-	.safe{
+	
+	.safe {
 		position: fixed;
 		width: 100%;
 		bottom: 8px;

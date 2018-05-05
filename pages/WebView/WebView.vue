@@ -90,8 +90,7 @@
 				this.webUrl = this.$route.params.url
 				this.webTitle = this.$route.params.title || ''
 				this.cpId = this.$route.params.cpId || ''
-
-				this.getCpBasic();
+				if(this.cpId != '')this.getCpBasic();
 			},
 			// 获得用户信息
 			getCpBasic() {

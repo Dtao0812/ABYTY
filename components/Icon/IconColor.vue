@@ -14,7 +14,7 @@
 			}
 		},
 		methods: {
-			icon(type){
+			icon(type) {
 				switch(type) {
 					//询价类型图标-----------------------------------------------------------------------------
 					case 'line':
@@ -118,6 +118,18 @@
 					case 'roletravel':
 						this.iconClass = '#icon-zutuanshe';
 						break;
+						//酒店角标
+					case 'rolehotel':
+						this.iconClass = '#icon-jiudian1';
+						break;
+						//机票角标
+					case 'roleplane':
+						this.iconClass = '#icon-jipiao1'
+						break;
+						//景点门票角标
+					case 'rolespot':
+						this.iconClass = '#icon-jingdianmenpiao';
+						break;
 						//head部分按钮图标--------------------------------------------------------------------------
 						//设置
 					case 'setting':
@@ -156,7 +168,7 @@
 						this.iconClass = '#icon-guanbi';
 						break;
 						//订单-----------------------------------------------------------------------------------
-	
+
 						//全部订单
 					case 'orderall':
 						this.iconClass = '#icon-quanbudingdan';
@@ -391,11 +403,15 @@
 					case 'msgorder':
 						this.iconClass = '#icon-wodedingdan';
 						break;
+						//互动消息
+					case 'interaction':
+						this.iconClass = '#icon-hudong';
+						break;
 						//时钟
 					case 'clock':
 						this.iconClass = '#icon-shizhong';
 						break;
-	
+
 					default:
 						this.iconClass = this.classname;
 				}
@@ -405,7 +421,7 @@
 			this.icon(this.type)
 		},
 		watch: {
-			type(val){
+			type(val) {
 				this.icon(val)
 			}
 		}

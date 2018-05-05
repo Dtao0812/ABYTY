@@ -76,6 +76,12 @@
 					case 'roleground':this.iconClass = 'aby-icon-roleground ' + this.className;break;
 					//组团角标
 					case 'roletravel':this.iconClass = 'aby-icon-roletravel ' + this.className;break;
+					//酒店角标
+					case 'rolehotel':this.iconClass = 'aby-icon-rolehotel ' + this.className;break;
+					//机票角标
+					case 'roleplane':this.iconClass = 'aby-icon-roleplane ' + this.className;break;
+					//景点门票角标
+					case 'rolespot':this.iconClass = 'aby-icon-rolespot ' + this.className;break;
 					//head部分按钮图标--------------------------------------------------------------------------
 					//设置
 					case 'setting':this.iconClass = 'aby-icon-setting ' + this.className;break;
@@ -217,6 +223,8 @@
 					case 'msgsystem':this.iconClass = 'aby-icon-msgsystem ' + this.className;break;
 					//订单消息
 					case 'msgorder':this.iconClass = 'aby-icon-msgorder ' + this.className;break;
+					//互动消息
+					case 'interaction':this.iconClass = 'aby-icon-interaction ' + this.className;break;
 					//时钟
 					case 'clock':this.iconClass = 'aby-icon-clock ' + this.className;break;
 					//hot

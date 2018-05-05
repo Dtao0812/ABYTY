@@ -200,6 +200,24 @@
 	content: '\e692';
 }
 
+/*酒店角标*/
+
+.aby-icon-rolehotel:before {
+	content: '\e6a4';
+}
+
+/*机票角标*/
+
+.aby-icon-roleplane:before {
+	content: '\e6a6';
+}
+
+/*景点门票角标*/
+
+.aby-icon-rolespot:before {
+	content: '\e6a5';
+}
+
 
 /*----------------------------head部分按钮图标----------------------------*/
 
@@ -678,6 +696,12 @@
 
 .aby-icon-msgorder:before {
 	content: '\e655';
+}
+
+/*互动消息*/
+
+.aby-icon-interaction:before {
+	content: '\e6a3';
 }
 
 

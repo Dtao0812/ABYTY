@@ -91,6 +91,8 @@
 			<div class="line"></div>
 			<p @click="toScan" class="aby-font-Black"><aby-icon class="mui-icon icon-plus" type="scan"></aby-icon>扫一扫</p>
 		</mt-popup>
+		<!--蒙版教程-->
+		<img class="aby-course" src="../../static/images/course/course_home_3x.jpg"/>
 	</div>
 
 </template>

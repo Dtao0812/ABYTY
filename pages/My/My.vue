@@ -15,11 +15,11 @@
 						<!--地接-->
 						<img v-if="cpUserInfo.cpBasic.cpBtype==20" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						<!--机票-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_plane.png" />
 						<!--酒店-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_hotel.png" />
 						<!--景点-->
-						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
+						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_spot.png" />
 						
 						<div class="mui-media-body">
 							{{cpUserInfo.userName}}

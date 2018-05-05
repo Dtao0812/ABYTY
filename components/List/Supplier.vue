@@ -42,12 +42,12 @@
 		mounted(){
 			
 		},
-		beforeRouteLeave(to, from, next) {
-			if(to.name == 'homePage') {
-				to.meta.noKeepAlive = false;
-			};
-			next();
-		},
+//		beforeRouteLeave(to, from, next) {
+//			if(to.name == 'homePage') {
+//				to.meta.noKeepAlive = false;
+//			};
+//			next();
+//		},
 		watch: {
 			list(val) {
 				this.noContent = val.length == 0;

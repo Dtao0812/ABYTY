@@ -8,7 +8,7 @@
 					{{li.userCuteName}}
 					<p class='mui-ellipsis'>{{li.userPost}}</p>
 					<div class="divContact">
-						<aby-icon-color class="icocall" type="call-circle" @click="$tool.dialTelToApp(li.userPhone)"></aby-icon-color>
+						<aby-icon-color class="icocall" type="call-circle" @click.native="$tool.dialTelToApp(li.userPhone)"></aby-icon-color>
 						<aby-icon-color class="icochat" type="chat-circle"></aby-icon-color>
 					</div>
 				</div>

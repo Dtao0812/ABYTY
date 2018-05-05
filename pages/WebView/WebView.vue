@@ -111,6 +111,9 @@
 			},
 			// 公司主页
 			toHomePage() {
+				if(this.cpBasic.userId){
+					this.cpBasic.userId = '';
+				};
 				this.$store.commit('setHomePage', this.cpBasic);
 				this.$router.push({
 					name: "homePage"

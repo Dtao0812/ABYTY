@@ -11,7 +11,7 @@
 							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
 							<aby-icon class="mui-icon icon-order" type="msgorder"></aby-icon>
 						</h5>
-						<h4 v-html="li.msgContent"></h4>
+						<p class="aby-font-Black" v-html="li.msgContent"></p>
 					</div>
 				</div>
 			</div>
@@ -138,7 +138,7 @@
 	
 	.mui-card-content-inner p {
 		font-size: 12px;
-		color: #AAAAAA;
+		color: #232323;
 		padding-bottom: 0px;
 		margin-bottom: 0px;
 	}

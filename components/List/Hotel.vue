@@ -17,7 +17,7 @@
 						<p class="mui-ellipsis aby-list-data">
 							<span>{{li.hStarlevel}}</span>
 							<span>浏览（{{li.readCnt}}）</span>
-							<span class="aby-list-price"><small>￥</small>{{li.sPrice}}起</span>
+							<span class="aby-list-price"><small>￥</small>{{li.sPrice}}<small>起</small></span>
 						</p>
 					</div>
 				</a>

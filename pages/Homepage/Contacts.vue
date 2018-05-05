@@ -9,7 +9,7 @@
 					<p class='mui-ellipsis'>{{li.userPost}}</p>
 					<div class="divContact">
 						<aby-icon-color class="icocall" type="call-circle" @click.native="$tool.dialTelToApp(li.userPhone)"></aby-icon-color>
-						<aby-icon-color class="icochat" type="chat-circle"></aby-icon-color>
+						<aby-icon-color class="icochat" type="chat-circle" @click.native="toChatDetail(li.userId)"></aby-icon-color>
 					</div>
 				</div>
 			</li>
@@ -28,8 +28,17 @@
 			}
 		},
 		methods: {
+			toChatDetail(userId){
+				this.$router.push({
+					name: 'chat',
+					params: {
+						userId: userId
+					}
+				})
+			}
 		},
 		mounted() {
+			
 		},
 		watch: {  
 		    list(val){

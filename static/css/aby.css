@@ -816,3 +816,7 @@ small {
 	z-index: 999999;
 	height: 100%;
 }
+/*红色泡泡*/
+.mui-icon .mui-badge {
+    background: #dd524d;
+}

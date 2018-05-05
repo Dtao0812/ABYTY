@@ -189,6 +189,7 @@
 							identityType: this.identityType,
 							orderId: this.info.orderId,
 							page: 'agrDetail',
+							agreementId:this.agreementId
 						}
 					});
 				}
@@ -207,9 +208,14 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.init()
-			})
+			if(from.params.orderId ==""){
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
+			
 		},
 	}
 </script>

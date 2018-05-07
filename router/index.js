@@ -7,6 +7,8 @@ Vue.use(Router)
 // 自定义页面
 import Page from '../components/Page/Default.vue'
 import IndexPage from '../components/Page/Index.vue'
+// 开屏广告
+import AdvPage from '../pages/Adv/Default.vue'
 //入口页面
 import Home from '../pages/Home/Home.vue'
 import Purchase from '../pages/Purchase/Purchase.vue'
@@ -116,6 +118,8 @@ const router = new Router({
 			]
 		},
 		
+		{ name: 'advPage',path: '/AdvPage',component: AdvPage },
+		
 		{ name: 'project',path: '/project',component: Project },
 		
 		{ name: 'login',path: '/login',component: Login },
@@ -223,7 +227,9 @@ router.beforeEach((to, from, next) => {
 	
 	/*判断调页面切换效果*/
 	let routeLength = store.state.routeChain.length;
-    if (routeLength === 0) {
+	if(to.name == 'advPage'||from.name == 'advPage'){
+		store.commit('setPageDirection', 'fade');
+	}else if (routeLength === 0) {
         store.commit('setPageDirection', 'fade');
         if (to.path === from.path && to.path === '/') {
             //当直接打开根路由的时候
@@ -253,7 +259,7 @@ router.beforeEach((to, from, next) => {
 	const userNotAuth = [
 		'index', 'home', 'purchase',
 		'login','registerOne','registerTwo','registerThree','setPassword',
-		'picExample','picWhy','picRegisteragre','picAuditType',
+		'picExample','picWhy','picRegisteragre','picAuditType','advPage'
 	];//不需要验证的页面
 	
 	if(!Vue.$tool.isInAarry(userNotAuth, to.name)){
@@ -267,6 +273,11 @@ router.beforeEach((to, from, next) => {
 		}else{
 			setTimeout(function(){next()},50);
 		}
+	}else if(store.state.advState&&store.state.loginState){
+		// 开屏广告
+		store.commit('setAdvInfo',{title:'advState',value:false});
+		window.localStorage.setItem('advState',false);
+		next({ name: 'advPage' });
 	}else{
 		// 延迟跳转
 		setTimeout(function(){next()},50);

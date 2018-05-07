@@ -226,6 +226,13 @@
 		},
 		mounted() {
 			this.isShowCourse = this.$store.state.isFirst;
+			// 开屏广告
+			this.$abyApi.Sys.getAdvInfo('',(res)=>{
+				window.localStorage.setItem('advState',true);
+				window.localStorage.setItem('advImg',res.advInfo.advImg);
+				window.localStorage.setItem('advTitle',res.advInfo.advTitle);
+				window.localStorage.setItem('advUrl',res.advInfo.advUrl);
+			});
 		},
 		activated() {
 			this.init();

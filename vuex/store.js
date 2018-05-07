@@ -9,6 +9,12 @@ const state = {
 	routeChain: [],
 	tabActive:'',
 	
+	//开屏广告
+	advState:window.localStorage.getItem('advState'),//是否显示广告
+	advImg:window.localStorage.getItem('advImg'),//广告图片
+	advTitle:window.localStorage.getItem('advTitle'),//广告标题
+	advUrl:window.localStorage.getItem('advUrl'),//广告地址
+	
 	chatNum:0,//聊天消息数
 	chatList:[],//聊天id
 	orderNum:0,//订单未读数
@@ -38,9 +44,11 @@ const state = {
 	loginState: window.localStorage.getItem('user_token')?true:false,//登录状态
 	user_token: window.localStorage.getItem('user_token')?window.localStorage.getItem('user_token'):'',//用户token
 	/*用户基本信息*/
-	cpUserInfo: '',userId: '',userName: '',userType: '',userPhone: '',
+	cpUserInfo: window.localStorage.getItem('cpUserInfo')?JSON.parse(window.localStorage.getItem('cpUserInfo')):'',
+	userId: '',userName: '',userType: '',userPhone: '',
 	/*企业基本信息*/
-	cpBasic:'',cpId: '',cpBtype: '',
+	cpBasic:window.localStorage.getItem('cpUserInfo')?JSON.parse(window.localStorage.getItem('cpUserInfo')).cpBasic:'',
+	cpId: '',cpBtype: '',
 	/*公司主页*/
 	userIdHome:'',cpIdHome:'',
 }
@@ -78,6 +86,8 @@ const mutations = {
 		state.cpId = info.cpUserInfo.cpId;
 		state.cpBasic = info.cpUserInfo.cpBasic;
 		state.cpBtype = info.cpUserInfo.cpBasic.cpBtype;
+		
+		window.localStorage.setItem('cpUserInfo',JSON.stringify(info.cpUserInfo));
 	},
 	// 设置token
 	setUserToken(state,token){
@@ -191,8 +201,11 @@ const mutations = {
 		state.messageType = messageNum>0;
 		state.homeMsgType = homeNum>0;
 		state.messageNum = messageNum + state.chatNum;
+	},
+	// 设置开屏广告
+	setAdvInfo(state,info){
+		state[info.title] = info.value;
 	}
-	
 }
 
 // 异步加载

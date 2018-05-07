@@ -13,7 +13,7 @@
 						<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>{{li.cpCityName}}
 					</p>
 					<p>
-						<span class="look  mui-pull-right"><aby-icon type="hot" class="icohot"></aby-icon>立即联系</span>
+						<span class="look  mui-pull-right"><aby-icon type="hot" class="icohot"></aby-icon>立即查看</span>
 					</p>
 				</div>
 			</a>

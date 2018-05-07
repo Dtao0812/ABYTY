@@ -98,7 +98,6 @@
 				reqInfo.loading = 1;
 				reqInfo.aac001 = this.pbId;
 				this.$abyApi.User.getGuiderInfo(reqInfo, (res)=>{
-					console.log('导游信息：'+JSON.stringify(res));
 					res.userinfo.aac002 = this.$abyApi.Crypto.DeCrypt(res.userinfo.aac002)
 					this.list = res.userinfo;
 				})

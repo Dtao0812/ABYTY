@@ -14,7 +14,7 @@
 				<p id="auditDesc" v-html="auditDesc"></p>
 			</div>
 			<div class="paddingTen" v-if="auditState===''||auditState===2||auditState===4">
-				<aby-button :title="btnTitle" @click.native="toNext"></aby-button>
+				<aby-button :title="btnTitle" @click.native="toNext" class="aby-button-blue"></aby-button>
 			</div>
 			<div class="textBottom mui-text-center">
 				客服电话：<span class="linkBlue" @click="onDialTel">{{tel}}</span>

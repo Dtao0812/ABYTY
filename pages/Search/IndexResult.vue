@@ -7,10 +7,10 @@
 		<div class="mui-content">
 			<aby-tab slot="navbar_1" :list="tabList" @eventTabBack="eventTab" :actSelect="tabSelectId" class="aby-top-fixed">
 				<div v-for="(li,i) in tabList" :key="i" :slot="li.id">
-					<aby-infoinite ref="pull" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='line'" :tabkey="i">
+					<aby-infoinite ref="pull0" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='line'" :tabkey="i">
 						<list-line slot="loadlist" :list="li.data"></list-line>
 					</aby-infoinite>
-					<aby-infoinite ref="pull" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='supplier'" :tabkey="i">
+					<aby-infoinite ref="pull1" @eventinfiniterBack="eventinfiniter" :type="li.type" v-if="li.type=='supplier'" :tabkey="i">
 						<list-supplier slot="loadlist" :list="li.data"></list-supplier>
 					</aby-infoinite>
 				</div>
@@ -58,7 +58,6 @@
 		methods: {
 			scroll(top) {},
 			init(){
-				this.$refs.pull.showLoading();
 				this.tabList[0].data = [];
 				this.tabList[1].data = [];
 				this.type = this.$route.params.type;
@@ -117,12 +116,12 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[0].data = res.proList;
-						this.$refs.pull[0].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.proList.length == 0){
 							this.$toast("没有更多内容了！")
+							this.$refs.pull0.isLoading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[0].data = this.tabList[0].data.concat(res.proList);
@@ -137,12 +136,12 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[1].data = res.cpBasicList;
-						this.$refs.pull[1].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.cpBasicList.length == 0){
 							this.$toast("没有更多内容了！")
+							this.$refs.pull1.isLoading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[1].data = this.tabList[1].data.concat(res.cpBasicList);

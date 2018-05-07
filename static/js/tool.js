@@ -231,15 +231,15 @@ let localStorage = {
 	},
 	get(title) {
 		let info = window.localStorage.getItem(title);
-		if(info) info = JSON.parse(info);
-		return info;
+		if(info) return JSON.parse(info);
+		return [];
 	},
 	remove(title) {
 		window.localStorage.removeItem(title);
 	},
 	// 保存搜索记录
-	setSearch(val) {
-		let localStorageList = this.get('searchList');
+	setSearch(id,val) {
+		let localStorageList = this.get(id+'_searchList');
 		if(!localStorageList) localStorageList = [];
 		let isAdd = true;
 		for(let i = 0, len = localStorageList.length; i < len; i++) {
@@ -247,15 +247,15 @@ let localStorage = {
 		}
 		if(isAdd) localStorageList.push(val);
 
-		this.set('searchList', JSON.stringify(localStorageList));
+		this.set(id+'_searchList', JSON.stringify(localStorageList));
 	},
 	// 获得搜索记录
-	getSearch() {
-		return this.get('searchList');
+	getSearch(id) {
+		return this.get(id+'_searchList');
 	},
 	// 清空搜索记录
-	clearSerch() {
-		this.remove('searchList');
+	clearSerch(id) {
+		this.remove(id+'_searchList');
 	}
 
 };

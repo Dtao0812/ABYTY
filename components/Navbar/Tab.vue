@@ -33,6 +33,11 @@
 		},
 		mounted() {
 		},
+		watch:{
+			actSelect(val){
+				this.selected = val;
+			}
+		}
 	}
 </script>
 

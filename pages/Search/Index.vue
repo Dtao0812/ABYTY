@@ -9,13 +9,14 @@
 			</div>
 			<br style="clear: both;" />-->
 		</mt-search>
-		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab"></aby-tab>
-		<div class="history">
-			<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete" @click.native="clearSearch"></aby-icon></h5>
-			<div>
-				<span class="tip" v-for="s in searchList" @click="onRecord(s)">{{s}}</span>
+		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab">
+			<div class="history" v-for="(li,i) in tabList" :key="i" :slot="li.id">
+				<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete" @click.native="clearSearch(i)"></aby-icon></h5>
+				<div>
+					<span class="tip" v-for="s in li.searchList" @click="onRecord(s)">{{s}}</span>
+				</div>
 			</div>
-		</div>
+		</aby-tab>
 	</div>
 </template>
 
@@ -27,20 +28,21 @@
 				value: '',
 				searchType: this.$route.params.type,
 				list: [],
-				searchList: [], //搜索记录
 				tabSelect: 'line',
 				tabSelectId: 0,
 				tabList: [{
 						id: 0,
 						title: '产品',
 						type: 'line',
-						data: ''
+						data: '',
+						searchList: this.$tool.localStorage.getSearch('line'), //搜索记录
 					},
 					{
 						id: 1,
 						title: '供应商',
 						type: 'supplier',
-						data: ''
+						data: '',
+						searchList: this.$tool.localStorage.getSearch('supplier'), //搜索记录
 					},
 				],
 			}
@@ -64,7 +66,7 @@
 			},
 			// 键盘搜索按钮事件
 			onSearch() {
-				this.$tool.localStorage.setSearch(this.value);
+				this.$tool.localStorage.setSearch(this.tabSelect,this.value);
 				this.toResult();
 			},
 			// 搜索类型点击事件
@@ -104,15 +106,14 @@
 				this.tabSelectId = e.id;
 			},
 			// 清空搜索记录
-			clearSearch(){
+			clearSearch(key){
 				this.$tool.confirm('您确定要清空搜索记录吗？',(res)=>{
-					this.searchList = [];
-					this.$tool.localStorage.clearSerch();
+					this.tabList[key].searchList = [];
+					this.$tool.localStorage.clearSerch(this.tabSelect);
 				});
 			}
 		},
 		mounted() {
-			this.searchList = this.$tool.localStorage.getSearch();
 		},
 	}
 </script>

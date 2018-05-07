@@ -36,6 +36,9 @@
 			}, false);
 		},
 		watch: {
+			placeholder(val){
+				this.inputPlaceholder = val;
+			},
 			searchValue(val) {
 				this.searchValue = val;
 				this.inputPlaceholder = val;

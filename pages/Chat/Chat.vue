@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<aby-page ref="page">
 		<aby-header slot="header">
 			<div class="mui-title" slot="title" v-if="userInfo != ''">
 				<h1>{{userInfo.cpBasic.cpCorpName}}</h1>
@@ -64,6 +64,7 @@
 		},
 		methods: {
 			init(name) {
+				this.$refs.page.showLoading();
 				this.fromName = name;
 				this.userId = this.$route.params.userId;
 				this.userInfo = [];
@@ -155,6 +156,7 @@
 					userId: this.userId
 				};
 				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
+					this.$refs.page.closeLoading();
 					this.userInfo = res.cpUserInfo;
 				});
 			},

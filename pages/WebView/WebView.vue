@@ -83,13 +83,12 @@
 		},
 		mounted() {
 			document.getElementById("myiframe").height = document.body.scrollHeight;
-			this.getCpBasic();
 		},
 		methods: {
 			init() {
-				this.webUrl = this.$route.params.url
-				this.webTitle = this.$route.params.title || ''
-				this.cpId = this.$route.params.cpId || ''
+				this.webUrl = this.$route.params.url;
+				this.webTitle = this.$route.params.title || '';
+				this.cpId = this.$route.params.cpId || '';
 				if(this.cpId != '')this.getCpBasic();
 			},
 			// 获得用户信息

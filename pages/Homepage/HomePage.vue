@@ -8,13 +8,8 @@
 				<li class="mui-table-view-cell mui-media">
 					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
 					<div class="mui-media-body">
-<<<<<<< HEAD
 						{{cpUserInfo.cpBasic.cpHeadName||''}}
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||''}}</p>
-=======
-						{{cpUserInfo.cpHeadName|filterNull}}
-						<p class='mui-ellipsis'>{{cpUserInfo.cpName|filterNull}}</p>
->>>>>>> d2511d6d80323eb9b82e562d77fefd61759072b4
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>
@@ -35,10 +30,6 @@
 
 <script>
 	import AbyInformation from './Informatica.vue'//个人主页资料
-<<<<<<< HEAD
-=======
-	import AllInformation from './InformaticaAll.vue'//其他供应商主页资料
->>>>>>> d2511d6d80323eb9b82e562d77fefd61759072b4
 	import AbyContacts from './Contacts.vue'
 	import AbyList from '../../components/List/Line.vue'
 	export default {

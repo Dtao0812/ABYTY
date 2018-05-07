@@ -2,12 +2,12 @@
 	<div class="aby-bg-white">
 		<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @click="goBack"></div>
 		<mt-search class="searchPanel" v-model="value" cancel-text="取消" @keyup.enter.native="onSearch" placeholder="搜索">
-			<div class="type-page-item  keyWordBtn" v-for="(li,i) in list" :key="i">
+			<!--<div class="type-page-item  keyWordBtn" v-for="(li,i) in list" :key="i">
 				<div class="mui-pull-left page-item-content aby-font-Black" @click="onSearchType(li.keyword,li.searchType)">
 					{{li.keyWordDescribe}}
 				</div>
 			</div>
-			<br style="clear: both;" />
+			<br style="clear: both;" />-->
 		</mt-search>
 		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab"></aby-tab>
 		<div class="history">

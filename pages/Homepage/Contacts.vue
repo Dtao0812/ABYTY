@@ -8,7 +8,7 @@
 					{{li.userCuteName}}
 					<p class='mui-ellipsis'>{{li.userPost}}</p>
 					<div class="divContact">
-						<aby-icon-color class="icocall" type="call-circle" @click.native="$tool.dialTelToApp(li.userPhone)"></aby-icon-color>
+						<aby-icon-color class="icocall" type="call-circle" @click.native="onTel(li.userPhone)"></aby-icon-color>
 						<aby-icon-color class="icochat" type="chat-circle" @click.native="toChatDetail(li.userId)"></aby-icon-color>
 					</div>
 				</div>
@@ -28,6 +28,12 @@
 			}
 		},
 		methods: {
+			// 拨打电话
+			onTel(phone){
+				let tel = this.$abyApi.Crypto.DeCrypt(phone);
+				this.$tool.dialTelToApp(tel);
+			},
+			// 聊天
 			toChatDetail(userId){
 				this.$router.push({
 					name: 'chat',

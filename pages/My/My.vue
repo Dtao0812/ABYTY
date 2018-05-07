@@ -66,9 +66,9 @@
 					</router-link>
 				</li>
 			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space onDialTel">
+			<ul class="mui-table-view mui-table-view-chevron space onDialTel" @click="$tool.dialTelToApp(abyTel)">
 				<li class="mui-table-view-cell mui-media menu">
-					<span @click="$tool.dialTelToApp(abyTel)" class="mui-navigate-right">
+					<span class="mui-navigate-right">
 						<aby-icon-color class="ptype" type="service"></aby-icon-color>联系客服
 					</span>
 				</li>

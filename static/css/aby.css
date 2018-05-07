@@ -447,7 +447,10 @@ small {
 .mint-search {
 	height: 40px;
 }
-
+/*隐藏首页搜索框的自动匹配div*/
+.searchPanel .mint-search-list{
+	display: none;
+}
 
 /*-----------------------------------------mint-ui下拉刷新样式----------------------------------------*/
 
@@ -819,4 +822,8 @@ small {
 /*红色泡泡*/
 .mui-icon .mui-badge {
     background: #dd524d;
+}
+/*城市列表样式*/
+.mint-indexlist-navitem {
+    padding: 0 6px;
 }

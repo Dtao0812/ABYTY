@@ -27,19 +27,6 @@
 			init(){
 				plus.navigator.setStatusBarBackground("#000000");
 				
-//				let os = this.$tool.browser.versions();
-//				if(os.android){
-//					
-//				}else{
-//					let AVCaptureDevice = plus.ios.importClass("AVCaptureDevice");
-//					let Status = AVCaptureDevice.authorizationStatusForMediaType("vide");
-//					if(3 != Status) {
-//						this.$tool.alert('请在设置中设置允许使用相机',(e)=> {
-//							this.onBack();
-//						});
-//					}
-//				}
-				
 				// 开始扫描
 				this.barCode();
 			},

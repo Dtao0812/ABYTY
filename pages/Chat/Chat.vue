@@ -1,13 +1,13 @@
 <template>
 	<aby-page>
 		<aby-header slot="header">
-			<div slot="title" v-if="userInfo != ''">
-				<h1 class="mui-title">{{userInfo.cpBasic.cpCorpName}}</h1>
+			<div class="mui-title" slot="title" v-if="userInfo != ''">
+				<h1>{{userInfo.cpBasic.cpCorpName}}</h1>
 				<h6 class="business">{{userInfo.cpBasic.cpName}}</h6>
 			</div>
 			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" @click.native="toHomePage" slot="right" type="chatsetting"></aby-icon>
 		</aby-header>
-		<div class="mui-content" slot="content" id="content">
+		<div class="mui-content" slot="content" id="content" @click="onContent">
 			<div id='msg-list' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
 				<div class="msg-item" v-for="(li,i) in msgList" :key="i" :class="li.messageDirection == 1 ? 'msg-item-self' : ''">
 					<img class="msg-user-img msg-user mui-icon selfHead" :src="li.sendUser.userFace" alt="" />
@@ -59,14 +59,21 @@
 				userId: '', //用户ID
 				userInfo: '', //用户信息
 				msgList: [], //消息列表
+				fromName:'',//上级页面名称
 			}
 		},
 		methods: {
-			init() {
+			init(name) {
+				this.fromName = name;
 				this.userId = this.$route.params.userId;
 				this.userInfo = [];
 				this.msgList = [];
 				this.msgtext = '';
+				this.faceIcon = 'chatface';
+				this.$refs.footer.className = '';
+				this.isShowFace = false;
+				this.isShowMore = false;
+				
 				this.getUserInfo();
 				this.getChatLog();
 			},
@@ -169,13 +176,24 @@
 			},
 			// 查看对方主页
 			toHomePage() {
-				this.$router.push({
-					name: "homePage",
-					params: {
-						userId: this.userId,
-						cpId: this.userInfo.cpBasic.cpId
-					}
-				});
+				if(this.fromName == 'homePage'){
+					this.$router.back()
+				}else{
+					this.$router.push({
+						name: "homePage",
+						params: {
+							userId: this.userId,
+							cpId: this.userInfo.cpBasic.cpId
+						}
+					});
+				}
+			},
+			// 点击消息内容
+			onContent(){
+				this.faceIcon = 'chatface';
+				this.$refs.footer.className = '';
+				this.isShowFace = false;
+				this.isShowMore = false;
 			}
 		},
 		mounted() {
@@ -197,7 +215,7 @@
 		},
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
-				vm.init()
+				vm.init(from.name)
 			})
 		},
 		watch: {

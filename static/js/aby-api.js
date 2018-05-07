@@ -666,16 +666,7 @@ const Project = {
 			cpId: requestInfo.cpId,
 		};
 		Server.getDataFromServer('cpGoods', requestData, successCallback, errorCallback);
-	},
-	//产品 - 收藏、取消收藏
-	getProCollection(requestInfo,successCallback, errorCallback){
-		var requestData = {
-			act: 'CPR201',
-			proId: requestInfo.proId,
-			collectState: requestInfo.collectState,
-		};
-		Server.getDataFromServer('cpProduct', requestData, successCallback, errorCallback);
-	},
+	}
 };
 
 /******************************      Supplier 供应商模块      *****************************/

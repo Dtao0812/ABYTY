@@ -2,6 +2,7 @@
 	<aby-page>
 		<aby-header slot="header" title="我的质保金"></aby-header>
 		<div class="mui-content" slot="content">
+			<div class="space"></div>
 			<ul class="mui-table-view space" v-if="depositType == 1">
 				<li class="mui-table-view-cell mui-media goldTotal">
 					<div class="mui-media-body">

@@ -198,7 +198,7 @@
 			<!--线路-->
 			<ul class="mui-table-view" v-if="publishInfo.selectType==10">
 				<li class="mui-table-view-cell">
-					<aby-field className="aby-input-default" @click.native="popupTrafficType=!popupTrafficType" modelId="publishInfo.trafficType" :modelVal="publishInfo.trafficType" placeholder="请选择交通方式" type="text" disabled="disabled">
+					<aby-field className="aby-input-default" @click.native="popupTrafficType=!popupTrafficType" modelId="publishInfo.trafficTypeName" :modelVal="publishInfo.trafficTypeName" placeholder="请选择交通方式" type="text" disabled="disabled">
 						<label class="inLabel" slot="label">交通方式</label>
 						<span slot="allowRight"><i class="mint-cell-allow-right"></i></span>
 					</aby-field>
@@ -297,6 +297,7 @@
 					fromTime:'',// 出发时间
 					backTime:'',// 
 					trafficType:'',// 出行方式
+					trafficTypeName:'',// 出行方式
 					peopleNum:0,// 成人数量
 					childNum:0,// 儿童数量
 					
@@ -343,7 +344,10 @@
 						this.$abyApi.Sys.getDict('trafficType','',(res)=>{
 							let dlist = []
 							for(let i=0,len=res.dicList.length;i<len;i++){
-								if(i == 0)this.publishInfo.trafficType = res.dicList[i].dicName;
+								if(i == 0){
+									this.publishInfo.trafficType = res.dicList[i].dicValue;
+									this.publishInfo.trafficTypeName = res.dicList[i].dicName;
+								}
 								let info = {};
 								info.text = res.dicList[i].dicName;
 								info.value = res.dicList[i].dicValue;
@@ -381,7 +385,10 @@
 						this.$abyApi.Sys.getDict('ticketType','',(res)=>{
 							let dlist = []
 							for(let i=0,len=res.dicList.length;i<len;i++){
-								if(i == 0)this.publishInfo.ticketType = res.dicList[i].dicName;
+								if(i == 0){
+									this.publishInfo.ticketType = res.dicList[i].dicValue;
+									this.publishInfo.ticketTypeName = res.dicList[i].dicName;
+								}
 								let info = {};
 								info.text = res.dicList[i].dicName;
 								info.value = res.dicList[i].dicValue;
@@ -627,7 +634,10 @@
 			this.$abyApi.Sys.getDict('trafficType','',(res)=>{
 				let dlist = []
 				for(let i=0,len=res.dicList.length;i<len;i++){
-					if(i == 0)this.publishInfo.trafficType = res.dicList[i].dicName;
+					if(i == 0){
+						this.publishInfo.trafficType = res.dicList[i].dicValue;
+						this.publishInfo.trafficTypeName = res.dicList[i].dicName;
+					}
 					let info = {};
 					info.text = res.dicList[i].dicName;
 					info.value = res.dicList[i].dicValue;

@@ -23,6 +23,14 @@
 			scroll() {
 				this.scrollTop = this.$refs.content.scrollTop
 			},
+			// 显示加载动画
+			showLoading(){
+				this.isLoading = true;
+			},
+			// 关闭加载动画
+			closeLoading(){
+				this.isLoading = false;
+			},
 		},
 		beforeMount(){
 		},

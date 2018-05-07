@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<aby-page ref="page">
 		<aby-header title="Ta的名片" slot="header"></aby-header>
 		<div class="mui-content guidepage" slot="content">
 			<div class="panelTop">
@@ -79,11 +79,12 @@
 		},
 		methods: {
 			getPageInfo(){
+				this.$refs.page.showLoading();
 				let reqInfo = {};
 				reqInfo.loading = 1;
 				reqInfo.aac001 = this.pbId;
 				this.$abyApi.User.getGuiderInfo(reqInfo, (res)=>{
-//					console.log('导游信息：'+JSON.stringify(res));
+					this.$refs.page.closeLoading();
 					res.userinfo.aac002 = this.$abyApi.Crypto.DeCrypt(res.userinfo.aac002)
 					this.list = res.userinfo;
 				})

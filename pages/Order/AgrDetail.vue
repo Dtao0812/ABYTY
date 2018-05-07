@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<aby-page ref="page">
 		<!--卖家中心为“收到的协议”  买家中心为“发出的协议”-->
 		<aby-header title="协议详情" slot="header"></aby-header>
 		<div class="mui-content" slot="content" v-if="info != ''">
@@ -155,7 +155,9 @@
 			},
 			// 获得详情
 			getDetail() {
+				this.$refs.page.showLoading();
 				this.$abyApi.Order.getAgreementDetail(this.agreementId, (res) => {
+					this.$refs.page.closeLoading();
 					this.info = res.data;
 					this.tel = this.identityType == 'seller' ? res.data.buyerInfo.contactPhone : res.data.sellerInfo.contactPhone;
 				});

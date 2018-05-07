@@ -269,6 +269,7 @@
 		},
 		methods: {
 			init(){
+				this.$refs.page.showLoading();
 				this.selectId = this.$route.params.selectId;
 				this.data = '';
 				
@@ -277,9 +278,9 @@
 				reqInfo.selectId = this.selectId;
 				this.$abyApi.Select.getPublishDetail(reqInfo, (res) => {
 					this.data = res.cpSelect;
-					this.$refs.page.isLoading = false;
+					this.$refs.page.closeLoading();
 				}, (err) => {
-					this.$refs.page.isLoading = false;
+					this.$refs.page.closeLoading();
 				});
 			},
 			// 聊天
@@ -291,6 +292,10 @@
 					}
 				});
 			}
+		},
+		updated() {
+			//初始化倒计时
+			this.$tool.countdown(this.data.endTime, this.data.selectId);
 		},
 		mounted() {
 			this.init();

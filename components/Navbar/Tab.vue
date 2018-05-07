@@ -7,6 +7,7 @@
 		<mt-tab-container v-model="selected">
 			<mt-tab-container-item v-for="(li,i) in tabList" :key="i" :id="i">
 				<slot :name="li.id"></slot>
+				{{li.isHide}}
 			</mt-tab-container-item>
 		</mt-tab-container>
 

@@ -107,7 +107,7 @@
 			setBasicInfo(){
 				this.$abyApi.User.setBasicInfo(this.basicInfo, (res)=>{
 					this.$tool.toast("提交成功");
-					this.$router.replace({name: 'homePage'})
+					this.$router.back();
 				},(err)=>{
 					this.$tool.toast(err);
 				})

@@ -9,7 +9,7 @@
 			return {
 				pickerValue: '',
 				modelId: '',
-				startDate:new Date(),
+				startDate:new Date(new Date().getTime()+24*60*60*1000),
 				endDate:new Date(new Date().getFullYear() + 1, 11, 31)
 			};
 		},

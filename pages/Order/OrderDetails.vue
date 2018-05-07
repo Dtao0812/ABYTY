@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<aby-page ref="page">
 		<aby-header title="订单详情" slot="header" :pageNum="pageNum">
 		</aby-header>
 		<div class="mui-content aby-detail" slot="content" v-if="info!=''">
@@ -358,9 +358,11 @@
 			},
 			// 获得详情
 			getDetail(){
+				this.$refs.page.showLoading();
 				let reqInfo = {};
 				reqInfo.orderId = this.orderId;
 				this.$abyApi.Order.getOrderDetail(reqInfo,(res)=>{
+					this.$refs.page.closeLoading();
 					res.data.orderInfo.proSummary = JSON.parse(res.data.orderInfo.proSummary);
 					res.data.orderSummary = JSON.parse(res.data.orderSummary);
 					this.info = res.data;

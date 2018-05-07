@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<aby-page ref="page">
 		<aby-header slot="header">
 			<div class="mui-title" slot="title" v-if="userInfo != ''">
 				<h1>{{userInfo.cpBasic.cpCorpName}}</h1>
@@ -59,12 +59,11 @@
 				userId: '', //用户ID
 				userInfo: '', //用户信息
 				msgList: [], //消息列表
-				fromName:'',//上级页面名称
 			}
 		},
 		methods: {
-			init(name) {
-				this.fromName = name;
+			init() {
+				this.$refs.page.showLoading();
 				this.userId = this.$route.params.userId;
 				this.userInfo = [];
 				this.msgList = [];
@@ -155,6 +154,7 @@
 					userId: this.userId
 				};
 				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
+					this.$refs.page.closeLoading();
 					this.userInfo = res.cpUserInfo;
 				});
 			},
@@ -214,9 +214,13 @@
 			this.msgList = this.$abyApi.Chat.getImLog(this.userId);
 		},
 		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.init(from.name)
-			})
+			if(to.params.userId){
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
 		},
 		watch: {
 			msgList(val) {

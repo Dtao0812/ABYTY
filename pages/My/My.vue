@@ -99,9 +99,12 @@
 			toHomePage(){
 				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
 				this.toHomePageInfo.userId = this.cpUserInfo.userId;
-				this.$store.commit('setHomePage', this.toHomePageInfo);
 				this.$router.push({
 					name:"homePage",
+					params:{
+						cpId:this.cpUserInfo.cpId,
+						userId:this.cpUserInfo.userId,
+					}
 				})
 			},
 		},

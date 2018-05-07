@@ -2,20 +2,20 @@
 	<div class="information">
 		<div v-if="list.cpBtype == 10">
 			<!--企业信息-->
-			<mt-cell title="公司地址" is-link>
+			<mt-cell title="公司地址">
 				<span>{{list.cpAddress|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="联系人姓名" is-link>
+			<mt-cell title="联系人姓名">
 				<span>{{list.cpHeadName|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="联系人电话" is-link>
+			<mt-cell title="联系人电话">
 				<span>{{list.cpHeadPhone|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="固定电话" is-link>
+			<mt-cell title="固定电话">
 				<span>{{list.cpTel|filterNull}}</span>
 			</mt-cell>
 			<div class="space"></div>
-			<mt-cell title="公司介绍" :label="list.cpIntro" is-link class="aby-area"></mt-cell>
+			<mt-cell title="公司介绍" :label="list.cpIntro" class="aby-area"></mt-cell>
 		</div>
 		<div v-else>
 			<!--企业信息-->
@@ -26,27 +26,27 @@
 			<mt-cell title="主营线路" is-link>
 				<span class="mui-ellipsis-2">{{list.cpRoute|filterListToString}}</span>
 			</mt-cell>-->
-			<mt-cell title="公司地址" is-link>
+			<mt-cell title="公司地址">
 				<span>{{list.cpAddress|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="联系人" is-link>
+			<mt-cell title="联系人">
 				<span>{{list.cpCorpName|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="联系电话" is-link>
+			<mt-cell title="联系电话">
 				<span>{{list.cpHeadPhone|filterNull}}</span>
 			</mt-cell>
-			<mt-cell title="固定电话" is-link>
+			<mt-cell title="固定电话">
 				<span>{{list.cpTel|filterNull}}</span>
 			</mt-cell>
-			<mt-cell v-if="list.depositType == 0" title="保证金" is-link>
+			<mt-cell v-if="list.depositType == 0" title="保证金">
 				<span>您尚未交纳质保金，点击交纳</span>
 			</mt-cell>
 			<div class="space"></div>
-			<mt-cell title="业务范围" :label="list.cpBizScope|filterListToString" is-link class="aby-area"></mt-cell>
+			<mt-cell title="业务范围" :label="list.cpBizScope|filterListToString" class="aby-area"></mt-cell>
 			<div class="space"></div>
-			<mt-cell title="主营线路" :label="list.cpRoute|filterListToString" is-link class="aby-area"></mt-cell>
+			<mt-cell title="主营线路" :label="list.cpRoute|filterListToString" class="aby-area"></mt-cell>
 			<div class="space"></div>
-			<mt-cell title="公司介绍" :label="list.cpIntro" is-link class="aby-area"></mt-cell>
+			<mt-cell title="公司介绍" :label="list.cpIntro" class="aby-area"></mt-cell>
 		</div>
 	</div>
 </template>
@@ -86,5 +86,8 @@
 	}
 	.mint-cell-value span{
 		line-height: 18px!important;
+	}
+	.mint-cell-label{
+		padding-right: 10px;
 	}
 </style>

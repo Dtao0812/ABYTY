@@ -3,7 +3,7 @@
 		<aby-header slot="header">
 			<div class="mui-title" slot="title" v-if="userInfo != ''">
 				<h1>{{userInfo.cpBasic.cpCorpName}}</h1>
-				<h6 class="business">{{userInfo.cpBasic.cpName}}</h6>
+				<h6 class="mui-ellipsis">{{userInfo.cpBasic.cpName}}</h6>
 			</div>
 			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" @click.native="toHomePage" slot="right" type="chatsetting"></aby-icon>
 		</aby-header>
@@ -482,5 +482,8 @@
 	.editFooter {
 		bottom: 150px!important;
 		position: fixed!important;
+	}
+	.mui-title h1{
+		font-size: 16px;
 	}
 </style>

@@ -36,7 +36,7 @@
 <style scoped>
 	.mui-title .aby-icon-arrowdown {
 		font-size: 12px;
-		margin-left: 5px;
+		margin-left: 5px!important;
 		color: #707070;
 	}
 	

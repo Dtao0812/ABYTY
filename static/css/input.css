@@ -119,22 +119,29 @@
 	width: 100%;
 	padding: 10px 20px 10px 80px;
 	font-size: 16px!important;
-	background: rgba(255, 255, 255, 0);
+	background-color: rgba(255, 255, 255, 0);
 	border: none;
 	color: #232323;
 	margin-bottom: 0px;
 }
+.aby-input-default input:disabled {
+	color: #232323!important;
+	opacity: 1!important;
+}
 
 .aby-input-default input::-webkit-input-placeholder {
 	color: #DDDDDD;
+	opacity: 1;
 }
 
 .aby-input-default input::-moz-input-placeholder {
 	color: #DDDDDD;
+	opacity: 1;
 }
 
 .aby-input-default input::-ms-input-placeholder {
 	color: #DDDDDD;
+	opacity: 1;
 }
 
 .field .inLabel {
@@ -160,7 +167,7 @@
 	margin-top: 50px;
 	padding: 0px;
 	font-size: 16px!important;
-	background: rgba(255, 255, 255, 0);
+	background-color: rgba(255, 255, 255, 0);
 }
 
 .field .areaLabel {

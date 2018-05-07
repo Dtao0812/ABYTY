@@ -3,6 +3,7 @@
 		<aby-no-content v-if="noContent"></aby-no-content>
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toHomePage(li)">
 			<a>
+				<img class="faceTip" src="../../static/images/ico/ico_good.png" />
 				<img class="mui-media-object mui-pull-left aby-img-guide" :src="li.cpLogo">
 				<div class="mui-media-body aby-list">
 					<p class="aby-list-title mui-ellipsis">{{li.cpName}}</p>

@@ -99,6 +99,7 @@
 					}
 					this.defTab = 1;
 					this.getBasicInfo();
+					this.getDownProList();
 				}
 			},
 			//获取企业资料

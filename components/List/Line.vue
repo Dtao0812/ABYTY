@@ -63,7 +63,6 @@
 			onUp(e){
 				this.$tool.confirm('您确定要上架该产品吗？', (res) => {
 					let proInfo = {};
-					proInfo.loading = 1;
 					proInfo.proId = e.target.getAttribute('proId');
 					proInfo.proState = 1;
 					this.$abyApi.Project.setProState(proInfo, (res) => {
@@ -76,7 +75,6 @@
 			onDown(e){
 				this.$tool.confirm('您确定要下架该产品吗？', (res) => {
 					let proInfo = {};
-					proInfo.loading = 1;
 					proInfo.proId = e.target.getAttribute('proId');
 					proInfo.proState = 2;
 					this.$abyApi.Project.setProState(proInfo, (res) => {

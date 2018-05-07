@@ -14,7 +14,7 @@
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
 						{{li.publisher.cpName}}
-						<p class="time">{{li.crateTime | filterConvertDateFromNow}}</p>
+						<p class="time">{{li.publishTime | filterConvertDateFromNowBy13}}</p>
 						<aby-icon-color class="ptype" v-if="li.selectType == 10" type="line"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 20" type="hotel"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 30" type="pticket"></aby-icon-color>
@@ -137,6 +137,7 @@
 				reqInfo.loading = 1; //不显示接口加载动画
 				reqInfo.pageNum = this.pageNum = 1;
 				reqInfo.isPrice = this.isPrice;
+				reqInfo.selectState = 10;
 				reqInfo.selectType = this.selectType;
 				reqInfo.where = this.where;
 
@@ -153,6 +154,7 @@
 				reqInfo.loading = 1;
 				reqInfo.pageNum = this.pageNum = ++this.pageNum;
 				reqInfo.isPrice = this.isPrice;
+				reqInfo.selectState = 10;
 				reqInfo.selectType = this.selectType;
 				reqInfo.where = this.where;
 
@@ -196,7 +198,7 @@
 					case 50: return 'sticket';break;
 					case 60: return 'guid';break;
 				}
-			}
+			},
 		},
 		mounted() {
 			// 底部导航栏
@@ -207,7 +209,7 @@
 			//初始化倒计时
 			for(var i = 0, len = this.list.length; i < len; i++) {
 				if(this.list[i].selectState == 10)
-					this.$tool.countdown(this.list[i].outServTime, this.list[i].selectId);
+					this.$tool.countdown(this.list[i].endTime, this.list[i].selectId);
 			}
 		},
 		activated() {

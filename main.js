@@ -114,6 +114,23 @@ Vue.filter('filterConvertDate', function(timestamp) {
 	var year = (new Date).getFullYear();
 	return nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2);
 });
+
+// 计算时间(13位时间戳)
+Vue.filter('filterConvertDateFromNowBy13', function(timestamp) {
+	var prmdate = new Date(parseInt(timestamp));
+	var nowDate = new Date();
+	var nTime = new Date(parseInt(timestamp));
+	var nYear = nTime.getFullYear();
+	var nMonth = nTime.getMonth() + 1;
+	var nDate = nTime.getDate();
+	var nHour = nTime.getHours();
+	var nMinute = nTime.getMinutes();
+	var year = (new Date).getFullYear();
+	var _date = nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2);
+	
+	Moment.locale('zh-cn');
+	return Moment(_date, "YYYYMMDD").fromNow();
+});
 // 计算时间
 Vue.filter('filterConvertDateFromNow', function(date) {
 	Moment.locale('zh-cn');

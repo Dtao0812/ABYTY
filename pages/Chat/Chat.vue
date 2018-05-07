@@ -59,13 +59,11 @@
 				userId: '', //用户ID
 				userInfo: '', //用户信息
 				msgList: [], //消息列表
-				fromName:'',//上级页面名称
 			}
 		},
 		methods: {
-			init(name) {
+			init() {
 				this.$refs.page.showLoading();
-				this.fromName = name;
 				this.userId = this.$route.params.userId;
 				this.userInfo = [];
 				this.msgList = [];
@@ -216,9 +214,13 @@
 			this.msgList = this.$abyApi.Chat.getImLog(this.userId);
 		},
 		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.init(from.name)
-			})
+			if(to.params.userId){
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next()
+			}
 		},
 		watch: {
 			msgList(val) {

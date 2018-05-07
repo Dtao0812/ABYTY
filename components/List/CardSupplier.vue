@@ -34,9 +34,11 @@
 		methods:{
 			// 公司主页
 			toHomePage(li){
-				this.$store.commit('setHomePage', li);
 				this.$router.push({
 					name:"homePage",
+					params:{
+						cpId:li.cpId
+					}
 				})
 			},
 		},

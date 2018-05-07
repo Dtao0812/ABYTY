@@ -56,7 +56,7 @@ var plusFun = function() {
 				if(new Date().getTime() - androidBackFirst < 1000) plus.runtime.quit();
 			}
 		} else {
-			history.go(-1);
+			Vue.$router.back();
 		}
 	}, false);
 

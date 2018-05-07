@@ -82,7 +82,7 @@ import MyGold from '../pages/My/MyGold.vue'
 //店铺主页
 import HomePage from '../pages/HomePage/HomePage.vue'
 //个人资料编辑页面
-import Edit from '../pages/Homepage/Edit.vue'
+import EidtHomePage from '../pages/Homepage/Edit.vue'
 //消息中心
 import MsgList from '../pages/Message/MsgList.vue'
 import TravelList from '../pages/Message/TravelList.vue'
@@ -155,7 +155,7 @@ const router = new Router({
 		{ name: 'myCollection',path: '/myCollection', component: MyCollection},
 		{ name: 'myProduct',path: '/myProduct', component: MyProduct},
 		{ name: 'myGold',path: '/MyGold', component: MyGold},
-		{ name: 'edit',path: '/edit', component: Edit},
+		{ name: 'eidtHomePage',path: '/EidtHomePage', component: EidtHomePage},
 		// 搜索
 		{ name: 'search',path: '/search',component: Search },
 		{ name: 'searchResult',path: '/searchResult',component: SearchResult },
@@ -203,7 +203,7 @@ router.beforeEach((to, from, next) => {
 		 	'orderList','orderDetails','searchIndexResult','searchResult',
 		 	'agrList','chat','purchaseDetails','payWay','webView','agrDetail',
 		 	'specialHot','specialLine','specialHotel','specialPlane','specialSuppliers',
-		 	'guide','sport','project','hotel'
+		 	'guide','sport','project','hotel','homePage'
         ]; 
 	const fromKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, from.name);
 	const toKeepAlive = Vue.$tool.isInAarry(keepAliveAarrt, to.name);

@@ -41,7 +41,6 @@
 				this.$router.push({
 					name:"homePage",
 					params:{
-						userId: li.userId,
 						cpId: li.cpId
 					}
 				})

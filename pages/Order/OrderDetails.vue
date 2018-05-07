@@ -205,6 +205,7 @@
 		data() {
 			return {
 				orderId:this.$route.params.orderId,
+				cpId: '',
 				identityType:this.$route.params.identityType,
 				page:this.$route.params.page,
 				agreementId:'',
@@ -398,6 +399,21 @@
 					});
 				}
 			},
+			toHomepage(userId){
+				let reqInfo = {
+					userId: userId
+				};
+				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
+					this.$refs.page.closeLoading();
+					this.cpId = res.cpUserInfo.cpId;
+					this.$router.push({
+						name:"homePage",
+						params:{
+							cpId: this.cpId
+						}
+					})
+				});
+			}
 			
 		},
 		mounted() {

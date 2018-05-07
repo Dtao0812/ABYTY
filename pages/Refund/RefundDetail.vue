@@ -234,6 +234,21 @@
 						this.serviceFee = rtn.data;
 					})
 				})
+			},
+			toHomepage(userId){
+				let reqInfo = {
+					userId: userId
+				};
+				this.$abyApi.User.getBasciInfo(reqInfo, (res) => {
+					this.$refs.page.closeLoading();
+					this.cpId = res.cpUserInfo.cpId;
+					this.$router.push({
+						name:"homePage",
+						params:{
+							cpId: this.cpId
+						}
+					})
+				});
 			}
 		},
 		mounted() {

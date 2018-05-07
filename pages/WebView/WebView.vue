@@ -111,13 +111,13 @@
 			},
 			// 公司主页
 			toHomePage() {
-				if(this.cpBasic.userId){
-					this.cpBasic.userId = '';
-				};
-				this.$store.commit('setHomePage', this.cpBasic);
 				this.$router.push({
-					name: "homePage"
+					name: "homePage",
+					params: {
+						cpId: this.cpBasic.cpId
+					}
 				})
+				
 			}
 		},
 		watch: {

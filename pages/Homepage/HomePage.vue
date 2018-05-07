@@ -8,8 +8,8 @@
 				<li class="mui-table-view-cell mui-media">
 					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpLogo">
 					<div class="mui-media-body">
-						{{cpUserInfo.cpHeadName}}
-						<p class='mui-ellipsis'>{{cpUserInfo.cpName}}</p>
+						{{cpUserInfo.cpHeadName|filterNull}}
+						<p class='mui-ellipsis'>{{cpUserInfo.cpName|filterNull}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>
@@ -38,7 +38,7 @@
 
 <script>
 	import AbyInformation from './Informatica.vue'//个人主页资料
-	import AllInformation from './InformaticaAll.vue'//供应商主页资料
+	import AllInformation from './InformaticaAll.vue'//其他供应商主页资料
 	import AbyContacts from './Contacts.vue'
 	import AbyList from '../../components/List/Line.vue'
 	export default {
@@ -200,6 +200,6 @@
 	}
 	
 	.mui-media-body {
-		font-size: 16px;
+		font-size: 14px;
 	}
 </style>

@@ -7,9 +7,9 @@
 		
 		<aby-tab :list="goodsList" @eventTabBack="eventTab" page="myCollect" slot="loadlist">
 			<div v-for="(li,i) in goodsList" :key="i" :slot="li.id">
-				<list-line v-if="li.type=='line'" :list="li.data"></list-line>
-				<list-sport v-if="li.type=='sport'" :list="li.data"></list-sport>
-				<list-hotel v-if="li.type=='hotel'" :list="li.data"></list-hotel>
+				<list-line v-if="li.type=='line'" page="myCollect" :list="li.data" @eventLineBack="eventLine"></list-line>
+				<list-sport v-if="li.type=='sport'" page="myCollect" :list="li.data" @eventLineBack="eventLine"></list-sport>
+				<list-hotel v-if="li.type=='hotel'" page="myCollect" :list="li.data" @eventLineBack="eventLine"></list-hotel>
 			</div>
 		</aby-tab>
 	</aby-pull>
@@ -83,6 +83,10 @@
 				})
 			},
 			eventTab(e){
+				console.log(e.id)
+			},
+			eventLine(){//上下架及删除返回监听
+				this.getPullDown();
 			}
 		},
 		mounted() {

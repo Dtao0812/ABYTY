@@ -24,8 +24,11 @@
 					<span class="purchase-finish-btn" v-if="proState == '2'" :proId="item.proId" @click="onUp">上架</span>
 					<span class="purchase-delete-btn" :proId="item.proId" @click="onDelete">删除</span>
 				</div>
+				<div class="purchase-btn-group " v-if="pageType == 'myCollect'">
+					<span class="purchase-delete-btn" :proId="item.proId" @click="onCancel">取消收藏</span>
+				</div>
 			</li>
-			<div class="space" v-if="pageType == 'myProduct'"></div>
+			<div class="space" v-if="pageType == 'myProduct' || pageType == 'myCollect'"></div>
 		</ul>
 		
 	</div>
@@ -89,6 +92,18 @@
 					proInfo.proId = e.target.getAttribute('proId');
 					this.$abyApi.Project.delPro(proInfo, (res) => {
 						this.$tool.toast('已删除');
+						this.$emit("eventLineBack");
+					})
+				})
+			},
+			onCancel(e){
+				this.$tool.confirm('您确定要取消收藏该产品吗？', (res) => {
+					let proInfo = {};
+					proInfo.loading = 1;
+					proInfo.proId = e.target.getAttribute('proId');
+					proInfo.collectState = 2;
+					this.$abyApi.Project.getProCollection(proInfo, (res) => {
+						this.$tool.toast('已取消');
 						this.$emit("eventLineBack");
 					})
 				})

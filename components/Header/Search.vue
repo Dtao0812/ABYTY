@@ -75,8 +75,9 @@
 		border-radius: 15px;
 	}
 	
-	.mint-searchbar-inner i {
+	.mint-searchbar-inner span {
 		color: #BBBBBB;
-		font-size: 17px;
+		font-size: 20px;
+		vertical-align: middle;
 	}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="headerSelect">
-		<h1 class="mui-title" @click="isPopup=!isPopup">{{headerTitle}}<span class="mui-icon mui-icon-arrowdown"></span></h1>
+		<h1 class="mui-title" @click="isPopup=!isPopup">{{headerTitle}}<span class="mui-icon aby-icon-arrowdown"></span></h1>
 		
 		<mt-popup v-model="isPopup" position="top" popup-transition="popup-fade">
 			<ul class="mui-table-view">
@@ -34,9 +34,10 @@
 </script>
 
 <style scoped>
-	.mui-title .mui-icon-arrowdown {
+	.mui-title .aby-icon-arrowdown {
 		font-size: 12px;
 		margin-left: 5px;
+		color: #707070;
 	}
 	
 	.mui-popover {

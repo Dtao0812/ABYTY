@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-const AbyUrl = 'http://114.215.202.155/';
-//const AbyUrl = 'http://www.ai-by.com/';
+//const AbyUrl = 'http://114.215.202.155/';
+const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -168,7 +168,21 @@ const General = {
 			loading: 1,
 		};
 		Server.getDataFromServer('cpDict', requestData, successCallback, errorCallback);
-	}
+	},
+	downLoadFile(webUrl, localFilename, sucesscallback, errorcallback){
+		let dtask = plus.downloader.createDownload(webUrl, {
+			filename: '_doc/download/' + localFilename
+		}, function(d, status) {
+			//下载完成
+			if(status == 200) {
+				sucesscallback(d.filename);
+			} else {
+				sucesscallback('_www/logo.png');
+			}
+		});
+		dtask.start();
+	},
+	
 };
 
 /******************************      Crypto 加密模块       *****************************/
@@ -666,7 +680,16 @@ const Project = {
 			cpId: requestInfo.cpId,
 		};
 		Server.getDataFromServer('cpGoods', requestData, successCallback, errorCallback);
-	}
+	},
+	//产品 - 收藏、取消收藏
+	getProCollection(requestInfo,successCallback, errorCallback){
+		var requestData = {
+			act: 'CPR201',
+			proId: requestInfo.proId,
+			collectState: requestInfo.collectState,
+		};
+		Server.getDataFromServer('cpProduct', requestData, successCallback, errorCallback);
+	},
 };
 
 /******************************      Supplier 供应商模块      *****************************/

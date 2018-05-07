@@ -70,7 +70,6 @@
 				let reqInfo = {};
 				reqInfo.loading = 1;
 				reqInfo.userId = this.routerParams;
-				console.log(reqInfo.userId)
 				this.$abyApi.User.getAccountInfo(reqInfo, (res)=>{
 					this.pageInfo = res.cpUserInfo;
 					//TODO

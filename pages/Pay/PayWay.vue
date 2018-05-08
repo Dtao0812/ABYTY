@@ -86,9 +86,13 @@
 		},
 		mounted() {},
 		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.init()
-			})
+			if(from.name =='webView'){
+				next()
+			}else{
+				next(vm => {
+					vm.init()
+				})
+			}
 		},
 	}
 </script>

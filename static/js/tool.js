@@ -173,6 +173,81 @@ let countdown = function(endDate, divId) {
 
 };
 
+//倒计时 接收参数为秒。
+let getRTime =  function(t) {
+	let d,h,m,s;
+	if(t >= 0) {
+		d = Math.floor(t /(60*60*24));
+		if(d > 0){
+			t = t-d*60*60*24;
+		}
+		h = Math.floor(t / 60 / 60);
+		if(h > 0) {
+			t = t - h * 60 * 60;
+		}
+		m = Math.floor(t / 60);
+		if(m > 0) {
+			t = t - m * 60;
+		}
+		s = Math.floor(t);
+	}
+	
+	if(d>0){
+		return d + "天" + h + "时" + m + "分" + s + "秒";
+	}else {
+		return h + "时" + m + "分" + s + "秒";
+	}
+	
+};
+
+
+// 获得当前时间
+let getNowFormatDate = function() {
+	var date = new Date();
+	var seperator1 = "-";
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	if(month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if(strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
+	}
+	var currentdate = year + seperator1 + month + seperator1 + strDate;
+	return currentdate;
+};
+
+// 时间格式化
+let getFormatDate = function(datetime) {
+	var year = datetime.getFullYear();
+	var month = datetime.getMonth() + 1; //js从0开始取 
+	var date = datetime.getDate();
+	var hour = datetime.getHours();
+	var minutes = datetime.getMinutes();
+	var second = datetime.getSeconds();
+
+	if(month < 10) {
+		month = "0" + month;
+	}
+	if(date < 10) {
+		date = "0" + date;
+	}
+
+	return year + "-" + month + "-" + date;
+};
+
+//计算年龄
+let countAge = function(datetime){
+	var r   =   datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
+    if(r == null) return false;     
+    var d = new Date(r[1], r[3]-1, r[4]);     
+    if(d.getFullYear() == r[1]&&(d.getMonth() + 1) == r[3]&&d.getDate() == r[4]){   
+        var Y = new Date().getFullYear();   
+        return Y-r[1];   
+    }  
+};
+
 // 拨打电话(app)
 let dialTelToApp = function(phone) {
 	plus.device.dial(phone, false);
@@ -260,53 +335,6 @@ let localStorage = {
 
 };
 
-// 获得当前时间
-let getNowFormatDate = function() {
-	var date = new Date();
-	var seperator1 = "-";
-	var year = date.getFullYear();
-	var month = date.getMonth() + 1;
-	var strDate = date.getDate();
-	if(month >= 1 && month <= 9) {
-		month = "0" + month;
-	}
-	if(strDate >= 0 && strDate <= 9) {
-		strDate = "0" + strDate;
-	}
-	var currentdate = year + seperator1 + month + seperator1 + strDate;
-	return currentdate;
-};
-
-// 时间格式化
-let getFormatDate = function(datetime) {
-	var year = datetime.getFullYear();
-	var month = datetime.getMonth() + 1; //js从0开始取 
-	var date = datetime.getDate();
-	var hour = datetime.getHours();
-	var minutes = datetime.getMinutes();
-	var second = datetime.getSeconds();
-
-	if(month < 10) {
-		month = "0" + month;
-	}
-	if(date < 10) {
-		date = "0" + date;
-	}
-
-	return year + "-" + month + "-" + date;
-};
-
-//计算年龄
-let countAge = function(datetime){
-	var r   =   datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
-    if(r == null) return false;     
-    var d = new Date(r[1], r[3]-1, r[4]);     
-    if(d.getFullYear() == r[1]&&(d.getMonth() + 1) == r[3]&&d.getDate() == r[4]){   
-        var Y = new Date().getFullYear();   
-        return Y-r[1];   
-    }  
-};
-
 //拷贝内容
 let copyContent = function(e){
 	
@@ -330,5 +358,6 @@ export default {
 	localStorage,
 	getNowFormatDate,
 	getFormatDate,
-	copyContent
+	copyContent,
+	getRTime
 }

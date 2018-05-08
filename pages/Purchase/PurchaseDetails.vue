@@ -224,7 +224,7 @@
 					</div>
 				</div>
 				<div v-else>
-					<div class="aby-detail-linegray" v-if="data.selectDesc!=null||''"></div>
+					<div class="aby-detail-linegray" v-if="data.selectDesc!=''"></div>
 					<div class="aby-detail-remarks" v-if="data.selectDesc">
 						<p class="title">备注</p>
 						<p>{{data.selectDesc}}</p>

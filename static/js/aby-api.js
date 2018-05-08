@@ -154,10 +154,30 @@ const Server = {
 };
 
 /******************************      Image 图片模块       *****************************/
+const Image = {
+	compressImage(src, dst, overwrite, quality, sucessCallback, errorCallBack){
+		plus.zip.compressImage({
+				src: src,
+				dst: dst,
+				overwrite: overwrite,
+				quality: quality
+			},
+			function(e) {
+				sucessCallback && sucessCallback(e);
+			},
+			function(error) {
+				errorCallBack && errorCallBack(false);
+			});
+	}
+}
 
 /******************************      General 通用模块       *****************************/
 
 const General = {
+	showMenu: false,
+	mode: 'main-move',
+	menu: null,
+	shares: null,
 	/*获取banner图
 	 *pageType: //页面类型  1.app首页   2.线路首页   3.酒店首页   4.景点首页
 	 */
@@ -182,7 +202,52 @@ const General = {
 		});
 		dtask.start();
 	},
-	
+	shareAction(id, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo){
+		var s = null;
+		if(!id || !(s = shares[id])) {
+			return;
+		}
+		if(s.authenticated) {
+			General.shareMessage(s, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo);
+		} else {
+			s.authorize(function() {
+				General.shareMessage(s, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo);
+			}, function(e) {
+				Vue.$toast("认证授权失败");
+			});
+		}
+	},
+	shareMessage(s, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo){
+		let msg = {
+			content: '呱啦啦同业-专业同业平台',
+			extra: {
+				scene: ex
+			}
+		};
+
+		if(bhref) {
+			msg.href = href;
+			if(sharehrefTitle) {
+				msg.title = sharehrefTitle;
+			}
+			if(sharehrefDes) {
+				msg.content = sharehrefDes;
+			}
+			msg.thumbs = [thumburl];
+			msg.pictures = [thumburl];
+		} else {
+			if(sharehrefDes) {
+				msg.content = sharehrefDes + href;
+			}
+			msg.pictures = [thumburl];
+		}
+		s.send(msg, function() {
+			
+			Vue.$toast("分享到\"" + s.description + "\"成功");
+		}, function(e) {
+			Vue.$toast("分享到\"" + s.description + "\"失败");
+		});
+	},
 };
 
 /******************************      Crypto 加密模块       *****************************/
@@ -490,7 +555,7 @@ const User = {
 	},
 	//企业 - 详情（其他企业，没有法人）
 	getBasicNotLegal(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPU103',
 			cpId: requestInfo.cpId
@@ -499,7 +564,7 @@ const User = {
 	},
 	//企业 - 员工列表
 	getBasicStaffList(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPU104',
 			cpId: requestInfo.cpId
@@ -508,7 +573,7 @@ const User = {
 	},
 	//个人 - 更新名片
 	setMyInfo(requestInfo, callBack) {
-		var requestData = {
+		let requestData = {
 			act: 'CPU300',
 			osType: store.state.osType,
 			deviceId: store.state.deviceId,
@@ -538,7 +603,7 @@ const User = {
 	},
 	//企业 - 更新数据（我的）
 	setBasicInfo(requestInfo, callBack) {
-		var requestData = {
+		let requestData = {
 			act: 'CPU204',
 			osType: store.state.osType,
 			deviceId: store.state.deviceId,
@@ -576,7 +641,7 @@ const User = {
 	},
 	//导游 - 名片（个人）
 	getGuiderInfo(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: '11008',
 			aac001: requestInfo.aac001
@@ -652,7 +717,7 @@ const Project = {
 	},
 	//产品 - 上架、下架
 	setProState(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPR106',
 			proId: requestInfo.proId,
@@ -662,7 +727,7 @@ const Project = {
 	},
 	//产品 - 删除
 	delPro(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPR107',
 			proId: requestInfo.proId
@@ -671,7 +736,7 @@ const Project = {
 	},
 	//产品 - 列表 （个人主页）
 	getMyProList(requestInfo, successCallback, errorCallback) {
-		var requestData = {
+		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPG200',
 			pageNum: requestInfo.pageNum,
@@ -683,7 +748,7 @@ const Project = {
 	},
 	//产品 - 收藏、取消收藏
 	getProCollection(requestInfo,successCallback, errorCallback){
-		var requestData = {
+		let requestData = {
 			act: 'CPR201',
 			proId: requestInfo.proId,
 			collectState: requestInfo.collectState,

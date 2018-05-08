@@ -16,19 +16,19 @@
 			</div>
 			<div class="share">
 				<h5 class="mui-content-padded h5title"><span>分享到社交平台</span></h5>
-				<div class="divPanel" id="qq" channelid="qq" ex="qq">
+				<div class="divPanel" ex="qq" @click="onShare('qq', 'qq')">
 					<aby-icon-color type="qq" id="qqFriend"></aby-icon-color>
 					<!--<span>qq好友</span>-->
 				</div>
-				<div class="divPanel" id="qq" channelid="" ex="">
+				<div class="divPanel" id="qq" channelid="qq" ex="">
 					<aby-icon-color type="qqspace" id="qqSpace"></aby-icon-color>
 					<!--<span>qq空间</span>-->
 				</div>
-				<div class="divPanel" id="WXSceneSession" channelid='weixin' ex="WXSceneSession">
+				<div class="divPanel" ex="WXSceneSession" @click="onShare('WXSceneSession', 'weixin')">
 					<aby-icon-color type="wechat" id="WXSceneSession"></aby-icon-color>
 					<!--<span>微信好友</span>-->
 				</div>
-				<div class="divPanel" id="WXSceneTimeline" channelid='weixin' ex="WXSceneTimeline">
+				<div class="divPanel" id="WXSceneTimeline" channelid='weixin' ex="WXSceneTimeline" @click="onShare('WXSceneTimeline', 'weixin')">
 					<aby-icon-color type="firends" id="WXSceneTimeline"></aby-icon-color>
 					<!--<span>朋友圈</span>-->
 				</div>
@@ -46,7 +46,7 @@
 			return {
 				cpUserInfo:this.$store.state.cpUserInfo,
 				barcode:'',//二维码图片
-				shareInfo:''
+				shareInfo: {}
 			}
 		},
 		methods:{
@@ -56,9 +56,26 @@
 				reqInfo.cpBtype = this.cpUserInfo.cpBasic.cpBtype;
 				this.$abyApi.User.get_myCode(reqInfo, (res)=>{
 					this.barcode = res.shopInfo.barcode;
+					//分享的数据
 					this.shareinfo = res.shopInfo.shareInfo;
 				})
-			}
+			},
+			onShare(shareId, channelid){
+				this.$abyApi.General.downLoadFile(this.shareinfo.shareImg, 'myCode.JPG', (file)=>{
+					this.$abyApi.Image.compressImage(file, file, true, 1, (res)=>{
+						//发送分享
+						if(shareId == 'WXSceneSession' || shareId == 'qq') {
+							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareTitle, shareinfo.shareDesc, interInfo);
+						}
+						if(shareId == 'WXSceneTimeline') {
+							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareDesc, shareinfo.shareTitle, interInfo);
+						}
+						if(shareId == 'sinaweibo') {
+							this.$abyApi.General.shareAction('sinaweibo', 'sinaweibo', false, shareinfo.shareUrl, file, shareinfo.shareTitle, shareinfo.shareDesc, interInfo);
+						}
+					})
+				})
+			},
 		},
 		mounted() {
 			this.get_myCode()

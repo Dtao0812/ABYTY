@@ -32,9 +32,10 @@
 <script>
 	export default {
 		components: {},
-		props: ['list'],
+		props: ['list', 'page'],
 		data() {
 			return {
+				pageType: this.page,
 				noContent:false
 			}
 		},

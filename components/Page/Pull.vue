@@ -1,10 +1,10 @@
 <template>
 	<div class="page" :class="page=='index'?'pt-45':''">
 		<slot name="header"></slot>
+		<slot name="navbar"><div style="padding-top: 45px;"></div></slot>
 		<div class="mui-content">
 			<div class="page-loadmore">
 				<div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }" @scroll="paperScroll" id="wrapper">
-					<slot name="navbar"><div style="padding-top: 45px;"></div></slot>
 					<slot name="explain"></slot>
 					<slot name="loading"><div v-if="isLoading"><aby-loading></aby-loading></div></slot>
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
@@ -13,7 +13,6 @@
 							<br style="clear:both"/>
 						</div>
 					</mt-loadmore>
-						
 					<div class="line-button"></div>
 				</div>
 			</div>

@@ -109,7 +109,9 @@
 		mounted() {
 		},
 		updated(){
-			this.noContent = this.list.length == 0;
+			setTimeout(()=>{
+				this.noContent = this.list.length == 0;
+			},1500)
 		},
 		watch: {  
 		    list(val){

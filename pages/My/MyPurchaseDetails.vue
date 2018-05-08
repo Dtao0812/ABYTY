@@ -6,7 +6,7 @@
 				<div class="aby-detail-header">
 					<span class="colorGreen" v-if="data.selectState == 10">正在进行</span>
 					<span v-else>已结束</span>
-					<aby-icon-color v-if="data.selectType == 10" class="mui-pull-right" type="nowlocation"></aby-icon-color>
+					<aby-icon-color v-if="data.selectType == 10" class="mui-pull-right" type="line"></aby-icon-color>
 					<aby-icon-color v-if="data.selectType == 20" class="mui-pull-right" type="hotel"></aby-icon-color>
 					<aby-icon-color v-if="data.selectType == 30" class="mui-pull-right" type="pticket"></aby-icon-color>
 					<aby-icon-color v-if="data.selectType == 40" class="mui-pull-right" type="planhotel"></aby-icon-color>
@@ -241,7 +241,7 @@
 				<div class="aby-detail-btn mui-text-center">
 					<aby-icon className="mui-pull-message" type="message"></aby-icon>
 					<span class="purchase-finish-btn" v-if="data.selectState == 10" @click="onFinish(data.selectId)">结束</span>
-					<span class="purchase-delete-btn" v-else @click="onDelete(data.selectId)">删除</span>
+					<span class="purchase-delete-btn aby-font-blue" v-else @click="onDelete(data.selectId)">删除</span>
 				</div>
 			</div>
 		</div>

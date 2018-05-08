@@ -175,6 +175,7 @@
 				reqInfo.invoiceName = this.invoiceName;
 				reqInfo.invoiceNumer = this.invoiceNumer;
 				reqInfo.invoiceContent = this.invoiceContent;
+				reqInfo.updataTime = new Date().getTime();
 				this.$abyApi.Order.confirmAgreementById(reqInfo,(res)=>{
 					this.$toast("订单生成成功，请去订单中心查看订单！");
 					this.getDetail();

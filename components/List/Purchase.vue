@@ -18,7 +18,7 @@
 						<!--线路10-->
 						<div v-if="tmp.selectType == 10">
 							<h5>{{tmp.fromCity}}→{{tmp.goCity}}
-								<aby-icon-color class="mui-pull-right" type="nowlocation"></aby-icon-color>
+								<aby-icon-color class="mui-pull-right" type="line"></aby-icon-color>
 							</h5>
 							<p>出行时间： {{tmp.fromTime|filterConvertDate}}</p>
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
@@ -80,8 +80,8 @@
 				</div>
 				<div class="mui-card-footer">
 					<div class="mui-col-xs-6">
-						<span>浏览({{tmp.readCnt}})&nbsp;&nbsp;&nbsp;</span>
-						<span>留言({{tmp.discussCnt}})</span>
+						<span class="aby-font-gray">浏览({{tmp.readCnt}})&nbsp;&nbsp;&nbsp;</span>
+						<!--<span>留言({{tmp.discussCnt}})</span>-->
 						<!--<span>聊天(11)</span>-->
 						<!--<span>推送(${li.notifyCnt})</span>-->
 					</div>

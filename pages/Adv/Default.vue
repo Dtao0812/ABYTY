@@ -1,14 +1,11 @@
 <template>
-	<div class="page">
-		<div class="mui-content content" ref="content">
-			<span class="skip" v-if="num >= 0" @click="toHome">
-				{{skipText}}
-			</span>
-			<div class="aby-bg" :style="'background-image: url('+bgUrl+');'" @click="onBg"></div>
-			<div class="aby-logo">
-				<img src="../../static/images/logo/log_font.png" />
-				<p>靠谱的旅游同业都在用</p>
-			</div>
+	<div class="mui-content">
+		<div class="adpanel">
+			<span class="btnclose" v-if="num >= 0" @click="toHome">{{skipText}}</span>
+			<img :src="bgUrl"  @click="onBg"/>
+		</div>
+		<div class="logoPanel">
+			<img src="../../static/images/logo/logo_txt_3x.png" />
 		</div>
 	</div>
 </template>
@@ -20,7 +17,7 @@
 			return {
 				bgUrl: this.$store.state.advImg,
 				skipText: '',
-				num: 3,
+				num: 6,
 			}
 		},
 		methods: {
@@ -33,7 +30,7 @@
 			// 倒计时
 			countDown() {
 				let _num = this.num = this.num - 1;
-				this.skipText = '跳过(' + _num + ')';
+				this.skipText = '跳过( ' + _num + ' )';
 				if(_num >= 0) {
 					setTimeout(() => {
 						this.countDown()
@@ -73,33 +70,41 @@
 </script>
 
 <style scoped>
-	.content {
-		top: 0 !important;
+	.mui-content{
+		background-color: #FFFFFF;
+		height: 100%;
 	}
 	
-	.aby-bg {
-		height: 80%;
-		background-size: 100% 100%;
-		background-position: center;
+	.adpanel {
+		width: 100%;
 	}
 	
-	.aby-logo {
-		height: 20%;
-		text-align: center;
-		font-size: 12px;
-		padding-top: 10%;
+	.adpanel img {
+		width: 100%;
 	}
 	
-	.aby-logo img {
-		height: 20px;
-		width: auto;
-	}
-	
-	.skip {
+	.btnclose {
 		position: absolute;
-		right: 20px;
-		top: 20px;
-		background-color: #B6B6B6;
-		padding: 2px 5px;
+		background-color: rgba(0, 0, 0, .5);
+		color: #FFFFFF;
+		font-size: 12px;
+		padding: 2px 6px;
+		right: 10px;
+		top: 10px;
+		border-radius: 4px;
+	}
+	
+	.logoPanel {
+		width: 100%;
+		background-color: #FFFFFF;
+		text-align: center;
+		padding: 25px 10px;
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+	}
+	
+	.logoPanel img {
+		width: 40%;
 	}
 </style>

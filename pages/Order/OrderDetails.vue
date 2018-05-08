@@ -225,6 +225,7 @@
 					{id:11,title:'删除',size:'small',bclass:'aby-button-line-default'},
 				],
 				info:'',
+				timer:'',
 			}
 		},
 		methods: {
@@ -375,29 +376,27 @@
 						this.serviceFee = rtn.data;
 					});
 					//倒计时
-					let timer;
 					if(this.info.orderState == 0) {
 						let remainTime = this.info.countDownTimestamp;
-						timer = setInterval(()=>{
+						this.timer = setInterval(()=>{
 							if(remainTime > 0) {
 								document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
 								remainTime = remainTime - 1;
 							} else {
-								clearInterval(timer);
+								clearInterval(this.timer);
 							}
 		
 						}, 1000);
 					}else if(this.info.orderState == 2) {
 						//待确认状态的订单
 						let remainTime = this.info.waitConfirmDownTimestamp;
-						timer = setInterval(()=>{
+						this.timer = setInterval(()=>{
 							if(remainTime > 0) {
 								document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
 								remainTime = remainTime - 1;
 							} else {
-								clearInterval(timer);
+								clearInterval(this.timer);
 							}
-		
 						}, 1000);
 					}
 				})
@@ -460,8 +459,14 @@
 			}else{
 				next()
 			}
-			
 		},
+		beforeRouteLeave(to, from, next){
+			if(to.name == 'orderList'){
+				clearInterval(this.timer);
+				this.timer = '';
+			}
+			next();
+		}
 	}
 </script>
 

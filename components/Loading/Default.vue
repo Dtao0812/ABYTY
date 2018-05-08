@@ -22,6 +22,7 @@
 		padding-top: 45%;
 		padding-left: 0%;
 		text-align: center;
+		z-index: 99999999999999;
 	}
 	.aby-loading img{
 		width: 20%;

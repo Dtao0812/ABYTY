@@ -1,7 +1,6 @@
 <template>
 	<div class="page">
 		<aby-header title="" slot="header" page="2">
-			<aby-back @click.native="goBack" slot="back"></aby-back>
 			<header-search slot="hSearch" :placeholder="keyword" disabled="true" @click.native="toSearch"></header-search>
 		</aby-header>
 		<div class="mui-content">
@@ -67,10 +66,6 @@
 				this.$refs.pull0[0].showLoading();
 				this.$refs.pull1[0].showLoading();
 				this.getList();
-			},
-			// 重写back方法
-			goBack(){
-				this.$router.push({ name: 'home' });
 			},
 			// 搜索子组件数据返回
 			eventSearchBack(val) {

@@ -19,6 +19,9 @@
 						</p>
 					</div>
 				</a>
+				<div class="purchase-btn-group " v-if="pageType == 'myCollect'">
+					<span class="purchase-delete-btn" :proId="item.sId" @click="onCancel">取消收藏</span>
+				</div>
 			</li>
 		</ul>
 	</div>
@@ -56,6 +59,18 @@
 						name: 'login',
 					});
 				}
+			},
+			onCancel(e){
+				this.$tool.confirm('您确定要取消收藏该产品吗？', (res) => {
+					let proInfo = {};
+					proInfo.loading = 1;
+					proInfo.sId = e.target.getAttribute('sId');
+					proInfo.collectState = 2;
+					this.$abyApi.Project.setScenicCollection(proInfo, (res) => {
+						this.$emit("eventLineBack");
+						this.$tool.toast('已取消');
+					})
+				})
 			}
 		},
 		mounted() {
@@ -73,5 +88,19 @@
 <style scoped>
 	.icobusiness {
 		font-size: 12px;
+	}
+	.purchase-btn-group{
+		text-align: right;
+	    min-height: 44px;
+	    padding-top: 15px;
+	    margin-top: 10px;
+	    border-top: 1px solid #F0F0F0;
+	    font-size: 14px;
+	}
+	.purchase-delete-btn{
+		border: 1px solid #D0D0D0;
+		color: #000;
+		padding: 5px 20px;
+		border-radius: 15px;
 	}
 </style>

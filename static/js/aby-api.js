@@ -763,6 +763,23 @@ const Project = {
 		};
 		Server.getDataFromServer('cpProduct', requestData, successCallback, errorCallback);
 	},
+	//景点 - 收藏、取消收藏
+	setScenicCollection(requestInfo, collectState,successCallback, errorCallback){
+		let requestData = {
+			act: 'CPMT801',
+			sId: requestInfo.sId,
+			collectState:requestInfo.collectState
+		};
+		Server.getDataFromServer('cpTicket', requestData, successCallback, errorCallback);
+	},
+	setHotelCollection(requestInfo, collectState,successCallback, errorCallback){
+		let requestData = {
+			act: 'CPMH801',
+			hId: requestInfo.hId,
+			collectState:requestInfo.collectState
+		};
+		Server.getDataFromServer('cpHotel', requestData, successCallback, errorCallback);
+	}
 };
 
 /******************************      Supplier 供应商模块      *****************************/

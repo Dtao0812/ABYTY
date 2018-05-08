@@ -77,8 +77,8 @@
 					proInfo.proId = e.target.getAttribute('proId');
 					proInfo.proState = 2;
 					this.$abyApi.Project.setProState(proInfo, (res) => {
-						this.$tool.toast('已下架');
 						this.$emit("eventLineBack");
+						this.$tool.toast('已下架');
 					})
 				})
 			},
@@ -88,8 +88,8 @@
 					proInfo.loading = 1;
 					proInfo.proId = e.target.getAttribute('proId');
 					this.$abyApi.Project.delPro(proInfo, (res) => {
-						this.$tool.toast('已删除');
 						this.$emit("eventLineBack");
+						this.$tool.toast('已删除');
 					})
 				})
 			},
@@ -100,8 +100,8 @@
 					proInfo.proId = e.target.getAttribute('proId');
 					proInfo.collectState = 2;
 					this.$abyApi.Project.getProCollection(proInfo, (res) => {
-						this.$tool.toast('已取消');
 						this.$emit("eventLineBack");
+						this.$tool.toast('已取消');
 					})
 				})
 			}

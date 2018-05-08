@@ -110,16 +110,16 @@
 			onDelete(selectId){//删除询价
 				this.$tool.confirm('您确定要删除吗？', (res) => {
 					this.$abyApi.Select.delPublish(selectId, (res)=> {
-						this.$tool.toast('删除成功！');
 						this.$emit('getPullDown');
+						this.$tool.toast('删除成功！');
 					})
 				})
 			},
 			onFinish(){//结束询价
 				this.$tool.confirm('结束询价后将收不到最新留言，确定要结束吗？', (res) => {
 					this.$abyApi.Select.closePublish(selectId, (res)=> {
-						this.$tool.toast('采购已结束');
 						this.$emit('getPullDown');
+						this.$tool.toast('采购已结束');
 					})
 				})
 			},

@@ -66,7 +66,7 @@
 				}else if(info.msgType == 'hotel_order' && info.params.winName == 'agreement_detail'){
 					//协议消息
 					this.$router.push({
-						name:'ageDetail',
+						name:'agrDetail',
 						params:{
 							agreementId: info.params.agreementId,
 							identityType: info.params.identityType

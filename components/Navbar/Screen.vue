@@ -6,11 +6,11 @@
 				<span class="mui-control-item" @click="onWhereType(index)">
 					{{item.title}} <aby-icon type="arrowdown"></aby-icon>
 				</span>
-			<mt-popup v-model="item.isPopup" position="top" popup-transition="popup-fade" :ref="'a'+index">
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell" v-for="(li,i) in item.list" :key="i" @click="onSelectWhere(li,index,item.tabid)" :class="item.title===li.text?'li-active':''">{{li.text}}</li>
-				</ul>
-			</mt-popup>
+				<mt-popup v-model="item.isPopup" position="top" popup-transition="popup-fade" :ref="'a'+index">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" v-for="(li,i) in item.list" :key="i" @click="onSelectWhere(li,index,item.tabid)" :class="item.title===li.text?'li-active':''">{{li.text}}</li>
+					</ul>
+				</mt-popup>
 			</span>
 		</div>
 	</div>
@@ -58,6 +58,7 @@
 				} else {
 					this.$refs.a0[key].$el.classList.remove("mint-popup-top-2");
 				}
+				console.log(this.tabs[key].isPopup)
 			}
 		},
 		mounted() {

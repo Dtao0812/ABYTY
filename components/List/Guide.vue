@@ -51,9 +51,13 @@
 		},
 		mounted() {
 		},
+		updated(){
+			setTimeout(()=>{
+				this.noContent = this.list.length == 0;
+			},1500)
+		},
 		watch: {  
 		    list(val){
-		    	this.noContent = val.length == 0;
 		    	this.lists = val;
 		    }  
 		},

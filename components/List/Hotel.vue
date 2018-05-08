@@ -32,9 +32,14 @@
 <script>
 	export default {
 		components: {},
+<<<<<<< HEAD
 		props: ['list','pageType'],
+=======
+		props: ['list', 'page'],
+>>>>>>> 51fdbb70556218c91ad3a908f7e0f77fc9f7511d
 		data() {
 			return {
+				pageType: this.page,
 				noContent:false
 			}
 		},

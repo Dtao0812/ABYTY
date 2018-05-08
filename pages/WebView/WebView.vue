@@ -3,18 +3,17 @@
 		<aby-header :title="webTitle" slot="header"></aby-header>
 		<div class="mui-content" slot="content">
 			<iframe id="myiframe" ref="iframe" :src="webUrl" width="100%" name="myiframe" height="100%"></iframe>
-			<div class="operation" v-if="cpBasic != ''">
-				<div class="mui-col-xs-3" @click="toChat">
-					<aby-icon class="mui-icon" type="msg"></aby-icon><span class="icotext">聊天</span>
-				</div>
-				<div class="mui-col-xs-3" @click="toHomePage">
-					<aby-icon class="mui-icon" type="business"></aby-icon><span class="icotext">主页</span>
-				</div>
-				<div class="mui-col-xs-6 btndisabled">
-					<input type="button" value="立即预订" />
-				</div>
+		</div>
+		<div class="operation" v-if="cpBasic != ''">
+			<div class="mui-col-xs-3" @click="toChat">
+				<aby-icon class="mui-icon" type="msg"></aby-icon><span class="icotext">聊天</span>
 			</div>
-
+			<div class="mui-col-xs-3" @click="toHomePage">
+				<aby-icon class="mui-icon" type="business"></aby-icon><span class="icotext">主页</span>
+			</div>
+			<div class="mui-col-xs-6 btndisabled">
+				<input type="button" value="立即预订" />
+			</div>
 		</div>
 	</aby-page>
 </template>

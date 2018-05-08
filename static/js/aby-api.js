@@ -344,6 +344,14 @@ const Sys = {
 		};
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback);
 	},
+	// 开屏广告
+	getAdvInfo(requestInfo, successCallback, errorCallback) {
+		let requestData = {
+			loading: 1,
+			act: 'CPI102',
+		};
+		Server.getDataFromServer('cpIndex', requestData, successCallback, errorCallback);
+	},
 };
 
 /******************************      Pay 支付模块       *****************************/

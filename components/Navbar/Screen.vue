@@ -1,5 +1,5 @@
 <template>
-	<div class="mui-input-row mui-search aby-header-screen" :class="this.fixed?'aby-top-fixed':''">
+	<div class="mui-input-row mui-search aby-header-screen" :class="fixed?'aby-top-fixed':''">
 		<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 			<!--公共的-->
 			<span class="mui-control-item" v-for="(item,index) in tabs" :key="index">

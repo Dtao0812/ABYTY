@@ -1,7 +1,6 @@
 <template>
 	<div class="list-item">
 		<!--线路产品列表-->
-		<aby-no-content v-if="noContent"></aby-no-content>
 		<ul class="mui-table-view" v-for="(item,i) in list" :key="i">
 			<li class="mui-table-view-cell mui-media" >
 				<a href="javascript:;" @click="toDetail(item)">
@@ -30,7 +29,7 @@
 			</li>
 			<div class="space" v-if="pageType == 'myProduct' || pageType == 'myCollect'"></div>
 		</ul>
-		
+		<aby-no-content v-if="noContent"></aby-no-content>
 	</div>
 </template>
 
@@ -109,9 +108,11 @@
 		},
 		mounted() {
 		},
+		updated(){
+			this.noContent = this.list.length == 0;
+		},
 		watch: {  
 		    list(val){
-		    	this.noContent = val.length == 0;
 		    	this.list = val;
 		    }  
 		}  

@@ -1,7 +1,6 @@
 <template>
 	<div class="page">
 		<aby-header title="" slot="header" page="2">
-			<aby-back @click.native="goBack" slot="back"></aby-back>
 			<header-search slot="hSearch" :placeholder="keyword" disabled="true" @click.native="toSearch"></header-search>
 		</aby-header>
 		<div class="mui-content">
@@ -64,11 +63,9 @@
 				this.keyword = this.$route.params.keyword;
 				this.tabSelect = this.$route.params.tabSelect||'line';
 				this.tabSelectId = this.$route.params.tabSelectId||0;
+				this.$refs.pull0[0].showLoading();
+				this.$refs.pull1[0].showLoading();
 				this.getList();
-			},
-			// 重写back方法
-			goBack(){
-				this.$router.push({ name: 'home' });
 			},
 			// 搜索子组件数据返回
 			eventSearchBack(val) {
@@ -116,12 +113,13 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[0].data = res.proList;
+						this.$refs.pull0[0].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.proList.length == 0){
 							this.$toast("没有更多内容了！")
-							this.$refs.pull0.isLoading = true;
+							this.$refs.pull0[0].isLoading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[0].data = this.tabList[0].data.concat(res.proList);
@@ -136,12 +134,13 @@
 					if(pullType == 1){
 						// 下拉
 						this.tabList[1].data = res.cpBasicList;
+						this.$refs.pull1[0].closeLoading();
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.cpBasicList.length == 0){
 							this.$toast("没有更多内容了！")
-							this.$refs.pull1.isLoading = true;
+							this.$refs.pull1[0].isLoading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[1].data = this.tabList[1].data.concat(res.cpBasicList);

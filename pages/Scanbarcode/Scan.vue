@@ -26,7 +26,6 @@
 		methods: {
 			init(){
 				plus.navigator.setStatusBarBackground("#000000");
-				
 				// 开始扫描
 				this.barCode();
 			},
@@ -63,7 +62,8 @@
 			},
 			// 返回
 			onBack(){
-				plus.navigator.setStatusBarBackground("#323136");
+				plus.navigator.setStatusBarBackground("#FFFFFF");
+				this.scan.close();
 				this.$router.back();
 			}
 		},

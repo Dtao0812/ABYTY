@@ -1,5 +1,5 @@
 <template>
-	<div class="mui-input-row mui-search aby-header-screen" :class="fixed?'aby-top-fixed':''">
+	<div class="mui-input-row mui-search aby-header-screen" :class="fixed?'aby-top-fixed':''" :style="popupVisible&&fixed?'height:100%':''">
 		<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 			<!--公共的-->
 			<span class="mui-control-item" v-for="(item,index) in tabs" :key="index">
@@ -38,9 +38,14 @@
 						text: '人气从高到低',
 						value: 4
 					}]
-				}, ],
-				popupVisible: false,
+				}],
+				selectKey:0,
 			}
+		},
+		computed:{
+			popupVisible(){
+				return this.tabs[this.selectKey].isPopup;
+			},
 		},
 		methods: {
 			// 选择条件监听
@@ -52,13 +57,13 @@
 			},
 			// 条件类型点击监听
 			onWhereType(key) {
+				this.selectKey = key;
 				this.tabs[key].isPopup = !this.tabs[key].isPopup;
 				if(this.fixed || this.noSearch) {
 					this.$refs.a0[key].$el.classList.add("mint-popup-top-2");
 				} else {
 					this.$refs.a0[key].$el.classList.remove("mint-popup-top-2");
 				}
-				console.log(this.tabs[key].isPopup)
 			}
 		},
 		mounted() {
@@ -137,7 +142,7 @@
 		watch: {
 			fixed(val) {
 				this.isFixed = val;
-			}
+			},
 		}
 	}
 </script>

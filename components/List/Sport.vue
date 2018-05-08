@@ -31,7 +31,7 @@
 	export default {
 		components: {},
 		name: "listSport",
-		props: ['list'],
+		props: ['list','pageType'],
 		data() {
 			return {
 				noContent:false

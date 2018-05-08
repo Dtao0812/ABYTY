@@ -32,7 +32,7 @@
 <script>
 	export default {
 		components: {},
-		props: ['list'],
+		props: ['list','pageType'],
 		data() {
 			return {
 				noContent:false

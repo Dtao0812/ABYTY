@@ -102,8 +102,6 @@ import SpecialLine from '../pages/Special/Line.vue'
 import SpecialHotel from '../pages/Special/Hotel.vue'
 import SpecialPlane from '../pages/Special/Plane.vue'
 import SpecialSuppliers from '../pages/Special/Suppliers.vue'
-//开屏广告
-import ScreenAdvertising from '../pages/Screenadvertising/Default.vue'
 
 const router = new Router({
 	routes: [
@@ -197,8 +195,6 @@ const router = new Router({
 		{ name: 'specialHotel',path: '/SpecialHotel',component: SpecialHotel },
 		{ name: 'specialPlane',path: '/SpecialPlane',component: SpecialPlane },
 		{ name: 'specialSuppliers',path: '/specialSuppliers',component: SpecialSuppliers },
-		//开屏广告
-		{ name: 'screenAdvertising',path: '/ScreenAdvertising',component: ScreenAdvertising },
 	]
 })
 

@@ -1,5 +1,5 @@
 <template>
-	<aby-pull>
+	<aby-pull ref="pull">
 		<aby-header title="" slot="header">
 			<header-search slot="hSearch" :placeholder="keyword" @eventSearch="eventSearchBack"></header-search>
 			<aby-fonts slot="right" class="aby-mui-bar mui-pull-right" title="搜索" @click.native="getPullDown()"></aby-fonts>
@@ -11,7 +11,7 @@
 		<list-hotel v-if="isNull&&type==30" slot="loadlist" ref="list" :list="lists"></list-hotel>
 		<list-sport v-if="isNull&&type==40" slot="loadlist" ref="list" :list="lists"></list-sport>
 
-		<div v-if="!isNull" slot="explain">
+		<!--<div v-if="!isNull" slot="explain">
 			<div class="list-item">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-media">
@@ -50,7 +50,7 @@
 					</li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 	</aby-pull>
 </template>
 
@@ -95,6 +95,7 @@
 				this.$abyApi.Project.getLineListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
+						this.$refs.pull.closeLoading();
 						this.lists = res.proList;
 						this.isNull = res.proList.length>0;
 					}else{
@@ -109,6 +110,7 @@
 				this.$abyApi.Hotel.getHotelListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
+						this.$refs.pull.closeLoading();
 						this.lists = res.hotelList;
 						this.isNull = res.hotelList.length>0;
 					}else{
@@ -123,6 +125,7 @@
 				this.$abyApi.Sport.getSportsListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
+						this.$refs.pull.closeLoading();
 						this.lists = res.scenicList;
 						this.isNull = res.scenicList.length>0;
 					}else{
@@ -137,6 +140,7 @@
 				this.$abyApi.Sport.getSportsListByKeyWord(info, (res) => {
 					if(pullType == 1){
 						// 下拉
+						this.$refs.pull.closeLoading();
 						this.lists = res.scenicList;
 						this.isNull = res.scenicList.length>0;
 					}else{

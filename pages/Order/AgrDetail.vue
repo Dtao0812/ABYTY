@@ -101,30 +101,30 @@
 				<li class="mui-table-view-cell invoice">
 					<h4><input type="checkbox" @click="isSelectInvoiceType=!isSelectInvoiceType" :checked="isSelectInvoiceType"/> 开具发票</h4>
 					<div v-if="isSelectInvoiceType">
-						<p><input type="text" placeholder="发票抬头" v-model="invoiceName"/></p>
-						<p><input type="text" placeholder="税号"  v-model="invoiceNumer"/></p>
-						<p><input type="text" placeholder="发票内容"  v-model="invoiceContent"/></p>
+						<p><input type="text" placeholder="发票抬头" v-model="invoiceName" /></p>
+						<p><input type="text" placeholder="税号" v-model="invoiceNumer" /></p>
+						<p><input type="text" placeholder="发票内容" v-model="invoiceContent" /></p>
 					</div>
 				</li>
 			</ul>
-			<div class="operation">
-				<div class="mui-col-xs-2" @click="toChat">
-					<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">聊天</span>
+		</div>
+		<div class="operation" slot="footer">
+			<div class="mui-col-xs-2" @click="toChat">
+				<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">聊天</span>
+			</div>
+			<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">
+				<aby-icon class="mui-icon" type="call"></aby-icon><span class="icotext">联系</span>
+			</div>
+			<div v-if="info.state == 1">
+				<div class="mui-col-xs-4 btndefault">
+					<input type="button" value="刷新协议" @click="getDetail" />
 				</div>
-				<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">
-					<aby-icon class="mui-icon" type="call"></aby-icon><span class="icotext">联系</span>
+				<div class="mui-col-xs-4 btnblue">
+					<input type="button" value="确认协议" @click="confirmAgr" />
 				</div>
-				<div v-if="info.state == 1">
-					<div class="mui-col-xs-4 btndefault">
-						<input type="button" value="刷新协议" @click="getDetail" />
-					</div>
-					<div class="mui-col-xs-4 btnblue">
-						<input type="button" value="确认协议" @click="confirmAgr"/>
-					</div>
-				</div>
-				<div class="mui-col-xs-8 btnblue" v-else>
-					<input type="button" value="查看订单" @click="toOrderDetail" />
-				</div>
+			</div>
+			<div class="mui-col-xs-8 btnblue" v-else>
+				<input type="button" value="查看订单" @click="toOrderDetail" />
 			</div>
 		</div>
 	</aby-page>
@@ -138,19 +138,19 @@
 				agreementId: this.$route.params.agreementId,
 				identityType: this.$route.params.identityType,
 				info: '',
-				isSelectInvoiceType:true,//是否开票
-				invoiceName:'',// 开票抬头
-				invoiceNumer:'',// 税号
-				invoiceContent:'',// 发票内容
-				tel:'',//联系电话,
-				orderId:'',
+				isSelectInvoiceType: true, //是否开票
+				invoiceName: '', // 开票抬头
+				invoiceNumer: '', // 税号
+				invoiceContent: '', // 发票内容
+				tel: '', //联系电话,
+				orderId: '',
 			}
 		},
 		methods: {
 			init() {
-				this.agreementId = this.$route.params.agreementId||'';
-				this.identityType = this.$route.params.identityType||'';
-				this.orderId = this.$route.params.orderId||'';
+				this.agreementId = this.$route.params.agreementId || '';
+				this.identityType = this.$route.params.identityType || '';
+				this.orderId = this.$route.params.orderId || '';
 				this.getDetail();
 			},
 			// 获得详情
@@ -163,46 +163,46 @@
 				});
 			},
 			// 确认协议
-			confirmAgr(){
-				if(this.isSelectInvoiceType){
-					if(this.invoiceName == '')return this.$toast("请输入发票抬头内容");
-					if(this.invoiceNumer == '')return this.$toast("请输入税号");
-					if(this.invoiceContent == '')return this.$toast("请输入发票内容");
+			confirmAgr() {
+				if(this.isSelectInvoiceType) {
+					if(this.invoiceName == '') return this.$toast("请输入发票抬头内容");
+					if(this.invoiceNumer == '') return this.$toast("请输入税号");
+					if(this.invoiceContent == '') return this.$toast("请输入发票内容");
 				}
 				let reqInfo = {};
 				reqInfo.id = this.info.id;
-				reqInfo.isSelectInvoice = this.isSelectInvoiceType?1:0;
+				reqInfo.isSelectInvoice = this.isSelectInvoiceType ? 1 : 0;
 				reqInfo.invoiceName = this.invoiceName;
 				reqInfo.invoiceNumer = this.invoiceNumer;
 				reqInfo.invoiceContent = this.invoiceContent;
 				reqInfo.updataTime = new Date().getTime();
-				this.$abyApi.Order.confirmAgreementById(reqInfo,(res)=>{
+				this.$abyApi.Order.confirmAgreementById(reqInfo, (res) => {
 					this.$toast("订单生成成功，请去订单中心查看订单！");
 					this.getDetail();
 				});
 			},
 			// 查看订单详情
-			toOrderDetail(){
-				if(this.orderId != ''){
+			toOrderDetail() {
+				if(this.orderId != '') {
 					this.$router.back()
-				}else{
+				} else {
 					this.$router.push({
 						name: 'orderDetails',
 						params: {
 							identityType: this.identityType,
 							orderId: this.info.orderId,
 							page: 'agrDetail',
-							agreementId:this.agreementId
+							agreementId: this.agreementId
 						}
 					});
 				}
 			},
 			// 打开聊天界面
-			toChat(){
+			toChat() {
 				this.$router.push({
 					name: 'chat',
 					params: {
-						userId:this.identityType == 'seller' ? this.info.buyerInfo.userId : this.info.sellerInfo.userId
+						userId: this.identityType == 'seller' ? this.info.buyerInfo.userId : this.info.sellerInfo.userId
 					}
 				});
 			}
@@ -215,15 +215,28 @@
 				next(vm => {
 					vm.init()
 				})
-			}else{
+			} else {
 				next()
 			}
-			
 		},
 	}
 </script>
 
 <style scoped>
+	/*为了解决底部按钮不固定问题*/
+	.mui-content {
+		position: fixed;
+		top: 0px;
+		left: 0;
+		bottom: 41px;
+		padding-top: 40px;
+		/*距离底部的距离为底部盒子的高度，自己也可以设置*/
+		overflow-y: scroll;
+		width: 100%;
+		height: auto;
+		-webkit-overflow-scrolling: touch;
+		/*这句是为了滑动更顺畅*/
+	}
 	h4 {
 		font-size: 16px;
 	}
@@ -287,8 +300,8 @@
 	}
 	
 	.operation .mui-col-xs-2,
-	.operation .mui-col-xs-4, 
-	.operation .mui-col-xs-8{
+	.operation .mui-col-xs-4,
+	.operation .mui-col-xs-8 {
 		float: left;
 		padding: 5px 0px;
 	}

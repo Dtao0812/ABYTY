@@ -211,14 +211,13 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.orderId == "") {
+			if(from.params.orderId ==""||from.name=="agrList"){
 				next(vm => {
 					vm.init()
 				})
 			} else {
 				next()
 			}
-
 		},
 	}
 </script>

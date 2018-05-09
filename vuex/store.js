@@ -48,7 +48,7 @@ const state = {
 	userId: '',userName: '',userType: '',userPhone: '',
 	/*企业基本信息*/
 	cpBasic:window.localStorage.getItem('cpUserInfo')?JSON.parse(window.localStorage.getItem('cpUserInfo')).cpBasic:'',
-	cpId: '',cpBtype: '',
+	cpId: '',cpBtype: '',cpAuditState:'',
 	/*公司主页*/
 	userIdHome:'',cpIdHome:'',
 }
@@ -77,16 +77,18 @@ const mutations = {
 	setUserInfo(state, info){
 		state.loginState = true;
 		state.user_token = info.user_token;
-		state.chat_token = info.chat_token;
 		state.cpUserInfo = info.cpUserInfo;
-		state.userId = info.cpUserInfo.userId;
-		state.userName = info.cpUserInfo.userName;
-		state.userType = info.cpUserInfo.userType;
-		state.userPhone = Vue.$abyApi.Crypto.DeCrypt(info.cpUserInfo.userPhone);
-		state.cpId = info.cpUserInfo.cpId;
-		state.cpBasic = info.cpUserInfo.cpBasic;
-		state.cpBtype = info.cpUserInfo.cpBasic.cpBtype;
-		
+		state.cpAuditState = info.cpUserInfo.cpBasic.cpAuditState;
+		if(state.cpAuditState == 1){
+			state.chat_token = info.chat_token;
+			state.userId = info.cpUserInfo.userId;
+			state.userName = info.cpUserInfo.userName;
+			state.userType = info.cpUserInfo.userType;
+			state.userPhone = Vue.$abyApi.Crypto.DeCrypt(info.cpUserInfo.userPhone);
+			state.cpId = info.cpUserInfo.cpId;
+			state.cpBasic = info.cpUserInfo.cpBasic;
+			state.cpBtype = info.cpUserInfo.cpBasic.cpBtype;
+		}
 		window.localStorage.setItem('cpUserInfo',JSON.stringify(info.cpUserInfo));
 	},
 	// 设置token

@@ -76,9 +76,14 @@
 				reqInfo.cpBasic = this.cpBasic;
 				reqInfo.files = this.cpImgs;
 				this.$abyApi.User.setUserUploadCred(reqInfo, (res) => {
-					if(res) this.$router.push({
-						name: 'home'
-					});
+					if(res) {
+						this.$toast("已提交成功，正在等待审核");
+						setTimeout(()=>{
+							this.$router.push({
+								name: 'home'
+							});
+						},1500)
+					}
 				});
 			},
 			onSelectImg(id) {
@@ -90,9 +95,14 @@
 						}
 					})
 				})
+			},
+			plusReady(){
+				
 			}
 		},
-		mounted() {},
+		mounted() {
+			document.addEventListener("plusready", this.plusReady, false);  
+		},
 	}
 </script>
 
@@ -125,6 +135,7 @@
 	/*两行两列图片排序*/
 	.imgListTwoTwo{
 		padding: 0px 30px;
+		position: relative;
 	}
 	
 	.imgListTwoTwo div {
@@ -152,6 +163,9 @@
 		background-color: #2091E1;
 		border-radius: 50%;
 		color: #FFFFFF;
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 
 	

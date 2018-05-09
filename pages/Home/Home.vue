@@ -149,22 +149,24 @@
 		methods: {
 			init() {
 				this.$abyApi.User.autoLogin((res)=>{
-					// 初始化数据库和融云服务器
-					this.$abyDb.Im.init((res) => {
-						this.$abyApi.Chat.getNotReadMsg();
-						// 初始化融云
-						this.$abyApi.Chat.init();
-						// 接受融云消息
-						this.$abyApi.Chat.setReceiveMsgListener();
-					});
-					// 初始化系统消息
-					this.$abyDb.Msg.init((res)=>{
-						this.$abyApi.Sys.getMsgList();
-						this.$abyApi.Sys.getMsgNum();
-					})
-					// 初始化订单消息
-					this.$abyApi.Order.getNum('buyer');
-					if(this.$store.state.cpBtype != 10)this.$abyApi.Order.getNum('seller');
+					if(this.$store.state.cpAuditState == 1){
+						// 初始化数据库和融云服务器
+						this.$abyDb.Im.init((res) => {
+							this.$abyApi.Chat.getNotReadMsg();
+							// 初始化融云
+							this.$abyApi.Chat.init();
+							// 接受融云消息
+							this.$abyApi.Chat.setReceiveMsgListener();
+						});
+						// 初始化系统消息
+						this.$abyDb.Msg.init((res)=>{
+							this.$abyApi.Sys.getMsgList();
+							this.$abyApi.Sys.getMsgNum();
+						});
+						// 初始化订单消息
+						this.$abyApi.Order.getNum('buyer');
+						if(this.$store.state.cpBtype != 10)this.$abyApi.Order.getNum('seller');
+					}
 				});
 				this.$parent.eventPageShow(this.$route.name);
 				this.getGoodsList();

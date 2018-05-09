@@ -23,11 +23,11 @@ var plusFun = function() {
 	}
 
 	/*设备id*/
-	window.localStorage.setItem('deviceid', plus.push.getClientInfo().clientid);
+	window.localStorage.setItem('deviceId', plus.push.getClientInfo().clientid);
 	store.commit('setStateInfo', {
-		title: 'deviceid',
+		title: 'deviceId',
 		value: plus.push.getClientInfo().clientid
-	})
+	});
 
 	/*版本号*/
 	plus.runtime.getProperty(plus.runtime.appid, function(wgtinfo) {
@@ -43,7 +43,6 @@ var plusFun = function() {
 	plus.key.addEventListener('backbutton', function() {
 		var index = ['index', 'home', 'purchase', 'order', 'message', 'my'];
 		if(Vue.$tool.isInAarry(index, store.state.tabActive)) {
-			console.log(1)
 			// 判断是否首页框架
 			if(!androidBackFirst) {
 				androidBackFirst = new Date().getTime(); //记录第一次按下回退键的时间
@@ -56,7 +55,7 @@ var plusFun = function() {
 				if(new Date().getTime() - androidBackFirst < 1000) plus.runtime.quit();
 			}
 		} else {
-			Vue.$router.back();
+			history.go(-1);
 		}
 	}, false);
 
@@ -112,24 +111,19 @@ var plusFun = function() {
 	//监听后台切到前台
 	document.addEventListener("resume", function() {
 		Vue.$abyApi.User.autoLogin((res)=>{
-			// 初始化数据库和融云服务器
-			Vue.$abyDb.Im.init((res) => {
-				Vue.$abyApi.Chat.getNotReadMsg();
-				// 初始化融云
-				Vue.$abyApi.Chat.init();
-				// 接受融云消息
-				Vue.$abyApi.Chat.setReceiveMsgListener();
-			});
 			// 初始化系统消息
 			Vue.$abyDb.Msg.init((res)=>{
 				Vue.$abyApi.Sys.getMsgList();
 				Vue.$abyApi.Sys.getMsgNum();
-			})
+			});
 			// 初始化订单消息
-			if(Vue.$store.state.cpBtype != 10)Vue.$abyApi.Order.getNum('seller');
+			if(store.state.cpBtype != 10)Vue.$abyApi.Order.getNum('seller');
 			Vue.$abyApi.Order.getNum('buyer');
 		});
 	}, false);
+	
+	//关闭启动窗口
+	plus.navigator.closeSplashscreen();
 };
 
 if(window.plus) {

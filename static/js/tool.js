@@ -90,9 +90,9 @@ let getPhoto = function(successCallback, errorCallback) {
 			case 1:
 				let cmr = plus.camera.getCamera();
 				cmr.captureImage(function(path) {
-					successCallback("file://" + plus.io.convertLocalFileSystemURL(path));
+					successCallback&&successCallback("file://" + plus.io.convertLocalFileSystemURL(path));
 				}, function(err) {
-					errorCallback('拍照失败');
+					errorCallback&&errorCallback('拍照失败');
 				}, {
 					filename: "_doc/camera/"
 				});
@@ -100,9 +100,9 @@ let getPhoto = function(successCallback, errorCallback) {
 			case 2:
 				plus.gallery.pick(function(path) {
 					if(path.substr(path.length - 3) != 'gif' && path.substr(path.length - 3) != 'GIF') {
-						successCallback(path);
+						successCallback&&successCallback(path);
 					} else {
-						errorCallback('不支持gif格式的图片！');
+						errorCallback&&errorCallback('不支持gif格式的图片！');
 					}
 				}, function(err) {
 					errorCallback('选择照片失败');

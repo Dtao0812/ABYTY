@@ -1,15 +1,18 @@
 <template>
 	<div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
 		<div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0" style="margin-bottom: 60px;">
-			<div id="list" style="min-height: 500px; padding-bottom: 60px;">
+			<div id="list" style="min-height: 500px;">
 				<slot name="loading">
 					<aby-loading v-show="isLoading"></aby-loading>
 				</slot>
-				<slot name="loadlist"></slot>
-				<p v-show="loading" class="page-infinite-loading">
-					<mt-spinner type="fading-circle"></mt-spinner>
-					加载中...
-				</p>
+				<div id="loadDiv">
+					<slot name="loadlist"></slot>
+					<p v-show="loading" class="page-infinite-loading">
+						<mt-spinner type="fading-circle"></mt-spinner>
+						加载中...
+					</p>
+					<br style="clear:both"/>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -50,7 +53,8 @@
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
-			document.getElementById("list").height = this.wrapperHeight;
+			document.getElementById('loadDiv').scrollTop = 0;
+			document.getElementById("loadDiv").style.minHeight = document.documentElement.clientHeight;
 		}
 	};
 </script>

@@ -251,6 +251,14 @@ body {
 	line-height: 17px;
 	color: #AAAAAA;
 }
+/*供应商列表头像*/
+.aby-img-supplier{
+	line-height: 55px!important;
+	max-width: 55px!important;
+	height: 55px!important;
+	border-radius: 4px;
+	border: .5px solid #F0F0F0;
+}
 
 
 /*列表标题*/

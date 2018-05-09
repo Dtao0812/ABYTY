@@ -75,6 +75,7 @@ const Server = {
 				method: "POST"
 			},
 			function(t, status) { //上传完成 
+				console.log(t.responseText)
 				Vue.$tool.loadingClose();
 				if(status == 200) {
 					let rtndata = JSON.parse(t.responseText);
@@ -90,7 +91,7 @@ const Server = {
 				}
 			}
 		);
-		task.addData("data", JSON.stringify(data, null, 4));
+		task.addData("data", JSON.stringify(data));
 		for(let i = 0; i < files.length; i++) {
 			let f = files[i];
 			task.addFile(f.path, {
@@ -224,7 +225,6 @@ const General = {
 				scene: ex
 			}
 		};
-
 		if(bhref) {
 			msg.href = href;
 			if(sharehrefTitle) {
@@ -242,7 +242,6 @@ const General = {
 			msg.pictures = [thumburl];
 		}
 		s.send(msg, function() {
-			
 			Vue.$toast("分享到\"" + s.description + "\"成功");
 		}, function(e) {
 			Vue.$toast("分享到\"" + s.description + "\"失败");
@@ -396,6 +395,7 @@ const User = {
 		};
 		Server.getDataFromServer('cpUser', requestData, function(rtn) {
 			store.commit('setUserInfo', rtn);
+			window.localStorage.setItem('user_token',rtn.user_token);
 			successCallback && successCallback(rtn);
 		}, function(err) {
 			store.commit('clearState');
@@ -442,10 +442,10 @@ const User = {
 		let requestData = {
 			loading: requestInfo.loading,
 			act: 'CPU081',
-			osType: store.state.osType,
-			deviceId: store.state.deviceId,
-			version: store.state.version,
-			user_token: store.state.user_token,
+			osType : store.state.osType,
+			deviceId : store.state.deviceId,
+			version : store.state.version,
+			user_token : store.state.user_token,
 			cpBasic: {
 				cpId: requestInfo.cpBasic.cpId,
 				cpBtype: requestInfo.cpBasic.cpBtype,

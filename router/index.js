@@ -267,7 +267,7 @@ router.beforeEach((to, from, next) => {
 		if(!store.state.loginState){
 			store.commit('delRouteChain', from);
 			next({ name: 'login' })
-		}else if(store.state.cpBasic === '' || store.state.cpBasic.cpAuditState !== '1'){
+		}else if(store.state.cpBasic == '' || store.state.cpAuditState != 1){
 			store.commit('delRouteChain', from);
 			next({ name: 'picAuditType' })
 		}else{

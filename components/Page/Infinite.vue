@@ -5,7 +5,10 @@
 				<slot name="loading">
 					<aby-loading v-show="isLoading"></aby-loading>
 				</slot>
-				<slot name="loadlist"></slot>
+				<div id="loadDiv">
+					<slot name="loadlist"></slot>
+					<br style="clear:both"/>
+				</div>
 				<p v-show="loading" class="page-infinite-loading">
 					<mt-spinner type="fading-circle"></mt-spinner>
 					加载中...
@@ -51,6 +54,7 @@
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
 			document.getElementById("list").height = this.wrapperHeight;
+			document.getElementById("loadDiv").style.minHeight = document.documentElement.clientHeight;
 		}
 	};
 </script>

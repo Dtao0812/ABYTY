@@ -49,10 +49,6 @@
 			}
 		},
 		mounted() {
-			try {
-				if(plus) plus.navigator.closeSplashscreen();
-			} catch(err) {};
-
 			this.countDown();
 		},
 		watch: {

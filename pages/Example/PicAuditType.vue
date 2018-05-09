@@ -5,15 +5,15 @@
 		</aby-header>
 		<div slot="content" class="mui-content">
 			<div class="divStatus">
-				<img v-if="auditState===0" src="../../static/images/status/status_auditting.png" />
-				<img v-if="auditState===2" src="../../static/images/status/status_auditFail.png" />
-				<img v-if="auditState===''||!auditState" src="../../static/images/status/status_notAudit.png" />
+				<img v-if="auditState==0" src="../../static/images/status/status_auditting.png" />
+				<img v-else-if="auditState==2" src="../../static/images/status/status_auditFail.png" />
+				<img v-else src="../../static/images/status/status_notAudit.png" />
 				<h5 class="marginComm"></h5>
 				<h3 class="fontBlue">{{auditTitle}}</h3>
 				<h5 class="mui-content-padded"></h5>
 				<p id="auditDesc" v-html="auditDesc"></p>
 			</div>
-			<div class="paddingTen" v-if="auditState===''||auditState===2||auditState===4">
+			<div class="paddingTen" v-if="auditState==''||auditState==2||auditState==4">
 				<aby-button :title="btnTitle" @click.native="toNext" class="aby-button-blue"></aby-button>
 			</div>
 			<div class="textBottom mui-text-center">
@@ -33,7 +33,7 @@
 				tel: this.$store.state.abyTel,
 				auditTitle: '',
 				auditDesc: this.$store.state.cpBasic.auditDesc||'',
-				auditState: this.$store.state.cpBasic.cpAuditState||'',
+				auditState: this.$store.state.cpAuditState||'',
 				btnTitle: '提交认证'
 			}
 		},
@@ -42,7 +42,7 @@
 				this.$tool.dialTelToApp(this.tel);
 			},
 			toNext(){
-				if(this.auditState === 2 || this.auditState === '' || this.auditState === 4){
+				if(this.auditState == 2 || this.auditState == '' || this.auditState == 4){
 					this.$router.push({ name: 'registerTwo' });
 				}
 			},
@@ -53,7 +53,7 @@
 			}
 		},
 		mounted() {
-			switch(this.auditState) {
+			switch(parseInt(this.auditState)) {
 				case 0:
 					this.auditTitle = '您的账号正在审核中';
 					break;

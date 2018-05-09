@@ -251,6 +251,14 @@ body {
 	line-height: 17px;
 	color: #AAAAAA;
 }
+/*供应商列表头像*/
+.aby-img-supplier{
+	line-height: 55px!important;
+	max-width: 55px!important;
+	height: 55px!important;
+	border-radius: 4px;
+	border: .5px solid #F0F0F0;
+}
 
 
 /*列表标题*/
@@ -382,14 +390,14 @@ small {
 	display: inline-block;
 	width: 49%;
 	color: #08C7B5;
-	font-size: 16px;
+	font-size: 15px;
 	background-color: #FFFFFF;
 	box-shadow: none;
 }
 
 .aby-button-contact .icochat,.aby-button-contact .icocall {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 	margin-right: 6px;
 	vertical-align: bottom;
 }

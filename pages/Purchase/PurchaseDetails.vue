@@ -246,7 +246,7 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation mui-text-center aby-font-blue" @click="toChat(data.publisher.userId)">
-					<aby-icon type="rob"></aby-icon>
+					<aby-icon type="rob" class="icorob"></aby-icon>
 					抢单
 				</div>
 			</div>
@@ -365,6 +365,10 @@
 		padding: 15px 15px 30px 15px;
 		margin: 0px;
 		text-align: center;
+	}
+	
+	.icorob{
+		font-size: 18px;
 	}
 	
 	.mui-table-view:before,

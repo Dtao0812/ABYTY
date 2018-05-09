@@ -5,15 +5,18 @@
 		<ul class="mui-table-view" v-if="list.length>0">
 			<li class="mui-table-view-cell mui-media" v-for="(item,i) in list" :key="i">
 				<a href="javascript:;" @click="toHomePage(item)">
-					<img class="mui-media-object mui-pull-left aby-img-guide" :src="item.cpLogo">
+					<img class="mui-media-object mui-pull-left aby-img-supplier" :src="item.cpLogo">
 					<div class="mui-media-body aby-list">
 						<p class="aby-list-title">{{item.cpName}}</p>
 						<p class="mui-ellipsis">
-							<aby-icon className="mui-pull-right" type="location"></aby-icon>
+							<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>
 							{{item.cpCityName}}
 						</p>
 						<p class="mui-ellipsis" v-if="item.cpRoute.length>0">
 							营业范围：{{item.cpRoute|filterListToString}}
+						</p>
+						<p  class="mui-ellipsis" v-else>
+							营业范围：未设置
 						</p>
 					</div>
 				</a>
@@ -61,5 +64,8 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	.iconowlocation{
+		font-size: 12px;
+	}
 </style>

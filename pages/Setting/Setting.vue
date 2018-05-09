@@ -22,7 +22,7 @@
 			<h5 class="mui-content-padded"></h5>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li id="feedback" class="mui-table-view-cell">
-					<a class="mui-navigate-right">客服电话：<span @click="onDialTel" class="fontGrayBlue floatRight">{{tel}}</span></a>
+					<a class="mui-navigate-right">客服电话：<span @click="onDialTel" class="aby-font-blue floatRight">{{tel}}</span></a>
 				</li>
 			</ul>
 			<div class="aby-button-panel">
@@ -79,5 +79,8 @@
 	}
 	.aby-button-panel{
 		margin-top: 50px;
+	}
+	.floatRight{
+		float: right;
 	}
 </style>

@@ -753,7 +753,9 @@ small {
 .aby-special {
 	width: 48%;
 	padding: 5px;
-	float: left;
+	/*float: left;*/
+	display: inline-block;
+	vertical-align: top;
 	margin: 0;
 	margin-right: 2%;
 	margin-bottom: 2%;

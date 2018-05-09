@@ -116,9 +116,7 @@
 					<li class="mui-table-view-cell mui-media" @click="toAgrDetail">
 						<div class="mui-media-object mui-pull-left">订单协议</div>
 						<div class="mui-media-body">
-							<a class="mui-navigate-right menu">
-								<span class="">查看</span>
-							</a>
+							<span class="aby-font-blue mui-navigate-right">查看</span>
 						</div>
 					</li>
 				</ul>

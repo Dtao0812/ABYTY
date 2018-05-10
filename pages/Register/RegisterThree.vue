@@ -49,15 +49,15 @@
 					cpBtype: this.$route.params.cpBtype
 				},
 				cpImgs: [{
-					id: 10,
+					id: '10',
 					src: '',
 					btnUpload: false
 				}, {
-					id: 20,
+					id: '20',
 					src: '',
 					btnUpload: false
 				}, {
-					id: 30,
+					id: '30',
 					src: '',
 					btnUpload: false
 				}]

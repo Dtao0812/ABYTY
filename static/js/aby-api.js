@@ -87,11 +87,9 @@ const Server = {
 				}
 			}
 		);
-		console.log(JSON.stringify(data))
-		task.addData("data", JSON.stringify(data));
+		task.addData("data", JSON.stringify(data, null, 4));
 		for(let i = 0; i < files.length; i++) {
 			let f = files[i];
-			console.log(JSON.stringify(f))
 			task.addFile(f.path, {
 				key: f.name
 			});

@@ -73,6 +73,21 @@
 							info.noReadNum = 0;
 							info.sendUser = JSON.parse(info.content.extra);
 							let isAdd = true;
+							if(info.sendUser.userId == this.$store.state.userId){
+								// 如果是本人发出的消息，显示对方头像
+								let reqInfo = {};
+								reqInfo.loading = 1;
+								reqInfo.userId = info.targetId;
+								this.$abyApi.User.getBasciInfo(reqInfo,(r)=>{
+									info.sendUser = {
+										cpId : r.cpUserInfo.cpBasic.cpId,
+										cpName : r.cpUserInfo.cpBasic.cpName,
+										userFace : r.cpUserInfo.userFace,
+										userId : r.cpUserInfo.userId,
+										userName : r.cpUserInfo.userName,
+									}
+								})
+							}
 							for(let i=0;i<list.length;i++){
 								if(list[i].targetId == info.targetId){
 									isAdd = false;

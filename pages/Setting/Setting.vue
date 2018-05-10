@@ -80,4 +80,7 @@
 	.aby-button-panel{
 		margin-top: 50px;
 	}
+	.floatRight{
+		float: right;
+	}
 </style>

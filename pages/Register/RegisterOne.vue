@@ -63,7 +63,9 @@
 					return this.$toast('验证码不正确');
 				} else if(this.userPassword !== this.userPassword_confirm) {
 					return this.$toast('密码重复不正确');
-				} else {
+				} else if(this.userPassword.length < 6){
+					return this.$toast('密码不能小于6位数字');
+				} else{
 					let reqInfo = {};
 					reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
 					reqInfo.userPassword = this.$abyApi.Crypto.MD5(this.userPassword);

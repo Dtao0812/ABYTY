@@ -33,9 +33,9 @@ const state = {
 	abyTel:'025-68132329',//客服电话
 	isFirst:window.localStorage.getItem('isFirst')?false:true,//是否第一次加载
 	
-	osType: window.localStorage.getItem('osType')?window.localStorage.getItem('osType'):'',
-	deviceId: window.localStorage.getItem('deviceId')?window.localStorage.getItem('deviceId'):'',
-	version: window.localStorage.getItem('version')?window.localStorage.getItem('version'):'',
+	osType: window.localStorage.getItem('osType')?window.localStorage.getItem('osType'):'3',
+	deviceId: window.localStorage.getItem('deviceId')?window.localStorage.getItem('deviceId'):'000',
+	version: window.localStorage.getItem('version')?window.localStorage.getItem('version'):'3.0',
 	
 	chat_token:'',//聊天token
 	isConnectChat:'',//是否连接聊天服务器
@@ -89,6 +89,7 @@ const mutations = {
 			state.cpBasic = info.cpUserInfo.cpBasic;
 			state.cpBtype = info.cpUserInfo.cpBasic.cpBtype;
 		}
+		window.localStorage.setItem('user_token',info.user_token);
 		window.localStorage.setItem('cpUserInfo',JSON.stringify(info.cpUserInfo));
 	},
 	// 设置token

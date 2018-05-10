@@ -21,8 +21,8 @@
 			</ul>
 			<h5 class="mui-content-padded"></h5>
 			<ul class="mui-table-view mui-table-view-chevron">
-				<li id="feedback" class="mui-table-view-cell">
-					<a class="mui-navigate-right">客服电话：<span @click="onDialTel" class="aby-font-blue floatRight">{{tel}}</span></a>
+				<li id="feedback" class="mui-table-view-cell" @click="onDialTel">
+					<a class="mui-navigate-right">客服电话：<span class="fontGrayBlue floatRight">{{tel}}</span></a>
 				</li>
 			</ul>
 			<div class="aby-button-panel">

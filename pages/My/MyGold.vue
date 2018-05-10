@@ -23,11 +23,11 @@
 					</li>
 				</ul>
 				<div class="mui-input-row mui-checkbox mui-left">
-					<label>同意<a>《质保金保障服务协议》</a></label>
+					<label>同意<a @click="toAgree">《质保金保障服务协议》</a></label>
 					<input name="checkbox" value="" type="checkbox" checked>
 				</div>
 			</div>
-			<div class="safe">
+			<div class="safe" @click="toTonglian">
 				<img src="../../static/images/ico/ico_pay_tl_3x.png" />
 				<p>本平台由通联支付提供资金担保</p>
 			</div>
@@ -67,6 +67,26 @@
 						preDeposit: this.preDeposit,
 						poundage: this.poundage,
 						totalPrice: this.totalPrice
+					}
+				})
+			},
+			// 质保金协议
+			toAgree(){
+				this.$router.push({
+					name:"webView",
+					params:{
+						title:'质保金保障服务协议',
+						url:'http://m.ai-by.com/wap/agreement/bondAgreement.html'
+					}
+				})
+			},
+			// 通联协议
+			toTonglian(){
+				this.$router.push({
+					name:"webView",
+					params:{
+						title:'通联支付说明',
+						url:'http://m.ai-by.com/wap/webView/index.html'
 					}
 				})
 			}

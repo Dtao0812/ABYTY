@@ -42,6 +42,7 @@
 				this.$router.replace({
 					name:'webView',
 					params:{
+						page:'adv',
 						title:this.$store.state.advTitle,
 						url:this.$store.state.advUrl
 					}

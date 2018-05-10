@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -69,20 +69,16 @@ const Server = {
 	},
 	// 上传文件接口（手机app）
 	UploadFileByApp(apiName, files, data, sucesscallback, errorcallback, uploadingcallback) {
-		Vue.$tool.loading('正在提交...');
 		let apiUrl = AbyUrl + 'aby/' + apiName;
 		let task = plus.uploader.createUpload(apiUrl, {
 				method: "POST"
 			},
 			function(t, status) { //上传完成 
-				console.log(t.responseText)
-				Vue.$tool.loadingClose();
 				if(status == 200) {
 					let rtndata = JSON.parse(t.responseText);
 					if(rtndata.errorcode == 0) {
 						sucesscallback && sucesscallback(rtndata);
 					} else {
-						Vue.$tool.toast(rtndata.msg)
 						errorcallback && errorcallback(rtndata.msg);
 					}
 				} else {
@@ -91,18 +87,23 @@ const Server = {
 				}
 			}
 		);
+		console.log(JSON.stringify(data))
 		task.addData("data", JSON.stringify(data));
 		for(let i = 0; i < files.length; i++) {
 			let f = files[i];
+			console.log(JSON.stringify(f))
 			task.addFile(f.path, {
 				key: f.name
 			});
 		}
 		task.addEventListener("statechanged", function(upload, num) {
-			Vue.$tool.loadingClose();
 			uploadingcallback && uploadingcallback(upload.uploadedSize, upload.totalSize);
 		}, false);
-		task.start();
+		try{
+			task.start();
+		}catch(e){
+			console.log(e)
+		}
 	},
 	// 获得java支付接口
 	getDataFromServerPayment(apiName, data, successCallback, errorCallback) {
@@ -443,7 +444,7 @@ const User = {
 			loading: requestInfo.loading,
 			act: 'CPU081',
 			osType : store.state.osType,
-			deviceId : store.state.deviceId,
+			deviceId : store.state.deviceId||'xxxx',
 			version : store.state.version,
 			user_token : store.state.user_token,
 			cpBasic: {
@@ -1372,7 +1373,11 @@ const Chat = {
 	// 上传文件
 	uploadFile(file, successCallback, errorCallback) {
 		let requestData = {
-			act: 'IM2000'
+			act: 'IM2000',
+			osType : store.state.osType,
+			deviceId : store.state.deviceId,
+			version : store.state.version,
+			user_token : store.state.user_token,
 		};
 		let files = [];
 		files.push({

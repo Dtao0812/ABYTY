@@ -127,22 +127,16 @@ let countdown = function(endDate, divId) {
 	//定义结束时间
 	let endDates = endDate.replace(/\-/g, '\/');
 	let endTime = new Date(endDates);
-
 	//算出中间差并且已毫秒数返回; 除以1000将毫秒数转化成秒数方便运算；
 	let countDown = (endTime.getTime() - startTime.getTime()) / 1000;
-
 	//获取天数 1天 = 24小时  1小时= 60分 1分 = 60秒
 	let oDay = parseInt(countDown / (24 * 60 * 60));
-
 	//获取小时数 
 	let oHours = parseInt(countDown / (60 * 60) % 24);
-
 	//获取分钟数
 	let oMinutes = parseInt(countDown / 60 % 60);
-
 	//获取秒数
 	let oSeconds = parseInt(countDown % 60);
-
 	//下面就是插入到页面事先准备容器即可;
 	let html = '';
 	if(oDay > 0) {
@@ -160,7 +154,6 @@ let countdown = function(endDate, divId) {
 	} else {
 		return;
 	}
-
 	//当时间为0的时候标记结束;
 	if(countDown < 0) {
 		document.getElementById(divId).className = 'time fontGray';
@@ -191,61 +184,56 @@ let getRTime =  function(t) {
 		}
 		s = Math.floor(t);
 	}
-	
 	if(d>0){
 		return d + "天" + h + "时" + m + "分" + s + "秒";
 	}else {
 		return h + "时" + m + "分" + s + "秒";
 	}
-	
 };
 
-
-// 获得当前时间
-let getNowFormatDate = function() {
-	var date = new Date();
-	var seperator1 = "-";
-	var year = date.getFullYear();
-	var month = date.getMonth() + 1;
-	var strDate = date.getDate();
-	if(month >= 1 && month <= 9) {
-		month = "0" + month;
+const abyDateFun = {
+	// 日期对比
+	compareDate(s1,s2){
+	  return ((new Date(s1.replace(/-/g,"\/")))>(new Date(s2.replace(/-/g,"\/"))));
+	},
+	//获得当前时间
+	getNowFormatDate() {
+		var date = new Date();
+		var seperator1 = "-";
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		if(month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if(strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		var currentdate = year + seperator1 + month + seperator1 + strDate;
+		return currentdate;
+	},
+	// 格式化时间
+	getFormatDate(datetime) {
+		var year = datetime.getFullYear();
+		var month = datetime.getMonth() + 1; //js从0开始取 
+		var date = datetime.getDate();
+		var hour = datetime.getHours();
+		var minutes = datetime.getMinutes();
+		var second = datetime.getSeconds();
+		if(month < 10)month = "0" + month;
+		if(date < 10)date = "0" + date;
+		return year + "-" + month + "-" + date;
+	},
+	// 计算年龄
+	countAge(datetime){
+		var r   =   datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
+	    if(r == null) return false;     
+	    var d = new Date(r[1], r[3]-1, r[4]);     
+	    if(d.getFullYear() == r[1]&&(d.getMonth() + 1) == r[3]&&d.getDate() == r[4]){   
+	        var Y = new Date().getFullYear();   
+	        return Y-r[1];   
+	    }  
 	}
-	if(strDate >= 0 && strDate <= 9) {
-		strDate = "0" + strDate;
-	}
-	var currentdate = year + seperator1 + month + seperator1 + strDate;
-	return currentdate;
-};
-
-// 时间格式化
-let getFormatDate = function(datetime) {
-	var year = datetime.getFullYear();
-	var month = datetime.getMonth() + 1; //js从0开始取 
-	var date = datetime.getDate();
-	var hour = datetime.getHours();
-	var minutes = datetime.getMinutes();
-	var second = datetime.getSeconds();
-
-	if(month < 10) {
-		month = "0" + month;
-	}
-	if(date < 10) {
-		date = "0" + date;
-	}
-
-	return year + "-" + month + "-" + date;
-};
-
-//计算年龄
-let countAge = function(datetime){
-	var r   =   datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
-    if(r == null) return false;     
-    var d = new Date(r[1], r[3]-1, r[4]);     
-    if(d.getFullYear() == r[1]&&(d.getMonth() + 1) == r[3]&&d.getDate() == r[4]){   
-        var Y = new Date().getFullYear();   
-        return Y-r[1];   
-    }  
 };
 
 // 拨打电话(app)
@@ -356,8 +344,7 @@ export default {
 	countdown,
 	pad,
 	localStorage,
-	getNowFormatDate,
-	getFormatDate,
 	copyContent,
-	getRTime
+	getRTime,
+	abyDateFun
 }

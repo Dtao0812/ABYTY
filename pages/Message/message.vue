@@ -80,9 +80,7 @@
 									list[i].msgList.push(info);
 								}
 							}
-							if(isAdd){
-								list.push(info);
-							}
+							if(isAdd)list.push(info);
 						}
 					});
 					this.chatList = list;

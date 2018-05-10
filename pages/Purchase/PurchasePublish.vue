@@ -330,6 +330,14 @@
 				},
 			}
 		},
+		computed: {
+			backTime() {
+				return this.publishInfo.backTime;
+			},
+			leaveTime() {
+				return this.publishInfo.leaveTime;
+			},
+		},
 		methods: {
 			onSelectPicker(e) {
 				if(e.id == 'selectType') {
@@ -386,8 +394,8 @@
 							let dlist = []
 							for(let i = 0, len = res.dicList.length; i < len; i++) {
 								if(i == 0) {
-									this.publishInfo.ticketType = res.dicList[i].dicValue;
-									this.publishInfo.ticketTypeName = res.dicList[i].dicName;
+									this.publishInfo.ticketType = res.dicList[i].dicName;
+									this.publishInfo.ticketTypeName = res.dicList[i].dicValue;
 								}
 								let info = {};
 								info.text = res.dicList[i].dicName;
@@ -532,6 +540,8 @@
 					if(this.publishInfo.fromTime == '') return this.$toast("请选择出发时间");
 					if(this.publishInfo.ticketType == '往返' && this.publishInfo.backTime == '') return this.$toast("请选择返程时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
+					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
+					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
 					reqInfo.fromCity = this.publishInfo.fromCity;
 					reqInfo.goCity = this.publishInfo.goCity;
 					reqInfo.fromTime = this.publishInfo.fromTime;
@@ -547,6 +557,8 @@
 					if(this.publishInfo.fromTime == '') return this.$toast("请选择出发时间");
 					if(this.publishInfo.ticketType == '往返' && this.publishInfo.backTime == '') return this.$toast("请选择返程时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
+					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
+					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
 					if(this.publishInfo.liveTime == '') return this.$toast("请选择入住时间");
 					if(this.publishInfo.leaveTime == '') return this.$toast("请选择离店时间");
 					if(this.publishInfo.roomNum == 0) return this.$toast("请输入预定房间数");
@@ -566,6 +578,8 @@
 					if(this.publishInfo.scenicName == '') return this.$toast("请输入景点名称");
 					if(this.publishInfo.playScenicTime == '') return this.$toast("请输入游玩时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
+					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
+					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
 					reqInfo.scenicName = this.publishInfo.scenicName;
 					reqInfo.playScenicTime = this.publishInfo.playScenicTime;
 					reqInfo.peopleNum = this.publishInfo.peopleNum;
@@ -683,6 +697,24 @@
 				this.trafficTypeList = slots;
 			});
 		},
+		watch:{
+			backTime(val){
+				if(val != '' && this.publishInfo.fromTime != ''){
+					if(this.$tool.abyDateFun.compareDate(this.publishInfo.fromTime,val)){
+						this.$toast("返程时间不能小于出发时间");
+						this.publishInfo.backTime = '';
+					}
+				}
+			},
+			liveTime(val){
+				if(val != '' && this.publishInfo.leaveTime != ''){
+					if(this.$tool.abyDateFun.compareDate(this.publishInfo.leaveTime,val)){
+						this.$toast("离店时间不能小于入住时间");
+						this.publishInfo.backTime = '';
+					}
+				}
+			}
+		}
 	}
 </script>
 

@@ -238,6 +238,14 @@
 		},
 		activated() {
 			this.init();
+			try{
+				/*设备id*/
+				window.localStorage.setItem('deviceId', plus.push.getClientInfo().clientid);
+				this.$store.commit('setStateInfo', {
+					title: 'deviceId',
+					value: plus.push.getClientInfo().clientid
+				});
+			}catch(e){}
 		},
 		deactivated(){
 			this.popupPlus = false;

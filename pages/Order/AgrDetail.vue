@@ -11,96 +11,99 @@
 					<p>时间：{{info.sendTime | filterConvertDate}}</p>
 				</li>
 			</ul>
-			<ul class="mui-table-view space">
-				<li class="mui-table-view-cell">
-					<p class="mui-pull-right creattime">创建时间：{{info.createTime | filterConvertDate}}</p>
-					<br />
-					<table class="table table-bordered table-striped">
-						<tbody>
-							<tr>
-								<td>甲方</td>
-								<td>{{info.sellerInfo.cpName}}</code>
-								</td>
-							</tr>
-							<tr>
-								<td>乙方</td>
-								<td>{{info.buyerInfo.cpName}}
-								</td>
-							</tr>
-							<tr>
-								<td>合同标题</td>
-								<td>{{info.title}}</td>
-							</tr>
-							<tr>
-								<td>收款帐号</td>
-								<td>
-									<div class="bank-logo">
-										<img :src="info.bankInfo.bankFace" alt="" />
-									</div>
-									<div class="bank-number">
-										<span>对公</span> {{info.bankInfo.holderName}}（{{info.bankInfo.account}}）
-										<p>{{info.bankInfo.bankSubName}}</p>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>出行日期</td>
-								<td>{{info.goDate}}至{{info.backDate}}</td>
-							</tr>
-							<tr>
-								<td>人数</td>
-								<td>{{info.adultsNum}}成人<span v-if="info.childNum !=0"> {{info.childNum}}儿童</span></td>
-							</tr>
-							<tr>
-								<td>结算价格</td>
-								<td>￥{{info.totalPrice}}</td>
-							</tr>
-							<tr>
-								<td>甲方联系人</td>
-								<td>{{info.sellerInfo.userName}}（{{info.sellerInfo.contactPhone}}）</td>
-							</tr>
-							<tr>
-								<td>乙方联系人</td>
-								<td>{{info.buyerInfo.userName}}（{{info.buyerInfo.contactPhone}}）</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="mui-text-center">合同内容</td>
-							</tr>
-							<tr>
-								<td colspan="2" v-html="info.content"></td>
-							</tr>
-						</tbody>
-					</table>
-				</li>
-			</ul>
+			<div class="aby-detail-content space">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">合同标题</div>
+						<div class="mui-media-body">{{info.title}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">创建时间</div>
+						<div class="mui-media-body">{{info.createTime | filterConvertDate}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">甲方</div>
+						<div class="mui-media-body">{{info.sellerInfo.cpName}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">乙方</div>
+						<div class="mui-media-body">{{info.buyerInfo.cpName}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">收款账户</div>
+						<div class="mui-media-body">
+							<p class="aby-font-Black"><span class="banktip">对公</span>{{info.bankInfo.holderName}}</p>
+							<div class="bank-number">
+								<img class="bank-logo" :src="info.bankInfo.bankFace" alt="" />{{info.bankInfo.account}}
+								<p>{{info.bankInfo.bankSubName}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="aby-detail-content space">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">出行日期</div>
+						<div class="mui-media-body">{{info.goDate}}至{{info.backDate}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">人数</div>
+						<div class="mui-media-body">{{info.adultsNum}}成人<span v-if="info.childNum !=0"> {{info.childNum}}儿童</span></div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">结算价格</div>
+						<div class="mui-media-body">￥{{info.totalPrice}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">甲方联系人</div>
+						<div class="mui-media-body">{{info.sellerInfo.userName}}（{{info.sellerInfo.contactPhone}}）</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">乙方联系人</div>
+						<div class="mui-media-body">{{info.buyerInfo.userName}}（{{info.buyerInfo.contactPhone}}）</div>
+					</li>
+				</ul>
+			</div>
+			<div class="aby-detail-content space">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">合同内容</div>
+						<div class="mui-media-body"></div>
+					</li>
+					<li class="mui-table-view-cell aby-font-Black" v-html="info.content"></li>
+				</ul>
+			</div>
 			<!--卖家发票样式-->
-			<table class="table3" border="1" cellspacing="0" cellpadding="0" v-if="info.state == 2 && info.isInvoice == 1">
-				<tr>
-					<td class="mui-col-xs-3">是否开票</td>
-					<td class="mui-col-xs-9">
-						需要发票
-					</td>
-				</tr>
-				<tr>
-					<td>发票抬头</td>
-					<td>
-						{{info.invoiceName}}
-					</td>
-				</tr>
-				<tr>
-					<td>纳税人识别号</td>
-					<td>{{info.invoiceNumer}}</td>
-				</tr>
-				<tr>
-					<td>发票内容</td>
-					<td>{{info.invoiceContent}}</td>
-				</tr>
-			</table>
+			<div class="aby-detail-content space" v-if="info.state == 2 && info.isInvoice == 1">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">是否开票</div>
+						<div class="mui-media-body">需要发票</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">发票抬头</div>
+						<div class="mui-media-body">{{info.invoiceName}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">税号</div>
+						<div class="mui-media-body">{{info.invoiceNumer}}</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-media-object mui-pull-left">发票内容</div>
+						<div class="mui-media-body">{{info.invoiceContent}}</div>
+					</li>
+
+				</ul>
+			</div>
 			<!--买家发票-->
-			<ul class="mui-table-view" v-if="identityType == 'buyer' && info.state == '1'">
-				<li class="mui-table-view-cell invoice">
-					<h4><input type="checkbox" @click="isSelectInvoiceType=!isSelectInvoiceType" :checked="isSelectInvoiceType"/> 开具发票</h4>
-					<div v-if="isSelectInvoiceType">
+			<ul class="mui-table-view space" v-if="identityType == 'buyer' && info.state == '1'">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row mui-checkbox mui-left">
+						<label>开具发票</label>
+						<input name="checkbox" value="" type="checkbox" @click="isSelectInvoiceType=!isSelectInvoiceType" :checked="isSelectInvoiceType">
+					</div>
+					<div v-if="isSelectInvoiceType" class="invoice">
 						<p><input type="text" placeholder="发票抬头" v-model="invoiceName" /></p>
 						<p><input type="text" placeholder="税号" v-model="invoiceNumer" /></p>
 						<p><input type="text" placeholder="发票内容" v-model="invoiceContent" /></p>
@@ -211,7 +214,7 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.orderId ==""||from.name=="agrList"){
+			if(from.params.orderId == "" || from.name == "agrList") {
 				next(vm => {
 					vm.init()
 				})
@@ -224,6 +227,7 @@
 
 <style scoped>
 	/*为了解决底部按钮不固定问题*/
+	
 	.mui-content {
 		position: fixed;
 		top: 0px;
@@ -237,8 +241,10 @@
 		-webkit-overflow-scrolling: touch;
 		/*这句是为了滑动更顺畅*/
 	}
+	
 	h4 {
-		font-size: 16px;
+		font-size: 15px;
+		font-weight: 400;
 	}
 	
 	.sender p {
@@ -248,36 +254,10 @@
 	.creattime {
 		font-size: 12px;
 	}
-	
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 20px;
-		margin-top: 10px;
-	}
-	
-	.table-bordered {
-		border: 1px solid #ddd;
-	}
-	
-	.table-bordered>tbody>tr>th {
-		border: 1px solid #ddd;
-	}
-	
-	.table-bordered>tbody>tr>th,
-	.table-bordered>tfoot>tr>th,
-	.table-bordered>thead>tr>td,
-	.table-bordered>tbody>tr>td,
-	.table-bordered>tfoot>tr>td {
-		border: 1px solid #ddd;
-		padding: 5px;
-		font-size: 12px;
-	}
 	/*发票*/
 	
 	.invoice {
 		padding-bottom: 20px;
-		margin-bottom: 60px;
 	}
 	
 	.invoice input[type=text] {
@@ -286,6 +266,7 @@
 		border-radius: 2px;
 		font-size: 12px;
 		padding-left: 8px;
+		border: 1px solid #DDDDDD;
 	}
 	
 	.operation {
@@ -343,14 +324,49 @@
 		background: #98c72b;
 		color: #fff;
 		padding: 0 3px;
+		margin-right: 3px;
 	}
 	
-	.bank-logo {
-		width: 35px;
+	.bank-logo{
+		width: 15px;
 		float: left;
+		vertical-align: bottom;
+		margin-top: 2px;
+		margin-right: 2px;
 	}
 	
-	.bank-number {
-		margin-left: 40px;
+	.banktip{
+		background-color: #08C7B5;
+		color: #FFFFFF;
+		padding:0px 2px;
+		font-size: 12px;
+		margin-right: 5px;
+	}
+	.mui-table-view:before,
+	.mui-table-view:after,
+	.mui-table-view-cell:after {
+		background-color: #FFFFFF;
+	}
+	
+	.mui-checkbox.mui-left input[type=checkbox] {
+		left: 0px;
+		top: 6px;
+		width: 20px;
+		height: 20px;
+		font-size: 20px;
+	}
+	
+	.mui-checkbox input[type=checkbox]:checked:before,
+	.mui-checkbox input[type=checkbox]:before {
+		font-size: 20px;
+	}
+	
+	.mui-checkbox.mui-left label
+	{
+		padding-right: 15px;
+		padding-left: 28px;
+	}
+	.mui-content{
+		padding-bottom: 30px;
 	}
 </style>

@@ -837,3 +837,16 @@ small {
 .mint-indexlist-navitem {
     padding: 0 6px;
 }
+/*弹出框美化*/
+.mint-msgbox-confirm {
+    color: #08C7B5;
+    width: 50%;
+    line-height: 28px;
+}
+.mint-msgbox-btn {
+    line-height: 28px;
+}
+.mint-msgbox-message {
+    line-height: 25px;
+    font-size: 15px;
+}

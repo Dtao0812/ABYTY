@@ -281,6 +281,8 @@
 	.home-menu .mui-media-body {
 		font-size: 14px!important;
 		margin-top: 5px!important;
+		height: 20px!important;
+		line-height: 18px!important;
 	}
 	/*居中两边带线大标题*/
 	

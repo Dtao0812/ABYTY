@@ -2,7 +2,7 @@
 	<aby-page ref="page">
 		<aby-header slot="header">
 			<div class="mui-title" slot="title" v-if="userInfo != ''">
-				<h1>{{userInfo.cpBasic.cpCorpName}}</h1>
+				<h1>{{userInfo.userName}}</h1>
 				<h6 class="mui-ellipsis">{{userInfo.cpBasic.cpName}}</h6>
 			</div>
 			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" @click.native="toHomePage" slot="right" type="chatsetting"></aby-icon>
@@ -15,7 +15,7 @@
 						<div class="msg-content-inner" v-if="li.content.messageName=='TextMessage'" v-html="$abyApi.Chat.emojiToHTML(li.content.content)">
 						</div>
 						<div class="msg-content-inner" v-if="li.content.messageName=='ImageMessage'">
-							<img :src="li.content.imageUri" id="imgMessage" :data-preview-src="li.content.imageUri" data-preview-group="1">
+							<img :src="'data:image/png;base64,'+li.content.content" id="imgMessage" :data-preview-src="li.content.imageUri" data-preview-group="1">
 						</div>
 						<div class="msg-content-arrow"></div>
 					</div>
@@ -124,9 +124,16 @@
 			// 点击相机
 			onCamera() {
 				this.$tool.getPhoto((file) => {
+					this.$tool.loading('正在提交...');
+					this.$refs.footer.className = '';
+					this.isShowFace = false;
+					this.isShowMore = false;
 					this.$abyApi.Chat.uploadFile(file, (res) => {
+						this.$tool.loadingClose();
 						let imgMsg = this.$abyApi.Chat.imgToRongIm(res.imageInfo.base64, res.imageInfo.imageUri);
 						this.RongImSend(imgMsg);
+					},(err)=>{
+						this.$tool.loadingClose();
 					})
 				});
 			},
@@ -354,7 +361,7 @@
 	
 	.mui-content {
 		height: 100%;
-		padding: 44px 0px 50px 0px;
+		padding: 0px 0px 50px 0px;
 		overflow: auto;
 	}
 	
@@ -481,6 +488,7 @@
 		width: 100%;
 		height: 150px;
 		overflow-y: scroll;
+	    background-color: #efeff4;
 	}
 	
 	.editFooter {

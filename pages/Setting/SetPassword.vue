@@ -33,8 +33,8 @@
 				userPhone:this.$store.state.userPhone||'',
 				newPassword:'',newPassword_confirm:'',code:'',verifyCode:'',
 				isShowPhoneDiv:true,
-				isShowPhone:this.$store.state.userPhone?false:true,
-				isShowPwd:this.$store.state.userPhone?true:false,
+				isShowPhone:true,
+				isShowPwd:false,
 			}
 		},
 		methods: {
@@ -78,7 +78,6 @@
 			}
 		},
 		mounted() {
-			console.log(this.isShowPhone)
 		},
 	}
 </script>

@@ -20,8 +20,8 @@
 			},
 			handleConfirm() {
 				let val = this.pickerValue;
-				if(!val)val = new Date();
-				val = this.$tool.getFormatDate(val);
+				if(!val)val = new Date(new Date().getTime()+24*60*60*1000);
+				val = this.$tool.abyDateFun.getFormatDate(val);
 				let list = this.modelId.split('.');
 				if(list.length == 1) {
 					this.$parent[this.modelId] = val;

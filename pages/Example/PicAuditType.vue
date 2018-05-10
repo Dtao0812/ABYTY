@@ -69,6 +69,13 @@
 					break;
 			}
 		},
+		beforeRouteLeave (to,from,next){
+			if(to.name == 'advPage'){
+				next({ name: 'home' });
+			}else{
+				next()
+			}
+		}
 	}
 </script>
 

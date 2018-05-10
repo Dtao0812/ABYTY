@@ -4,7 +4,7 @@
 		<mt-cell title="公司地址" :is-link="isOwn" replace @click.native="toEdit('公司地址','cpAddress')">
 			<span>{{cpUserInfo.cpBasic.cpAddress|filterNull}}</span>
 		</mt-cell>
-		<mt-cell title="联系人姓名" :is-link="isOwn" replace @click.native="toEdit('公司地址','cpHeadName')">
+		<mt-cell title="联系人姓名" :is-link="isOwn" replace @click.native="toEdit('联系人姓名','cpHeadName')">
 			<span>{{cpUserInfo.cpBasic.cpHeadName|filterNull}}</span>
 		</mt-cell>
 		<mt-cell title="联系人电话" :is-link="isOwn"  @click.native="toEdit('联系人电话','cpHeadPhone')">

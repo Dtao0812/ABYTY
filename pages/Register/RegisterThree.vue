@@ -75,7 +75,9 @@
 				var reqInfo = {};
 				reqInfo.cpBasic = this.cpBasic;
 				reqInfo.files = this.cpImgs;
+				this.$tool.loading('正在提交...');
 				this.$abyApi.User.setUserUploadCred(reqInfo, (res) => {
+					this.$tool.loadingClose();
 					if(res) {
 						this.$toast("已提交成功，正在等待审核");
 						setTimeout(()=>{

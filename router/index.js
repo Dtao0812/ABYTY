@@ -273,7 +273,7 @@ router.beforeEach((to, from, next) => {
 		}else{
 			setTimeout(function(){next()},50);
 		}
-	}else if(store.state.advState&&store.state.loginState){
+	}else if(store.state.advState&&store.state.loginState&&store.state.cpAuditState==1){
 		// 开屏广告
 		store.commit('setAdvInfo',{title:'advState',value:false});
 		window.localStorage.setItem('advState',false);

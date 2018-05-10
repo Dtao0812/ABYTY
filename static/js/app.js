@@ -22,13 +22,6 @@ var plusFun = function() {
 		})
 	}
 
-	/*设备id*/
-	window.localStorage.setItem('deviceId', plus.push.getClientInfo().clientid);
-	store.commit('setStateInfo', {
-		title: 'deviceId',
-		value: plus.push.getClientInfo().clientid
-	});
-
 	/*版本号*/
 	plus.runtime.getProperty(plus.runtime.appid, function(wgtinfo) {
 		window.localStorage.setItem('version', wgtinfo.version);

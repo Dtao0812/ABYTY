@@ -85,7 +85,6 @@
 			onDelete(e){
 				this.$tool.confirm('您确定要删除该产品吗？', (res) => {
 					let proInfo = {};
-					proInfo.loading = 1;
 					proInfo.proId = e.target.getAttribute('proId');
 					this.$abyApi.Project.delPro(proInfo, (res) => {
 						this.$emit("eventLineBack");
@@ -96,7 +95,6 @@
 			onCancel(e){
 				this.$tool.confirm('您确定要取消收藏该产品吗？', (res) => {
 					let proInfo = {};
-					proInfo.loading = 1;
 					proInfo.proId = e.target.getAttribute('proId');
 					proInfo.collectState = 2;
 					this.$abyApi.Project.getProCollection(proInfo, (res) => {

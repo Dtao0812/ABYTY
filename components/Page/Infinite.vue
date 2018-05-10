@@ -1,18 +1,18 @@
 <template>
 	<div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-		<div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0" style="margin-bottom: 60px;">
+		<div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-immediate-check="loading" infinite-scroll-distance="0" style="padding-bottom: 60px;">
 			<div id="list" style="min-height: 500px;">
 				<slot name="loading">
 					<aby-loading v-show="isLoading"></aby-loading>
 				</slot>
 				<div id="loadDiv">
 					<slot name="loadlist"></slot>
-					<p v-show="loading" class="page-infinite-loading">
-						<mt-spinner type="fading-circle"></mt-spinner>
-						加载中...
-					</p>
 					<br style="clear:both"/>
 				</div>
+				<p v-show="loading" class="page-infinite-loading">
+					<mt-spinner type="fading-circle"></mt-spinner>
+					加载中...
+				</p>
 			</div>
 		</div>
 	</div>
@@ -38,7 +38,6 @@
 						this.loading = !res;
 					});
 				}, 1500);
-				this.loading = false;
 			},
 			// 显示加载动画
 			showLoading(){

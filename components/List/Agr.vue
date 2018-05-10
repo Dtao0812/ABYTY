@@ -10,7 +10,7 @@
 					</p>
 					<!--买家中心-->
 					<p class="mui-ellipsis">
-						发件人：{{li.buyerInfo.cpName}}
+						收件人：{{li.sellerInfo.cpName}}
 					</p>
 					<p class="mui-ellipsis">
 						{{li.createTime | filterConvertDate}}
@@ -30,7 +30,7 @@
 					</p>
 					<!--卖家中心-->
 					<p class="mui-ellipsis">
-						收件人：{{li.sellerInfo.cpName}}
+						发件人：{{li.buyerInfo.cpName}}
 					</p>
 					<p class="mui-ellipsis">
 						{{li.createTime | filterConvertDate}}

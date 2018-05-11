@@ -14,6 +14,7 @@ const state = {
 	advImg:window.localStorage.getItem('advImg'),//广告图片
 	advTitle:window.localStorage.getItem('advTitle'),//广告标题
 	advUrl:window.localStorage.getItem('advUrl'),//广告地址
+	advOnTime:window.localStorage.getItem('advOnTime')||'',//点击时间
 	
 	chatNum:0,//聊天消息数
 	chatList:[],//聊天id
@@ -48,7 +49,7 @@ const state = {
 	userId: '',userName: '',userType: '',userPhone: '',
 	/*企业基本信息*/
 	cpBasic:window.localStorage.getItem('cpUserInfo')?JSON.parse(window.localStorage.getItem('cpUserInfo')).cpBasic:'',
-	cpId: '',cpBtype: '',cpAuditState:'',
+	cpId: '',cpBtype: '',cpAuditState:1,
 	/*公司主页*/
 	userIdHome:'',cpIdHome:'',
 }

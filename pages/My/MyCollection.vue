@@ -53,7 +53,7 @@
 		},
 		methods: {
 			scroll(top){
-				this.isShowSearch = top;
+				this.isShowSearch = false;
 			},
 			getPullDown(callback){
 				let reqInfo = {};

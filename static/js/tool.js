@@ -213,7 +213,7 @@ const abyDateFun = {
 		return currentdate;
 	},
 	// 格式化时间
-	getFormatDate(datetime) {
+	getFormatDate(datetime,type) {
 		var year = datetime.getFullYear();
 		var month = datetime.getMonth() + 1; //js从0开始取 
 		var date = datetime.getDate();
@@ -222,7 +222,11 @@ const abyDateFun = {
 		var second = datetime.getSeconds();
 		if(month < 10)month = "0" + month;
 		if(date < 10)date = "0" + date;
-		return year + "-" + month + "-" + date;
+		if(type == 1){
+			return year + "-" + month + "-" + date + '-' + hour + '-' + minutes;
+		}else{
+			return year + "-" + month + "-" + date;
+		}
 	},
 	// 计算年龄
 	countAge(datetime){
@@ -233,6 +237,41 @@ const abyDateFun = {
 	        var Y = new Date().getFullYear();   
 	        return Y-r[1];   
 	    }  
+	},
+	// 获得时间戳
+	getTime(){
+		return new Date().getTime();
+	},
+	setFormat(x) {
+	  if (x < 10) {
+	    x = "0" + x;
+	  }
+	  return x;
+	},
+	//获取当前时间（Y-m-d h:i:s）
+	getNowtime(){
+		var date = new Date(); //日期对象
+		var now = "";
+		now = date.getFullYear()+"-"; //读英文就行了
+		now = now + (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';//取月的时候取的是当前月-1如果想取当前月+1就可以了
+		now = now + abyDateFun.setFormat(date.getDate())+" ";
+		now = now + abyDateFun.setFormat(date.getHours())+":";
+		now = now + abyDateFun.setFormat(date.getMinutes())+":";
+		now = now + abyDateFun.setFormat(date.getSeconds())+"";
+		return now;
+	},
+	//获取从现在到 beforetime 分钟前的时间
+	beforeNowtimeByMinu(beforetime){
+	    var date = new Date(); //日期对象
+	    date.setMinutes (date.getMinutes () - beforetime);
+	    var now = "";
+	    now = date.getFullYear()+"-"; //读英文就行了
+	    now = now + (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';//取月的时候取的是当前月-1如果想取当前月+1就可以了
+	    now = now + abyDateFun.setFormat(date.getDate())+" ";
+	    now = now + abyDateFun.setFormat(date.getHours())+":";
+	    now = now + abyDateFun.setFormat(date.getMinutes())+":";
+	    now = now + abyDateFun.setFormat(date.getSeconds())+"";
+	    return now;
 	}
 };
 

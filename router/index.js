@@ -253,7 +253,6 @@ router.beforeEach((to, from, next) => {
             store.commit('setPageDirection', 'slide-right');
         }
     }
-    
     store.commit('setStateInfo',{title:'tabActive',value:to.name});
 	/*判断是否有权限访问*/
 	const userNotAuth = [
@@ -275,9 +274,16 @@ router.beforeEach((to, from, next) => {
 		}
 	}else if(store.state.advState&&store.state.loginState&&store.state.cpAuditState==1){
 		// 开屏广告
-		store.commit('setAdvInfo',{title:'advState',value:false});
-		window.localStorage.setItem('advState',false);
-		next({ name: 'advPage' });
+		let onTime = store.state.advOnTime;
+		if(onTime == ''|| Vue.$tool.abyDateFun.compareDate(Vue.$tool.abyDateFun.beforeNowtimeByMinu(10),onTime)){
+			store.commit('setAdvInfo',{title:'advState',value:false});
+			window.localStorage.setItem('advState',false);
+			window.localStorage.setItem('advOnTime',Vue.$tool.abyDateFun.getNowtime());
+			next({ name: 'advPage' });
+		}else{
+			// 延迟跳转
+			setTimeout(function(){next()},50);
+		}
 	}else{
 		// 延迟跳转
 		setTimeout(function(){next()},50);

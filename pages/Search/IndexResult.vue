@@ -114,12 +114,19 @@
 						// 下拉
 						this.tabList[0].data = res.proList;
 						this.$refs.pull0[0].closeLoading();
+						if(this.tabList[0].data.length < 6){
+							this.$refs.pull0[0].loading = true;
+							this.$refs.pull0[0].isButtonLoading = false;
+						}else{
+							this.$refs.pull0[0].loading = false;
+							this.$refs.pull0[0].isButtonLoading = true;
+						}
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.proList.length == 0){
 							this.$toast("没有更多内容了！")
-							this.$refs.pull0[0].isLoading = true;
+							this.$refs.pull0[0].loading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[0].data = this.tabList[0].data.concat(res.proList);
@@ -135,12 +142,19 @@
 						// 下拉
 						this.tabList[1].data = res.cpBasicList;
 						this.$refs.pull1[0].closeLoading();
+						if(this.tabList[1].data.length < 6){
+							this.$refs.pull1[0].loading = true;
+							this.$refs.pull1[0].isButtonLoading = false;
+						}else{
+							this.$refs.pull1[0].loading = false;
+							this.$refs.pull1[0].isButtonLoading = true;
+						}
 						callback && callback(true);
 					}else{
 						// 上拉
 						if(res.cpBasicList.length == 0){
 							this.$toast("没有更多内容了！")
-							this.$refs.pull1[0].isLoading = true;
+							this.$refs.pull1[0].loading = true;
 							callback && callback(false)
 						}else{
 							this.tabList[1].data = this.tabList[1].data.concat(res.cpBasicList);

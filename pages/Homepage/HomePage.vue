@@ -171,7 +171,7 @@
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()
 				})
-			}else if(to.params.cpId == ''){
+			}else if(to.params.cpId == ''||from.name=="chat"){
 				next()
 			}else{
 				next(vm => {

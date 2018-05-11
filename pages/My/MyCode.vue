@@ -90,6 +90,8 @@
 	.mui-content{
 		background-color: #08C7B5;
 		padding: 18% 25px 55% 25px;
+		height: 100%;
+		width: 100%;
 	}
 .qrcard {
 	border-radius: 4px;

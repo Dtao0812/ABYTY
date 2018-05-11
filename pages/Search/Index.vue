@@ -165,7 +165,8 @@
 		font-size: 14px;
 		padding: 5px 10px;
 		margin-right: 15px;
-		margin-top: 10px;
+		margin-top: 6px;
+		display: inline-block;
 	}
 	
 	.icodelete {

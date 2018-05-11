@@ -112,7 +112,7 @@
 			</ul>
 		</div>
 		<div class="operation" slot="footer">
-			<div class="mui-col-xs-2" @click="toChat">
+			<div class="mui-col-xs-2" @click="toChat()">
 				<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">聊天</span>
 			</div>
 			<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">

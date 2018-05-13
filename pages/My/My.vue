@@ -85,7 +85,6 @@
 			return {
 				cpUserInfo:this.$store.state.cpUserInfo,
 				abyTel:this.$store.state.abyTel,
-				toHomePageInfo: {}
 			}
 		},
 		methods:{
@@ -97,8 +96,6 @@
 				this.$router.push({name:'setting'});
 			},
 			toHomePage(){
-				this.toHomePageInfo.cpId = this.cpUserInfo.cpId;
-				this.toHomePageInfo.userId = this.cpUserInfo.userId;
 				this.$router.push({
 					name:"homePage",
 					params:{

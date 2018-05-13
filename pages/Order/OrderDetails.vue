@@ -224,13 +224,16 @@
 				],
 				info:'',
 				timer:'',
+				isCear:false,
 			}
 		},
 		methods: {
 			init(){
 				this.orderId = this.$route.params.orderId;
+				this.identityType = this.$route.params.identityType;
 				this.agreementId = this.$route.params.agreementId||'';
 				this.info = '';
+				this.isCear = false;
 				this.getDetail();
 			},
 			// 列表按钮显示
@@ -376,20 +379,22 @@
 					//倒计时
 					if(this.info.orderState == 0) {
 						let remainTime = this.info.countDownTimestamp;
-						this.timer = setInterval(()=>{
-							if(remainTime > 0) {
+						let timer;
+						timer = setInterval(()=>{
+							if(remainTime > 0 && !this.isCear) {
 								document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
 								remainTime = remainTime - 1;
 							} else {
-								clearInterval(this.timer);
+								clearInterval(timer);
 							}
 		
 						}, 1000);
 					}else if(this.info.orderState == 2) {
 						//待确认状态的订单
 						let remainTime = this.info.waitConfirmDownTimestamp;
-						this.timer = setInterval(()=>{
-							if(remainTime > 0) {
+						let timer;
+						timer = setInterval(()=>{
+							if(remainTime > 0 && !this.isCear) {
 								document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
 								remainTime = remainTime - 1;
 							} else {
@@ -410,6 +415,7 @@
 			},
 			//查看协议详情
 			toAgrDetail(){
+				console.log(this.info.orderInfo.proid)
 				if(this.agreementId != ''){
 					this.$router.back();
 				}else{
@@ -450,7 +456,7 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.agreementId == ''){
+			if(from.params.agreementId == ''||from.name=='orderList'){
 				next(vm => {
 					vm.init()
 				})
@@ -460,8 +466,7 @@
 		},
 		beforeRouteLeave(to, from, next){
 			if(to.name == 'orderList'){
-				clearInterval(this.timer);
-				this.timer = '';
+				this.isCear = true;
 			}
 			next();
 		}

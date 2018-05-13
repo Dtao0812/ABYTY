@@ -272,7 +272,7 @@ router.beforeEach((to, from, next) => {
 		}else{
 			setTimeout(function(){next()},50);
 		}
-	}else if(store.state.advState&&store.state.loginState&&store.state.cpAuditState==1){
+	}else if(store.state.advState&&store.state.loginState&&store.state.cpAuditState==1&&from.name==null){
 		// 开屏广告
 		let onTime = store.state.advOnTime;
 		if(onTime == ''|| Vue.$tool.abyDateFun.compareDate(Vue.$tool.abyDateFun.beforeNowtimeByMinu(10),onTime)){

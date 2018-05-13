@@ -25,18 +25,23 @@
 			}
 		},
 		methods: {
-			
+
 		},
 		mounted() {
-			document.getElementById("search").addEventListener('keydown', function(e) {
-				if(e.keyCode == 13) {
-					e.preventDefault();
-					this.searchValue();
-				}
-			}, false);
+			try {
+				document.getElementById("search").addEventListener('keydown', function(e) {
+					if(e.keyCode == 13) {
+						e.preventDefault();
+						this.searchValue();
+					}
+				}, false);
+			} catch(e) {
+				//TODO handle the exception
+			}
+
 		},
 		watch: {
-			placeholder(val){
+			placeholder(val) {
 				this.inputPlaceholder = val;
 			},
 			searchValue(val) {

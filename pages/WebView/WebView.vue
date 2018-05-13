@@ -8,7 +8,7 @@
 				<iframe id="myiframe" ref="iframe" :src="webUrl" width="100%" name="myiframe" height="100%"></iframe>
 			</div>
 			<div class="operation" v-if="cpBasic != ''">
-				<div class="mui-col-xs-3" @click="toChat">
+				<div class="mui-col-xs-3" @click="toChat()">
 					<aby-icon class="mui-icon" type="msg"></aby-icon><span class="icotext">聊天</span>
 				</div>
 				<div class="mui-col-xs-3" @click="toHomePage">

@@ -84,8 +84,8 @@
 		position: absolute;
 		background-color: rgba(0, 0, 0, .5);
 		color: #FFFFFF;
-		font-size: 12px;
-		padding: 2px 6px;
+		font-size: 14px;
+		padding: 5px 15px;
 		right: 10px;
 		top: 10px;
 		border-radius: 4px;

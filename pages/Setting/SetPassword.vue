@@ -40,9 +40,10 @@
 		methods: {
 			onGetVerifyCode() {
 				let reqInfo = {};
-				reqInfo.userPhone = this.userPhone;
+				reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
 				reqInfo.smsType = 2;
 				this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
+					this.$toast("验证码已发送！")
 					this.verifyCode = res.verifyCode
 					this.$tool.disableWait(document.getElementById("btnVerificationCode"))
 				});

@@ -383,7 +383,7 @@
 						timer = setInterval(()=>{
 							if(remainTime > 0 && !this.isCear) {
 								document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
-								remainTime = remainTime - 1;
+								this.info.waitConfirmDownTimestamp = remainTime - 1;
 							} else {
 								clearInterval(timer);
 							}
@@ -396,7 +396,7 @@
 						timer = setInterval(()=>{
 							if(remainTime > 0 && !this.isCear) {
 								document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
-								remainTime = remainTime - 1;
+								this.info.waitConfirmDownTimestamp = remainTime - 1;
 							} else {
 								clearInterval(this.timer);
 							}

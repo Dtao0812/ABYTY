@@ -5,20 +5,20 @@
 		</aby-header>
 		<div class="content">
 			<ul class="mui-table-view space">
-				<li class="mui-table-view-cell mui-media" v-if="messageList.msgNum != 0" @click="toMsgList">
+				<li class="mui-table-view-cell mui-media" @click="toMsgList">
 					<a>
 						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/ico_msgsys_3x.png">
-						<span class="mui-badge mui-badge-danger">{{messageList.msgNum}}</span>
+						<span class="mui-badge mui-badge-danger" v-show="messageList.msgNum != 0">{{messageList.msgNum}}</span>
 						<div class="mui-media-body">
 							系统消息
 							<p class='mui-ellipsis'></p>
 						</div>
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media" v-if="messageList.travelNum!=0" @click="toTravelList">
+				<li class="mui-table-view-cell mui-media" @click="toTravelList">
 					<a>
 						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/msg_interactMsg.png">
-						<span class="mui-badge mui-badge-danger">{{messageList.travelNum}}</span>
+						<span class="mui-badge mui-badge-danger" v-show="messageList.travelNum != 0">{{messageList.travelNum}}</span>
 						<div class="mui-media-body">
 							旅游咨询
 							<p class='mui-ellipsis'></p>

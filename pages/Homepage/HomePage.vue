@@ -40,8 +40,8 @@
 		},
 		data() {
 			return {
-				userId: this.$store.state.userId,
-				cpId: this.$store.state.cpId,
+				userId: '',
+				cpId: '',
 				cpUserInfo: {},
 				isOwn:false,//是否自己主页
 				isLoading:true,//加载动画
@@ -166,7 +166,7 @@
 			},
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name=="eidtHomePage"){
+			if(from.name=="eidtHomePage"||from.name == 'my'){
 				next(vm => {
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()

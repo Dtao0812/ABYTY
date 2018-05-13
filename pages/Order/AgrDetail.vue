@@ -161,6 +161,7 @@
 				this.$refs.page.showLoading();
 				this.$abyApi.Order.getAgreementDetail(this.agreementId, (res) => {
 					this.$refs.page.closeLoading();
+					this.$toast("获取协议成功！");
 					this.info = res.data;
 					this.tel = this.identityType == 'seller' ? res.data.buyerInfo.contactPhone : res.data.sellerInfo.contactPhone;
 				});

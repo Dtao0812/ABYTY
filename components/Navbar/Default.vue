@@ -1,7 +1,7 @@
 <template>
 	<div class="navbar" ref="navbar">
 		<slot name="navbar">
-			<aby-search :type="pageType" v-if="!isShowSearch||!isFixed" :placeholder="searchPlaceholder"></aby-search>
+			<aby-search :type="pageType" v-if="!isShowSearch&&!isFixed" :placeholder="searchPlaceholder"></aby-search>
 			<slot name="navbar_1"></slot>
 			<aby-screen :fixed="isFixed" :type="pageType" v-if="!isShownoScreen" :noSearch="isShowSearch" @eventScreen="eventNavBack"></aby-screen>
 		</slot>
@@ -36,7 +36,8 @@
 				this.$emit("eventNavBack", e);
 			},
 		},
-		mounted() {},
+		mounted() {
+		},
 	}
 </script>
 

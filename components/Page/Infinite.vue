@@ -31,11 +31,11 @@
 		},
 		methods: {
 			loadMore() {
-				this.isLoading = false;
 				this.loading = true;
 				this.isButtonLoading = true;
 				setTimeout(() => {
 					this.$emit("eventinfiniterBack", this.type, (res) => {
+						this.isLoading = false;
 						if(res){
 							this.loading = false;
 							this.isButtonLoading = true;

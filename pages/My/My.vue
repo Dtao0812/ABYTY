@@ -98,10 +98,6 @@
 			toHomePage(){
 				this.$router.push({
 					name:"homePage",
-					params:{
-						cpId:this.cpUserInfo.cpId,
-						userId:this.cpUserInfo.userId,
-					}
 				})
 			},
 		},

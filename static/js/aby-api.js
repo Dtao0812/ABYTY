@@ -1165,7 +1165,6 @@ const Chat = {
 	// 初始化融云聊天
 	init(callBack) {
 		RongIMLib.RongIMClient.init(RongIMKey, RongIMLib.WebSQLDataProvider); //初始化融云
-		RongIMLib.RongIMEmoji.init(); //初始化表情库
 		//连接服务器
 		this.connect({
 			successCallBack: function(proMsg) {

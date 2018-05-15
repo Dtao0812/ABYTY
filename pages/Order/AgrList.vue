@@ -83,6 +83,11 @@
 				next(vm => {
 					vm.init()
 				})
+			}else if(from.name == 'agrDetail'){
+				// 果然是详情页返回，刷新页面
+				next(vm => {
+					vm.getPullDown()
+				})
 			}else{
 				next()
 			}

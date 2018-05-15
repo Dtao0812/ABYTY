@@ -63,14 +63,14 @@
 			// 付款
 			toPay(){
 				let reqInfo = {};
-				reqInfo.radioinsuranceValue = "alipay";
+				reqInfo.channelid = "alipay";
 				reqInfo.payType = 0;
 				reqInfo.orderInfo = {
 					orderName : '',
 					orderPrice : this.preDeposit
 				};
 				this.$abyApi.Pay.payDeposit(reqInfo,(res)=>{
-					plus.payment.request(this.pays[reqInfo.radioinsuranceValue], res.order, (result)=> {
+					plus.payment.request(this.pays[reqInfo.channelid], res.order, (result)=> {
 						this.$router.back()
 					},(e)=>{
 						this.$toast("支付失败");

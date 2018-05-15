@@ -6,7 +6,7 @@
 				<aby-field modelId="userPhone" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入注册手机号" type="tel">
 					<aby-icon id="iconLabel" type="loginid" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
-				<aby-field modelId="verycode" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入验证码" type="number">
+				<aby-field modelId="verifyCode" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入验证码" type="number">
 					<aby-icon id="iconLabel" type="vcode" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 				<input type="button" class="mui-btn btnVerificationCode" id="btnVerificationCode" @click="onGetVerifyCode" value="获取验证码">
@@ -44,13 +44,13 @@
 				reqInfo.smsType = 2;
 				this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
 					this.$toast("验证码已发送！")
-					this.verifyCode = res.verifyCode
+					this.code = res.verifyCode
 					this.$tool.disableWait(document.getElementById("btnVerificationCode"))
 				});
 			},
 			onSetPwd(){
 				if(this.isShowPhone && !this.isShowPwd){
-					if(this.userPhone === '' || this.code === ''){
+					if(this.userPhone === '' || this.verifyCode === ''){
 						return this.$toast('修改内容不能为空');
 					}else if(this.verifyCode !== this.code){
 						return this.$toast('验证码不正确');
@@ -67,7 +67,7 @@
 						let reqInfo = {};
 						reqInfo.loginId = this.$abyApi.Crypto.EnCrypt(this.userPhone);
 						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.userPassword);
-						reqInfo.verifyCode = this.code;
+						reqInfo.verifyCode = this.verifyCode;
 						this.$abyApi.User.setLoginPwd(reqInfo,(res)=>{
 							this.$tool.toast('修改成功');
 							setTimeout(()=>{

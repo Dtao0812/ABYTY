@@ -145,23 +145,18 @@ let countdown = function(endDate, divId) {
 		html = p(oHours) + ":" + p(oMinutes) + ":" + p(oSeconds);
 	}
 	if(document.getElementById(divId)) {
-		if(oDay) {
-			document.getElementById(divId).innerHTML = html;
-		} else {
+		//当时间为0的时候标记结束;
+		if(countDown < 0) {
 			document.getElementById(divId).className = 'time fontGray';
 			document.getElementById(divId).innerHTML = '已结束';
+		} else {
+			document.getElementById(divId).innerHTML = html;
+			setTimeout(function() {
+				countdown(endDate, divId);
+			}, 1000);
 		}
 	} else {
 		return;
-	}
-	//当时间为0的时候标记结束;
-	if(countDown < 0) {
-		document.getElementById(divId).className = 'time fontGray';
-		document.getElementById(divId).innerHTML = '已结束';
-	} else {
-		setTimeout(function() {
-			countdown(endDate, divId);
-		}, 1000);
 	}
 
 };

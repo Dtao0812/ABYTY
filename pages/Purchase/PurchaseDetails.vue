@@ -57,7 +57,7 @@
 					</ul>
 					<!--酒店询价-->
 					<ul class="mui-table-view" v-if="data.selectType == 20||data.selectType == 40">
-						<h4>{{data.title}}</h4>
+						<h4 v-if="data.selectType == 40">预定{{data.goCity}}的酒店</h4>
 						<li class="mui-table-view-cell mui-media" v-if="data.hotelAddress">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">酒店地点</div>
@@ -218,7 +218,7 @@
 					</ul>
 				</div>
 				<div v-if="data.selectType == 60">
-					<div class="aby-detail-remarks" v-if="data.pbDetail">
+					<div class="aby-detail-remarks" v-if="data.pbDetail!=''">
 						<p>备注</p>
 						<p>{{data.pbDetail}}</p>
 					</div>
@@ -295,6 +295,7 @@
 		},
 		updated() {
 			//初始化倒计时
+			console.log(this.data.endTime)
 			this.$tool.countdown(this.data.endTime, this.data.selectId);
 		},
 		mounted() {

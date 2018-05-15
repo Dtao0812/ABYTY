@@ -37,7 +37,7 @@
 					</router-link>
 				</li>
 			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space">
+			<ul class="mui-table-view mui-table-view-chevron space" v-if="cpUserInfo.cpBasic.cpBtype==20">
 				<li class="mui-table-view-cell mui-media">
 					<router-link class="menu mui-navigate-right" :to="{name:'myProduct'}">
 						<aby-icon-color class="ptype" type="myproduct"></aby-icon-color>我的产品库

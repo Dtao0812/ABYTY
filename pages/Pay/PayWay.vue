@@ -19,7 +19,7 @@
 				<!--支付金额小于5000-->
 				<div class="mui-input-row mui-checkbox paymethod space">
 					<label>银行卡快捷支付</label>
-					<input name="checkbox1" value="" type="checkbox" checked="">
+					<input name="checkbox1" id="checkbox1" value="" type="checkbox" checked="">
 				</div>
 				<div class="aby-button-panel">
 					<aby-button class="aby-button-blue" title="确认支付" @click.native="toPay"></aby-button>
@@ -61,6 +61,8 @@
 			},
 			// 支付
 			toPay(){
+				let isSel = document.getElementById("checkbox1").checked;
+				if(!isSel)return this.$toast("必须选择支付方式");
 				var orderId = this.orderId;
 				var orderCode = this.data.orderCode;
 				var signature = this.$abyApi.Crypto.MD5(orderId + orderCode + this.data.strPayment+this.data.orderState)

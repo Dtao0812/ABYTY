@@ -13,7 +13,7 @@
 							<br style="clear:both"/>
 						</div>
 					</mt-loadmore>
-					<div class="line-button"></div>
+					<!--<div class="line-button"></div>-->
 				</div>
 			</div>
 		</div>

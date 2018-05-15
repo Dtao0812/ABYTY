@@ -21,6 +21,7 @@
 					</div>
 				</div>
 			</div>
+			<aby-no-content v-if="list.length==0"></aby-no-content>
 		</div>
 	</aby-page>
 </template>

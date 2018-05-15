@@ -5,8 +5,8 @@
 				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
 				<span class="mui-badge mui-badge-danger" v-show="li.noReadNum!=0">{{li.noReadNum}}</span>
 				<div class="mui-media-body">
-					{{li.sendUser.userName}}
-					<p class='mui-ellipsis'>{{li.sendUser.cpName}}</p>
+					{{li.sendUser.cpName}}
+					<p class='mui-ellipsis'>{{li.content.content}}</p>
 				</div>
 			</a>
 		</li>

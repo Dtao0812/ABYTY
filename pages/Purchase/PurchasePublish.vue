@@ -166,7 +166,7 @@
 			</ul>
 			<div class="space"></div>
 			<!--酒店-->
-			<ul class="mui-table-view" v-if="publishInfo.selectType==20">
+			<ul class="mui-table-view" v-if="publishInfo.selectType==20||publishInfo.selectType==40">
 				<li class="mui-table-view-cell">
 					<aby-field modelId="publishInfo.hotelStar" :modelVal="publishInfo.hotelStar" @click.native="popupHStarlevel=!popupHStarlevel" className="aby-input-default" placeholder="请选择酒店标准" type="text" disabled="disabled">
 						<label class="inLabel" slot="label">酒店标准</label>
@@ -209,12 +209,12 @@
 			<div v-if="publishInfo.selectType==60">
 				<ul class="mui-table-view space">
 					<li class="mui-table-view-cell">
-						<aby-field className="aby-input-default" placeholder="请填写导服费（元/天）" type="text">
+						<aby-field className="aby-input-default" modelId="publishInfo.pbDayFee" placeholder="请填写导服费（元/天）" type="text">
 							<label class="inLabel" slot="label">导服费</label>
 						</aby-field>
 					</li>
 					<li class="mui-table-view-cell">
-						<aby-field className="aby-input-default" placeholder="请填写定金（元）" type="text">
+						<aby-field className="aby-input-default" modelId="publishInfo.pbDepositFee" placeholder="请填写定金（元）" type="text">
 							<label class="inLabel" slot="label">订金</label>
 						</aby-field>
 					</li>
@@ -388,7 +388,47 @@
 							}];
 							this.HStarlevelList = slots;
 						});
-					} else if(e.selected.value == 30 || e.selected.value == 40) {
+					} else if(e.selected.value == 30) {
+						// 获得航班类型
+						this.$abyApi.Sys.getDict('ticketType', '', (res) => {
+							let dlist = []
+							for(let i = 0, len = res.dicList.length; i < len; i++) {
+								if(i == 0) {
+									this.publishInfo.ticketType = res.dicList[i].dicName;
+									this.publishInfo.ticketTypeName = res.dicList[i].dicValue;
+								}
+								let info = {};
+								info.text = res.dicList[i].dicName;
+								info.value = res.dicList[i].dicValue;
+								dlist.push(info);
+							}
+							let slots = [{
+								flex: 1,
+								values: dlist,
+								className: 'slot1',
+								textAlign: 'center'
+							}];
+							this.ticketTypeList = slots;
+						});
+					}else if(e.selected.value == 40){
+						// 获得酒店标准
+						this.$abyApi.Sys.getDict('hStarlevel', '', (res) => {
+							let dlist = []
+							for(let i = 0, len = res.dicList.length; i < len; i++) {
+								if(i == 0) this.publishInfo.hotelStar = res.dicList[i].dicName;
+								let info = {};
+								info.text = res.dicList[i].dicName;
+								info.value = res.dicList[i].dicValue;
+								dlist.push(info);
+							}
+							let slots = [{
+								flex: 1,
+								values: dlist,
+								className: 'slot1',
+								textAlign: 'center'
+							}];
+							this.HStarlevelList = slots;
+						});
 						// 获得航班类型
 						this.$abyApi.Sys.getDict('ticketType', '', (res) => {
 							let dlist = []

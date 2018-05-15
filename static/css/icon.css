@@ -21,11 +21,14 @@
 
 
 /*----------------------------询价类型图标----------------------------*/
+
+
 /*线路*/
 
 .aby-icon-line:before {
 	content: '\e641';
 }
+
 
 /*导游*/
 
@@ -200,17 +203,20 @@
 	content: '\e692';
 }
 
+
 /*酒店角标*/
 
 .aby-icon-rolehotel:before {
 	content: '\e6a4';
 }
 
+
 /*机票角标*/
 
 .aby-icon-roleplane:before {
 	content: '\e6a6';
 }
+
 
 /*景点门票角标*/
 
@@ -377,6 +383,7 @@
 	content: '\e66c';
 }
 
+
 /*键盘*/
 
 .aby-icon-chatkeyboard:before {
@@ -397,6 +404,7 @@
 	content: '\e695';
 }
 
+
 /*照片*/
 
 .aby-icon-chatpic:before {
@@ -410,11 +418,13 @@
 	content: '\e654';
 }
 
+
 /*发送按钮*/
 
 .aby-icon-send:before {
 	content: '\e6aa';
 }
+
 
 /*----------------------------注册、登录----------------------------*/
 
@@ -481,7 +491,9 @@
 	content: '\e64c';
 }
 
+
 /*企业名称*/
+
 .aby-icon-business:before {
 	content: '\e699';
 }
@@ -698,6 +710,7 @@
 	content: '\e655';
 }
 
+
 /*互动消息*/
 
 .aby-icon-interaction:before {
@@ -711,8 +724,41 @@
 	content: '\e68e';
 }
 
+
 /*hot图标*/
 
 .aby-icon-hot:before {
 	content: '\e69c';
+}
+
+
+/*分享*/
+
+.aby-icon-share:before {
+	content: '\e6b8';
+}
+
+/*----------------------------产品详情----------------------------*/
+
+/*餐饮*/
+.aby-icon-dayfood:before{
+	content: '\e6b1';
+}
+
+/*住宿*/
+.aby-icon-dayhotel:before{
+	content: '\e6b0';
+}
+
+/*在线联系*/
+.aby-icon-prochat:before{
+	content: '\e6ad';
+}
+/*查看主页*/
+.aby-icon-proshop:before{
+	content: '\e6ac';
+}
+/*收藏*/
+.aby-icon-procollection:before{
+	content: '\e6ae';
 }

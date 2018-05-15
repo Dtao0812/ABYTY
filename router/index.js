@@ -21,6 +21,7 @@ import SetPassword from '../pages/Setting/SetPassword.vue'
 import Feedback from '../pages/Setting/Feedback.vue'
 //产品
 import Project from '../pages/Project/Index.vue'
+import ProjectDetail from '../pages/Project/Detail.vue'
 //景点门票
 import Sport from '../pages/Sport/Index.vue'
 //酒店
@@ -121,6 +122,7 @@ const router = new Router({
 		{ name: 'advPage',path: '/AdvPage',component: AdvPage },
 		
 		{ name: 'project',path: '/project',component: Project },
+		{ name: 'projectDetail',path: '/projectDetail',component: ProjectDetail },
 		
 		{ name: 'login',path: '/login',component: Login },
 		{ name: 'registerOne',path: '/registerOne',component: RegisterOne },

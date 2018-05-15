@@ -229,6 +229,19 @@
 					case 'clock':this.iconClass = 'aby-icon-clock ' + this.className;break;
 					//hot
 					case 'hot':this.iconClass = 'aby-icon-hot ' + this.className;break;
+					//分享
+					case 'share':this.iconClass = 'aby-icon-share ' + this.className;break;
+					//产品详情部分---------------------------------------------------------------------------
+					//餐饮
+					case 'dayfood':this.iconClass = 'aby-icon-dayfood ' + this.className;break;
+					//住宿
+					case 'dayhotel':this.iconClass = 'aby-icon-dayhotel ' + this.className;break;
+					//聊天
+					case 'prochat':this.iconClass = 'aby-icon-prochat ' + this.className;break;
+					//收藏
+					case 'procollection':this.iconClass = 'aby-icon-procollection ' + this.className;break;
+					//查看主页
+					case 'proshop':this.iconClass = 'aby-icon-proshop ' + this.className;break;
 					
 					default: this.iconClass = this.classname;
 				}

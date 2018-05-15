@@ -66,7 +66,7 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat()"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
 					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.sellerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
@@ -406,7 +406,6 @@
 			},
 			//聊天
 			toChat(){
-				console.log(111)
 				this.$router.push({
 					name: 'chat',
 					params: {

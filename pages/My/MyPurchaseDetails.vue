@@ -74,7 +74,7 @@
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">航程类型</div>
-								<div class="mui-media-body mui-text-right">{{data.trafficType}}</div>
+								<div class="mui-media-body mui-text-right">{{data.ticketType}}</div>
 							</a>
 						</li>
 						<li class="mui-table-view-cell mui-media">
@@ -284,6 +284,7 @@
 			reqInfo.loading = 1;
 			reqInfo.selectId = this.selectId;
 			this.$abyApi.Select.getPublishDetail(reqInfo,(res)=>{
+				console.log('询价详情:'+JSON.stringify(res))
 				this.data = res.cpSelect;
 				this.$refs.page.isLoading = false;
 			},(err)=>{this.$refs.page.isLoading = false;});

@@ -227,15 +227,18 @@
 <style scoped>
 	.mui-card {
 		font-size: 14px;
-		margin: 10px!important;
+		margin: 12px!important;
 		border-radius: 0px;
 		background-color: #fff;
-		-webkit-box-shadow: 0px 0px 3px 0px rgba(187, 187, 187, .6);
+		-webkit-box-shadow: none;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
 		line-height: 20px;
-		border-radius: 4px;
-		box-shadow: 0px 0px 3px 0px rgba(187, 187, 187, .6);
-		border: 1px solid rgba(255, 255, 255, 1);
+		border-radius: 10px;
+		box-shadow: none;
+		border: none;
+	}
+	.mui-card-footer{
+		font-size: 13px;
 	}
 	
 	.mui-card p {

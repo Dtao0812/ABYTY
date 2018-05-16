@@ -1,6 +1,7 @@
 <template>
 	<aby-tab :list="tabList" page="order" @eventTabBack="eventTab">
 		<div v-for="(v,x) in tabList" :key="x" :slot="v.id" class="mui-content pt-45">
+			<aby-no-content v-if="v.data.length == 0"></aby-no-content>
 			<ul class="mui-table-view mui-table-view-chevron space">
 				<li class="mui-table-view-cell mui-media" v-for="(li,i) in v.data" v-if="li.id == 'agr'" @click="toAgrList(li)">
 					<a class="mui-navigate-right menu">
@@ -153,6 +154,7 @@
 			// 初始化
 			init() {
 				// 底部导航监听
+				if(this.$store.state.cpBtype == 10)this.tabList[1].data = [];
 				this.$parent.eventPageShow(this.$route.name);
 				this.getOrderNum();
 			},

@@ -74,7 +74,6 @@
 					return; 
 				};
 				let userInfo = {};
-				userInfo.loading = 1;
 				userInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
 				userInfo.smsType = 1;
 				this.$abyApi.User.getVerificationCode(userInfo, (res)=>{

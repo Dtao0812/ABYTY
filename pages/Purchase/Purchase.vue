@@ -35,6 +35,7 @@
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 20">
 					<div class="mui-card-content-inner mui-navigate-right" @click="toDetail(li.selectId)">
+						<h5>预定{{li.hotelAddress}}的酒店</h5>
 						<p>入住时间：{{li.liveTime|filterConvertDate}}</p>
 						<p>离店时间：{{li.leaveTime|filterConvertDate}}</p>
 						<p>房间数：{{li.roomNum}}间</p>
@@ -43,7 +44,7 @@
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 40">
 					<div class="mui-card-content-inner mui-navigate-right" @click="toDetail(li.selectId)">
-						<h5>我需要{{li.hotelAddress}}的酒店</h5>
+						<h5>预定{{li.goCity}}的酒店</h5>
 						<p>出行时间：{{li.outServTime}}</p>
 						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
 						<p>天数：{{li.selectDays}}天</p>
@@ -214,6 +215,7 @@
 		},
 		activated() {
 			// 底部导航栏
+			this.getPullDown();
 			this.$parent.eventPageShow(this.$route.name);
 		},
 		watch: {

@@ -166,7 +166,7 @@
 			},
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name=="eidtHomePage"||from.name == 'my'){
+			if(from.name=="eidtHomePage"){
 				next(vm => {
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()

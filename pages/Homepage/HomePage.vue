@@ -71,8 +71,6 @@
 				this.cpId = this.$route.params.cpId;
 				this.isLoading = true;
 				this.cpUserInfo = {};
-				console.log(this.userId)
-				console.log(this.$store.state.userId)
 				if(this.userId == this.$store.state.userId){
 					// 自己的主页
 					if(this.tabList.length == 3){

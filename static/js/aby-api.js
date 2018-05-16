@@ -467,6 +467,7 @@ const User = {
 		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
 			callBack && callBack(true);
 		}, function(err) {
+			Vue.$tool.toast(err)
 			callBack && callBack(false);
 		});
 	},

@@ -83,8 +83,8 @@
 		},
 		data() {
 			return {
-				cpUserInfo:this.$store.state.cpUserInfo,
-				abyTel:this.$store.state.abyTel,
+				cpUserInfo:this.$store.state.cpUserInfo||'',
+				abyTel:this.$store.state.abyTel||'',
 			}
 		},
 		methods:{

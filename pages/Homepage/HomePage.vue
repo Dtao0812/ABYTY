@@ -71,6 +71,8 @@
 				this.cpId = this.$route.params.cpId;
 				this.isLoading = true;
 				this.cpUserInfo = {};
+				console.log(this.userId)
+				console.log(this.$store.state.userId)
 				if(this.userId == this.$store.state.userId){
 					// 自己的主页
 					if(this.tabList.length == 3){
@@ -81,9 +83,7 @@
 					}
 					this.isOwn = true;
 					this.cpUserInfo = this.$store.state.cpUserInfo;
-					this.tabList[0].data = this.cpUserInfo;
 					this.defTab = 0;
-					this.isLoading = false;
 				}else{
 					// 查看别人主页
 					this.isOwn = false;
@@ -98,9 +98,9 @@
 						this.tabList.unshift(tabLine);
 					}
 					this.defTab = 1;
-					this.getBasicInfo();
 					this.getDownProList();
 				}
+				this.getBasicInfo();
 			},
 			//获取企业资料
 			getBasicInfo() { 
@@ -159,7 +159,9 @@
 				}
 			},
 		},
-		mounted() {},
+		mounted() {
+			this.init();
+		},
 		watch: {
 			cpUserInfo(val) {
 				this.cpUserInfo = val;

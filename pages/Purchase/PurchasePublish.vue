@@ -262,8 +262,10 @@
 				</li>
 			</ul>
 			<div class="space"></div>
+			<div class="aby-button-panel">
+				<aby-button slot="footer" title="发布" class="aby-button-blue" @click.native="onSelect"></aby-button>
+			</div>
 		</div>
-		<aby-button slot="footer" title="发布" class="aby-button-fixed" @click.native="onSelect"></aby-button>
 	</aby-page>
 
 </template>
@@ -410,7 +412,7 @@
 							}];
 							this.ticketTypeList = slots;
 						});
-					}else if(e.selected.value == 40){
+					} else if(e.selected.value == 40) {
 						// 获得酒店标准
 						this.$abyApi.Sys.getDict('hStarlevel', '', (res) => {
 							let dlist = []
@@ -581,7 +583,7 @@
 					if(this.publishInfo.ticketType == '往返' && this.publishInfo.backTime == '') return this.$toast("请选择返程时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
 					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
-					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
+					if(this.publishInfo.childNum < 0) return this.$toast("儿童数量不能小于0");
 					reqInfo.fromCity = this.publishInfo.fromCity;
 					reqInfo.goCity = this.publishInfo.goCity;
 					reqInfo.fromTime = this.publishInfo.fromTime;
@@ -598,7 +600,7 @@
 					if(this.publishInfo.ticketType == '往返' && this.publishInfo.backTime == '') return this.$toast("请选择返程时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
 					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
-					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
+					if(this.publishInfo.childNum < 0) return this.$toast("儿童数量不能小于0");
 					if(this.publishInfo.liveTime == '') return this.$toast("请选择入住时间");
 					if(this.publishInfo.leaveTime == '') return this.$toast("请选择离店时间");
 					if(this.publishInfo.roomNum == 0) return this.$toast("请输入预定房间数");
@@ -619,7 +621,7 @@
 					if(this.publishInfo.playScenicTime == '') return this.$toast("请输入游玩时间");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
 					if(this.publishInfo.peopleNum <= 0) return this.$toast("成人数量最少要一位");
-					if(this.publishInfo.childNum  < 0) return this.$toast("儿童数量不能小于0");
+					if(this.publishInfo.childNum < 0) return this.$toast("儿童数量不能小于0");
 					reqInfo.scenicName = this.publishInfo.scenicName;
 					reqInfo.playScenicTime = this.publishInfo.playScenicTime;
 					reqInfo.peopleNum = this.publishInfo.peopleNum;
@@ -737,18 +739,18 @@
 				this.trafficTypeList = slots;
 			});
 		},
-		watch:{
-			backTime(val){
-				if(val != '' && this.publishInfo.fromTime != ''){
-					if(this.$tool.abyDateFun.compareDate(this.publishInfo.fromTime,val)){
+		watch: {
+			backTime(val) {
+				if(val != '' && this.publishInfo.fromTime != '') {
+					if(this.$tool.abyDateFun.compareDate(this.publishInfo.fromTime, val)) {
 						this.$toast("返程时间不能小于出发时间");
 						this.publishInfo.backTime = '';
 					}
 				}
 			},
-			liveTime(val){
-				if(val != '' && this.publishInfo.leaveTime != ''){
-					if(this.$tool.abyDateFun.compareDate(this.publishInfo.leaveTime,val)){
+			liveTime(val) {
+				if(val != '' && this.publishInfo.leaveTime != '') {
+					if(this.$tool.abyDateFun.compareDate(this.publishInfo.leaveTime, val)) {
 						this.$toast("离店时间不能小于入住时间");
 						this.publishInfo.backTime = '';
 					}
@@ -800,17 +802,18 @@
 		-webkit-font-smoothing: antialiased;
 	}
 	/*为了解决底部按钮不固定问题*/
-	.mui-content {
+	
+	/*.mui-content {
 		position: fixed;
 		top: 0px;
 		left: 0;
 		bottom: 41px;
-		padding-top: 55px;
+		padding-top: 55px;*/
 		/*距离底部的距离为底部盒子的高度，自己也可以设置*/
-		overflow-y: scroll;
+		/*overflow-y: scroll;
 		width: 100%;
 		height: auto;
-		-webkit-overflow-scrolling: touch;
+		-webkit-overflow-scrolling: touch;*/
 		/*这句是为了滑动更顺畅*/
-	}
+	/*}*/
 </style>

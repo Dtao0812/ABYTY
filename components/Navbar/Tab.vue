@@ -36,6 +36,9 @@
 		watch:{
 			actSelect(val){
 				this.selected = val;
+			},
+			list(val){
+				this.tabList = val;
 			}
 		}
 	}

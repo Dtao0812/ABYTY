@@ -20,7 +20,7 @@
 				<div class="mui-card-content-inner">
 					<h5 class="mui-ellipsis aby-font-Black">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
 					<p>{{li.goData}} {{li.orderSummary.goCity}}出发</p>
-					<p>{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt!=0">{{li.orderSummary.childCnt}}儿童</span></p>
+					<p>{{li.orderSummary.childNum}}成人<span v-if="li.orderSummary.childCnt">{{li.orderSummary.childCnt}}儿童</span></p>
 				</div>
 			</div>
 			<div class="mui-card-footer">

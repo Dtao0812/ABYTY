@@ -8,7 +8,7 @@
 			</div>
 			<div class="mui-input-row mui-checkbox paymethod space">
 				<label><img class="icopay" src="../../static/images/ico/ico_alipay_3x.png"/>支付宝</label>
-				<input name="checkbox1" value="" type="checkbox" checked="">
+				<input id="checkbox" name="checkbox1" value="" type="checkbox" checked="">
 			</div>
 			<div class="aby-button-panel">
 				<aby-button class="aby-button-blue" title="确认支付" @click.native="toPay"></aby-button>
@@ -62,21 +62,25 @@
 			},
 			// 付款
 			toPay(){
-				let reqInfo = {};
-				reqInfo.channelid = "alipay";
-				reqInfo.payType = 0;
-				reqInfo.orderInfo = {
-					orderName : '',
-					orderPrice : this.preDeposit
-				};
-				this.$abyApi.Pay.payDeposit(reqInfo,(res)=>{
-					plus.payment.request(this.pays[reqInfo.channelid], res.order, (result)=> {
-						this.$router.back()
-					},(e)=>{
-						this.$toast("支付失败");
-						this.$router.back()
+				if(document.getElementById("checkbox").checked){
+					let reqInfo = {};
+					reqInfo.channelid = "alipay";
+					reqInfo.payType = 0;
+					reqInfo.orderInfo = {
+						orderName : '',
+						orderPrice : this.preDeposit
+					};
+					this.$abyApi.Pay.payDeposit(reqInfo,(res)=>{
+						plus.payment.request(this.pays[reqInfo.channelid], res.order, (result)=> {
+							this.$router.back()
+						},(e)=>{
+							this.$toast("支付失败");
+							this.$router.back()
+						})
 					})
-				})
+				}else{
+					this.$toast("请选择支付方式");
+				}
 			},
 		},
 		mounted() {

@@ -24,7 +24,7 @@
 				</ul>
 				<div class="mui-input-row mui-checkbox mui-left">
 					<label>同意<a @click="toAgree">《质保金保障服务协议》</a></label>
-					<input name="checkbox" value="" type="checkbox" checked>
+					<input id="checkbox" name="checkbox" value="" type="checkbox" checked>
 				</div>
 			</div>
 			<div class="safe" @click="toTonglian">
@@ -61,14 +61,18 @@
 			},
 			// 支付
 			toPay(){
-				this.$router.push({
-					name:'payGold',
-					params:{
-						preDeposit: this.preDeposit,
-						poundage: this.poundage,
-						totalPrice: this.totalPrice
-					}
-				})
+				if(document.getElementById("checkbox").checked){
+					this.$router.push({
+						name:'payGold',
+						params:{
+							preDeposit: this.preDeposit,
+							poundage: this.poundage,
+							totalPrice: this.totalPrice
+						}
+					})
+				}else{
+					this.$toast("请同意《质保金保障服务协议》");
+				}
 			},
 			// 质保金协议
 			toAgree(){

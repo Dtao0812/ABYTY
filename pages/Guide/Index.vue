@@ -92,7 +92,6 @@
 		created() {},
 		beforeRouteEnter(to, from, next) {
 			if(from.name != 'guidePage') {
-				console.log(111)
 				next(vm => {
 					vm.init()
 				})

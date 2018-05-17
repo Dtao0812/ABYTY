@@ -132,7 +132,7 @@
 					</ul>
 					<!--景点询价-->
 					<ul class="mui-table-view" v-if="data.selectType == 50">
-						<h4>{{data.title}}</h4>
+						<h4>预定{{data.scenicName}}景点门票</h4>
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">景点名称</div>

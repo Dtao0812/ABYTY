@@ -242,6 +242,39 @@
 					case 'procollection':this.iconClass = 'aby-icon-procollection ' + this.className;break;
 					//查看主页
 					case 'proshop':this.iconClass = 'aby-icon-proshop ' + this.className;break;
+					//酒店详情-----------------------------------------------------------------------------------
+					//充电
+					case 'hotelcharge':this.iconClass = 'aby-icon-hotelcharge ' + this.className;break;
+					//洗手间
+					case 'hotelwc':this.iconClass = 'aby-icon-hotelwc ' + this.className;break;
+					//交通
+					case 'hotelbus':this.iconClass = 'aby-icon-hotelbus ' + this.className;break;
+					//轮椅
+					case 'hotelwheelchair':this.iconClass = 'aby-icon-hotelwheelchair ' + this.className;break;
+					//婴儿租车
+					case 'hotelbabycar':this.iconClass = 'aby-icon-hotelbabycar ' + this.className;break;
+					//商店
+					case 'hotelshop':this.iconClass = 'aby-icon-hotelshop ' + this.className;break;
+					//吸烟区
+					case 'hotelsmoke':this.iconClass = 'aby-icon-hotelsmoke ' + this.className;break;
+					//停车场
+					case 'hotelpark':this.iconClass = 'aby-icon-hotelpark ' + this.className;break;
+					//热水
+					case 'hotelhotwater':this.iconClass = 'aby-icon-hotelhotwater ' + this.className;break;
+					//餐厅
+					case 'hotelfood':this.iconClass = 'aby-icon-hotelfood ' + this.className;break;
+					//宽带
+					case 'hotelbroadband':this.iconClass = 'aby-icon-hotelbroadband ' + this.className;break;
+					//行李寄存
+					case 'hoteldeposit':this.iconClass = 'aby-icon-hoteldeposit ' + this.className;break;
+					//接机服务
+					case 'hotelair':this.iconClass = 'aby-icon-hotelair ' + this.className;break;
+					//健身房
+					case 'hotelbodybuilding':this.iconClass = 'aby-icon-hotelbodybuilding ' + this.className;break;
+					//游泳池
+					case 'hotelpool':this.iconClass = 'aby-icon-hotelpool ' + this.className;break;
+					//会议服务
+					case 'hotelmeeting':this.iconClass = 'aby-icon-hotelmeeting ' + this.className;break;
 					
 					default: this.iconClass = this.classname;
 				}

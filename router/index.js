@@ -27,6 +27,7 @@ import Sport from '../pages/Sport/Index.vue'
 //酒店
 import Hotel from '../pages/Hotel/Index.vue'
 import HotelSearch from '../pages/Hotel/Search.vue'
+import HotelDetail from '../pages/Hotel/Detail.vue'
 //导游
 import Guide from '../pages/Guide/Index.vue'
 import GuidePage from '../pages/Guide/Detail.vue'
@@ -170,6 +171,7 @@ const router = new Router({
 		// 酒店
 		{ name: 'hotel',path: '/hotel',component: Hotel },
 		{ name: 'hotelSearch',path: '/hotelSearch',component: HotelSearch },
+		{ name: 'hotelDetail',path: '/hotelDetail',component: HotelDetail },
 		
 		{ name: 'sport',path: '/sport',component: Sport },
 		

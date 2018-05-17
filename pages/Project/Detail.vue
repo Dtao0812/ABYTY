@@ -342,6 +342,7 @@
 	.fee p,.careful p {
 		margin-bottom: 0px;
 		color: #666666;
+		text-align: justify;
 	}
 	/*底部固定操作区域*/
 	.footer{

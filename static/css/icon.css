@@ -738,27 +738,107 @@
 	content: '\e6b8';
 }
 
+
 /*----------------------------产品详情----------------------------*/
 
+
 /*餐饮*/
-.aby-icon-dayfood:before{
+
+.aby-icon-dayfood:before {
 	content: '\e6b1';
 }
 
+
 /*住宿*/
-.aby-icon-dayhotel:before{
+
+.aby-icon-dayhotel:before {
 	content: '\e6b0';
 }
 
+
 /*在线联系*/
-.aby-icon-prochat:before{
+
+.aby-icon-prochat:before {
 	content: '\e6ad';
 }
+
+
 /*查看主页*/
-.aby-icon-proshop:before{
+
+.aby-icon-proshop:before {
 	content: '\e6ac';
 }
+
+
 /*收藏*/
-.aby-icon-procollection:before{
+
+.aby-icon-procollection:before {
 	content: '\e6ae';
+}
+
+
+/*----------------------------酒店详情----------------------------*/
+/*充电*/
+.aby-icon-hotelcharge:before {
+	content: '\e6cf';
+}
+/*洗手间*/
+.aby-icon-hotelwc:before {
+	content: '\e6ce';
+}
+/*交通*/
+.aby-icon-hotelbus:before {
+	content: '\e6cd';
+}
+/*轮椅*/
+.aby-icon-hotelwheelchair:before {
+	content: '\e6cc';
+}
+/*婴儿租车*/
+.aby-icon-hotelbabycar:before {
+	content: '\e6cb';
+}
+/*商店*/
+.aby-icon-hotelshop:before {
+	content: '\e6ca';
+}
+/*吸烟区*/
+.aby-icon-hotelsmoke:before {
+	content: '\e6c9';
+}
+/*停车场*/
+.aby-icon-hotelpark:before {
+	content: '\e6c7';
+}
+/*热水*/
+.aby-icon-hotelhotwater:before {
+	content: '\e6c6';
+}
+/*餐厅*/
+.aby-icon-hotelfood:before {
+	content: '\e6c4';
+}
+/*宽带*/
+.aby-icon-hotelbroadband:before {
+	content: '\e6c3';
+}
+/*行李寄存*/
+.aby-icon-hoteldeposit:before {
+	content: '\e6c2';
+}
+/*接机服务*/
+.aby-icon-hotelair:before {
+	content: '\e6c1';
+}
+/*健身房*/
+.aby-icon-hotelbodybuilding:before {
+	content: '\e6c0';
+}
+/*游泳池*/
+.aby-icon-hotelpool:before {
+	content: '\e6be';
+}
+/*会议服务*/
+.aby-icon-hotelmeeting:before {
+	content: '\e6bd';
 }

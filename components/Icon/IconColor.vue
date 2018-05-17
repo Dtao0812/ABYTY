@@ -410,7 +410,7 @@
 						//时钟
 					case 'clock':
 						this.iconClass = '#icon-shizhong';
-						break;
+						break;	
 
 					default:
 						this.iconClass = this.classname;

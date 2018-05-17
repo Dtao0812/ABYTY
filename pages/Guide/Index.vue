@@ -20,6 +20,7 @@
 			return {
 				isShowSearch:false,title:'导游',pageNum:1,orderBy:1,lists:[],
 				where:{
+					cityId: this.$route.params.cityId||'',
 					cityName: this.$route.params.cityName||''
 				},
 			}
@@ -30,6 +31,10 @@
 				this.pageNum = 1;
 				this.orderBy = 1;
 				this.lists = [];
+				this.where = {
+					cityId: this.$route.params.cityId||'',
+					cityName: this.$route.params.cityName||''
+				};
 				this.getPullDown();
 			},
 			scroll(top){
@@ -41,7 +46,6 @@
 				reqInfo.pageIndex = 1;
 				reqInfo.loading = 1;
 				reqInfo.where = this.where;
-				
 				this.$abyApi.Guide.getGuiderList(reqInfo,(res)=>{
 					this.$refs.pull.closeLoading();
 					this.lists = res.userlist;
@@ -88,6 +92,7 @@
 		created() {},
 		beforeRouteEnter(to, from, next) {
 			if(from.name != 'guidePage') {
+				console.log(111)
 				next(vm => {
 					vm.init()
 				})

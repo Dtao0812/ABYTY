@@ -6,7 +6,7 @@
 			<div class="mui-scroll-wrapper" v-if="isShow">
 				<mt-index-list>
 					<mt-index-section v-bind:index="codeList[index]" v-for="(tmps,index) in cityNewList" :key="index">
-						<mt-cell v-bind:title="item.name" v-for='(item,i) in tmps' :key="i" @click.native="onSelect(item.name)">
+						<mt-cell v-bind:title="item.name" v-for='(item,i) in tmps' :key="i" @click.native="onSelect(item.cityid,item.name)">
 							<p class="fName">{{item.fName}}</p>
 						</mt-cell>
 					</mt-index-section>
@@ -144,10 +144,11 @@
 				this.cityNewList = this.citySort(this.cityList, this.codeList);
 			},
 			// 选择城市
-			onSelect(val){
+			onSelect(cityid, val){
 				this.$router.replace({
 					name: this.fromPageUrl,
 					params: {
+						cityid: cityid,
 						cityName: val,
 					}
 				});

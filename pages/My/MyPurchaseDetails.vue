@@ -284,7 +284,6 @@
 			reqInfo.loading = 1;
 			reqInfo.selectId = this.selectId;
 			this.$abyApi.Select.getPublishDetail(reqInfo,(res)=>{
-				console.log('询价详情:'+JSON.stringify(res))
 				this.data = res.cpSelect;
 				this.$refs.page.isLoading = false;
 			},(err)=>{this.$refs.page.isLoading = false;});

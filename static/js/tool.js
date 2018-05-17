@@ -306,13 +306,13 @@ let confirm = function(message, callbacl, title) {
 	});
 };
 //prompt
-let prompt = function(title, callbacl) {
+let prompt = function(message, title, callbacl) {
 	title = title || '呱啦啦提示';
-	Vue.$messagebox.prompt(title).then(({
+	Vue.$messagebox.prompt(title, message).then(({
 		value,
 		action
 	}) => {
-		if(action == 1){
+		if(action == 'confirm'){
 			callbacl && callbacl({
 				value,
 				action

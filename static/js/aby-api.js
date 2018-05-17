@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-const AbyUrl = 'http://114.215.202.155/';
-//const AbyUrl = 'http://www.ai-by.com/';
+//const AbyUrl = 'http://114.215.202.155/';
+const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -1047,12 +1047,12 @@ const Order = {
 		Server.getDataFromServerPayment('storder/ORDER007.action', requestData, successCallback, errorCallback);
 	},
 	// 修改价格
-	editPrice(requestInfo, successCallback, errorCallback) {
-		let requestData = {
-			orderId: requestInfo.orderId,
-		};
-		Server.getDataFromServerPayment('storder/ORDER005.action', requestData, successCallback, errorCallback);
-	},
+//	editPrice(requestInfo, successCallback, errorCallback) {
+//		let requestData = {
+//			orderId: requestInfo.orderId,
+//		};
+//		Server.getDataFromServerPayment('storder/ORDER005.action', requestData, successCallback, errorCallback);
+//	},
 	// 获得订单详情
 	getOrderDetail(requestInfo, successCallback, errorCallback) {
 		let requestData = {
@@ -1133,20 +1133,16 @@ const Order = {
 	// 修改价格
 	editPrice(requestInfo, successCallback, errorCallback) {
 		let requestData = {
-			params: {
-				orderId: requestInfo.orderId,
-				payment: requestInfo.payment,
-			}
+			orderId: requestInfo.orderId,
+			payment: requestInfo.payment,
 		};
 		Server.getDataFromServerPayment('storder/ORDER005.action', requestData, successCallback, errorCallback);
 	},
 	// 添加备注
 	addIntro(requestInfo, successCallback, errorCallback) {
 		let requestData = {
-			params: {
-				orderId: requestInfo.orderId,
-				sellerNote: requestInfo.sellerNote,
-			}
+			orderId: requestInfo.orderId,
+			sellerNote: requestInfo.sellerNote,
 		};
 		Server.getDataFromServerPayment('storder/ORDER006.action', requestData, successCallback, errorCallback);
 	},

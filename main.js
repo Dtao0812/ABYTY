@@ -126,10 +126,9 @@ Vue.filter('filterConvertDateFromNowBy13', function(timestamp) {
 	var nHour = nTime.getHours();
 	var nMinute = nTime.getMinutes();
 	var year = (new Date).getFullYear();
-	var _date = nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2);
-	
+	var _date = nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2) + '-' + Vue.$tool.pad(nHour, 2) + '-' + Vue.$tool.pad(nMinute, 2);
 	Moment.locale('zh-cn');
-	return Moment(_date, "YYYYMMDD").fromNow();
+	return Moment(_date, "YYYYMMDDHHmm").fromNow();
 });
 // 计算时间
 Vue.filter('filterConvertDateFromNow', function(date) {

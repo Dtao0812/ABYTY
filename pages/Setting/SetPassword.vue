@@ -2,7 +2,7 @@
 	<aby-page class="aby-bg-white">
 		<aby-header title="修改密码" slot="header"></aby-header>
 		<div class="mui-content aby-bg-white" slot="content">
-			<div class="row-input" v-if="isShowPhone">
+			<div class="row-input" v-show="isShowPhone">
 				<aby-field modelId="userPhone" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入注册手机号" type="tel">
 					<aby-icon id="iconLabel" type="loginid" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
@@ -11,7 +11,7 @@
 				</aby-field>
 				<input type="button" class="mui-btn btnVerificationCode" id="btnVerificationCode" @click="onGetVerifyCode" value="获取验证码">
 			</div>
-			<div class="row-input" v-if="isShowPwd">
+			<div class="row-input" v-show="isShowPwd">
 				<aby-field modelId="newPassword" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请设置新密码" type="password">
 					<aby-icon id="iconLabel" type="pwd" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
@@ -30,7 +30,7 @@
 	export default {
 		data() {
 			return {
-				userPhone:this.$store.state.userPhone||'',
+				userPhone:'',
 				newPassword:'',newPassword_confirm:'',code:'',verifyCode:'',
 				isShowPhoneDiv:true,
 				isShowPhone:true,
@@ -39,14 +39,19 @@
 		},
 		methods: {
 			onGetVerifyCode() {
-				let reqInfo = {};
-				reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
-				reqInfo.smsType = 2;
-				this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
-					this.$toast("验证码已发送！")
-					this.code = res.verifyCode
-					this.$tool.disableWait(document.getElementById("btnVerificationCode"))
-				});
+				if(this.userPhone == this.$store.state.userPhone){
+					let reqInfo = {};
+					reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
+					reqInfo.smsType = 2;
+					this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
+						this.$toast("验证码已发送！")
+						this.code = res.verifyCode
+						this.$tool.disableWait(document.getElementById("btnVerificationCode"))
+					});
+				}else{
+					this.$toast("您输入的注册号码有误，请查证后再输入！")
+				}
+				
 			},
 			onSetPwd(){
 				if(this.isShowPhone && !this.isShowPwd){

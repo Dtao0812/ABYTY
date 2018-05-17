@@ -20,7 +20,8 @@
 				<div class="mui-card-content-inner">
 					<h5 class="mui-ellipsis aby-font-Black">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
 					<p>{{li.goData}} {{li.orderSummary.goCity}}出发</p>
-					<p>{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt!=0">{{li.orderSummary.childCnt}}儿童</span></p>
+					<p v-if="li.orderInfo.proSummary.proType == 1">{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt">{{li.orderSummary.childCnt}}儿童</span></p>
+					<p v-else>{{li.orderSummary.adultsNum}}成人<span v-if="li.orderSummary.childNum">{{li.orderSummary.childNum}}儿童</span></p>
 				</div>
 			</div>
 			<div class="mui-card-footer">
@@ -112,21 +113,21 @@
 			onBtn(liObj,btnObj){
 				if(btnObj.id == 3){
 					// 订单备注
-					this.$tool.prompt('输入备注内容',(e)=>{
+					this.$tool.prompt({inputPlaceholder: '请输入备注内容'}, '备注',(e)=>{
 						let reqInfo = {};
-						reqInfo.orderId = liObj.id;
-						reqInfo.sellerNote = e.sellerNote;
-						this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
+						reqInfo.orderId = liObj.orderInfo.orderId;
+						reqInfo.sellerNote = e.value;
+						this.$abyApi.Order.addIntro(reqInfo,(res)=>{
 							this.$emit("eventOrder");
 						});
 					});
 				}else if(btnObj.id == 4){
 					// 修改价格
-					this.$tool.prompt('输入价格',(e)=>{
+					this.$tool.prompt({inputPlaceholder: '请输入新价格'},'输入价格',(e)=>{
 						let reqInfo = {};
-						reqInfo.orderId = liObj.id;
+						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.payment = e.value;
-						this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
+						this.$abyApi.Order.editPrice(reqInfo,(res)=>{
 							this.$emit("eventOrder");
 						});
 					})
@@ -204,6 +205,9 @@
 </script>
 
 <style scoped>
+	.list-item{
+		min-height: 600px;
+	}
 	.mui-card {
 		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0);

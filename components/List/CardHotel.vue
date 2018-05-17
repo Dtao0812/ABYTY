@@ -66,6 +66,9 @@
 </script>
 
 <style scoped>
+	.card-item{
+		min-height: 800px;
+	}
 	.icobusiness {
 		font-size: 12px;
 	}

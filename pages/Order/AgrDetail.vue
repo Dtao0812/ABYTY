@@ -118,13 +118,16 @@
 			<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">
 				<aby-icon class="mui-icon" type="call"></aby-icon><span class="icotext">联系</span>
 			</div>
-			<div v-if="info.state == 1">
+			<div v-if="identityType == 'buyer' && info.state == 1">
 				<div class="mui-col-xs-4 btndefault">
 					<input type="button" value="刷新协议" @click="getDetail" />
 				</div>
 				<div class="mui-col-xs-4 btnblue">
 					<input type="button" value="确认协议" @click="confirmAgr" />
 				</div>
+			</div>
+			<div class="mui-col-xs-8 btnblue" v-if="identityType == 'seller' && info.state == 1">
+				<input type="button" value="已发送，等待对方确认..." />
 			</div>
 			<div class="mui-col-xs-8 btnblue" v-else>
 				<input type="button" value="查看订单" @click="toOrderDetail" />
@@ -169,8 +172,9 @@
 			// 确认协议
 			confirmAgr() {
 				if(this.isSelectInvoiceType) {
+					let re = /^[0-9a-zA-Z]*$/g;
 					if(this.invoiceName == '') return this.$toast("请输入发票抬头内容");
-					if(this.invoiceNumer == '') return this.$toast("请输入税号");
+					if(this.invoiceNumer == '' || !re.test(this.invoiceNumer)) return this.$toast("请输入正确的发票税号");
 					if(this.invoiceContent == '') return this.$toast("请输入发票内容");
 				}
 				let reqInfo = {};
@@ -215,7 +219,7 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.orderId == "" || from.name == "agrList") {
+			if(from.params.orderId == "" || from.name == "agrList" || from.name == "orderDetails") {
 				next(vm => {
 					vm.init()
 				})

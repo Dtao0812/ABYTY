@@ -294,6 +294,7 @@ let loadingClose = function() {
 // alert
 let alert = function(message, callbacl, title) {
 	title = title || '呱啦啦提示';
+	console.log('vue:'+Vue.$messagebox.alert)
 	Vue.$messagebox.alert(message, title).then(action => {
 		callbacl && callbacl(action)
 	});
@@ -301,18 +302,19 @@ let alert = function(message, callbacl, title) {
 // confirm
 let confirm = function(message, callbacl, title) {
 	title = title || '呱啦啦提示';
+	console.log('vue:'+Vue.$messagebox.confirm)
 	Vue.$messagebox.confirm(message, title).then(action => {
 		callbacl && callbacl(action)
 	});
 };
 //prompt
-let prompt = function(title, callbacl) {
+let prompt = function(message, title, callbacl) {
 	title = title || '呱啦啦提示';
-	Vue.$messagebox.prompt(title).then(({
+	Vue.$messagebox.prompt(title, message).then(({
 		value,
 		action
 	}) => {
-		if(action == 1){
+		if(action == 'confirm'){
 			callbacl && callbacl({
 				value,
 				action

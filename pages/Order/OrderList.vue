@@ -85,6 +85,10 @@
 				next(vm => {
 					vm.init()
 				})
+			}else if(from.name == 'orderDetails'){
+				next(vm => {
+					vm.getPullDown()
+				})
 			}else{
 				next()
 			}

@@ -112,21 +112,21 @@
 			onBtn(liObj,btnObj){
 				if(btnObj.id == 3){
 					// 订单备注
-					this.$tool.prompt('输入备注内容',(e)=>{
+					this.$tool.prompt({inputPlaceholder: '请输入备注内容'}, '备注',(e)=>{
 						let reqInfo = {};
-						reqInfo.orderId = liObj.id;
-						reqInfo.sellerNote = e.sellerNote;
-						this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
+						reqInfo.orderId = liObj.orderInfo.orderId;
+						reqInfo.sellerNote = e.value;
+						this.$abyApi.Order.addIntro(reqInfo,(res)=>{
 							this.$emit("eventOrder");
 						});
 					});
 				}else if(btnObj.id == 4){
 					// 修改价格
-					this.$tool.prompt('输入价格',(e)=>{
+					this.$tool.prompt({inputPlaceholder: '请输入新价格'},'输入价格',(e)=>{
 						let reqInfo = {};
-						reqInfo.orderId = liObj.id;
+						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.payment = e.value;
-						this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
+						this.$abyApi.Order.editPrice(reqInfo,(res)=>{
 							this.$emit("eventOrder");
 						});
 					})

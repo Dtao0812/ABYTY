@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			
-			<div class="safe">
+			<div class="safe" @click="toTonglian">
 				<img src="../../static/images/ico/ico_pay_tl_3x.png" />
 				<p>本平台由通联支付提供资金担保</p>
 			</div>
@@ -83,6 +83,16 @@
 					res.data.orderInfo.proSummary = JSON.parse(res.data.orderInfo.proSummary);
 					res.data.orderSummary = JSON.parse(res.data.orderSummary);
 					this.data = res.data;
+				})
+			},
+			// 通联协议
+			toTonglian(){
+				this.$router.push({
+					name:"webView",
+					params:{
+						title:'通联支付说明',
+						url:'http://m.ai-by.com/wap/webView/index.html'
+					}
 				})
 			}
 		},

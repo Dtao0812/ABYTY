@@ -172,8 +172,9 @@
 			// 确认协议
 			confirmAgr() {
 				if(this.isSelectInvoiceType) {
+					let re = /^[0-9a-zA-Z]*$/g;
 					if(this.invoiceName == '') return this.$toast("请输入发票抬头内容");
-					if(this.invoiceNumer == '') return this.$toast("请输入税号");
+					if(this.invoiceNumer == '' || !re.test(this.invoiceNumer)) return this.$toast("请输入正确的发票税号");
 					if(this.invoiceContent == '') return this.$toast("请输入发票内容");
 				}
 				let reqInfo = {};
@@ -218,7 +219,7 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.orderId == "" || from.name == "agrList") {
+			if(from.params.orderId == "" || from.name == "agrList" || from.name == "orderDetails") {
 				next(vm => {
 					vm.init()
 				})

@@ -294,7 +294,6 @@ let loadingClose = function() {
 // alert
 let alert = function(message, callbacl, title) {
 	title = title || '呱啦啦提示';
-	console.log('vue:'+Vue.$messagebox.alert)
 	Vue.$messagebox.alert(message, title).then(action => {
 		callbacl && callbacl(action)
 	});
@@ -302,7 +301,6 @@ let alert = function(message, callbacl, title) {
 // confirm
 let confirm = function(message, callbacl, title) {
 	title = title || '呱啦啦提示';
-	console.log('vue:'+Vue.$messagebox.confirm)
 	Vue.$messagebox.confirm(message, title).then(action => {
 		callbacl && callbacl(action)
 	});

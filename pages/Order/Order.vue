@@ -36,125 +36,63 @@
 		components: {},
 		data() {
 			return {
-				tabList: [{
-						id: 'buyersTab',
-						title: '买家中心',
-						type: 'buyer',
-						data: [{
-								id: 'agr',
-								title: '收到的协议',
-								num: 0,
-								state: '',
-								icon: 'myagreement'
-							},
-							{
-								id: 'all',
-								title: '全部订单',
-								num: 0,
-								state: '',
-								icon: 'orderall'
-							},
-							{
-								id: 'waitConfrim',
-								title: '待确认',
-								num: 0,
-								state: 9,
-								icon: 'orderconfirm'
-							},
-							{
-								id: 'waitPay',
-								title: '待付款',
-								num: 0,
-								state: 0,
-								icon: 'orderpay'
-							},
-							{
-								id: 'waitSetOut',
-								title: '待出行',
-								num: 0,
-								state: 1,
-								icon: 'ordertrip'
-							},
-							{
-								id: 'waitEnd',
-								title: '待完成',
-								num: 0,
-								state: 2,
-								icon: 'orderfinish'
-							},
-							{
-								id: 'waitRefund',
-								title: '退款',
-								num: 0,
-								state: 10,
-								icon: 'orderrefund'
-							},
-						]
-					},
-					{
-						id: 'sellerTab',
-						title: '卖家中心',
-						type: 'seller',
-						data: [{
-								id: 'agr',
-								title: '发出的协议',
-								num: 0,
-								state: '',
-								icon: 'myagreement'
-							},
-							{
-								id: 'all',
-								title: '全部订单',
-								num: 0,
-								state: '',
-								icon: 'orderall'
-							},
-							{
-								id: 'waitConfrim',
-								title: '待确认',
-								num: 0,
-								state: 9,
-								icon: 'orderconfirm'
-							},
-							{
-								id: 'waitPay',
-								title: '待付款',
-								num: 0,
-								state: 0,
-								icon: 'orderpay'
-							},
-							{
-								id: 'waitSetOut',
-								title: '待出行',
-								num: 0,
-								state: 1,
-								icon: 'ordertrip'
-							},
-							{
-								id: 'waitEnd',
-								title: '待完成',
-								num: 0,
-								state: 2,
-								icon: 'orderfinish'
-							},
-							{
-								id: 'waitRefund',
-								title: '退款处理',
-								num: 0,
-								state: 10,
-								icon: 'orderrefund'
-							},
-						]
-					},
-				],
+				tabList: [],
 				identityType: 'buyer',
 			}
 		},
 		methods: {
 			// 初始化
 			init() {
+				if(this.$store.state.cpBtype == 10){
+					this.tabList = [
+						{
+							id: 'buyersTab',
+							title: '买家中心',
+							type: 'buyer',
+							data: [
+								{id: 'agr',title: '收到的协议',num: 0,state: '',icon: 'myagreement'},
+								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},
+								{id: 'waitConfrim',title: '待确认',num: 0,state: 9,icon: 'orderconfirm'},
+								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
+								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
+								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
+								{id: 'waitRefund',title: '退款',num: 0,state: 10,icon: 'orderrefund'},
+							]
+						},
+					];
+				}else{
+					this.tabList = [
+						{
+							id: 'buyersTab',
+							title: '买家中心',
+							type: 'buyer',
+							data: [
+								{id: 'agr',title: '收到的协议',num: 0,state: '',icon: 'myagreement'},
+								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},
+								{id: 'waitConfrim',title: '待确认',num: 0,state: 9,icon: 'orderconfirm'},
+								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
+								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
+								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
+								{id: 'waitRefund',title: '退款',num: 0,state: 10,icon: 'orderrefund'},
+							]
+						},
+						{
+							id: 'sellerTab',
+							title: '卖家中心',
+							type: 'seller',
+							data: [
+								{id: 'agr',title: '发出的协议',num: 0,state: '',icon: 'myagreement'},
+								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},
+								{id: 'waitConfrim',title: '待确认',num: 0,state: 9,icon: 'orderconfirm'},
+								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
+								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
+								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
+								{id: 'waitRefund',title: '退款处理',num: 0,state: 10,icon: 'orderrefund'},
+							]
+						},
+					];
+				}
 				// 底部导航监听
-				if(this.$store.state.cpBtype == 10)this.tabList[1].data = [];
 				this.$parent.eventPageShow(this.$route.name);
 				this.getOrderNum();
 			},

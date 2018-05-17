@@ -31,7 +31,7 @@
 					<h3 class="">支付金额大于5000元</h3>
 					<p>请登录呱啦啦网站www.gualala.cn进行支付</p>
 				</div>
-				<div class="aby-button-panel space">
+				<div class="aby-button-panel space" @click="toScan">
 					<aby-button class="aby-button-blue" title="扫码登录支付"></aby-button>
 				</div>
 			</div>
@@ -94,12 +94,20 @@
 						url:'http://m.ai-by.com/wap/webView/index.html'
 					}
 				})
-			}
+			},
+			// 扫码登录网页支付
+			toScan(){
+				this.$router.push({
+					name: 'scan',
+				});
+			},
 		},
 		mounted() {},
 		beforeRouteEnter(to, from, next) {
 			if(from.name =='webView'){
 				next()
+			}else if(from.name =='scan'){
+				next();
 			}else{
 				next(vm => {
 					vm.init()

@@ -417,6 +417,19 @@ small {
 	line-height: 10px;
 }
 
+/*返回顶部按钮*/
+.aby-button-top{
+	position: fixed;
+	right: 8px!important;
+	bottom: 100px!important;
+	background-color: rgba(255,255,255,.8);
+	border: 1px solid #CCCCCC;
+	color: #888888;
+	border-radius: 50%;
+	padding: 10px;
+	font-size: 16px;
+}
+
 
 /*-----------------------------------------head下方固定样式----------------------------------------*/
 

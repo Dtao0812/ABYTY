@@ -275,6 +275,8 @@
 					case 'hotelpool':this.iconClass = 'aby-icon-hotelpool ' + this.className;break;
 					//会议服务
 					case 'hotelmeeting':this.iconClass = 'aby-icon-hotelmeeting ' + this.className;break;
+					//返回顶部
+					case 'top':this.iconClass = 'aby-icon-top ' + this.className;break;
 					
 					default: this.iconClass = this.classname;
 				}

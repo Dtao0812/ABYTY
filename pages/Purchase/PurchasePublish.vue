@@ -246,7 +246,7 @@
 			<div class="space"></div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell liRefundRemark">
-					<aby-field modelId="refundDesc" className="aby-input-area" placeholder="例：需要大巴接送、需要导游等" type="textarea" rows="5">
+					<aby-field modelId="publishInfo.pDesc" :modelVal="publishInfo.pDesc" className="aby-input-area" placeholder="例：需要大巴接送、需要导游等" type="textarea" rows="5">
 						<label class="areaLabel" slot="label">备注</label>
 						<i slot="allowRight"></i>
 					</aby-field>

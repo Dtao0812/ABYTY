@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -420,6 +420,7 @@ const User = {
 			loginPwd: requestInfo.loginPwd,
 			verifyCode: requestInfo.verifyCode
 		};
+		console.log('修改密码提交参数：'+JSON.stringify(requestData))
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback);
 	},
 	// 简单注册

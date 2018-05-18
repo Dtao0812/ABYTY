@@ -22,7 +22,7 @@
 						<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
 						
 						<div class="mui-media-body">
-							{{cpUserInfo.cpBasic.cpHeadName|filterNull}}
+							{{cpUserInfo.userName|filterNull}}
 							<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName|filterNull}}</p>
 						</div>
 					</a>

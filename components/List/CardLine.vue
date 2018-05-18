@@ -41,13 +41,23 @@
 					}
 				});
 			},
+//			setImgSize(){
+//				console.log(22)
+//				var imgArr = document.getElementsByClassName("face");
+//				console.log(imgArr)
+//				for(var i = 0; i < imgArr.length; i++) {
+//					imgArr[i].style.height = 2*imgArr[i].clientWidth / 3 + "px";
+//				}
+//			}
 		},
 		mounted() {
+//			this.setImgSize();
 		},
 		watch: {  
 		    list(val){
 		    	this.noContent = val.length == 0;
 		    	this.list = val;
+//		    	this.setImgSize();
 		    }  
 		}  
 	}

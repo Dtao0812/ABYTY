@@ -8,8 +8,8 @@
 				<li class="mui-table-view-cell mui-media">
 					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
 					<div class="mui-media-body">
-						{{cpUserInfo.cpBasic.cpHeadName||''}}
-						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||''}}</p>
+						{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}
+						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>

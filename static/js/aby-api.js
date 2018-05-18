@@ -420,6 +420,7 @@ const User = {
 			loginPwd: requestInfo.loginPwd,
 			verifyCode: requestInfo.verifyCode
 		};
+		console.log('修改密码提交参数：'+JSON.stringify(requestData))
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback);
 	},
 	// 简单注册

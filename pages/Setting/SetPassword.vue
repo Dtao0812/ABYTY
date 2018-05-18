@@ -64,20 +64,21 @@
 					this.isShowPwd = true;
 					return;
 				}else{
-					if(this.userPassword === '' || this.userPassword_confirm === ''){
+					if(this.newPassword === '' || this.newPassword_confirm === ''){
 						return this.$toast('修改内容不能为空');
-					}else if(this.userPassword !== this.userPassword_confirm){
+					}else if(this.newPassword !== this.newPassword_confirm){
 						return this.$toast('密码重复不正确');
 					}else{
 						let reqInfo = {};
 						reqInfo.loginId = this.$abyApi.Crypto.EnCrypt(this.userPhone);
-						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.userPassword);
+						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.newPassword);
 						reqInfo.verifyCode = this.verifyCode;
 						this.$abyApi.User.setLoginPwd(reqInfo,(res)=>{
+							console.log(JSON.stringify(res))
 							this.$tool.toast('修改成功');
-							setTimeout(()=>{
-								this.$router.back();
-							},1000);
+//							setTimeout(()=>{
+//								this.$router.back();
+//							},1000);
 						})
 					}
 				}

@@ -1150,9 +1150,7 @@ const Order = {
 	// 确认完成订单
 	transactionCompletion(requestInfo, successCallback, errorCallback) {
 		let requestData = {
-			params: {
-				id: requestInfo.id,
-			}
+			params: requestInfo.orderId,
 		};
 		Server.getDataFromServerPayment('stpay/paytoseller.action', requestData, successCallback, errorCallback);
 	},

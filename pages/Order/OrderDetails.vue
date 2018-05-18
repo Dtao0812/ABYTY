@@ -381,24 +381,29 @@
 						let remainTime = this.info.countDownTimestamp;
 						let timer;
 						timer = setInterval(()=>{
-							if(remainTime > 0 && !this.isCear) {
-								document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
-//								this.info.waitConfirmDownTimestamp = remainTime - 1;
+							if(remainTime > 0 ) {
+								this.info.waitConfirmDownTimestamp = remainTime - 1;
 								remainTime = remainTime - 1;
+								if(!this.isCear){
+									document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime+1);
+								}
 							} else {
 								clearInterval(timer);
 							}
 		
 						}, 1000);
 					}else if(this.info.orderState == 2) {
+						
 						//待确认状态的订单
 						let remainTime = this.info.waitConfirmDownTimestamp;
 						let timer;
 						timer = setInterval(()=>{
-							if(remainTime > 0 && !this.isCear) {
-								document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime);
-//								this.info.waitConfirmDownTimestamp = remainTime - 1;
+							if(remainTime > 0 ) {
+								this.info.waitConfirmDownTimestamp = remainTime - 1;
 								remainTime = remainTime - 1;
+								if(!this.isCear){
+									document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime+1);
+								}
 							} else {
 								clearInterval(this.timer);
 							}
@@ -463,11 +468,13 @@
 					vm.init()
 				})
 			}else{
-				next()
+				next(vm => {
+					vm.isCear= false
+				})
 			}
 		},
 		beforeRouteLeave(to, from, next){
-			if(to.name == 'orderList'){
+			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay'){
 				this.isCear = true;
 			}
 			next();

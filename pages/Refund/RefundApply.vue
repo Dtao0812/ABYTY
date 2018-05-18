@@ -19,7 +19,7 @@
 				</li>
 			</ul>
 			<div class="aby-button-panel">
-				<aby-button class="aby-button-blue" title="提交申请"></aby-button>
+				<aby-button @click.native="onFefund" class="aby-button-blue" title="提交申请"></aby-button>
 			</div>
 		</div>
 	</aby-page>
@@ -66,9 +66,11 @@
 				if(this.refundPrice == '')return this.$toast('退款金额不能为空');
 				if(this.refundDesc == '')return this.$toast('退款原因不能为空');
 				let reqInfo = {};
+				reqInfo.orderId = this.orderId;
 				reqInfo.refundPayment = this.refundPrice;
 				reqInfo.refundReason = this.refundDesc;
 				this.$abyApi.Order.applyRefund(reqInfo,(res)=>{
+					console.log('res:'+JSON.stringify(res))
 					this.$toast('已提交申请');
 					setTimeout(()=>{
 						this.$router.back();

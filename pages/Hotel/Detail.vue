@@ -49,14 +49,26 @@
 						<span class="roomPrice aby-list-price"><small>￥</small>128<small>起</small></span>
 					</a>
 					<div class="mui-collapse-content">
-						<h4 class="aby-list-title feetitle">[商务大床房]</h4>
-						<p>不含早 单人床</p>
-						<p>附加说明：无</p>
-						<div class="feePrice aby-list-price">
-							<small>￥</small>128
-							<span class="feeOPrice">￥200</span>
+						<div class="collapse-item">
+							<h4 class="aby-list-title feetitle">[商务大床房]</h4>
+							<p>不含早 单人床</p>
+							<p>附加说明：无</p>
+							<div class="feePrice aby-list-price">
+								<small>￥</small>128
+								<span class="feeOPrice">￥200</span>
+							</div>
+							<aby-button size="small" title="预订" class="aby-input-button-blue btnbook"></aby-button>
 						</div>
-						<aby-button size="small" title="预订" class="aby-input-button-blue btnbook"></aby-button>
+						<div class="collapse-item">
+							<h4 class="aby-list-title feetitle">[商务大床房]</h4>
+							<p>不含早 单人床</p>
+							<p>附加说明：无</p>
+							<div class="feePrice aby-list-price">
+								<small>￥</small>128
+								<span class="feeOPrice">￥200</span>
+							</div>
+							<aby-button size="small" title="预订" class="aby-input-button-blue btnbook"></aby-button>
+						</div>
 					</div>
 				</li>
 				<li class="mui-table-view-cell mui-collapse">
@@ -68,14 +80,16 @@
 						<span class="roomPrice aby-list-price"><small>￥</small>128<small>起</small></span>
 					</a>
 					<div class="mui-collapse-content">
-						<h4 class="aby-list-title feetitle">[商务大床房]</h4>
-						<p>不含早 单人床</p>
-						<p>附加说明：无</p>
-						<div class="feePrice aby-list-price">
-							<small>￥</small>128
-							<span class="feeOPrice">￥200</span>
+						<div class="collapse-item">
+							<h4 class="aby-list-title feetitle">[商务大床房]</h4>
+							<p>不含早 单人床</p>
+							<p>附加说明：无</p>
+							<div class="feePrice aby-list-price">
+								<small>￥</small>128
+								<span class="feeOPrice">￥200</span>
+							</div>
+							<aby-button size="small" title="预订" class="aby-input-button-blue btnbook"></aby-button>
 						</div>
-						<aby-button size="small" title="预订" class="aby-input-button-blue btnbook"></aby-button>
 					</div>
 				</li>
 			</ul>
@@ -97,15 +111,15 @@
 			// 选项卡头部点击
 			onCollapse(e) {
 				var obj = e.target.parentElement;
-				if(obj.tagName=="A"){
-					obj=obj.parentElement;
+				if(obj.tagName == "A") {
+					obj = obj.parentElement;
 				}
 				//判断是否展开
 				if(obj.className.match(RegExp('(\\s|^)mui-active(\\s|$)'))) {
 					var cn = obj.className.replace("mui-active", "");
 					obj.setAttribute("class", cn);
 				} else {
-					obj.className= obj.className.replace(/(^\s*)|(\s*$)/g, "")+' mui-active';
+					obj.className = obj.className.replace(/(^\s*)|(\s*$)/g, "") + ' mui-active';
 				}
 			},
 		},
@@ -115,7 +129,7 @@
 </script>
 
 <style scoped>
-	.mui-content{
+	.mui-content {
 		padding-bottom: 50px;
 	}
 	/*封面*/
@@ -144,7 +158,8 @@
 		vertical-align: top;
 	}
 	/*收藏*/
-	.btncollection{
+	
+	.btncollection {
 		background-color: #FFFFFF;
 		padding: 10px;
 		border-radius: 50%;
@@ -160,7 +175,8 @@
 	.proInfo,
 	.facilities,
 	.address,
-	.shopInfo,.info {
+	.shopInfo,
+	.info {
 		background-color: #FFFFFF;
 		padding: 15px;
 	}
@@ -184,7 +200,7 @@
 		font-size: 18px;
 		position: absolute;
 		right: 13px;
-		margin-top: 2px;
+		margin-top: 17px;
 		padding: 5px;
 	}
 	/*设施*/
@@ -193,6 +209,9 @@
 		font-size: 13px;
 		margin-top: 1px;
 		padding-right: 80px;
+	}
+	.facilities .mui-icon{
+		vertical-align: top;
 	}
 	
 	.hotelLevel {
@@ -245,53 +264,61 @@
 		margin-top: -13px;
 	}
 	/*房型*/
-	.roompanel{
-		height: 66.7px;
+	
+	.roompanel {
+		height: 78px;
 	}
+	
 	.imgroom {
 		width: 100px;
 		height: 66.7px;
 		position: absolute;
-		left: 0px;
-		top: 0px;
+		left: 7px;
+		top: 5px;
 	}
 	
 	.roomtitle {
-		padding: 0px 20px 0px 96px!important;
-		margin-top: -5px;
-		margin-bottom: 1px;
+		padding: 0px 20px 0px 103px!important;
+		margin-top: 0px;
+		margin-bottom: 2px;
+		font-weight: 400;
 	}
 	
 	.roomInfo {
-		padding-left: 96px;
+		padding-left: 103px;
 		padding-right: 80px;
 		margin: 0px!important;
 		font-size: 12px;
 		line-height: 18px;
 	}
-	.roomPrice{
+	
+	.roomPrice {
 		position: absolute;
 		right: 33px;
-		top: 23px;
+		top: 29px;
 	}
 	/*房型价格标题*/
-	.mui-collapse-content p{
+	
+	.mui-collapse-content p {
 		font-size: 12px;
 		line-height: 16px;
 		margin-right: 110px;
 	}
-	.feetitle{
+	
+	.feetitle {
 		font-size: 13px!important;
 		margin: 0px 0px 2px 0px;
 		margin-right: 110px;
 	}
-	.feePrice{
+	
+	.feePrice {
 		position: absolute;
 		text-align: center!important;
 		right: 70px;
 		top: 20px;
 	}
-	.feeOPrice{
+	
+	.feeOPrice {
 		font-size: 12px;
 		text-decoration: line-through;
 		display: block;
@@ -301,22 +328,46 @@
 		line-height: 13px;
 	}
 	/*预订*/
-	.btnbook{
+	
+	.btnbook {
 		height: 25px;
 		border-radius: 4px!important;
 		font-size: 13px;
 		position: absolute;
 		right: 10px;
-		top: 25px;
+		top: 26px;
 	}
+	
 	.linetitle {
 		border-left: 3px solid #08C7B5;
 		padding-left: 10px;
 		margin-bottom: 15px;
 	}
+	
 	.info p {
 		margin-bottom: 0px;
 		color: #666666;
 		text-align: justify;
+	}
+	
+	.mui-table-view-cell.mui-active {
+		background-color: #FFFFFF;
+	}
+	
+	.mui-collapse-content {
+		-webkit-box-shadow: 0 0px 5px rgba(0, 0, 0, .2) inset;
+		box-shadow: 0 0px 5px rgba(0, 0, 0, .2) inset;
+		background-color: rgba(240, 240, 240, .1)!important;
+		padding: 0px!important;
+	}
+	
+	.collapse-item {
+		border-top: 1px solid #F0F0F0;
+		padding: 13px 12px;
+		position: relative;
+	}
+	
+	.mui-collapse-content .collapse-item:first-child {
+		border-top: none;
 	}
 </style>

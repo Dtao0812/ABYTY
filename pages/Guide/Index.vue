@@ -1,7 +1,7 @@
 <template>
 	<aby-pull ref="pull">
 		<aby-header :title="title" slot="header">
-			<header-search v-if="isShowSearch" slot="hSearch"></header-search>
+			<header-search v-if="isShowSearch" @eventSearch="searchKey" slot="hSearch"></header-search>
 			<aby-icon slot="right" type="screen" className="mui-pull-right" @click.native="toCityList"></aby-icon>
 		</aby-header>
 		<aby-navbar slot="navbar" @eventNavBack="eventBack" noSearch="true" noScreen="true" type="99" ref="navbar"></aby-navbar>
@@ -74,6 +74,10 @@
 				}else if(e.tabid === 4){
 					this.where.sStarlevel = e.value;
 				}
+				this.getPullDown();
+			},
+			searchKey(e){
+				this.where.cityName = e;
 				this.getPullDown();
 			},
 			// 打开城市检索

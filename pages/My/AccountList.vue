@@ -87,6 +87,7 @@
 		-webkit-overflow-scrolling: touch;
 		font-size: 15px;
 		color: #333333;
+		margin-bottom: 100px;
 	}
 	/*列表头像尺寸-圆*/
 	

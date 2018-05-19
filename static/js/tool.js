@@ -90,9 +90,9 @@ let getPhoto = function(successCallback, errorCallback) {
 			case 1:
 				let cmr = plus.camera.getCamera();
 				cmr.captureImage(function(path) {
-					successCallback&&successCallback("file://" + plus.io.convertLocalFileSystemURL(path));
+					successCallback && successCallback("file://" + plus.io.convertLocalFileSystemURL(path));
 				}, function(err) {
-					errorCallback&&errorCallback('拍照失败');
+					errorCallback && errorCallback('拍照失败');
 				}, {
 					filename: "_doc/camera/"
 				});
@@ -100,9 +100,9 @@ let getPhoto = function(successCallback, errorCallback) {
 			case 2:
 				plus.gallery.pick(function(path) {
 					if(path.substr(path.length - 3) != 'gif' && path.substr(path.length - 3) != 'GIF') {
-						successCallback&&successCallback(path);
+						successCallback && successCallback(path);
 					} else {
-						errorCallback&&errorCallback('不支持gif格式的图片！');
+						errorCallback && errorCallback('不支持gif格式的图片！');
 					}
 				}, function(err) {
 					errorCallback('选择照片失败');
@@ -162,12 +162,12 @@ let countdown = function(endDate, divId) {
 };
 
 //倒计时 接收参数为秒。
-let getRTime =  function(t) {
-	let d,h,m,s;
+let getRTime = function(t) {
+	let d, h, m, s;
 	if(t >= 0) {
-		d = Math.floor(t /(60*60*24));
-		if(d > 0){
-			t = t-d*60*60*24;
+		d = Math.floor(t / (60 * 60 * 24));
+		if(d > 0) {
+			t = t - d * 60 * 60 * 24;
 		}
 		h = Math.floor(t / 60 / 60);
 		if(h > 0) {
@@ -179,17 +179,17 @@ let getRTime =  function(t) {
 		}
 		s = Math.floor(t);
 	}
-	if(d>0){
+	if(d > 0) {
 		return d + "天" + h + "时" + m + "分" + s + "秒";
-	}else {
+	} else {
 		return h + "时" + m + "分" + s + "秒";
 	}
 };
 
 const abyDateFun = {
 	// 日期对比
-	compareDate(s1,s2){
-	  return ((new Date(s1.replace(/-/g,"\/")))>(new Date(s2.replace(/-/g,"\/"))));
+	compareDate(s1, s2) {
+		return((new Date(s1.replace(/-/g, "\/"))) > (new Date(s2.replace(/-/g, "\/"))));
 	},
 	//获得当前时间
 	getNowFormatDate() {
@@ -208,65 +208,65 @@ const abyDateFun = {
 		return currentdate;
 	},
 	// 格式化时间
-	getFormatDate(datetime,type) {
+	getFormatDate(datetime, type) {
 		var year = datetime.getFullYear();
 		var month = datetime.getMonth() + 1; //js从0开始取 
 		var date = datetime.getDate();
 		var hour = datetime.getHours();
 		var minutes = datetime.getMinutes();
 		var second = datetime.getSeconds();
-		if(month < 10)month = "0" + month;
-		if(date < 10)date = "0" + date;
-		if(type == 1){
+		if(month < 10) month = "0" + month;
+		if(date < 10) date = "0" + date;
+		if(type == 1) {
 			return year + "-" + month + "-" + date + '-' + hour + '-' + minutes;
-		}else{
+		} else {
 			return year + "-" + month + "-" + date;
 		}
 	},
 	// 计算年龄
-	countAge(datetime){
-		var r   =   datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
-	    if(r == null) return false;     
-	    var d = new Date(r[1], r[3]-1, r[4]);     
-	    if(d.getFullYear() == r[1]&&(d.getMonth() + 1) == r[3]&&d.getDate() == r[4]){   
-	        var Y = new Date().getFullYear();   
-	        return Y-r[1];   
-	    }  
+	countAge(datetime) {
+		var r = datetime.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+		if(r == null) return false;
+		var d = new Date(r[1], r[3] - 1, r[4]);
+		if(d.getFullYear() == r[1] && (d.getMonth() + 1) == r[3] && d.getDate() == r[4]) {
+			var Y = new Date().getFullYear();
+			return Y - r[1];
+		}
 	},
 	// 获得时间戳
-	getTime(){
+	getTime() {
 		return new Date().getTime();
 	},
 	setFormat(x) {
-	  if (x < 10) {
-	    x = "0" + x;
-	  }
-	  return x;
+		if(x < 10) {
+			x = "0" + x;
+		}
+		return x;
 	},
 	//获取当前时间（Y-m-d h:i:s）
-	getNowtime(){
+	getNowtime() {
 		var date = new Date(); //日期对象
 		var now = "";
-		now = date.getFullYear()+"-"; //读英文就行了
-		now = now + (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';//取月的时候取的是当前月-1如果想取当前月+1就可以了
-		now = now + abyDateFun.setFormat(date.getDate())+" ";
-		now = now + abyDateFun.setFormat(date.getHours())+":";
-		now = now + abyDateFun.setFormat(date.getMinutes())+":";
-		now = now + abyDateFun.setFormat(date.getSeconds())+"";
+		now = date.getFullYear() + "-"; //读英文就行了
+		now = now + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'; //取月的时候取的是当前月-1如果想取当前月+1就可以了
+		now = now + abyDateFun.setFormat(date.getDate()) + " ";
+		now = now + abyDateFun.setFormat(date.getHours()) + ":";
+		now = now + abyDateFun.setFormat(date.getMinutes()) + ":";
+		now = now + abyDateFun.setFormat(date.getSeconds()) + "";
 		return now;
 	},
 	//获取从现在到 beforetime 分钟前的时间
-	beforeNowtimeByMinu(beforetime){
-	    var date = new Date(); //日期对象
-	    date.setMinutes (date.getMinutes () - beforetime);
-	    var now = "";
-	    now = date.getFullYear()+"-"; //读英文就行了
-	    now = now + (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';//取月的时候取的是当前月-1如果想取当前月+1就可以了
-	    now = now + abyDateFun.setFormat(date.getDate())+" ";
-	    now = now + abyDateFun.setFormat(date.getHours())+":";
-	    now = now + abyDateFun.setFormat(date.getMinutes())+":";
-	    now = now + abyDateFun.setFormat(date.getSeconds())+"";
-	    return now;
+	beforeNowtimeByMinu(beforetime) {
+		var date = new Date(); //日期对象
+		date.setMinutes(date.getMinutes() - beforetime);
+		var now = "";
+		now = date.getFullYear() + "-"; //读英文就行了
+		now = now + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'; //取月的时候取的是当前月-1如果想取当前月+1就可以了
+		now = now + abyDateFun.setFormat(date.getDate()) + " ";
+		now = now + abyDateFun.setFormat(date.getHours()) + ":";
+		now = now + abyDateFun.setFormat(date.getMinutes()) + ":";
+		now = now + abyDateFun.setFormat(date.getSeconds()) + "";
+		return now;
 	}
 };
 
@@ -312,7 +312,7 @@ let prompt = function(message, title, callbacl) {
 		value,
 		action
 	}) => {
-		if(action == 'confirm'){
+		if(action == 'confirm') {
 			callbacl && callbacl({
 				value,
 				action
@@ -335,8 +335,8 @@ let localStorage = {
 		window.localStorage.removeItem(title);
 	},
 	// 保存搜索记录
-	setSearch(id,val) {
-		let localStorageList = this.get(id+'_searchList');
+	setSearch(id, val) {
+		let localStorageList = this.get(id + '_searchList');
 		if(!localStorageList) localStorageList = [];
 		let isAdd = true;
 		for(let i = 0, len = localStorageList.length; i < len; i++) {
@@ -344,22 +344,22 @@ let localStorage = {
 		}
 		if(isAdd) localStorageList.push(val);
 
-		this.set(id+'_searchList', JSON.stringify(localStorageList));
+		this.set(id + '_searchList', JSON.stringify(localStorageList));
 	},
 	// 获得搜索记录
 	getSearch(id) {
-		return this.get(id+'_searchList');
+		return this.get(id + '_searchList');
 	},
 	// 清空搜索记录
 	clearSerch(id) {
-		this.remove(id+'_searchList');
+		this.remove(id + '_searchList');
 	}
 
 };
 
 //拷贝内容
-let copyContent = function(e){
-	
+let copyContent = function(e) {
+
 };
 
 export default {

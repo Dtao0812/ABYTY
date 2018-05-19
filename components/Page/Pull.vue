@@ -1,16 +1,25 @@
 <template>
 	<div class="page" :class="page=='index'?'pt-45':''">
 		<slot name="header"></slot>
-		<slot name="navbar"><div style="padding-top: 45px;"></div></slot>
+		<slot name="navbar">
+			<div style="padding-top: 45px;"></div>
+		</slot>
+		<slot name="btntop">
+			<aby-icon type="top" class="aby-button-top" @click.native="goTop" v-show="btnTopShow"></aby-icon>
+		</slot>
 		<div class="mui-content">
 			<div class="page-loadmore">
 				<div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }" @scroll="paperScroll" id="wrapper">
 					<slot name="explain"></slot>
-					<slot name="loading"><div v-if="isLoading"><aby-loading></aby-loading></div></slot>
+					<slot name="loading">
+						<div v-if="isLoading">
+							<aby-loading></aby-loading>
+						</div>
+					</slot>
 					<mt-loadmore ref="loadmore" :top-method="loadTop" :autoFill="loading" @translate-change="translateChange" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded">
 						<div id="loadDiv">
 							<slot name="loadlist"></slot>
-							<br style="clear:both"/>
+							<br style="clear:both" />
 						</div>
 					</mt-loadmore>
 				</div>
@@ -21,13 +30,13 @@
 
 <script>
 	export default {
-		props: ['title','page'],
+		props: ['title', 'page'],
 		components: {},
 		data() {
 			return {
 				pageId: '',
 				list: [],
-				isLoading:true,
+				isLoading: true,
 				// 下拉
 				topStatus: '',
 				wrapperHeight: 0,
@@ -42,6 +51,8 @@
 				noContent: false,
 				scrollTop: 0,
 				isDeactivated: false,
+				//显示返回顶部按钮
+				btnTopShow: false,
 			};
 		},
 
@@ -51,6 +62,11 @@
 			},
 			paperScroll() {
 				let tpScrollTop = document.getElementById('wrapper').scrollTop;
+				if(tpScrollTop > 200) {
+					this.btnTopShow = true;
+				} else {
+					this.btnTopShow = false;
+				}
 				this.scrollTop = tpScrollTop;
 				this.$parent.scroll(tpScrollTop);
 				if(this.$parent.$refs.navbar) {
@@ -70,7 +86,7 @@
 			loadTop() {
 				setTimeout(() => {
 					this.$parent.getPullDown((ret) => {
-						if(ret == 0)this.noContent = true;
+						if(ret == 0) this.noContent = true;
 						this.$refs.loadmore.onTopLoaded();
 					});
 				}, 2500);
@@ -79,7 +95,7 @@
 			loadBottom() {
 				setTimeout(() => {
 					this.$parent.getPullUp((ret) => {
-						if(ret.length == 0){
+						if(ret.length == 0) {
 							this.$tool.toast('没有更多内容了');
 						}
 						this.allLoaded = false;
@@ -88,18 +104,22 @@
 				}, 1500);
 			},
 			// 显示加载动画
-			showLoading(){
+			showLoading() {
 				this.isLoading = true;
 			},
 			// 关闭加载动画
-			closeLoading(){
+			closeLoading() {
 				this.isLoading = false;
 			},
 			// 禁止上推
-			disableLoadBottom(){
-				setTimeout(()=>{
+			disableLoadBottom() {
+				setTimeout(() => {
 					this.allLoaded = true;
-				},1500)
+				}, 1500)
+			},
+			//返回顶部
+			goTop() {
+				document.getElementById('wrapper').scrollTop = 0;
 			},
 		},
 		mounted() {

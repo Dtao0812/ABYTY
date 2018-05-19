@@ -90,6 +90,13 @@
 		},
 		methods: {
 			scroll(top) {},
+			init(){
+				this.type = this.$route.params.type;//搜索类型
+				this.keyword = this.$route.params.keyword;//关键字
+				this.isNull = true;//内容是否为空
+				this.where = {};
+				this.getPullDown();
+			},
 			// 获取线路详情
 			getLineList(info,pullType,callback){
 				this.$abyApi.Project.getLineListByKeyWord(info, (res) => {
@@ -97,7 +104,7 @@
 						// 下拉
 						this.$refs.pull.closeLoading();
 						this.lists = res.proList;
-						this.isNull = res.proList.length>0;
+//						this.isNull = res.proList.length>0;
 					}else{
 						// 上拉
 						this.lists = this.lists.concat(res.proList);
@@ -212,6 +219,15 @@
 			this.getPullDown();
 		},
 		created() {},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'search') {
+				next(vm => {
+					vm.init();
+				})
+			}else{
+				next()
+			}
+		},
 	}
 </script>
 

@@ -77,6 +77,7 @@
 				userInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
 				userInfo.smsType = 1;
 				this.$abyApi.User.getVerificationCode(userInfo, (res)=>{
+					this.$tool.toast('验证码已发送');
 					this.cpUserInfo.verifyCode = res.verifyCode;
 					this.cpUserInfo.userPhone = userInfo.userPhone;
 					this.$tool.disableWait(document.getElementById('btnVerificationCode'))
@@ -129,9 +130,9 @@
 					this.cpUserInfo.userPost = this.userPost;
 					this.$abyApi.User.setAccounInfo(this.cpUserInfo, (res)=>{
 						this.$tool.toast('添加成功！');
-						setTimeout(function(){
+//						setTimeout(function(){
 							this.$router.back();
-						},1000)
+//						},1000)
 					})
 				}
 			}

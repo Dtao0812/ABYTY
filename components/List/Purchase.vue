@@ -121,8 +121,8 @@
 					})
 				})
 			},
-			onFinish(){//结束询价
-				this.$tool.confirm('结束询价后将收不到最新留言，确定要结束吗？', (res) => {
+			onFinish(selectId){//结束询价
+				this.$tool.confirm('结束询价后供应商将无法继续联系您，确定要结束吗？', (res) => {
 					this.$abyApi.Select.closePublish(selectId, (res)=> {
 						this.$emit('getPullDown');
 						this.$tool.toast('采购已结束');

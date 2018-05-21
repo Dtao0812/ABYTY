@@ -17,7 +17,7 @@
 			<div class="mui-card">
 				<form class="mui-input-group">
 					<div class="mui-input-row">
-						<label class="mui-navigate-right">电话</label>
+						<label class="">电话</label>
 						<input type="text" disabled="disabled" v-model="pageInfo.userPhone"/>				
 					</div>
 					<div class="mui-input-row">

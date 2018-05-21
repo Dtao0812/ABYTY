@@ -4,7 +4,6 @@
 			<div slot="back"></div>
 			<header-select slot="select" title="全部询价" @eventSelectBack="eventBack" :selectList="selectList"></header-select>
 			<aby-icon slot="right" class="mui-icon mui-pull-right icon-plus" type="plus" @click.native="onPubish"></aby-icon>
-			
 		</aby-header>
 		<div slot="navbar"></div>
 		<div class="list-item" slot="loadlist" ref="loadlist">

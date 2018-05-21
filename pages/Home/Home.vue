@@ -156,7 +156,7 @@
 							// 初始化融云
 							this.$abyApi.Chat.init();
 							// 接受融云消息
-							this.$abyApi.Chat.setReceiveMsgListener();
+							if(!this.$store.state.isConnectChat)this.$abyApi.Chat.setReceiveMsgListener();
 						});
 						// 初始化系统消息
 						this.$abyDb.Msg.init((res)=>{

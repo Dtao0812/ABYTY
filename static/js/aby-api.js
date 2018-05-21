@@ -606,6 +606,7 @@ const User = {
 		}
 		//执行提交任务
 		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
+			store.commit('setUserInfo', responeData);
 			callBack && callBack(true);
 		}, function(err) {
 			callBack && callBack(false);
@@ -1224,7 +1225,7 @@ const Chat = {
 	},
 	// 连接融云服务器
 	connect(callBack) {
-		if(store.state.isConnect) return;
+		if(store.state.isConnectChat) return;
 		RongIMLib.RongIMClient.connect(store.state.chat_token, {
 			onSuccess: function(userId) {
 				store.commit('setStateInfo', {

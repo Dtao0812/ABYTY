@@ -71,14 +71,17 @@
 					}else{
 						let reqInfo = {};
 						reqInfo.loginId = this.$abyApi.Crypto.EnCrypt(this.userPhone);
-						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.newPassword);
+						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.newPassword).toString();
 						reqInfo.verifyCode = this.verifyCode;
 						this.$abyApi.User.setLoginPwd(reqInfo,(res)=>{
 							console.log(JSON.stringify(res))
+//							if(res.errorcode == 1){
+//								
+//							}
 							this.$tool.toast('修改成功');
-//							setTimeout(()=>{
-//								this.$router.back();
-//							},1000);
+							setTimeout(()=>{
+								this.$router.back();
+							},1000);
 						})
 					}
 				}

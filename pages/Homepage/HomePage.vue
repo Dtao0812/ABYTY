@@ -6,12 +6,14 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;" v-if="cpUserInfo.cpBasic">
 				<li class="mui-table-view-cell mui-media">
-					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
+					<img @click="onLogo" class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
 					<div class="mui-media-body">
-						{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}
+						<span v-if="isOwn">{{cpUserInfo.userName}}</span>
+						<span v-else>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</span>
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
+						<span class="btnEditPic" v-if="isOwn">修改Logo</span>
 					</div>
 				</li>
 			</ul>
@@ -148,14 +150,30 @@
 			eventTab(e) {
 				if(e.id == 'line'){
 					this.getDownProList();
-				};
+				}
 				if(e.id == 'infor'){
 					this.getBasicInfo();
-				};
+				}
 				if(e.id == 'contacts'){
 					this.getBasicStaffList();
 				}
 			},
+			//头像点击
+			onLogo(){
+				if(this.isOwn){
+					this.$tool.getPhoto((file) => {
+						this.$tool.loading('正在提交...');
+						let reqInfo = {};
+						reqInfo.files = [
+							{ id:'userFace',src:file }
+						];
+						this.$abyApi.User.setMyInfo(reqInfo, (res) => {
+							this.$tool.loadingClose();
+							this.cpUserInfo.cpBasic.cpLogo = file;
+						});
+					});
+				}
+			}
 		},
 		mounted() {
 			this.init();

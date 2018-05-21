@@ -44,11 +44,10 @@
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 40">
 					<div class="mui-card-content-inner mui-navigate-right" @click="toDetail(li.selectId)">
-						<h5>预定{{li.goCity}}的机票和酒店</h5>
+						<h5>预定{{li.goCity}}的酒店和机票</h5>
 						<p>出发地：{{li.fromCity}}</p>
 						<p>出行时间：{{li.outServTime}}</p>
 						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
-						<!--<p>天数：{{li.selectDays}}天</p>-->
 						<p>入住时间：{{li.liveTime|filterConvertDate}}</p>
 						<p>离店时间：{{li.leaveTime|filterConvertDate}}</p>
 						<p>房间数：{{li.roomNum}}间</p>

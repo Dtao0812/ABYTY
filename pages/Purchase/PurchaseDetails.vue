@@ -295,7 +295,6 @@
 		},
 		updated() {
 			//初始化倒计时
-			console.log(this.data.endTime)
 			this.$tool.countdown(this.data.endTime, this.data.selectId);
 		},
 		mounted() {

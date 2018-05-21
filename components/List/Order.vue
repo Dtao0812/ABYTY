@@ -20,8 +20,8 @@
 				<div class="mui-card-content-inner">
 					<h5 class="mui-ellipsis aby-font-Black">{{li.orderTitle}}<span class="price">￥{{li.strPayment}}</span></h5>
 					<p>{{li.goData}} {{li.orderSummary.goCity}}出发</p>
-					<p v-if="li.orderInfo.proSummary.proType == 1">{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt">{{li.orderSummary.childCnt}}儿童</span></p>
-					<p v-else>{{li.orderSummary.adultsNum}}成人<span v-if="li.orderSummary.childNum">{{li.orderSummary.childNum}}儿童</span></p>
+					<p v-if="li.orderInfo.proSummary.proType == 1">{{li.orderSummary.peopleCnt}}成人<span v-if="li.orderSummary.childCnt!=0">{{li.orderSummary.childCnt}}儿童</span></p>
+					<p v-else>{{li.orderSummary.adultsNum}}成人<span v-if="li.orderSummary.childNum!=0">{{li.orderSummary.childNum}}儿童</span></p>
 				</div>
 			</div>
 			<div class="mui-card-footer">

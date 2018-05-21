@@ -6,11 +6,27 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;" v-if="cpUserInfo.cpBasic">
 				<li class="mui-table-view-cell mui-media">
-					<img class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
+					<img class="mui-media-object mui-pull-left personpic" :src="cpUserInfo.cpBasic.cpLogo||''">
+					<!--组团-->
+					<img v-if="cpUserInfo.cpBasic.cpBtype==10" class="role" src="../../static/images/ico/ico_role_travel.png" />
+					<!--地接-->
+					<img v-if="cpUserInfo.cpBasic.cpBtype==20" class="role" src="../../static/images/ico/ioc_role_local.png" />
+					<!--机票-->
+					<img v-if="cpUserInfo.cpBasic.cpBtype==30" class="role" src="../../static/images/ico/ioc_role_local.png" />
+					<!--酒店-->
+					<img v-if="cpUserInfo.cpBasic.cpBtype==40" class="role" src="../../static/images/ico/ioc_role_local.png" />
+					<!--景点-->
+					<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
+					<span class="btnEditPic">修改头像</span>
 					<div class="mui-media-body">
+<<<<<<< HEAD
 						<span v-if="isOwn">{{cpUserInfo.userName}}</span>
 						<span v-else>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</span>
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
+=======
+						{{cpUserInfo.cpBasic.cpName||'未设置'}}	
+						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</p>
+>>>>>>> 0cebbb2c4ea82baa5fe616c19bf9f596e4707344
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>
@@ -30,7 +46,7 @@
 </template>
 
 <script>
-	import AbyInformation from './Informatica.vue'//个人主页资料
+	import AbyInformation from './Informatica.vue' //个人主页资料
 	import AbyContacts from './Contacts.vue'
 	import AbyList from '../../components/List/Line.vue'
 	export default {
@@ -44,12 +60,11 @@
 				userId: '',
 				cpId: '',
 				cpUserInfo: {},
-				isOwn:false,//是否自己主页
-				isLoading:true,//加载动画
-				defTab:0,//默认选项卡
+				isOwn: false, //是否自己主页
+				isLoading: true, //加载动画
+				defTab: 0, //默认选项卡
 				pageNum: 1,
-				tabList:[
-					{
+				tabList: [{
 						id: 'infor',
 						title: '企业信息',
 						type: 'infor',
@@ -64,17 +79,16 @@
 				],
 			}
 		},
-		created() {
-		},
+		created() {},
 		methods: {
-			init(){
+			init() {
 				this.userId = this.$route.params.userId;
 				this.cpId = this.$route.params.cpId;
 				this.isLoading = true;
 				this.cpUserInfo = {};
-				if(this.userId == this.$store.state.userId){
+				if(this.userId == this.$store.state.userId) {
 					// 自己的主页
-					if(this.tabList.length == 3){
+					if(this.tabList.length == 3) {
 						// 在Tab开头删除产品选项卡
 						let _tabList = this.tabList;
 						_tabList.shift();
@@ -83,10 +97,10 @@
 					this.isOwn = true;
 					this.cpUserInfo = this.$store.state.cpUserInfo;
 					this.defTab = 0;
-				}else{
+				} else {
 					// 查看别人主页
 					this.isOwn = false;
-					if(this.tabList.length == 2){
+					if(this.tabList.length == 2) {
 						// 在tab开头插入产品选项卡
 						let tabLine = {
 							id: 'line',
@@ -102,24 +116,24 @@
 				this.getBasicInfo();
 			},
 			//获取企业资料
-			getBasicInfo() { 
+			getBasicInfo() {
 				let reqInfo = {};
 				reqInfo.loading = 1;
 				reqInfo.cpId = this.cpId;
 				this.$abyApi.User.getBasicNotLegal(reqInfo, (res) => {
 					this.cpUserInfo.cpBasic = res.cpBasic;
-					this.tabList[this.tabList.length-2].data = this.cpUserInfo;
+					this.tabList[this.tabList.length - 2].data = this.cpUserInfo;
 					this.isLoading = false;
 				});
 			},
-			 //获得产品下拉
+			//获得产品下拉
 			getDownProList() {
 				let proInfo = {};
 				proInfo.loading = 1;
 				proInfo.pageNum = this.pageNum == 1;
 				proInfo.where = {};
 				proInfo.keyWord = '',
-				proInfo.cpId = this.cpId;
+					proInfo.cpId = this.cpId;
 				this.$abyApi.Project.getMyProList(proInfo, (res) => {
 					this.tabList[0].data = res.proList
 				});
@@ -131,7 +145,7 @@
 				proInfo.pageNum = this.pageNum = ++this.pageNum;
 				proInfo.where = {};
 				proInfo.keyWord = '',
-				proInfo.cpId = this.cpId;
+					proInfo.cpId = this.cpId;
 				this.$abyApi.Project.getMyProList(proInfo, (res) => {
 					this.tabList[0].data = this.tabList[0].data.concat(res.proList);
 				});
@@ -142,18 +156,18 @@
 				reqInfo.loading = 1;
 				reqInfo.cpId = this.cpId;
 				this.$abyApi.User.getBasicStaffList(reqInfo, (res) => {
-					this.tabList[this.tabList.length-1].data = res.cpUserList;
+					this.tabList[this.tabList.length - 1].data = res.cpUserList;
 				});
 			},
 			//tab点击事件
 			eventTab(e) {
-				if(e.id == 'line'){
+				if(e.id == 'line') {
 					this.getDownProList();
 				};
-				if(e.id == 'infor'){
+				if(e.id == 'infor') {
 					this.getBasicInfo();
 				};
-				if(e.id == 'contacts'){
+				if(e.id == 'contacts') {
 					this.getBasicStaffList();
 				}
 			},
@@ -167,31 +181,57 @@
 			},
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name=="eidtHomePage"){
+			if(from.name == "eidtHomePage") {
 				next(vm => {
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()
 				})
-			}else if(to.params.cpId == ''){
+			} else if(to.params.cpId == '') {
 				next()
-			}else{
+			} else {
 				next(vm => {
 					vm.init()
 				})
 			}
 		},
-		
+
 	}
 </script>
 
 <style scoped>
-	.mui-table-view .mui-media-object {
-		line-height: 60px;
-		max-width: 60px;
-		height: 60px;
-	}
 	
 	.mui-media-body {
 		font-size: 14px;
+	}
+	
+	.btnEditPic {
+		color: #FFFFFF;
+		position: absolute;
+		background-color: rgba(0, 0, 0, .4);
+		font-size: 12px;
+		left: 12px;
+		height: 16px;
+		width: 65px;
+		line-height: 16px;
+		text-align: center;
+		margin-top: 49px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	/*身份标志*/
+	.role{
+		width: 40px;
+		position: absolute;
+		margin-left: -50px;
+	}
+	/*头像*/
+	.personpic{
+		height: 65px!important;
+		width: 65px!important;
+		max-width: 65px!important;
+		border-radius: 5px!important;
+	}
+	.aby-img-Authentication{
+		margin-top: 5px;
 	}
 </style>

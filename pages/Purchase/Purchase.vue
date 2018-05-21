@@ -30,7 +30,7 @@
 						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
 						<p v-if="li.selectType == 10">天数：{{li.selectDays}}天</p>
 						<p v-if="li.selectType == 10">交通方式：{{li.trafficTypeName}}</p>
-						<p>备注：{{li.selectDesc||'无'}}</p>
+						<!--<p>备注：{{li.selectDesc||'无'}}</p>-->
 					</div>
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 20">
@@ -40,19 +40,25 @@
 						<p>离店时间：{{li.leaveTime|filterConvertDate}}</p>
 						<p>房间数：{{li.roomNum}}间</p>
 						<p>酒店标准：{{li.hotelStar}}</p>
-						<p>备注：{{li.selectDesc||'无'}}</p>
 					</div>
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 40">
 					<div class="mui-card-content-inner mui-navigate-right" @click="toDetail(li.selectId)">
+<<<<<<< HEAD
 						<h5>预定{{li.goCity}}的酒店和机票</h5>
 						<p>出行时间：{{li.outServTime}}</p>
 						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
+=======
+						<h5>预定{{li.goCity}}的机票和酒店</h5>
+						<p>出发地：{{li.fromCity}}</p>
+						<p>出行时间：{{li.outServTime}}</p>
+						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
+						<!--<p>天数：{{li.selectDays}}天</p>-->
+>>>>>>> 0cebbb2c4ea82baa5fe616c19bf9f596e4707344
 						<p>入住时间：{{li.liveTime|filterConvertDate}}</p>
 						<p>离店时间：{{li.leaveTime|filterConvertDate}}</p>
 						<p>房间数：{{li.roomNum}}间</p>
 						<p>酒店标准：{{li.hotelStar}}</p>
-						<p>备注：{{li.selectDesc||'无'}}</p>
 					</div>
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 50">
@@ -60,7 +66,6 @@
 						<h5>我需要预定去{{li.scenicName}}的景点门票</h5>
 						<p>游玩时间：{{li.playScenicTime|filterConvertDate}}</p>
 						<p>人数：{{li.peopleNum}}成人 <span v-if="li.childNum!=0">{{li.childNum}}儿童</span></p>
-						<p>备注：{{li.selectDesc||'无'}}</p>
 					</div>
 				</div>
 				<div class="mui-card-content" v-if="li.selectType == 60">
@@ -70,7 +75,6 @@
 						<p>接团地：{{li.pbAddress}}</p>
 						<p>出行时间：{{li.playScenicTime|filterConvertDate}}</p>
 						<p>天数：{{li.pbDays}}</p>
-						<p>备注：{{li.selectDesc||'无'}}</p>
 					</div>
 				</div>
 				<div class="mui-card-footer">浏览（{{li.readCnt}}）

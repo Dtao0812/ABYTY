@@ -18,7 +18,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label class="mui-navigate-right">电话</label>
-						<input type="text" disabled="disabled" v-bind:value="pageInfo.userPhone"/>				
+						<input type="text" disabled="disabled" v-model="pageInfo.userPhone"/>				
 					</div>
 					<div class="mui-input-row">
 						<label class="mui-navigate-right">职位</label>
@@ -72,9 +72,7 @@
 				reqInfo.userId = this.routerParams;
 				this.$abyApi.User.getAccountInfo(reqInfo, (res)=>{
 					this.pageInfo = res.cpUserInfo;
-					//TODO
 					this.pageInfo.userPhone = this.$abyApi.Crypto.DeCrypt(res.cpUserInfo.userPhone);
-					
 				})
 			}
 		},

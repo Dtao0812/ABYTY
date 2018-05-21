@@ -6,7 +6,10 @@
 				<div class="mui-card-content" @click="onLookAccount(tmp.userId)" v-bind:cpUser-id="tmp.userId">
 					<div class="mui-card-content-inner mui-navigate-right">
 						<img class="picList pic" :src="tmp.userFace" />
-						<h4 class="name aby-list-title">{{tmp.userName}}</h4>
+						<h4 class="name aby-list-title">{{tmp.userName}} 
+							<span v-show="tmp.userStatus == 0" class="btn-state state1">已停用</span>
+							<span v-show="tmp.userStatus == 1" class="btn-state state2">已启用</span>
+						</h4>
 						<p class="job">{{tmp.userPost}}</p>
 					</div>
 				</div>
@@ -88,6 +91,17 @@
 		font-size: 15px;
 		color: #333333;
 		margin-bottom: 100px;
+	}
+	.btn-state{
+		background-color: #08C7B5;
+		color: #fff;
+		font-size: 12px;
+		font-weight: normal;
+		padding: 3px 5px;
+		border-radius: 3px;
+	}
+	.state1{/*停用*/
+		background-color: red;
 	}
 	/*列表头像尺寸-圆*/
 	

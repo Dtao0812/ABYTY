@@ -19,14 +19,9 @@
 					<img v-if="cpUserInfo.cpBasic.cpBtype==50" class="role" src="../../static/images/ico/ioc_role_local.png" />
 					<span class="btnEditPic">修改头像</span>
 					<div class="mui-media-body">
-<<<<<<< HEAD
 						<span v-if="isOwn">{{cpUserInfo.userName}}</span>
 						<span v-else>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</span>
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
-=======
-						{{cpUserInfo.cpBasic.cpName||'未设置'}}	
-						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</p>
->>>>>>> 0cebbb2c4ea82baa5fe616c19bf9f596e4707344
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
 					</div>

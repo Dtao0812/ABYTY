@@ -153,7 +153,7 @@
 					this.$router.push({
 						name: 'refundDetail',
 						params: {
-							orderId: li.id,
+							orderId: liObj.id,
 							identityType:this.identityType
 						}
 					});

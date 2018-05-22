@@ -58,10 +58,12 @@
 					this.barcode = res.shopInfo.barcode;
 					//分享的数据
 					this.shareinfo = res.shopInfo.shareInfo;
+					
 				})
 			},
 			onShare(shareId, channelid){
 				this.$abyApi.General.downLoadFile(this.shareinfo.shareImg, 'myCode.JPG', (file)=>{
+					console.log('第一层file：'+file)
 					this.$abyApi.Image.compressImage(file, file, true, 1, (res)=>{
 						//发送分享
 						if(shareId == 'WXSceneSession' || shareId == 'qq') {

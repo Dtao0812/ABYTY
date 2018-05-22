@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-const AbyUrl = 'http://114.215.202.155/';
-//const AbyUrl = 'http://www.ai-by.com/';
+//const AbyUrl = 'http://114.215.202.155/';
+const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -156,6 +156,7 @@ const Server = {
 /******************************      Image 图片模块       *****************************/
 const Image = {
 	compressImage(src, dst, overwrite, quality, sucessCallback, errorCallBack){
+		console.log('分享进来了')
 		plus.zip.compressImage({
 				src: src,
 				dst: dst,
@@ -541,7 +542,6 @@ const User = {
 				userPost: requestInfo.userPost
 			}
 		};
-		console.log('增加子账号提交参数：'+JSON.stringify(requestData))
 		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
 	},
 	//短信验证码

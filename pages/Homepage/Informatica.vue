@@ -51,7 +51,7 @@
 				if(this.isOwn){
 					let textMsg = this.cpUserInfo.cpBasic[id];
 					if(id == 'cpHeadPhone'|| id == 'cpTel'){
-						textMsg = this.$abyApi.Crypto.DeCrypt(textMsg);
+						textMsg = this.deCrypt(textMsg);
 					}
 					this.$router.push({
 						name:'eidtHomePage',

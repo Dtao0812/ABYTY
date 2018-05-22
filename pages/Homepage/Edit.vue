@@ -79,7 +79,7 @@
 						};
 						break;
 					case 'cpIntro':
-						this.basicInfo.cpAddress = this.textMsg;
+						this.basicInfo.cpIntro = this.textMsg;
 						this.setBasicInfo();
 						break;
 					case 'cpBizScope'://业务范围

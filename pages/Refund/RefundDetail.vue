@@ -156,7 +156,10 @@
 		},
 		methods: {
 			init(){
-				
+				this.orderId=this.$route.params.orderId;
+				this.identityType=this.$route.params.identityType;
+				this.info='';
+				this.getDetail();
 			},
 			// 列表按钮显示
 			initBtn(orderState){
@@ -267,7 +270,16 @@
 			list(val) {
 				this.list = val;
 			}
-		}
+		},
+		beforeRouteEnter(to, from, next) {
+			if(from.params.agreementId == ''||from.name=='orderList'){
+				next(vm => {
+					vm.init()
+				})
+			}else{
+				next();
+			}
+		},
 	}
 </script>
 

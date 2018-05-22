@@ -218,7 +218,7 @@
 					{id:6,title:'申请退款',size:'small',bclass:'aby-button-line-default'},
 					{id:7,title:'退款处理',size:'small',bclass:'aby-button-line-blue'},
 					{id:8,title:'退款详情',size:'small',bclass:'aby-button-line-default'},
-					{id:9,title:'取消退款',size:'small',bclass:'aby-button-line-blue'},
+					{id:9,title:'退款处理',size:'small',bclass:'aby-button-line-blue'},
 					{id:10,title:'确认完成',size:'small',bclass:'aby-button-line-blue'},
 					{id:11,title:'删除',size:'small',bclass:'aby-button-line-default'},
 				],
@@ -317,7 +317,7 @@
 							identityType:this.identityType
 						}
 					});
-				}else if(btnObj.id == 7 || btnObj.id == 8){
+				}else if(btnObj.id == 7 || btnObj.id == 8 || btnObj.id == 9){
 					// 退款处理 退款详情
 					this.$router.push({
 						name: 'refundDetail',
@@ -339,11 +339,6 @@
 						}else if(btnObj.id == 2){
 							// 取消订单
 							this.$abyApi.Order.cancelOrder(reqInfo,(res)=>{
-								this.getDetail();
-							});
-						}else if(btnObj.id == 9){
-							// 取消申请退款
-							this.$abyApi.Order.cancelApply(reqInfo,(res)=>{
 								this.getDetail();
 							});
 						}else if(btnObj.id == 10){

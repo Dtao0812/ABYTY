@@ -4,7 +4,14 @@
 			<aby-fonts slot="right" class="aby-mui-bar" @click.native="onFinish(htmlId)" className="mui-pull-right" title="完成"></aby-fonts>
 		</aby-header>
 		<div class="mui-content" slot="content">
-			<textarea name="" v-model="textMsg"></textarea>
+			<div v-if="htmlId == 'cpRoute' || htmlId == 'cpBizScope'" class="">
+				<div class="mui-input-group" id="checkBox"></div>
+				<div type="button" class="mui-btn-block btnBlue btnFixed" id="add" >手动新增</div>
+			</div>
+			<div v-else class="">
+				<textarea name="" v-model="textMsg"></textarea>
+			</div>
+			
 		</div>
 	</aby-page>
 </template>
@@ -111,6 +118,9 @@
 				},(err)=>{
 					this.$tool.toast(err);
 				})
+			},
+			getRoute(){
+				
 			}
 		},
 		mounted() {
@@ -126,5 +136,19 @@
     	min-height: 200px;
     	font-size: 14px;
     	overflow: scroll;
+	}
+	.btnFixed {
+		position: fixed;
+		bottom: 0px;
+		margin-bottom: 0px;
+		text-align: center;
+		line-height: 10px;
+		border-radius: 0px;
+	}
+	.btnBlue {
+		color: #FFFFFF;
+		background-color: #08C7B5;
+		border: none;
+		height: 45px;
 	}
 </style>

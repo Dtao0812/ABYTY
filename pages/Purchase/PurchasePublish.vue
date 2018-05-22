@@ -653,6 +653,7 @@
 
 				if(this.publishInfo.selectType == 60) {
 					this.$abyApi.Select.saveGuidePublish(reqInfo, (res) => {
+						console.log('导游询价：'+JSON.stringify(res))
 						this.$toast('发布成功');
 						setTimeout(() => {
 							this.$router.back();

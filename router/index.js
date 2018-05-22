@@ -208,7 +208,7 @@ router.beforeEach((to, from, next) => {
 	const keepAliveAarrt = 
 		[
 		 	'home','purchase','order','message','my',
-		 	'orderList','orderDetails','searchIndexResult','searchResult',
+		 	'orderList','orderDetails','refundDetail','searchIndexResult','searchResult',
 		 	'agrList','chat','purchaseDetails','payWay','webView','agrDetail',
 		 	'specialHot','specialLine','specialHotel','specialPlane','specialSuppliers',
 		 	'guide','sport','project','hotel','homePage'

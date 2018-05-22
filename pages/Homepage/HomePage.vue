@@ -6,14 +6,14 @@
 			<!--个人信息部分-->
 			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 1px;" v-if="cpUserInfo.cpBasic">
 				<li class="mui-table-view-cell mui-media">
-					<img @click="onLogo" class="mui-media-object mui-pull-left" :src="cpUserInfo.cpBasic.cpLogo||''">
+					<img @click="onLogo" class="mui-media-object mui-pull-left personpic" :src="cpUserInfo.cpBasic.cpLogo||''">
+					<span class="btnEditPic" v-if="isOwn">修改Logo</span>
 					<div class="mui-media-body">
 						<span v-if="isOwn">{{cpUserInfo.userName}}</span>
 						<span v-else>{{cpUserInfo.cpBasic.cpHeadName||'未设置'}}</span>
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
-						<span class="btnEditPic" v-if="isOwn">修改Logo</span>
 					</div>
 				</li>
 			</ul>
@@ -211,4 +211,36 @@
 	.mui-media-body {
 		font-size: 14px;
 	}
+	
+	.btnEditPic {
+		color: #FFFFFF;
+		position: absolute;
+		background-color: rgba(0, 0, 0, .4);
+		font-size: 12px;
+		left: 12px;
+		height: 16px;
+		width: 65px;
+		line-height: 16px;
+		text-align: center;
+		margin-top: 49px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	/*身份标志*/
+	.role{
+		width: 40px;
+		position: absolute;
+		margin-left: -50px;
+	}
+	/*头像*/
+	.personpic{
+		height: 65px!important;
+		width: 65px!important;
+		max-width: 65px!important;
+		border-radius: 5px!important;
+	}
+	.aby-img-Authentication{
+		margin-top: 5px;
+	}
+	
 </style>

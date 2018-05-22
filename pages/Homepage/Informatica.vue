@@ -58,7 +58,8 @@
 						params:{
 							title:title,
 							htmlId:id,
-							textMsg:textMsg
+							textMsg:textMsg,
+							cpBtype: this.cpUserInfo.cpBasic.cpBtype
 						}
 					});
 				}

@@ -6,7 +6,7 @@
 		<div class="mui-content" slot="content">
 			<div v-if="htmlId == 'cpRoute' || htmlId == 'cpBizScope'" class="">
 				<div class="mui-input-group" id="checkBox"></div>
-				<div type="button" class="mui-btn-block btnBlue btnFixed" id="add" >手动新增</div>
+				<div @click="addLabel(title)" type="button" class="mui-btn-block btnBlue btnFixed" id="add" >手动新增</div>
 			</div>
 			<div v-else class="">
 				<textarea name="" v-model="textMsg"></textarea>
@@ -24,10 +24,18 @@
 				title: this.$route.params.title,
 				textMsg: this.$route.params.textMsg,
 				htmlId: this.$route.params.htmlId,
+				cpBtype: this.$route.params.cpBtype,
+				value: '',
+				valId: '',
 				basicInfo: {}
 			}
 		},
 		methods: {
+			init(){
+				if(this.htmlId == 'cpBizScope' || this.htmlId == 'cpRoute'){
+					this.getRoute(this.textMsg,this.cpBtype);
+				};
+			},
 			fCheckInto(val) {
 				var reg = /^[\u0391-\uFFE5A-Za-z]+$/;
 				if(reg.test(val)) {
@@ -90,11 +98,33 @@
 						this.setBasicInfo();
 						break;
 					case 'cpBizScope'://业务范围
-						this.basicInfo.cpBizScope = this.textMsg;
+//						this.basicInfo.cpBizScope = this.textMsg;
+//						this.setBasicInfo();
+//						break;
+						
+						this.basicInfo.cpBizScope = [];
+						this.value = [];
+						let allBox = document.getElementById('checkBox').getElementsByTagName('input');
+						for(let i = 0; i < allBox.length; i++) {
+							if(allBox[i].checked == true) {
+								this.value.push(allBox[i].parentNode.getElementsByTagName('label')[0].innerHTML);
+								this.basicInfo.cpBizScope.push(allBox[i].parentNode.getElementsByTagName('label')[0].innerHTML);
+								this.valId = allBox[i].value;
+							}
+						}
 						this.setBasicInfo();
 						break;
-					case 'cpRoute':
-						this.basicInfo.cpRoute = this.textMsg;
+					case 'cpRoute'://主营路线
+						this.basicInfo.cpBizScope = [];
+						this.value = [];
+						let allBoxRoute = document.getElementById('checkBox').getElementsByTagName('input');
+						for(let i = 0; i < allBoxRoute.length; i++) {
+							if(allBoxRoute[i].checked == true) {
+								this.value.push(allBoxRoute[i].parentNode.getElementsByTagName('label')[0].innerHTML);
+								this.basicInfo.cpBizScope.push(allBoxRoute[i].parentNode.getElementsByTagName('label')[0].innerHTML);
+								this.valId = allBox[i].value;
+							}
+						}
 						this.setBasicInfo();
 						break;
 					case 'cpCorpName':
@@ -119,12 +149,38 @@
 					this.$tool.toast(err);
 				})
 			},
-			getRoute(){
-				
+			getRoute(val, cpBtype){
+				let info = {
+					cpBtype: cpBtype,
+					tagType: 10
+				};
+				this.$abyApi.User.getBasicType(info, (res)=>{
+//					console.log('标签：'+JSON.stringify(res))
+					let list = res.tagList;
+					for(let i = 0; i < list.length; i++) {
+						let checked = '';
+						for(let x = 0; x < val.length; x++) {
+							if(list[i] == val[x]) {
+								checked = 'checked';
+							}
+						}
+						document.getElementById('checkBox').innerHTML += '<div class="mui-input-row mui-checkbox"><label>' + list[i] + '</label><input name="checkbox1" value="' + i + '" type="checkbox" ' + checked + '></div>';
+					}
+				})
+			},
+			addLabel(title){
+				this.$tool.prompt({inputPlaceholder: '请输入要添加的属性'},'添加'+title,(e)=>{
+					if(e.value != '') {
+						let div = document.createElement('div');
+						div.className = 'mui-input-row mui-checkbox';
+						div.innerHTML = '<label>' + e.value + '</label><input name="checkbox1" value="' + e.value + '" type="checkbox" checked>';
+						document.getElementById('checkBox').appendChild(div);
+					}
+				});
 			}
 		},
 		mounted() {
-			
+			this.init();
 		},
 	}
 </script>
@@ -150,5 +206,8 @@
 		background-color: #08C7B5;
 		border: none;
 		height: 45px;
+	}
+	.mui-input-group{
+		margin-bottom: 45px;
 	}
 </style>

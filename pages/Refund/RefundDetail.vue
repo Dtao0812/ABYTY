@@ -190,10 +190,10 @@
 			onBtn(liObj,btnObj){
 				if(btnObj.id == 4){
 					// 拒绝退款
-					this.$tool.prompt('输入价格',(e)=>{
+					this.$tool.prompt({inputPlaceholder: '退款理由'},'您确定要拒绝退款吗？',(e)=>{
 						let reqInfo = {};
 						reqInfo.orderId = liObj.id;
-						reqInfo.refuceReason = liObj.value;
+						reqInfo.refuceReason = e.value;
 						this.$abyApi.Order.refuceRefund(reqInfo,(res)=>{
 							this.getDetail();
 						});

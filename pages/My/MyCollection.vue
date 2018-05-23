@@ -3,8 +3,7 @@
 		<aby-header :title="title" slot="header">
 			<!--<header-search v-if="isShowSearch" slot="hSearch"></header-search>-->
 		</aby-header>
-		<aby-search class="aby-search" slot="navbar"></aby-search>
-		
+		<!--<aby-search class="aby-search" slot="navbar"></aby-search>-->
 		<aby-tab :list="goodsList" @eventTabBack="eventTab" page="myCollect" slot="loadlist">
 			<div v-for="(li,i) in goodsList" :key="i" :slot="li.id">
 				<list-line v-if="li.type=='line'" page="myCollect" :list="li.data" @eventLineBack="eventLine"></list-line>
@@ -17,13 +16,13 @@
 
 <script>
 	import HeaderSearch from '../../components/Header/Search.vue'
-	import AbySearch from '../../components/Navbar/Search.vue'
+//	import AbySearch from '../../components/Navbar/Search.vue'
 	import ListLine from '../../components/List/Line.vue'
 	import ListSport from '../../components/List/Sport.vue'
 	import ListHotel from '../../components/List/Hotel.vue'
 	export default {
 		components: {
-			HeaderSearch,AbySearch,ListLine,ListSport,ListHotel
+			HeaderSearch,ListLine,ListSport,ListHotel
 		},
 		data() {
 			return {
@@ -56,6 +55,7 @@
 				this.isShowSearch = false;
 			},
 			getPullDown(callback){
+				
 				let reqInfo = {};
 				reqInfo.pageNum = 1;
 				reqInfo.keyWord = '',

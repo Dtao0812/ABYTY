@@ -174,11 +174,12 @@ const Image = {
 
 /******************************      General 通用模块       *****************************/
 
+let mask = null;
+let showMenu = false;
+let mode = 'main-move';
+let menu = null;
+let shares = null;
 const General = {
-	showMenu: false,
-	mode: 'main-move',
-	menu: null,
-	shares: null,
 	/*获取banner图
 	 *pageType: //页面类型  1.app首页   2.线路首页   3.酒店首页   4.景点首页
 	 */
@@ -202,6 +203,17 @@ const General = {
 			}
 		});
 		dtask.start();
+	},
+	updateSerivces(){
+		plus.share.getServices(function(s) {
+			shares = {};
+			for(var i in s) {
+				var t = s[i];
+				shares[t.id] = t;
+			}
+		}, function(e) {
+			abyBase.showToastExp("获取分享服务列表失败", "short");
+		});
 	},
 	shareAction(id, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo){
 		var s = null;
@@ -1568,5 +1580,6 @@ export default {
 	Order,
 	Supplier,
 	Chat,
-	Pay
+	Pay,
+	Image
 }

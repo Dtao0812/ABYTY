@@ -212,7 +212,7 @@ const General = {
 				shares[t.id] = t;
 			}
 		}, function(e) {
-			abyBase.showToastExp("获取分享服务列表失败", "short");
+			Vue.$toast("获取分享服务列表失败");
 		});
 	},
 	shareAction(id, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo){

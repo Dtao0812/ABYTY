@@ -20,14 +20,17 @@
 					<aby-icon-color type="qq" id="qqFriend"></aby-icon-color>
 					<!--<span>qq好友</span>-->
 				</div>
-				<div class="divPanel" id="qq" channelid="qq" ex="">
+				<div class="divPanel" channelid="qzone" ex="qzone"  @click="onShare(shareinfo, 'qZone', 'qZone', interInfo)">
 					<aby-icon-color type="qqspace" id="qqSpace"></aby-icon-color>
+					<!--<span>qq空间</span>-->
 				</div>
-				<div class="divPanel" ex="WXSceneSession" @click="onShare('WXSceneSession', 'weixin')">
-					<aby-icon-color type="wechat" id="WXSceneSession"></aby-icon-color>
+				<div class="divPanel" ex="WXSceneSession" @click="onShare(shareinfo, 'WXSceneSession', 'weixin', interInfo)">
+					<aby-icon-color type="wechat" ></aby-icon-color>
+					<!--<span>微信好友</span>-->
 				</div>
-				<div class="divPanel" id="WXSceneTimeline" channelid='weixin' ex="WXSceneTimeline" @click="onShare('WXSceneTimeline', 'weixin')">
-					<aby-icon-color type="firends" id="WXSceneTimeline"></aby-icon-color>
+				<div class="divPanel" channelid='weixin' ex="WXSceneTimeline" @click="onShare(shareinfo, 'WXSceneTimeline', 'weixin', interInfo)">
+					<aby-icon-color type="firends" ></aby-icon-color>
+					<!--<span>朋友圈</span>-->
 				</div>
 			</div>
 		</div>
@@ -61,6 +64,7 @@
 				this.$abyApi.General.updateSerivces();
 			},
 			onShare(shareinfo, shareId, channelid, interInfo){
+				console.log('shareinfo:'+JSON.stringify(shareinfo))
 				this.$abyApi.General.downLoadFile(shareinfo.shareImg, 'myCode.JPG', (file)=>{
 					console.log('第一层file：'+file)
 					this.$abyApi.Image.compressImage(file, file, true, 1, (res)=>{
@@ -68,7 +72,7 @@
 						if(shareId == 'WXSceneSession' || shareId == 'qq') {
 							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareTitle, shareinfo.shareDesc, interInfo);
 						}
-						if(shareId == 'WXSceneTimeline') {
+						if(shareId == 'WXSceneTimeline' || shareId == 'qzone') {
 							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareDesc, shareinfo.shareTitle, interInfo);
 						}
 						if(shareId == 'sinaweibo') {

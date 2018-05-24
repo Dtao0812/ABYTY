@@ -20,7 +20,7 @@
 					<aby-icon-color type="qq" id="qqFriend"></aby-icon-color>
 					<!--<span>qq好友</span>-->
 				</div>
-				<div class="divPanel" channelid="qzone" ex="qzone"  @click="onShare(shareinfo, 'qZone', 'qZone', interInfo)">
+				<div class="divPanel" channelid="qzone" ex="qzone"  @click="onShare(shareinfo, 'qzone', 'qzone', interInfo)">
 					<aby-icon-color type="qqspace" id="qqSpace"></aby-icon-color>
 					<!--<span>qq空间</span>-->
 				</div>

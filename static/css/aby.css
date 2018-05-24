@@ -914,3 +914,8 @@ small {
     -webkit-box-shadow: 0 0 1px rgba(0,0,0,.3);
     box-shadow: 0 0 1px rgba(0,0,0,.3);
 }
+/*个人主页主营线路选择页面*/
+.aby-edit-choose .mui-input-group .mui-input-row {
+    height: auto;
+    font-size: 13px;
+}

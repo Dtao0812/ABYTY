@@ -4,14 +4,13 @@
 			<aby-fonts slot="right" class="aby-mui-bar" @click.native="onFinish(htmlId)" className="mui-pull-right" title="完成"></aby-fonts>
 		</aby-header>
 		<div class="mui-content" slot="content">
-			<div v-if="htmlId == 'cpRoute' || htmlId == 'cpBizScope'" class="">
+			<div v-if="htmlId == 'cpRoute' || htmlId == 'cpBizScope'" class="aby-edit-choose">
 				<div class="mui-input-group" id="checkBox"></div>
-				<div @click="addLabel(title)" type="button" class="mui-btn-block btnBlue btnFixed" id="add" >手动新增</div>
+				<div @click="addLabel(title)" type="button" class="mui-btn-block btnBlue btnFixed" id="add">手动新增</div>
 			</div>
 			<div v-else class="">
 				<textarea name="" v-model="textMsg"></textarea>
 			</div>
-			
 		</div>
 	</aby-page>
 </template>
@@ -31,9 +30,9 @@
 			}
 		},
 		methods: {
-			init(){
-				if(this.htmlId == 'cpBizScope' || this.htmlId == 'cpRoute'){
-					this.getRoute(this.textMsg,this.cpBtype);
+			init() {
+				if(this.htmlId == 'cpBizScope' || this.htmlId == 'cpRoute') {
+					this.getRoute(this.textMsg, this.cpBtype);
 				};
 			},
 			fCheckInto(val) {
@@ -44,7 +43,7 @@
 					return false
 				}
 			},
-			isNull(data){
+			isNull(data) {
 				if(data && data != '' && data != 0) {
 					return data;
 				} else {
@@ -59,7 +58,7 @@
 					return false
 				}
 			},
-			onFinish(htmlId){
+			onFinish(htmlId) {
 				this.basicInfo.files = [];
 				this.basicInfo.cpId = this.$store.state.cpUserInfo.cpId;
 				switch(htmlId) {
@@ -68,27 +67,27 @@
 						this.setBasicInfo();
 						break;
 					case 'cpHeadName':
-						if(this.fCheckInto(this.textMsg)){
+						if(this.fCheckInto(this.textMsg)) {
 							this.basicInfo.cpHeadName = this.textMsg;
 							this.setBasicInfo();
-						}else{
+						} else {
 							this.$tool.toast("联系人只能输入中文或者英文！")
 							return
 						};
 						break;
-					case 'cpHeadPhone'://手机
-						if(!this.isNull(this.textMsg)){
+					case 'cpHeadPhone': //手机
+						if(!this.isNull(this.textMsg)) {
 							this.$tool.toast("数据不能为空！")
 							return
 						}
 						this.basicInfo.cpHeadPhone = this.$abyApi.Crypto.EnCrypt(this.textMsg);
 						this.setBasicInfo();
 						break;
-					case 'cpTel'://企业固定电话
-						if(this.fCheckTel(this.textMsg)){
+					case 'cpTel': //企业固定电话
+						if(this.fCheckTel(this.textMsg)) {
 							this.basicInfo.cpTel = this.$abyApi.Crypto.EnCrypt(this.textMsg);
 							this.setBasicInfo();
-						}else{
+						} else {
 							this.$tool.toast("电话号码格式错误！")
 							return
 						};
@@ -97,11 +96,11 @@
 						this.basicInfo.cpIntro = this.textMsg;
 						this.setBasicInfo();
 						break;
-					case 'cpBizScope'://业务范围
-//						this.basicInfo.cpBizScope = this.textMsg;
-//						this.setBasicInfo();
-//						break;
-						
+					case 'cpBizScope': //业务范围
+						//						this.basicInfo.cpBizScope = this.textMsg;
+						//						this.setBasicInfo();
+						//						break;
+
 						this.basicInfo.cpBizScope = [];
 						this.value = [];
 						let allBox = document.getElementById('checkBox').getElementsByTagName('input');
@@ -114,7 +113,7 @@
 						}
 						this.setBasicInfo();
 						break;
-					case 'cpRoute'://主营路线
+					case 'cpRoute': //主营路线
 						this.basicInfo.cpBizScope = [];
 						this.value = [];
 						let allBoxRoute = document.getElementById('checkBox').getElementsByTagName('input');
@@ -132,30 +131,30 @@
 						this.setBasicInfo();
 						break;
 					default:
-						if(this.isNull(this.textMsg)){
+						if(this.isNull(this.textMsg)) {
 							this.$tool.toast("数据不能为空！")
 							return;
 						}
 						setBasicInfo();
 						break;
 				};
-				
+
 			},
-			setBasicInfo(){
-				this.$abyApi.User.setBasicInfo(this.basicInfo, (res)=>{
+			setBasicInfo() {
+				this.$abyApi.User.setBasicInfo(this.basicInfo, (res) => {
 					this.$tool.toast("提交成功");
 					this.$router.back();
-				},(err)=>{
+				}, (err) => {
 					this.$tool.toast(err);
 				})
 			},
-			getRoute(val, cpBtype){
+			getRoute(val, cpBtype) {
 				let info = {
 					cpBtype: cpBtype,
 					tagType: 10
 				};
-				this.$abyApi.User.getBasicType(info, (res)=>{
-//					console.log('标签：'+JSON.stringify(res))
+				this.$abyApi.User.getBasicType(info, (res) => {
+					//					console.log('标签：'+JSON.stringify(res))
 					let list = res.tagList;
 					for(let i = 0; i < list.length; i++) {
 						let checked = '';
@@ -168,8 +167,10 @@
 					}
 				})
 			},
-			addLabel(title){
-				this.$tool.prompt({inputPlaceholder: '请输入要添加的属性'},'添加'+title,(e)=>{
+			addLabel(title) {
+				this.$tool.prompt({
+					inputPlaceholder: '请输入要添加的属性'
+				}, '添加' + title, (e) => {
 					if(e.value != '') {
 						let div = document.createElement('div');
 						div.className = 'mui-input-row mui-checkbox';
@@ -186,13 +187,14 @@
 </script>
 
 <style scoped>
-	textarea{
+	textarea {
 		margin: 10px 5%;
-    	width: 90%;
-    	min-height: 200px;
-    	font-size: 14px;
-    	overflow: scroll;
+		width: 90%;
+		min-height: 200px;
+		font-size: 14px;
+		overflow: scroll;
 	}
+	
 	.btnFixed {
 		position: fixed;
 		bottom: 0px;
@@ -201,13 +203,16 @@
 		line-height: 10px;
 		border-radius: 0px;
 	}
+	
 	.btnBlue {
 		color: #FFFFFF;
 		background-color: #08C7B5;
 		border: none;
 		height: 45px;
 	}
-	.mui-input-group{
+	
+	.mui-input-group {
 		margin-bottom: 45px;
 	}
+	
 </style>

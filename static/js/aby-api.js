@@ -1049,6 +1049,18 @@ const Order = {
 		};
 		Server.getDataFromServerPayment('storder/ORDER001.action', requestData, successCallback, errorCallback);
 	},
+	//获得退款相关的订单列表
+	getRefundOrderList(requestInfo,orderType,identityType, successCallback, errorCallback){
+		let requestData = {
+			pageNum: requestInfo.pageNum,
+			keyWord: requestInfo.keyWord,
+		};
+		requestData.where = {
+			orderType: orderType,
+			identityType: identityType
+		}
+		Server.getDataFromServerPayment('storder/ORDER103.action', requestData, successCallback, errorCallback);
+	},
 	// 确认订单
 	confirmOrder(requestInfo, successCallback, errorCallback) {
 		let requestData = {

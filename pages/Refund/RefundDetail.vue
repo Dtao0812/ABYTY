@@ -168,8 +168,9 @@
 				let newBtnList = [];
 				if(this.identityType == 'buyer'){
 					// 买家
+					console.log('orderState:'+orderState)
 					switch (orderState){
-						case 6: bList =  [2,3];break;// 退款中
+						case 6: bList =  [2];break;// 退款中
 						case 8: bList =  [3];break;// 拒绝退款
 					}
 				}else if(this.identityType == 'seller'){
@@ -188,7 +189,15 @@
 			},
 			// 按钮事件
 			onBtn(liObj,btnObj){
-				if(btnObj.id == 4){
+				if(btnObj.id == 3){
+					this.$router.push({
+						name: 'refundApply',
+						params: {
+							orderId: liObj.id,
+							identityType:this.identityType
+						}
+					});
+				}else if(btnObj.id == 4){
 					// 拒绝退款
 					this.$tool.prompt({inputPlaceholder: '退款理由'},'您确定要拒绝退款吗？',(e)=>{
 						let reqInfo = {};

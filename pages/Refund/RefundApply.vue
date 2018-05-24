@@ -64,6 +64,7 @@
 			// 提交退款申请
 			onFefund(){
 				if(this.refundPrice == '')return this.$toast('退款金额不能为空');
+				if(this.refundPrice <= 0)return this.$toast('退款金额不能低于0');
 				if(this.refundDesc == '')return this.$toast('退款原因不能为空');
 				let reqInfo = {};
 				reqInfo.orderId = this.orderId;

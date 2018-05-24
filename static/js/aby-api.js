@@ -1108,9 +1108,7 @@ const Order = {
 	// 取消申请退款
 	cancelApply(requestInfo, successCallback, errorCallback) {
 		let requestData = {
-			params: {
-				orderId: requestInfo.orderId,
-			}
+			params:  requestInfo.orderId,
 		};
 		Server.getDataFromServerPayment('storder/ORDER100.action', requestData, successCallback, errorCallback);
 	},

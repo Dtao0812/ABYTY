@@ -168,7 +168,6 @@
 				let newBtnList = [];
 				if(this.identityType == 'buyer'){
 					// 买家
-					console.log('orderState:'+orderState)
 					switch (orderState){
 						case 6: bList =  [2];break;// 退款中
 						case 8: bList =  [3];break;// 拒绝退款
@@ -281,7 +280,7 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.agreementId == ''||from.name=='orderList'){
+			if(from.params.agreementId == ''||from.name=='orderList'||from.name=='orderDetails'){
 				next(vm => {
 					vm.init()
 				})

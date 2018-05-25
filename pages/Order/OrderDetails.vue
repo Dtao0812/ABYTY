@@ -252,7 +252,7 @@
 						case 5: bList =  [11];break;// 超时关闭
 						case 6: bList =  [9];break;// 退款中
 						case 7: bList =  [11];break;// 已退款
-						case 8: bList =  [6];break;// 拒绝退款
+						case 8: bList =  [7];break;// 拒绝退款
 						case 9: bList =  [2];break;// 待确认
 					}
 				}else if(this.identityType == 'seller'){
@@ -374,6 +374,7 @@
 				let reqInfo = {};
 				reqInfo.orderId = this.orderId;
 				this.$abyApi.Order.getOrderDetail(reqInfo,(res)=>{
+					console.log('res:'+JSON.stringify(res))
 					this.$refs.page.closeLoading();
 					res.data.orderInfo.proSummary = JSON.parse(res.data.orderInfo.proSummary);
 					res.data.orderSummary = JSON.parse(res.data.orderSummary);

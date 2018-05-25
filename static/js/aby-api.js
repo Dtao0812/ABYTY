@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-const AbyUrl = 'http://114.215.202.155/';
-//const AbyUrl = 'http://www.ai-by.com/';
+//const AbyUrl = 'http://114.215.202.155/';
+const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -606,7 +606,6 @@ const User = {
 		}
 		//执行提交任务
 		Server.UploadFileByApp('cpUser', files, requestData, function(responeData) {
-			store.commit('setUserInfo', responeData);
 			callBack && callBack(true);
 		}, function(err) {
 			callBack && callBack(false);

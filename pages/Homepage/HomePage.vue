@@ -165,9 +165,9 @@
 						this.$tool.loading('正在提交...');
 						let reqInfo = {};
 						reqInfo.files = [
-							{ id:'userFace',src:file }
+							{ id:'cpLogo',src:file }
 						];
-						this.$abyApi.User.setMyInfo(reqInfo, (res) => {
+						this.$abyApi.User.setBasicInfo(reqInfo, (res) => {
 							this.$tool.loadingClose();
 							this.cpUserInfo.cpBasic.cpLogo = file;
 						});

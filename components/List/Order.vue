@@ -49,6 +49,7 @@
 					{id:9,title:'取消退款',size:'small',bclass:'aby-button-line-blue'},
 					{id:10,title:'确认完成',size:'small',bclass:'aby-button-line-blue'},
 					{id:11,title:'删除',size:'small',bclass:'aby-button-line-default'},
+					{id:12,title:'再次申请',size:'small',bclass:'aby-button-line-blue'},
 				],
 				noContent:false
 			}
@@ -82,9 +83,9 @@
 						case 3: bList =  [11];break;// 已完成
 						case 4: bList =  [11];break;// 已取消
 						case 5: bList =  [11];break;// 超时关闭
-						case 6: bList =  [9];break;// 退款中
+						case 6: bList =  [8,9];break;// 退款中
 						case 7: bList =  [11];break;// 已退款
-						case 8: bList =  [6];break;// 拒绝退款
+						case 8: bList =  [8,12];break;// 拒绝退款
 						case 9: bList =  [2];break;// 待确认
 					}
 				}else if(this.identityType == 'seller'){
@@ -154,7 +155,7 @@
 							orderId: liObj.id,
 						}
 					})
-				}else if(btnObj.id == 6){
+				}else if(btnObj.id == 6 || btnObj.id == 12){
 					// 申请退款
 					this.$router.push({
 						name: 'refundApply',

@@ -68,12 +68,17 @@
 				this.$abyDb.Im.init((res)=>{
 					this.$abyDb.Im.get((res)=>{
 						if(res){
-							let info = res.value;
-							info.msgList = [];
-							info.noReadNum = 0;
-							info.sendUser = JSON.parse(info.content.extra);
+							let msgValue = res.value;
+							let info = {
+								targetId: msgValue.targetId,//接收者ID
+								senderUserId: msgValue.senderUserId,//发送者ID
+								sendUser: {},//发送者数据
+								content: this.$abyApi.Chat.emojiToHTML(msgValue.content.content),//最后一条消息内容
+								isRead: msgValue.isRead,//是否已读
+								noReadNum:0,//未读数量
+							};
 							let isAdd = true;
-							if(info.sendUser.userId == this.$store.state.userId){
+							if(info.senderUserId == this.$store.state.userId){
 								// 如果是本人发出的消息，显示对方头像
 								let reqInfo = {};
 								reqInfo.loading = 1;
@@ -87,12 +92,14 @@
 										userName : r.cpUserInfo.userName,
 									}
 								})
+							}else{
+								info.sendUser = msgValue.sendUser;
 							}
 							for(let i=0;i<list.length;i++){
 								if(list[i].targetId == info.targetId){
 									isAdd = false;
+									list[i].content = info.content;//始终显示最后一条聊天
 									if(!info.isRead)list[i].noReadNum = list[i].noReadNum + 1;
-									list[i].msgList.push(info);
 								}
 							}
 							if(isAdd)list.push(info);

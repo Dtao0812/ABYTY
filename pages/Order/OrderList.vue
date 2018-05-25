@@ -63,7 +63,6 @@
 						this.$refs.pull.closeLoading();
 						res.data.forEach((v, i) => {
 							res.data[i].orderSummary = JSON.parse(v.orderSummary);
-//							res.data[i].orderInfo.proSummary = JSON.parse(v.orderInfo.proSummary);
 						})
 						this.orderList = res.data;
 						callback && callback(true);
@@ -102,7 +101,7 @@
 				next(vm => {
 					vm.init()
 				})
-			}else if(from.name == 'orderDetails'){
+			}else if(from.name == 'orderDetails' || from.name == 'refundDetail'){
 				next(vm => {
 					vm.getPullDown()
 				})

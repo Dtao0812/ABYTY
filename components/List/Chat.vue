@@ -6,7 +6,7 @@
 				<span class="mui-badge mui-badge-danger" v-show="li.noReadNum!=0">{{li.noReadNum}}</span>
 				<div class="mui-media-body">
 					{{li.sendUser.cpName}}
-					<p class='mui-ellipsis'>{{li.content.content}}</p>
+					<p class='mui-ellipsis' v-html="li.content"></p>
 				</div>
 			</a>
 		</li>

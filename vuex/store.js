@@ -130,6 +130,12 @@ const mutations = {
 			state.chatList = state.chatList.concat(info.value);
 		}
 		state[info.title] = state.chatList.length;
+		let messageNum = 0;
+		for(let i=0;i<state.messageList.length;i++){
+			messageNum += state.messageList[i].num;
+		}
+		state.messageType = messageNum>0;
+		state.messageNum = messageNum + state.chatNum;
 	},
 	// 删除聊天未读消息
 	removeChatNum(state,info){
@@ -141,6 +147,12 @@ const mutations = {
 		}
 		state.chatList = newList;
 		state[info.title] = state.chatList.length;
+		let messageNum = 0;
+		for(let i=0;i<state.messageList.length;i++){
+			messageNum += state.messageList[i].num;
+		}
+		state.messageType = messageNum>0;
+		state.messageNum = messageNum + state.chatNum;
 	},
 	setHomePage(state,info){
 		state.userIdHome = info.userId;
@@ -165,7 +177,6 @@ const mutations = {
 				state.messageList[i].num = state.messageList[i].list.length;
 			}
 		}
-		
 		let messageNum = 0;
 		let homeNum = 0;
 		// 首页只计算系统消息、订单消息、询价消息

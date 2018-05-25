@@ -54,7 +54,7 @@
 		    list(val){
 		    	this.noContent = val.length == 0;
 		    	this.list = val;
-		    	
+		    	this.setImgHeight();
 		    }  
 		}  
 	}

@@ -7,8 +7,8 @@
 					<div class="mui-card-content-inner mui-navigate-right">
 						<img class="picList pic" :src="tmp.userFace" />
 						<h4 class="name aby-list-title">{{tmp.userName}} 
-							<span v-show="tmp.userStatus == 0" class="btn-state state1">已停用</span>
-							<span v-show="tmp.userStatus == 1" class="btn-state state2">已启用</span>
+							<span v-show="tmp.userStatus == 1" class="btn-state state1">已停用</span>
+							<span v-show="tmp.userStatus == 0" class="btn-state state2">已启用</span>
 						</h4>
 						<p class="job">{{tmp.userPost}}</p>
 					</div>

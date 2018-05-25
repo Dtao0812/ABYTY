@@ -6,7 +6,7 @@
 				<img class="mui-media-object mui-pull-left" :src="li.userFace">
 				<div class="mui-media-body mui-ellipsis">
 					{{li.userCuteName}}
-					<p class='mui-ellipsis'>{{li.userPost}}</p>
+					<p class='mui-ellipsis userPost'>{{li.userPost}}</p>
 					<div class="divContact">
 						<aby-icon-color class="icocall" type="call-circle" @click.native="onTel(li.userPhone)"></aby-icon-color>
 						<aby-icon-color class="icochat" type="chat-circle" @click.native="toChatDetail(li.userId)"></aby-icon-color>
@@ -79,6 +79,9 @@
 		height: 32px;
 		margin-left: 10px;
 		margin-top: 3px;
+	}
+	.userPost{
+		min-height: 23px;
 	}
 	
 </style>

@@ -174,11 +174,12 @@ const Image = {
 
 /******************************      General 通用模块       *****************************/
 
+let mask = null;
+let showMenu = false;
+let mode = 'main-move';
+let menu = null;
+let shares = null;
 const General = {
-	showMenu: false,
-	mode: 'main-move',
-	menu: null,
-	shares: null,
 	/*获取banner图
 	 *pageType: //页面类型  1.app首页   2.线路首页   3.酒店首页   4.景点首页
 	 */
@@ -202,6 +203,17 @@ const General = {
 			}
 		});
 		dtask.start();
+	},
+	updateSerivces(){
+		plus.share.getServices(function(s) {
+			shares = {};
+			for(var i in s) {
+				var t = s[i];
+				shares[t.id] = t;
+			}
+		}, function(e) {
+			Vue.$toast("获取分享服务列表失败");
+		});
 	},
 	shareAction(id, ex, bhref, href, thumburl, sharehrefTitle, sharehrefDes, shareInfo){
 		var s = null;
@@ -1036,6 +1048,18 @@ const Order = {
 		};
 		Server.getDataFromServerPayment('storder/ORDER001.action', requestData, successCallback, errorCallback);
 	},
+	//获得退款相关的订单列表
+	getRefundOrderList(requestInfo,orderType,identityType, successCallback, errorCallback){
+		let requestData = {
+			pageNum: requestInfo.pageNum,
+			keyWord: requestInfo.keyWord,
+		};
+		requestData.where = {
+			orderType: orderType,
+			identityType: identityType
+		}
+		Server.getDataFromServerPayment('storder/ORDER103.action', requestData, successCallback, errorCallback);
+	},
 	// 确认订单
 	confirmOrder(requestInfo, successCallback, errorCallback) {
 		let requestData = {
@@ -1095,9 +1119,7 @@ const Order = {
 	// 取消申请退款
 	cancelApply(requestInfo, successCallback, errorCallback) {
 		let requestData = {
-			params: {
-				orderId: requestInfo.orderId,
-			}
+			params:  requestInfo.orderId,
 		};
 		Server.getDataFromServerPayment('storder/ORDER100.action', requestData, successCallback, errorCallback);
 	},
@@ -1567,5 +1589,6 @@ export default {
 	Order,
 	Supplier,
 	Chat,
-	Pay
+	Pay,
+	Image
 }

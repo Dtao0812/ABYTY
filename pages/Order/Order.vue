@@ -56,7 +56,7 @@
 								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
 								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
 								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
-								{id: 'waitRefund',title: '退款',num: 0,state: 6,icon: 'orderrefund'},
+								{id: 'waitRefund',title: '退款',num: 0,state: 10,icon: 'orderrefund'},
 							]
 						},
 					];
@@ -73,7 +73,7 @@
 								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
 								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
 								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
-								{id: 'waitRefund',title: '退款',num: 0,state: 6,icon: 'orderrefund'},
+								{id: 'waitRefund',title: '退款',num: 0,state: 10,icon: 'orderrefund'},
 							]
 						},
 						{
@@ -87,7 +87,7 @@
 								{id: 'waitPay',title: '待付款',num: 0,state: 0,icon: 'orderpay'},
 								{id: 'waitSetOut',title: '待出行',num: 0,state: 1,icon: 'ordertrip'},
 								{id: 'waitEnd',title: '待完成',num: 0,state: 2,icon: 'orderfinish'},
-								{id: 'waitRefund',title: '退款处理',num: 0,state: 6,icon: 'orderrefund'},
+								{id: 'waitRefund',title: '退款处理',num: 0,state: 10,icon: 'orderrefund'},
 							]
 						},
 					];

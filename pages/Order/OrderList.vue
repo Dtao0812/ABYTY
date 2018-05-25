@@ -46,17 +46,32 @@
 				reqInfo.pageNum = this.pageNum = 1;
 				reqInfo.where = this.where;
 				reqInfo.keyWord = this.keyWord;
-				this.$abyApi.Order.getList(reqInfo, (res) => {
-					this.$refs.pull.closeLoading();
-					res.data.forEach((v, i) => {
-						res.data[i].orderSummary = JSON.parse(v.orderSummary);
-						res.data[i].orderInfo.proSummary = JSON.parse(v.orderInfo.proSummary);
-					})
-					this.orderList = res.data;
-					callback && callback(true);
-				}, (err) => {
-					callback && callback(false);
-				});
+				if(this.where.orderState != '10'){
+					this.$abyApi.Order.getList(reqInfo, (res) => {
+						this.$refs.pull.closeLoading();
+						res.data.forEach((v, i) => {
+							res.data[i].orderSummary = JSON.parse(v.orderSummary);
+							res.data[i].orderInfo.proSummary = JSON.parse(v.orderInfo.proSummary);
+						})
+						this.orderList = res.data;
+						callback && callback(true);
+					}, (err) => {
+						callback && callback(false);
+					});
+				}else{
+					this.$abyApi.Order.getRefundOrderList(reqInfo,this.where.orderType,this.where.identityType, (res) => {
+						this.$refs.pull.closeLoading();
+						res.data.forEach((v, i) => {
+							res.data[i].orderSummary = JSON.parse(v.orderSummary);
+//							res.data[i].orderInfo.proSummary = JSON.parse(v.orderInfo.proSummary);
+						})
+						this.orderList = res.data;
+						callback && callback(true);
+					}, (err) => {
+						callback && callback(false);
+					});
+				}
+				
 			},
 			getPullUp(callback) {
 				let reqInfo = {};

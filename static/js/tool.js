@@ -275,6 +275,17 @@ let dialTelToApp = function(phone) {
 	plus.device.dial(phone, false);
 };
 
+//判断是否为数字
+let isRealNum = function(val){
+	if(val === "" || val ==null){
+        return false;
+    }
+    if(!isNaN(val)){
+        return true;
+    }else{
+        return false;
+    }
+};
 /******************************      toast       *****************************/
 let toast = function(title, pos) {
 	Vue.$toast(title);
@@ -380,5 +391,6 @@ export default {
 	localStorage,
 	copyContent,
 	getRTime,
-	abyDateFun
+	abyDateFun,
+	isRealNum
 }

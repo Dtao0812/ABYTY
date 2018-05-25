@@ -58,7 +58,12 @@
 						this.scan.close();
 						this.onBack();
 					},1500);
+				}, (err)=>{
+					this.$toast(err);
+					this.scan.close();
+					this.onBack();
 				})
+				
 			},
 			// 返回
 			onBack(){

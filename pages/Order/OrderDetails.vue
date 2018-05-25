@@ -296,6 +296,19 @@
 						let reqInfo = {};
 						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.payment = e.value;
+						if(!this.$tool.isRealNum(reqInfo.payment)) {
+							this.$tool.toast('请输入数字！');
+							return;
+						};
+						if(reqInfo.payment < 100) {
+							this.$tool.toast('金额不能低于¥100！');
+							return;
+						};
+						
+						if(parseFloat(reqInfo.payment).toFixed(2).length>10){
+							this.$tool.toast('结算价格过大，暂不支持！');
+							return;
+						};
 						this.$abyApi.Order.editPrice(reqInfo,(res)=>{
 							this.getDetail();
 						});

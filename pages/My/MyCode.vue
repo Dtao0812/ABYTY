@@ -16,20 +16,20 @@
 			</div>
 			<div class="share">
 				<h5 class="mui-content-padded h5title"><span>分享到社交平台</span></h5>
-				<div class="divPanel" ex="qq" @click="onShare('qq', 'qq')">
+				<div class="divPanel" ex="qq" @click="onShare(shareinfo, 'qq', 'qq', interInfo)">
 					<aby-icon-color type="qq" id="qqFriend"></aby-icon-color>
 					<!--<span>qq好友</span>-->
 				</div>
-				<div class="divPanel" id="qq" channelid="qq" ex="">
+				<div class="divPanel" channelid="qzone" ex="qzone"  @click="onShare(shareinfo, 'qzone', 'qzone', interInfo)">
 					<aby-icon-color type="qqspace" id="qqSpace"></aby-icon-color>
 					<!--<span>qq空间</span>-->
 				</div>
-				<div class="divPanel" ex="WXSceneSession" @click="onShare('WXSceneSession', 'weixin')">
-					<aby-icon-color type="wechat" id="WXSceneSession"></aby-icon-color>
+				<div class="divPanel" ex="WXSceneSession" @click="onShare(shareinfo, 'WXSceneSession', 'weixin', interInfo)">
+					<aby-icon-color type="wechat" ></aby-icon-color>
 					<!--<span>微信好友</span>-->
 				</div>
-				<div class="divPanel" id="WXSceneTimeline" channelid='weixin' ex="WXSceneTimeline" @click="onShare('WXSceneTimeline', 'weixin')">
-					<aby-icon-color type="firends" id="WXSceneTimeline"></aby-icon-color>
+				<div class="divPanel" channelid='weixin' ex="WXSceneTimeline" @click="onShare(shareinfo, 'WXSceneTimeline', 'weixin', interInfo)">
+					<aby-icon-color type="firends" ></aby-icon-color>
 					<!--<span>朋友圈</span>-->
 				</div>
 			</div>
@@ -46,7 +46,8 @@
 			return {
 				cpUserInfo:this.$store.state.cpUserInfo,
 				barcode:'',//二维码图片
-				shareInfo: {}
+				shareInfo: {},
+				interInfo: ''
 			}
 		},
 		methods:{
@@ -59,17 +60,19 @@
 					//分享的数据
 					this.shareinfo = res.shopInfo.shareInfo;
 					
-				})
+				});
+				this.$abyApi.General.updateSerivces();
 			},
-			onShare(shareId, channelid){
-				this.$abyApi.General.downLoadFile(this.shareinfo.shareImg, 'myCode.JPG', (file)=>{
+			onShare(shareinfo, shareId, channelid, interInfo){
+				console.log('shareinfo:'+JSON.stringify(shareinfo))
+				this.$abyApi.General.downLoadFile(shareinfo.shareImg, 'myCode.JPG', (file)=>{
 					console.log('第一层file：'+file)
 					this.$abyApi.Image.compressImage(file, file, true, 1, (res)=>{
 						//发送分享
 						if(shareId == 'WXSceneSession' || shareId == 'qq') {
 							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareTitle, shareinfo.shareDesc, interInfo);
 						}
-						if(shareId == 'WXSceneTimeline') {
+						if(shareId == 'WXSceneTimeline' || shareId == 'qzone') {
 							this.$abyApi.General.shareAction(channelid, shareId, true, shareinfo.shareUrl, file, shareinfo.shareDesc, shareinfo.shareTitle, interInfo);
 						}
 						if(shareId == 'sinaweibo') {

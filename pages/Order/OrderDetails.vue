@@ -343,7 +343,6 @@
 					this.$tool.confirm('您确定要'+btnObj.title+'吗？',(res)=>{
 						let reqInfo = {};
 						reqInfo.orderId = liObj.id;
-						console.log(JSON.stringify(reqInfo))
 						if(btnObj.id == 1){
 							// 确认订单
 							this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
@@ -472,7 +471,7 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.agreementId == ''||from.name=='orderList'){
+			if(from.params.agreementId || from.params.agreementId == ''||from.name=='orderList'){
 				next(vm => {
 					vm.init()
 				})
@@ -483,7 +482,7 @@
 			}
 		},
 		beforeRouteLeave(to, from, next){
-			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay'){
+			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay' || to.name == 'agrDetail'){
 				this.isCear = true;
 			}
 			next();

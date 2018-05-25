@@ -471,13 +471,17 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.agreementId || from.params.agreementId == ''||from.name=='orderList'){
+			if(from.params.agreementId == ''||from.name=='orderList'){
 				next(vm => {
 					vm.init()
 				})
 			}else{
 				next(vm => {
-					vm.isCear= false
+					if(vm.agreementId != from.params.agreementId){
+						vm.init()
+					}else{
+						vm.isCear= false
+					}
 				})
 			}
 		},

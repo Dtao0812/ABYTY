@@ -11,7 +11,7 @@
 				<p class="aby-list-data mui-ellipsis"><span v-if="li.groupType != '不限'" v-text="li.groupType"></span><span>浏览({{li.readCnt}})</span></p>
 			</div>
 			<div class="mui-card-footer">
-				<span class="aby-list-price"><small>￥</small>{{li.dPrice}}<small>起</small></span>
+				<span class="aby-list-price" v-if="li.dPrice!=0"><small>￥</small>{{li.dPrice}}<small>起</small></span>
 				<span class="look"><aby-icon type="hot" class="icohot"></aby-icon>查看</span>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 			},
 			setImgHeight(){
 				let imgArr = document.getElementsByClassName("face");
-				this.imgHeight = 2*imgArr[0].clientWidth / 3 + "px";
+				if(imgArr[0])this.imgHeight = 2*imgArr[0].clientWidth / 3 + "px";
 			}
 		},
 		mounted() {

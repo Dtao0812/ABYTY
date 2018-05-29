@@ -61,6 +61,11 @@
 				msgList: [], //消息列表
 			}
 		},
+		computed: {
+			chatList() {
+				return this.$store.state.chatList;
+			},
+		},
 		methods: {
 			init() {
 				this.$refs.page.showLoading();
@@ -77,7 +82,7 @@
 				this.getChatLog();
 			},
 			paperScroll() {
-				let tpScrollTop = document.getElementById('msg-list').scrollTop;
+//				let tpScrollTop = document.getElementById('msg-list').scrollTop;
 			},
 			// 表情转换
 			toFaceHtml(data) {
@@ -111,9 +116,11 @@
 			},
 			// 表情选择
 			onFaceTip(e) {
-				let emoji = e.target.parentNode.getAttribute("name");
-				emoji = this.$abyApi.Chat.htmlToEmoji(emoji);
-				this.msgtext = this.msgtext + emoji;
+				let emoji = e.target.parentNode.getAttribute("name")||e.target.parentNode.parentNode.getAttribute("name");
+				if(emoji){
+					emoji = this.$abyApi.Chat.htmlToEmoji(emoji);
+					this.msgtext = this.msgtext + emoji;
+				}
 			},
 			// 输入框获得焦点
 			focus() {
@@ -201,15 +208,11 @@
 				this.$refs.footer.className = '';
 				this.isShowFace = false;
 				this.isShowMore = false;
-			}
+			},
 		},
 		mounted() {
 			// 初始化融云
 			this.$abyApi.Chat.init();
-			// 接受融云消息
-			this.$abyApi.Chat.setReceiveMsgListener((res) => {
-				this.msgList = this.msgList.concat(res);
-			});
 			// 获取表情列表
 			let emijiArrr = this.$abyApi.Chat.getEmojis();
 			var emojiArrHtml = "";
@@ -217,8 +220,6 @@
 				emojiArrHtml = emojiArrHtml + emijiArrr[i].innerHTML;
 			}
 			this.faceArr = emojiArrHtml;
-
-			this.msgList = this.$abyApi.Chat.getImLog(this.userId);
 		},
 		beforeRouteEnter(to, from, next) {
 			if(to.params.userId){
@@ -235,6 +236,29 @@
 				if(obj) {
 					obj.scrollTop = obj.scrollHeight;
 					document.getElementById("content").scrollTop = obj.scrollHeight;
+				}
+			},
+			chatList(val){
+				if(val.length>0){
+					let isAdd = true;
+					this.msgList.forEach((v,i)=>{
+						val.forEach((x)=>{
+							if(v.messageUId == x)isAdd = false;
+						})
+					});
+					if(isAdd){
+						this.$abyDb.Im.get((res) => {
+							if(res) {
+								let info = res.value;
+								info.sendUser = JSON.parse(info.content.extra);
+								if(info.messageUId == val) {
+									this.msgList = this.msgList.concat(info);
+									// 更新已读状态
+									this.$abyDb.Im.updateIsRead(info.targetId);
+								}
+							}
+						});
+					}
 				}
 			}
 		}

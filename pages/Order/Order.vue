@@ -49,6 +49,8 @@
 							id: 'buyersTab',
 							title: '买家中心',
 							type: 'buyer',
+							isTips:this.$store.state.buyer>0,
+							num:this.$store.state.buyer,
 							data: [
 								{id: 'agr',title: '收到的协议',num: 0,state: '',icon: 'myagreement'},
 								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},
@@ -66,6 +68,8 @@
 							id: 'buyersTab',
 							title: '买家中心',
 							type: 'buyer',
+							isTips:this.$store.state.buyer>0,
+							num:this.$store.state.buyer,
 							data: [
 								{id: 'agr',title: '收到的协议',num: 0,state: '',icon: 'myagreement'},
 								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},
@@ -80,6 +84,8 @@
 							id: 'sellerTab',
 							title: '卖家中心',
 							type: 'seller',
+							isTips:this.$store.state.seller>0,
+							num:this.$store.state.seller,
 							data: [
 								{id: 'agr',title: '发出的协议',num: 0,state: '',icon: 'myagreement'},
 								{id: 'all',title: '全部订单',num: 0,state: '',icon: 'orderall'},

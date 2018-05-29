@@ -189,11 +189,16 @@
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()
 				})
-			}else if(from.name=="chat" || to.params.cpId == ''){
+			}else if(to.params.cpId == ''){
 				next()
 			}else{
 				next(vm => {
-					vm.init()
+					if(!vm.$route.params.userId){
+						next()
+					}else{
+						vm.init()
+					}
+					
 				})
 			}
 		},

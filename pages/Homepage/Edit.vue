@@ -24,7 +24,7 @@
 				textMsg: this.$route.params.textMsg,
 				htmlId: this.$route.params.htmlId,
 				cpBtype: this.$route.params.cpBtype,
-				value: '',
+				value: [],
 				valId: '',
 				basicInfo: {}
 			}
@@ -62,11 +62,11 @@
 				this.basicInfo.files = [];
 				this.basicInfo.cpId = this.$store.state.cpUserInfo.cpId;
 				switch(htmlId) {
-					case 'cpAddress':
+					case 'cpAddress'://地址
 						this.basicInfo.cpAddress = this.textMsg;
 						this.setBasicInfo();
 						break;
-					case 'cpHeadName':
+					case 'cpHeadName'://联系人
 						if(this.fCheckInto(this.textMsg)) {
 							this.basicInfo.cpHeadName = this.textMsg;
 							this.setBasicInfo();
@@ -92,15 +92,11 @@
 							return
 						};
 						break;
-					case 'cpIntro':
+					case 'cpIntro'://公司介绍
 						this.basicInfo.cpIntro = this.textMsg;
 						this.setBasicInfo();
 						break;
 					case 'cpBizScope': //业务范围
-						//						this.basicInfo.cpBizScope = this.textMsg;
-						//						this.setBasicInfo();
-						//						break;
-
 						this.basicInfo.cpBizScope = [];
 						this.value = [];
 						let allBox = document.getElementById('checkBox').getElementsByTagName('input');
@@ -114,14 +110,13 @@
 						this.setBasicInfo();
 						break;
 					case 'cpRoute': //主营路线
-						this.basicInfo.cpBizScope = [];
-						this.value = [];
+						this.basicInfo.cpRoute = [];
 						let allBoxRoute = document.getElementById('checkBox').getElementsByTagName('input');
 						for(let i = 0; i < allBoxRoute.length; i++) {
 							if(allBoxRoute[i].checked == true) {
 								this.value.push(allBoxRoute[i].parentNode.getElementsByTagName('label')[0].innerHTML);
-								this.basicInfo.cpBizScope.push(allBoxRoute[i].parentNode.getElementsByTagName('label')[0].innerHTML);
-								this.valId = allBox[i].value;
+								this.basicInfo.cpRoute.push(allBoxRoute[i].parentNode.getElementsByTagName('label')[0].innerHTML);
+								this.valId = allBoxRoute[i].value;
 							}
 						}
 						this.setBasicInfo();
@@ -154,7 +149,6 @@
 					tagType: 10
 				};
 				this.$abyApi.User.getBasicType(info, (res) => {
-					//					console.log('标签：'+JSON.stringify(res))
 					let list = res.tagList;
 					for(let i = 0; i < list.length; i++) {
 						let checked = '';

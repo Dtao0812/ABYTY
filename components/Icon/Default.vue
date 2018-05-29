@@ -238,6 +238,8 @@
 					case 'dayhotel':this.iconClass = 'aby-icon-dayhotel ' + this.className;break;
 					//聊天
 					case 'prochat':this.iconClass = 'aby-icon-prochat ' + this.className;break;
+					//打电话
+					case 'procall':this.iconClass = 'aby-icon-procall ' + this.className;break;
 					//收藏
 					case 'procollection':this.iconClass = 'aby-icon-procollection ' + this.className;break;
 					//查看主页

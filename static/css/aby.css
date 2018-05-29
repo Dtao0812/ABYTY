@@ -447,11 +447,15 @@ small {
 
 /*列表价格*/
 
-.aby-list-price {
+.aby-list-price,.aby-list-pricenone {
 	color: #FF9800;
 	float: right;
 	font-size: 17px;
 	font-weight: initial;
+}
+
+.aby-list-pricenone{
+	font-size: 13px;
 }
 
 
@@ -811,6 +815,7 @@ small {
 .aby-special .mui-card-footer {
 	padding: 0px;
 	min-height: 25px;
+	position: relative;
 }
 
 .aby-special .mui-card-footer:before {
@@ -823,6 +828,8 @@ small {
 	font-size: 11px;
 	padding: 0px 5px;
 	border-radius: 5px;
+	position: absolute;
+	right: 0px;
 }
 
 .aby-special .mui-card-footer .mui-icon {

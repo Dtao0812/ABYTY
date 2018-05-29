@@ -164,6 +164,8 @@
 					this.$tool.getPhoto((file) => {
 						this.$tool.loading('正在提交...');
 						let reqInfo = {};
+						reqInfo.cpId = this.cpId;
+						reqInfo.userId = this.userId;
 						reqInfo.files = [
 							{ id:'cpLogo',src:file }
 						];

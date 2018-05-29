@@ -14,7 +14,8 @@
 						<p class="mui-ellipsis aby-list-data">
 							<span v-if="item.groupType!=='不限'">{{item.groupType}}</span>
 							<span>浏览（{{item.readCnt}}）</span>
-							<span class="aby-list-price"><small>￥</small>{{item.dPrice}}<small>起</small></span>
+							<span class="aby-list-price" v-if="item.dPrice!=0"><small>￥</small>{{item.dPrice}}<small>起</small></span>
+							<span class="aby-list-pricenone" v-else>点击咨询</span>
 						</p>
 					</div>
 				</a>

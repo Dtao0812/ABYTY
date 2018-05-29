@@ -113,10 +113,10 @@
 		</div>
 		<div class="operation" slot="footer">
 			<div class="mui-col-xs-2" @click="toChat()">
-				<aby-icon class="mui-icon" type="chat"></aby-icon><span class="icotext">聊天</span>
+				<aby-icon class="mui-icon" type="prochat"></aby-icon><span class="icotext">聊天</span>
 			</div>
 			<div class="mui-col-xs-2" @click="$tool.dialTelToApp(tel)">
-				<aby-icon class="mui-icon" type="call"></aby-icon><span class="icotext">联系</span>
+				<aby-icon class="mui-icon" type="procall"></aby-icon><span class="icotext">联系</span>
 			</div>
 			<div v-if="identityType == 'buyer' && info.state == 1">
 				<div class="mui-col-xs-4 btndefault">

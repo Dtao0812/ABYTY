@@ -1,7 +1,10 @@
 <template>
 	<div id="">
 		<mt-navbar class="mint-navbar" :class="pageType==='order'?'mui-bar mui-bar-nav':''" v-model="selected">
-			<mt-tab-item class="mint-tab-item" v-for="(li,i) in tabList" :key="i" :id="i" @click.native="onTabTitle(li)">{{li.title}}</mt-tab-item>
+			<mt-tab-item class="mint-tab-item" v-for="(li,i) in tabList" :key="i" :id="i" @click.native="onTabTitle(li)">
+				{{li.title}}
+				<span class="mui-icon" v-show="li.isTips"><span class="mui-badge mui-badge-danger">{{li.num}}</span></span>
+			</mt-tab-item>
 		</mt-navbar>
 
 		<mt-tab-container v-model="selected">
@@ -17,11 +20,11 @@
 <script>
 	export default {
 		components: {},
-		props: ['list', 'datas', 'page','actSelect'],
+		props: ['list', 'datas', 'page', 'actSelect'],
 		data() {
 			return {
 				tabList: this.list,
-				selected: parseInt(this.actSelect)||0,
+				selected: parseInt(this.actSelect) || 0,
 				pageType: this.page
 			}
 		},
@@ -31,13 +34,12 @@
 				this.$emit("eventTabBack", e);
 			}
 		},
-		mounted() {
-		},
-		watch:{
-			actSelect(val){
+		mounted() {},
+		watch: {
+			actSelect(val) {
 				this.selected = val;
 			},
-			list(val){
+			list(val) {
 				this.tabList = val;
 			}
 		}
@@ -68,5 +70,9 @@
 		-ms-flex: 1;
 		flex: 1;
 		text-decoration: none;
+	}
+	
+	.mui-icon .mui-badge {
+		padding: 1px 6px!important;
 	}
 </style>

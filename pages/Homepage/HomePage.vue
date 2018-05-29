@@ -195,7 +195,7 @@
 				next()
 			}else{
 				next(vm => {
-					if(!vm.$route.params.userId){
+					if(!vm.$route.params.cpId){
 						next()
 					}else{
 						vm.init()

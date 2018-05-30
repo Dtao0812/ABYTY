@@ -3,16 +3,16 @@
 		<aby-header title="认证" slot="header"></aby-header>
 		<div slot="content" class="mui-content aby-bg-white">
 			<div class="row-input">
-				<aby-field modelId="cpBasic.cpName" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入企业名称" type="text">
+				<aby-field modelId="cpBasic.cpName" :modelVal="cpBasic.cpName" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入企业名称" type="text">
 					<aby-icon id="iconLabel" type="business" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
-				<aby-field modelId="cpBasic.cpChartered" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入营业执照编号" type="text">
+				<aby-field modelId="cpBasic.cpChartered" :modelVal="cpBasic.cpChartered" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入营业执照编号" type="text">
 					<aby-icon id="iconLabel" type="licensewhite" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
-				<aby-field modelId="cpBasic.cpCorpName" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入您的姓名" type="text">
+				<aby-field modelId="cpBasic.cpCorpName" :modelVal="cpBasic.cpCorpName" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入您的姓名" type="text">
 					<aby-icon id="iconLabel" type="name" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
-				<aby-field modelId="cpBasic.cpCorpID" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入您的身份证号" type="text">
+				<aby-field modelId="cpBasic.cpCorpID" :modelVal="cpBasic.cpCorpID" className="aby-input-line aby-input-line-blue" iclassName="mintui mintui-more aby-font-blue" placeholder="请输入您的身份证号" type="text">
 					<aby-icon id="iconLabel" type="IDwhite" class="aby-font-blue" slot="icon"></aby-icon>
 				</aby-field>
 			</div>
@@ -41,11 +41,11 @@
 		data() {
 			return {
 				cpBasic: {
-					cpName: '111',
-					cpChartered: '',
-					cpCorpID: '',
-					cpCorpName: '',
-					cpId: '',
+					cpName: this.$store.state.cpBasic.cpName||'',
+					cpChartered: this.$store.state.cpBasic.cpChartered||'',
+					cpCorpID: this.$store.state.cpBasic.cpCorpID||'',
+					cpCorpName: this.$store.state.cpBasic.cpCorpName||'',
+					cpId: this.$store.state.cpBasic.cpId||'',
 					cpBtype: this.$route.params.cpBtype
 				},
 				cpImgs: [{
@@ -103,6 +103,19 @@
 			}
 		},
 		mounted() {
+			if(this.cpId != ''){
+				// 获取认证资料
+				this.$abyApi.User.getCpCredList((res)=>{
+					res.cpCredList.forEach((v)=>{
+						this.cpImgs.forEach((vv,i)=>{
+							if(v.credType == vv.id){
+								this.cpImgs[i].src = v.credImg;
+								this.cpImgs[i].btnUpload = true;
+							}
+						});
+					});
+				});
+			}
 			document.addEventListener("plusready", this.plusReady, false);  
 		},
 	}

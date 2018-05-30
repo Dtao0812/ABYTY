@@ -9,7 +9,7 @@
 		<div class="list-item" slot="loadlist" ref="loadlist">
 			<aby-no-content v-if="noContent"></aby-no-content>
 			<div class="mui-card space" v-for="(li,i) in list">
-				<div class="mui-card-header mui-card-media">
+				<div class="mui-card-header mui-card-media" @click="toHomePage(li)">
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
 						{{li.publisher.cpName}}
@@ -73,7 +73,7 @@
 				<div class="mui-card-footer">浏览（{{li.readCnt}}）
 					<span class="clock font-clock">
 						<aby-icon-color type="clock"></aby-icon-color>
-						<span :id="li.selectId"></span>
+						<span :id="li.selectId">计算中...</span>
 					</span>
 				</div>
 			</div>
@@ -160,8 +160,13 @@
 				reqInfo.where = this.where;
 
 				this.$abyApi.Select.getPublishList(reqInfo, (res) => {
-					this.list = this.list.concat(res.cpSelectList);
-					callback && callback(this.list);
+					if(res.cpSelectList.length == 0){
+						this.$toast("没有更多内容了！")
+						callback && callback(false)
+					}else{
+						this.list = this.list.concat(res.cpSelectList);
+						callback && callback(this.list);
+					}
 				}, (err) => {
 					callback && callback(false);
 				});
@@ -200,6 +205,15 @@
 					case 60: return 'guid';break;
 				}
 			},
+			// 公司主页
+			toHomePage(li){
+				this.$router.push({
+					name:"homePage",
+					params:{
+						cpId: li.cpId
+					}
+				})
+			}
 		},
 		mounted() {
 			// 底部导航栏

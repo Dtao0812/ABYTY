@@ -7,8 +7,8 @@
 			</div>
 			<aby-icon class="mui-icon mui-pull-right icon-chatsetting" @click.native="toHomePage" slot="right" type="chatsetting"></aby-icon>
 		</aby-header>
-		<div class="mui-content" slot="content" id="content" @click="onContent">
-			<div id='msg-list' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
+		<div class="mui-content" slot="content" ref="content" id="content" @click="onContent">
+			<div id='msglist' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
 				<div class="msg-item" v-for="(li,i) in msgList" :key="i" :class="li.messageDirection == 1 ? 'msg-item-self' : ''">
 					<img class="msg-user-img msg-user mui-icon selfHead" :src="li.sendUser.userFace" alt="" />
 					<div class="msg-content">
@@ -59,6 +59,7 @@
 				userId: '', //用户ID
 				userInfo: '', //用户信息
 				msgList: [], //消息列表
+				scrollTop:0,
 			}
 		},
 		computed: {
@@ -82,7 +83,6 @@
 				this.getChatLog();
 			},
 			paperScroll() {
-//				let tpScrollTop = document.getElementById('msg-list').scrollTop;
 			},
 			// 表情转换
 			toFaceHtml(data) {
@@ -157,6 +157,7 @@
 			},
 			// 发送消息
 			RongImSend(msg) {
+				msg.targetUser = this.userInfo;
 				this.$abyApi.Chat.sendMessage(this.userId, msg, (res) => {
 					res.sendUser = JSON.parse(res.content.extra);
 					this.msgList = this.msgList.concat(res);
@@ -175,15 +176,26 @@
 			// 获得聊天记录
 			getChatLog() {
 				let list = [];
-				this.$abyDb.Im.get((res) => {
+				this.$abyDb.Im.getAll((res) => {
 					if(res) {
-						let info = res.value;
-						info.sendUser = JSON.parse(info.content.extra);
-						if(info.targetId == this.userId) {
-							list.push(info);
-							// 更新已读状态
-							this.$abyDb.Im.updateIsRead(info.targetId);
-						}
+						res.forEach((v)=>{
+							let isAdd = false;
+							let info = v;
+							info.sendUser = JSON.parse(info.content.extra);
+							// 如果发送者不是本人，并且发送者为当前用户
+							if(info.senderUserId != this.$store.state.userId && info.senderUserId == this.userId){
+								isAdd = true;
+							}
+							// 发送人是本人，接收者是当前用户
+							if(info.targetId == this.userId && info.senderUserId == this.$store.state.userId) {
+								isAdd = true;
+							}
+							if(isAdd){
+								list.push(info);
+								// 更新已读状态
+								this.$abyDb.Im.updateIsRead(info.messageUId);
+							}
+						})
 					}
 				});
 				this.msgList = list;
@@ -230,14 +242,11 @@
 				next()
 			}
 		},
+		updated(){
+			let obj = document.getElementById('msglist');
+			if(obj)obj.scrollTop = obj.scrollHeight;
+		},
 		watch: {
-			msgList(val) {
-				let obj = document.getElementById('msg-list');
-				if(obj) {
-					obj.scrollTop = obj.scrollHeight;
-					document.getElementById("content").scrollTop = obj.scrollHeight;
-				}
-			},
 			chatList(val){
 				if(val.length>0){
 					let isAdd = true;
@@ -254,14 +263,14 @@
 								if(info.messageUId == val) {
 									this.msgList = this.msgList.concat(info);
 									// 更新已读状态
-									this.$abyDb.Im.updateIsRead(info.targetId);
+									this.$abyDb.Im.updateIsRead(info.messageUId);
 								}
 							}
 						});
 					}
 				}
 			}
-		}
+		},
 	}
 </script>
 
@@ -389,7 +398,7 @@
 		overflow: auto;
 	}
 	
-	#msg-list {
+	#msglist {
 		height: 100%;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;

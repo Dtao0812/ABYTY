@@ -41,8 +41,9 @@
 			document.getElementById("myiframe").height = document.body.scrollHeight;
 		},
 		methods: {
-			init() {
+			init(info) {
 				this.self = this.$route.params.page||'';
+				if(info)this.self = info.page||'';
 				this.webUrl = this.$route.params.url;
 				this.webTitle = this.$route.params.title || '';
 				this.cpId = this.$route.params.cpId || '';
@@ -67,13 +68,16 @@
 			},
 			// 公司主页
 			toHomePage() {
-				this.$router.push({
-					name: "homePage",
-					params: {
-						cpId: this.cpBasic.cpId
-					}
-				})
-				
+				if(this.self == 'homePage'){
+					this.$router.back();
+				}else{
+					this.$router.push({
+						name: "homePage",
+						params: {
+							cpId: this.cpBasic.cpId
+						}
+					})
+				}
 			},
 			// 重写goback
 			goBack(){
@@ -90,7 +94,13 @@
 			webUrl(val) {}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name != 'homePage' && from.name != 'chat') {
+			if(from.name == 'homePage' && from.params.cpId && from.params.proId){
+				next(vm => {
+					let info = {};
+					info.page = 'homePage';
+					vm.init(info);
+				})
+			}else if(from.name != 'homePage' && from.name != 'chat') {
 				next(vm => {
 					vm.init();
 				})

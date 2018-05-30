@@ -47,6 +47,27 @@ const Im = {
 			};
 		})
 	},
+	// 查询所有数据
+	getAll(successCallback, errorCallback) {
+		Im.init((res)=>{
+			var arr = [];
+			var transaction = ImDb.transaction('im', 'readwrite');
+			var objStore = transaction.objectStore('im');
+			var request = objStore.openCursor();
+			request.onsuccess = function(e) {
+				var cursor = e.target.result;
+	            if(cursor){
+	            	arr.push(cursor.value);
+	            	cursor.continue();//遍历了存储对象中的所有内容
+	            }else{
+	            	successCallback && successCallback(arr);
+	            }
+			};
+			request.onerror = function(e) {
+				errorCallback && errorCallback(e);
+			};
+		})
+	},
 	// 插入数据
 	insert(data, successCallback, errorCallback) {
 		Im.init((res)=>{
@@ -70,7 +91,7 @@ const Im = {
 		});
 	},
 	// 修改已读状态
-	updateIsRead(targetId,successCallback, errorCallback) {
+	updateIsRead(messageUId,successCallback, errorCallback) {
 		Im.init((res)=>{
 			var transaction = ImDb.transaction('im', 'readwrite');
 			transaction.oncomplete = function(event) {};
@@ -78,12 +99,12 @@ const Im = {
 			transaction.onabort = function(event) {};
 			var objStore = transaction.objectStore('im');
 			var target = objStore.index('targetId');
-			var request = target.openCursor(IDBKeyRange.lowerBound(targetId));
+			var request = target.openCursor();
 			request.onsuccess = function(e) {
 				var cursor = this.result;
 	            if(cursor){
 	            	var val = cursor.value;
-	            	if(val.targetId == targetId){
+	            	if(val.messageUId == messageUId){
 						val.isRead = true;
 						cursor.update(val);
 						//修改消息数

@@ -80,7 +80,7 @@ const mutations = {
 		state.user_token = info.user_token;
 		state.cpUserInfo = info.cpUserInfo;
 		state.cpAuditState = info.cpUserInfo.cpBasic.cpAuditState;
-		if(state.cpAuditState == 1){
+		if(state.cpAuditState == 1 || state.cpAuditState == 2){
 			state.chat_token = info.chat_token;
 			state.userId = info.cpUserInfo.userId;
 			state.userName = info.cpUserInfo.userName;

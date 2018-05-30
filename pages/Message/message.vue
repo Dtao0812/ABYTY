@@ -40,6 +40,7 @@
 		data() {
 			return {
 				chatList:[],//聊天列表
+				dbChatList:[],//聊天列表
 			}
 		},
 		computed: {
@@ -66,32 +67,32 @@
 			getChatList(){
 				let list = [];
 				this.$abyDb.Im.init((res)=>{
-					this.$abyDb.Im.get((res)=>{
-						if(res){
-							let msgValue = res.value;
+					this.$abyDb.Im.getAll((res)=>{
+						res.forEach((v)=>{
+							let msgValue = v;
 							let info = {
 								targetId: msgValue.targetId,//接收者ID
 								senderUserId: msgValue.senderUserId,//发送者ID
 								sendUser: {},//发送者数据
-								content: this.$abyApi.Chat.emojiToHTML(msgValue.content.content),//最后一条消息内容
 								isRead: msgValue.isRead,//是否已读
 								noReadNum:0,//未读数量
 							};
+							//最后一条消息内容
+							if(msgValue.content.messageName=='ImageMessage'){
+								info.content = '[图片]';
+							}else{
+								info.content = this.$abyApi.Chat.emojiToHTML(msgValue.content.content);
+							}
 							let isAdd = true;
 							if(info.senderUserId == this.$store.state.userId){
 								// 如果是本人发出的消息，显示对方头像
-								let reqInfo = {};
-								reqInfo.loading = 1;
-								reqInfo.userId = info.targetId;
-								this.$abyApi.User.getBasciInfo(reqInfo,(r)=>{
-									info.sendUser = {
-										cpId : r.cpUserInfo.cpBasic.cpId,
-										cpName : r.cpUserInfo.cpBasic.cpName,
-										userFace : r.cpUserInfo.userFace,
-										userId : r.cpUserInfo.userId,
-										userName : r.cpUserInfo.userName,
-									}
-								})
+								info.sendUser = {
+									cpId : msgValue.content.targetUser.cpBasic.cpId,
+									cpName : msgValue.content.targetUser.cpBasic.cpName,
+									userFace : msgValue.content.targetUser.userFace,
+									userId : msgValue.content.targetUser.userId,
+									userName : msgValue.content.targetUser.userName,
+								};
 							}else{
 								info.sendUser = msgValue.sendUser;
 							}
@@ -103,10 +104,10 @@
 								}
 							}
 							if(isAdd)list.push(info);
-						}
+						});
 					});
-				})
-				this.chatList = list;
+				});
+				this.dbChatList = list;
 			},
 			// 消息列表
 			toMsgList(){
@@ -132,10 +133,9 @@
 		},
 		watch:{
 			dbChatList(val){
-				console.log(val)
-				console.log(this.chatList);
-				console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
-				this.chatList = val;
+				if(val.length>0&&(JSON.stringify(val)!=JSON.stringify(this.chatList))){
+					this.chatList = val;
+				}
 			}
 		}
 	}

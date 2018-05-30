@@ -5,7 +5,7 @@
 			<div class="aby-detail" v-if="data">
 				<div class="aby-detail-header font-clock">
 					<aby-icon type="clock" class="clock"></aby-icon>
-					<span :id="data.selectId"></span>
+					<span :id="data.selectId">计算中...</span>
 					<aby-icon-color class="ptype mui-pull-right" v-if="data.selectType == 10" type="line"></aby-icon-color>
 					<aby-icon-color class="ptype mui-pull-right" v-if="data.selectType == 20" type="hotel"></aby-icon-color>
 					<aby-icon-color class="ptype mui-pull-right" v-if="data.selectType == 30" type="pticket"></aby-icon-color>
@@ -233,7 +233,7 @@
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-publisher">
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell mui-media">
+						<li class="mui-table-view-cell mui-media" @click="toHomePage(data.publisher)">
 							<a>
 								<img class="mui-media-object mui-pull-left" :src="data.publisher.cpLogo">
 								<div class="mui-media-body mui-ellipsis">
@@ -291,11 +291,20 @@
 						userId: userId
 					}
 				});
+			},
+			// 公司主页
+			toHomePage(li){
+				this.$router.push({
+					name:"homePage",
+					params:{
+						cpId: li.cpId
+					}
+				})
 			}
 		},
 		updated() {
 			//初始化倒计时
-			this.$tool.countdown(this.data.endTime, this.data.selectId);
+			if(this.data.endTime)this.$tool.countdown(this.data.endTime, this.data.selectId);
 		},
 		mounted() {
 			this.init();

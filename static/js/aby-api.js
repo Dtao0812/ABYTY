@@ -485,6 +485,13 @@ const User = {
 			callBack && callBack(false);
 		});
 	},
+	//获取用户认证材料
+	getCpCredList(successCallback, errorCallback) {
+		let requestData = {
+			act: 'CPU100'
+		};
+		Server.getDataFromServer('cpUser', requestData, successCallback, errorCallback)
+	},
 	// 获得保证金状态
 	getDepositType(requestInfo, successCallback, errorCallback) {
 		let requestData = {
@@ -1306,7 +1313,7 @@ const Chat = {
 				if(message.content.messageName == "ImageMessage" || message.content.messageName == "TextMessage") {
 					message.sendUser = JSON.parse(message.content.extra);
 					message.isRead = false;
-					Chat.setImLog(message, message.targetId);
+					Chat.setImLog(message);
 
 					callBack && callBack(message);
 				}

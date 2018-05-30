@@ -3,7 +3,7 @@
 		<li class="mui-table-view-cell mui-media" v-for="(li,i) in list" :key="i" @click="toDetail(li)">
 			<a>
 				<img class="mui-media-object mui-pull-left" :src="li.sendUser.userFace">
-				<span class="mui-badge mui-badge-danger" v-show="li.noReadNum!=0">{{li.noReadNum}}</span>
+				<span class="mui-badge mui-badge-danger" v-if="li.noReadNum!=0">{{li.noReadNum}}</span>
 				<div class="mui-media-body">
 					{{li.sendUser.cpName}}
 					<p class='mui-ellipsis' v-html="li.content"></p>

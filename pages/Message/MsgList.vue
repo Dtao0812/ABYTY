@@ -14,7 +14,7 @@
 							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'system'" type="msgsystem"></aby-icon>
 						</h5>
 						<p v-if="li.msgType=='hotel_order'" v-html="li.msgContent"></p>
-						<p v-if="li.msgType=='interactMsg'" v-text="li.msgTitle"></p>
+						<p v-else="li.msgType=='interactMsg'" v-text="li.msgTitle"></p>
 					</div>
 				</div>
 			</div>
@@ -82,12 +82,12 @@
 							identityType: info.params.identityType
 						}
 					});
-				}else if(info.msgType == 'system'){
+				}else if(li.msgType == 'system'){
 					// 系统消息
 					this.$router.push({
 						name:'msgDetail',
 						params:{
-							data: li
+							info: li
 						}
 					});
 				}else if(li.msgType == 'product'){

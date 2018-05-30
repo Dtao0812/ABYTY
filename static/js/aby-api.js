@@ -156,7 +156,6 @@ const Server = {
 /******************************      Image 图片模块       *****************************/
 const Image = {
 	compressImage(src, dst, overwrite, quality, sucessCallback, errorCallBack){
-		console.log('分享进来了')
 		plus.zip.compressImage({
 				src: src,
 				dst: dst,

@@ -477,11 +477,7 @@
 				})
 			}else{
 				next(vm => {
-					if(vm.agreementId != from.params.agreementId){
-						vm.init()
-					}else{
-						vm.isCear= false
-					}
+					vm.isCear= false
 				})
 			}
 		},

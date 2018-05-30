@@ -24,7 +24,7 @@
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
 							<p>天数：{{tmp.selectDays}}</p>
 							<p>航程类型：{{tmp.trafficTypeName}}</p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 						<!--酒店20-->
 						<div v-if="tmp.selectType == 20">
@@ -35,7 +35,7 @@
 							<p>离店时间：{{tmp.endTime}}</p>
 							<p>房间数：{{tmp.roomNum}}</p>
 							<p>酒店标准：{{tmp.hotelStar}}</p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 						<!--机票30-->
 						<div v-if="tmp.selectType == 30">
@@ -43,10 +43,10 @@
 								<aby-icon-color class="mui-pull-right" type="pticket"></aby-icon-color>
 							</h5>
 							<p>航程类型：{{tmp.ticketType}} </p>
-							<p>出发时间：{{tmp.fromTime|filterConvertDate}}</p>
-							<p>返程时间：{{tmp.endTime}}</p>
+							<p>出行时间：{{tmp.fromTime|filterConvertDate}}</p>
+							<p v-if="tmp.backTime!='0'">返程时间：{{tmp.backTime|filterConvertDate}}</p>
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 						<!--机+酒40-->
 						<div v-if="tmp.selectType == 40">
@@ -54,13 +54,14 @@
 								<aby-icon-color class="mui-pull-right" type="planhotel"></aby-icon-color>
 							</h5>
 							<p>出发地：{{tmp.fromCity}}</p>
-							<p>出发时间：{{tmp.fromTime|filterConvertDate}}</p>
-							<p>返程时间：{{tmp.endTime}}</p>
-							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
+							<p>出行时间：{{tmp.fromTime|filterConvertDate}}</p>
+							<p v-if="tmp.backTime!='0'">返程时间：{{tmp.backTime|filterConvertDate}}</p>
+							<p>人数：{{tmp.peopleNum}}成人 <span v-if="tmp.childNum != 0">{{tmp.childNum}}儿童</span></p>
 							<p>入住时间：{{tmp.liveTime|filterConvertDate}}</p>
 							<p>离店时间：{{tmp.endTime}}</p>
 							<p>房间数：{{tmp.roomNum}}</p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<p>酒店标准：{{tmp.hotelStar}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 						<!--景点50-->
 						<div v-if="tmp.selectType == 50">
@@ -69,7 +70,7 @@
 							</h5>
 							<p>游玩时间：{{tmp.playScenicTime|filterConvertDate}}</p>
 							<p>人数：{{tmp.peopleNum}}成人 <span>{{tmp.childNum}}儿童</span></p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 						<!--导游60-->
 						<div v-if="tmp.selectType == 60">
@@ -80,7 +81,7 @@
 							<p>接团地：{{tmp.pbAddress}} </p>
 							<p>出行时间：{{tmp.selectDays}} </p>
 							<p>行程天数：{{tmp.pbDays}}天 </p>
-							<p>备注：{{tmp.selectDesc||'无'}}</p>
+							<!--<p>备注：{{tmp.selectDesc||'无'}}</p>-->
 						</div>
 					</div>
 				</div>

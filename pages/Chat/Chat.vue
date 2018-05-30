@@ -11,9 +11,12 @@
 			<div id='msglist' ref="msglist" v-if="msgList.length>0" @scroll="paperScroll">
 				<div class="msg-item" v-for="(li,i) in msgList" :key="i" :class="li.messageDirection == 1 ? 'msg-item-self' : ''">
 					<img class="msg-user-img msg-user mui-icon selfHead" :src="li.sendUser.userFace" alt="" />
-					<div class="msg-content">
+					<div v-if="li.content.messageName=='TextMessage'" class="msg-content">
 						<div class="msg-content-inner" v-if="li.content.messageName=='TextMessage'" v-html="$abyApi.Chat.emojiToHTML(li.content.content)">
 						</div>
+						<div class="msg-content-arrow"></div>
+					</div>
+					<div v-else class="msg-content msg-img">
 						<div class="msg-content-inner" v-if="li.content.messageName=='ImageMessage'">
 							<img :src="'data:image/png;base64,'+li.content.content" id="imgMessage" :data-preview-src="li.content.imageUri" data-preview-group="1">
 						</div>
@@ -453,6 +456,14 @@
 		min-width: 35px;
 		float: left;
 	}
+	.msg-img{
+		padding: 0px!important;
+		background-color: #F0F0F0!important;
+		border: none!important;	
+	}
+	.msg-img img{
+		border-radius: 5px;
+	}
 	
 	.msg-item .msg-content .msg-content-inner {
 		overflow-x: hidden;
@@ -471,24 +482,30 @@
 		-webkit-transform: rotateZ(45deg);
 		transform: rotateZ(45deg);
 	}
-	
+	.msg-item .msg-img .msg-content-arrow {
+		background-color: rgba(255,255,255,0)!important;
+		border: none!important;	
+	}
 	.msg-item-self .msg-user,
 	.msg-item-self .msg-content {
 		float: right;
 	}
-	
+
 	.msg-item-self .msg-content .msg-content-arrow {
 		left: auto;
 		right: -5px;
 		-webkit-transform: rotateZ(225deg);
 		transform: rotateZ(225deg);
 	}
-	
+	.msg-item-self .msg-img .msg-content-arrow {
+		background-color: rgba(255,255,255,0)!important;
+		border: none!important;	
+	}
 	.msg-item-self .msg-content,
 	.msg-item-self .msg-content .msg-content-arrow {
-		background-color: #4CD964;
+		background-color: #08C7B5;
 		color: #fff;
-		border-color: #2AC845;
+		border-color: #06A899;
 	}
 	
 	footer .mui-icon {

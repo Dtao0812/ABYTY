@@ -90,7 +90,7 @@
 			webUrl(val) {}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name != 'homePage' && from.name != 'chat') {
+			if(from.name != 'chat') {
 				next(vm => {
 					vm.init();
 				})

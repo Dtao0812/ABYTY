@@ -9,7 +9,7 @@
 		<div class="list-item" slot="loadlist" ref="loadlist">
 			<aby-no-content v-if="noContent"></aby-no-content>
 			<div class="mui-card space" v-for="(li,i) in list">
-				<div class="mui-card-header mui-card-media">
+				<div class="mui-card-header mui-card-media" @click="toHomePage(li.cpId)">
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
 						{{li.publisher.cpName}}
@@ -200,6 +200,14 @@
 					case 60: return 'guid';break;
 				}
 			},
+			toHomePage(cpId){//跳至公司主页
+				this.$router.push({
+					name:"homePage",
+					params:{
+						cpId: cpId
+					}
+				})
+			}
 		},
 		mounted() {
 			// 底部导航栏

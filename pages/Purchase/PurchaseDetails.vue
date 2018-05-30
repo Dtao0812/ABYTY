@@ -232,7 +232,7 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-publisher">
-					<ul class="mui-table-view">
+					<ul class="mui-table-view" @click="toHomePage(data.cpId)">
 						<li class="mui-table-view-cell mui-media">
 							<a>
 								<img class="mui-media-object mui-pull-left" :src="data.publisher.cpLogo">
@@ -291,6 +291,14 @@
 						userId: userId
 					}
 				});
+			},
+			toHomePage(cpId){//跳至公司主页
+				this.$router.push({
+					name:"homePage",
+					params:{
+						cpId: cpId
+					}
+				})
 			}
 		},
 		updated() {

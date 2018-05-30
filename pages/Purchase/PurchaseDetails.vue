@@ -55,43 +55,10 @@
 							</a>
 						</li>
 					</ul>
-					<!--酒店询价-->
-					<ul class="mui-table-view" v-if="data.selectType == 20||data.selectType == 40">
-						<h4 v-if="data.selectType == 40">预定{{data.goCity}}的酒店</h4>
-						<li class="mui-table-view-cell mui-media" v-if="data.hotelAddress">
-							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">酒店地点</div>
-								<div class="mui-media-body mui-text-right">{{data.hotelAddress}}</div>
-							</a>
-						</li>
-						<li class="mui-table-view-cell mui-media">
-							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">入住时间</div>
-								<div class="mui-media-body mui-text-right">{{data.liveTime | filterConvertDate}}</div>
-							</a>
-						</li>
-						<li class="mui-table-view-cell mui-media">
-							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">离店时间</div>
-								<div class="mui-media-body mui-text-right">{{data.backTime | filterConvertDate}}</div>
-							</a>
-						</li>
-						<li class="mui-table-view-cell mui-media">
-							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">房间数</div>
-								<div class="mui-media-body mui-text-right">{{data.roomNum}}间</div>
-							</a>
-						</li>
-						<li class="mui-table-view-cell mui-media">
-							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">酒店标准</div>
-								<div class="mui-media-body mui-text-right">{{data.hotelStar}}</div>
-							</a>
-						</li>
-					</ul>
 					<!--机票询价-->
 					<ul class="mui-table-view" v-if="data.selectType == 30||data.selectType == 40">
-						<h4>{{data.fromCity}}→{{data.goCity}}</h4>
+						<h4 v-if="data.selectType == 30">{{data.fromCity}}→{{data.goCity}}</h4>
+						<h4 v-if="data.selectType == 40">预定{{data.goCity}}的机票和酒店</h4>
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">出发地</div>
@@ -112,12 +79,12 @@
 						</li>
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">出发时间</div>
+								<div class="mui-media-object mui-pull-left">出行时间</div>
 								<div class="mui-media-body mui-text-right">{{data.fromTime | filterConvertDate}}</div>
 							</a>
 						</li>
 						<!--航程类型为单程的时候没有返回时间-->
-						<li class="mui-table-view-cell mui-media" v-if="data.backTime!==''">
+						<li class="mui-table-view-cell mui-media" v-if="data.backTime!='0'">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">返程时间</div>
 								<div class="mui-media-body mui-text-right">{{data.backTime | filterConvertDate}}</div>
@@ -127,6 +94,40 @@
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">人数</div>
 								<div class="mui-media-body mui-text-right">{{data.peopleNum}}成人 <span v-if="data.childNum!=0">{{data.childNum}}儿童</span></div>
+							</a>
+						</li>
+					</ul>
+					<!--酒店询价-->
+					<ul class="mui-table-view" v-if="data.selectType == 20||data.selectType == 40">
+						<h4 v-if="data.selectType == 20">预定{{data.hotelAddress}}的酒店</h4>
+						<li class="mui-table-view-cell mui-media" v-if="data.hotelAddress">
+							<a href="javascript:;">
+								<div class="mui-media-object mui-pull-left">酒店地点</div>
+								<div class="mui-media-body mui-text-right">{{data.hotelAddress}}</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a href="javascript:;">
+								<div class="mui-media-object mui-pull-left">入住时间</div>
+								<div class="mui-media-body mui-text-right">{{data.liveTime | filterConvertDate}}</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a href="javascript:;">
+								<div class="mui-media-object mui-pull-left">离店时间</div>
+								<div class="mui-media-body mui-text-right">{{data.leaveTime | filterConvertDate}}</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a href="javascript:;">
+								<div class="mui-media-object mui-pull-left">房间数</div>
+								<div class="mui-media-body mui-text-right">{{data.roomNum}}间</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a href="javascript:;">
+								<div class="mui-media-object mui-pull-left">酒店标准</div>
+								<div class="mui-media-body mui-text-right">{{data.hotelStar}}</div>
 							</a>
 						</li>
 					</ul>

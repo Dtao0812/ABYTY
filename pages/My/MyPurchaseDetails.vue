@@ -57,8 +57,8 @@
 					</ul>
 					<!--机票询价-->
 					<ul class="mui-table-view" v-if="data.selectType == 30||data.selectType == 40">
-						<h4 v-if="data.selectType == 20">{{data.fromCity}}→{{data.goCity}}</h4>
-						<h4 v-if="data.selectType == 40">预订{{data.goCity}}机票和酒店</h4>
+						<h4 v-if="data.selectType == 30">{{data.fromCity}}→{{data.goCity}}</h4>
+						<h4 v-if="data.selectType == 40">预订{{data.goCity}}的机票和酒店</h4>
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">出发地</div>
@@ -79,15 +79,15 @@
 						</li>
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
-								<div class="mui-media-object mui-pull-left">出发时间</div>
+								<div class="mui-media-object mui-pull-left">出行时间</div>
 								<div class="mui-media-body mui-text-right">{{data.fromTime|filterConvertDate}}</div>
 							</a>
 						</li>
 						<!--航程类型为单程的时候没有返回时间-->
-						<li class="mui-table-view-cell mui-media" v-if="data.backTime!==''">
+						<li class="mui-table-view-cell mui-media" v-if="data.backTime!='0'">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">返程时间</div>
-								<div class="mui-media-body mui-text-right">{{data.backTime}}</div>
+								<div class="mui-media-body mui-text-right">{{data.backTime|filterConvertDate}}</div>
 							</a>
 						</li>
 						<li class="mui-table-view-cell mui-media">
@@ -99,7 +99,7 @@
 					</ul>
 					<!--酒店询价-->
 					<ul class="mui-table-view" v-if="data.selectType == 20||data.selectType == 40">
-						<h4 v-if="data.selectType == 20">{{data.title}}</h4>
+						<h4 v-if="data.selectType == 20">预订{{data.hotelAddress}}的酒店</h4>
 						<li class="mui-table-view-cell mui-media" v-if="data.selectType == 20">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">酒店地点</div>
@@ -115,7 +115,7 @@
 						<li class="mui-table-view-cell mui-media">
 							<a href="javascript:;">
 								<div class="mui-media-object mui-pull-left">离店时间</div>
-								<div class="mui-media-body mui-text-right">{{data.backTime}}</div>
+								<div class="mui-media-body mui-text-right">{{data.leaveTime|filterConvertDate}}</div>
 							</a>
 						</li>
 						<li class="mui-table-view-cell mui-media">
@@ -285,16 +285,28 @@
 						cpId: cpId
 					}
 				})
+			},
+			getPublishDetail(){
+				let reqInfo = {};
+				reqInfo.loading = 1;
+				reqInfo.selectId = this.selectId;
+				this.$abyApi.Select.getPublishDetail(reqInfo,(res)=>{
+					this.data = res.cpSelect;
+					this.$refs.page.isLoading = false;
+				},(err)=>{this.$refs.page.isLoading = false;});
 			}
 		},
 		mounted() {
-			let reqInfo = {};
-			reqInfo.loading = 1;
-			reqInfo.selectId = this.selectId;
-			this.$abyApi.Select.getPublishDetail(reqInfo,(res)=>{
-				this.data = res.cpSelect;
-				this.$refs.page.isLoading = false;
-			},(err)=>{this.$refs.page.isLoading = false;});
+			this.getPublishDetail();
+		},
+		beforeRouteEnter(to, from, next) {
+			if(from.name == 'myPurchase') {
+				next(vm => {
+					vm.getPublishDetail()
+				})
+			}else{
+				next()
+			}
 		},
 	}
 </script>

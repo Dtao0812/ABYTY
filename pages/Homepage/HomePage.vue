@@ -196,7 +196,12 @@
 				next()
 			}else{
 				next(vm => {
-					vm.init()
+					if(!vm.$route.params.cpId){
+						next()
+					}else{
+						vm.init()
+					}
+					
 				})
 			}
 		},

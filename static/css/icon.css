@@ -762,6 +762,12 @@
 	content: '\e6ad';
 }
 
+/*拨打电话*/
+
+.aby-icon-procall:before {
+	content: '\e72f';
+}
+
 
 /*查看主页*/
 

@@ -6,9 +6,9 @@
 				<img class="mui-media-object mui-pull-left" :src="li.buyerInfo.cpLogo" >
 				<div class="mui-media-body aby-list">
 					<p class="aby-list-title">
-						<mt-badge size="small" type="error" class="aby-badge-nonum"></mt-badge>{{li.title}}
+						<mt-badge size="small" type="error" class="aby-badge-nonum" v-if="li.state==1"></mt-badge>{{li.title}}
 					</p>
-					<!--买家中心-->
+					<!--卖家中心-->
 					<p class="mui-ellipsis">
 						收件人：{{li.sellerInfo.cpName}}
 					</p>
@@ -28,7 +28,7 @@
 					<p class="aby-list-title">
 						<mt-badge size="small" type="error" class="aby-badge-nonum" v-if="li.state==1"></mt-badge>{{li.title}}
 					</p>
-					<!--卖家中心-->
+					<!--买家中心-->
 					<p class="mui-ellipsis">
 						发件人：{{li.buyerInfo.cpName}}
 					</p>

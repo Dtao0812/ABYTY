@@ -6,8 +6,8 @@
 		<div slot="content" class="mui-content">
 			<div class="divStatus">
 				<img v-if="auditState==0" src="../../static/images/status/status_auditting.png" />
-				<img v-else-if="auditState==2" src="../../static/images/status/status_auditFail.png" />
-				<img v-else src="../../static/images/status/status_notAudit.png" />
+				<img v-if="auditState==2" src="../../static/images/status/status_auditFail.png" />
+				<img v-if="auditState!=0&&auditState!=2" src="../../static/images/status/status_notAudit.png" />
 				<h5 class="marginComm"></h5>
 				<h3 class="fontBlue">{{auditTitle}}</h3>
 				<h5 class="mui-content-padded"></h5>

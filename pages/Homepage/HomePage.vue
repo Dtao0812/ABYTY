@@ -115,6 +115,7 @@
 			},
 			 //获得产品下拉
 			getDownProList() {
+				this.tabList[0].data = [];
 				let proInfo = {};
 				proInfo.loading = 1;
 				proInfo.pageNum = this.pageNum == 1;
@@ -191,7 +192,7 @@
 					vm.cpId = vm.$store.state.cpId;
 					vm.getBasicInfo()
 				})
-			}else if(from.name=="chat" || to.params.cpId == ''){
+			}else if(from.name=="chat" || !to.params.cpId){
 				next()
 			}else{
 				next(vm => {

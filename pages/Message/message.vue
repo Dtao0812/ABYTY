@@ -105,8 +105,8 @@
 							if(isAdd)list.push(info);
 						}
 					});
-					this.chatList = list;
 				})
+				this.chatList = list;
 			},
 			// 消息列表
 			toMsgList(){
@@ -122,7 +122,7 @@
 			}
 		},
 		mounted() {
-			this.getChatList();
+			this.init();
 			this.$parent.eventPageShow(this.$route.name);
 		},
 		activated() {
@@ -131,6 +131,12 @@
 			this.$parent.eventPageShow(this.$route.name);
 		},
 		watch:{
+			dbChatList(val){
+				console.log(val)
+				console.log(this.chatList);
+				console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
+				this.chatList = val;
+			}
 		}
 	}
 </script>

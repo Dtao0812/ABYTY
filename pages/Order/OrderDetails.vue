@@ -430,7 +430,6 @@
 			},
 			//查看协议详情
 			toAgrDetail(){
-				console.log(this.info.orderInfo.proid)
 				if(this.agreementId != ''){
 					this.$router.back();
 				}else{
@@ -482,7 +481,7 @@
 			}
 		},
 		beforeRouteLeave(to, from, next){
-			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay' || to.name == 'agrDetail'){
+			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay' || to.name == 'agrDetail' || to.name == 'chat'){
 				this.isCear = true;
 			}
 			next();

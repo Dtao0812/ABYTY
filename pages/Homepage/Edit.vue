@@ -1,5 +1,5 @@
 <template>
-	<aby-page>
+	<div class="editBox">
 		<aby-header :title="title" slot="header">
 			<aby-fonts slot="right" class="aby-mui-bar" @click.native="onFinish(htmlId)" className="mui-pull-right" title="完成"></aby-fonts>
 		</aby-header>
@@ -12,7 +12,7 @@
 				<textarea name="" v-model="textMsg"></textarea>
 			</div>
 		</div>
-	</aby-page>
+	</div>
 </template>
 
 <script>
@@ -181,6 +181,9 @@
 </script>
 
 <style scoped>
+	.editBox{
+		margin-top: 45px;
+	}
 	textarea {
 		margin: 10px 5%;
 		width: 90%;

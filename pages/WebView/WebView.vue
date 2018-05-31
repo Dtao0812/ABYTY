@@ -94,7 +94,7 @@
 			webUrl(val) {}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.name == 'homePage' && from.params.cpId && from.params.proId){
+			if(from.name == 'homePage'){
 				next(vm => {
 					let info = {};
 					info.page = 'homePage';

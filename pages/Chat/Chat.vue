@@ -30,7 +30,7 @@
 		<div slot="footer">
 			<footer ref="footer">
 				<div class="footer-center">
-					<textarea v-model="msgtext" @focus="focus" type="text" class='input-text'></textarea>
+					<textarea v-model="msgtext" id="msgtext" @focus="focus" type="text" class='input-text'></textarea>
 				</div>
 				<label class="footer-right">
 					<aby-icon class="mui-icon icon-face" :type="faceIcon" @click.native="onFace"></aby-icon>
@@ -154,9 +154,7 @@
 				sendMsg.sendLoading = 'sending';
 				this.RongImSend(sendMsg);
 				this.msgtext = '';
-				this.$refs.footer.className = '';
-				this.isShowFace = false;
-				this.isShowMore = false;
+				document.getElementById('msgtext').focus();
 			},
 			// 发送消息
 			RongImSend(msg) {

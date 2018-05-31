@@ -141,6 +141,10 @@
 	}
 </script>
 <style scoped>
+	.content{
+		height: 100%;
+		background-color: #F0F0F0;
+	}
 	.mui-badge {
 		right: auto!important;
 		left: 45px;

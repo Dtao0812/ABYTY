@@ -1,34 +1,35 @@
 <template>
-	<aby-tab :list="tabList" page="order" @eventTabBack="eventTab">
-		<div v-for="(v,x) in tabList" :key="x" :slot="v.id" class="mui-content pt-45">
-			<aby-no-content v-if="v.data.length == 0"></aby-no-content>
-			<ul class="mui-table-view mui-table-view-chevron space">
-				<li class="mui-table-view-cell mui-media" v-for="(li,i) in v.data" v-if="li.id == 'agr'" @click="toAgrList(li)">
-					<a class="mui-navigate-right menu">
-						<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
-						<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
-					</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space">
-				<li class="mui-table-view-cell mui-media" v-for="(li,i) in v.data" v-if="li.id != 'waitRefund'&&li.id != 'agr'" @click="toList(li)">
-					<a class="mui-navigate-right menu">
-						<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
-						<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
-					</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view mui-table-view-chevron space" v-for="(li,i) in v.data" v-if="li.id == 'waitRefund'" @click="toList(li)">
-				<li class="mui-table-view-cell mui-media">
-					<a class="mui-navigate-right menu">
-						<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
-						<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</aby-tab>
-
+	<div class="order">
+		<aby-tab :list="tabList" page="order" @eventTabBack="eventTab">
+			<div v-for="(v,x) in tabList" :key="x" :slot="v.id" class="mui-content pt-45">
+				<aby-no-content v-if="v.data.length == 0"></aby-no-content>
+				<ul class="mui-table-view mui-table-view-chevron space">
+					<li class="mui-table-view-cell mui-media" v-for="(li,i) in v.data" v-if="li.id == 'agr'" @click="toAgrList(li)">
+						<a class="mui-navigate-right menu">
+							<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
+							<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron space">
+					<li class="mui-table-view-cell mui-media" v-for="(li,i) in v.data" v-if="li.id != 'waitRefund'&&li.id != 'agr'" @click="toList(li)">
+						<a class="mui-navigate-right menu">
+							<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
+							<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron space" v-for="(li,i) in v.data" v-if="li.id == 'waitRefund'" @click="toList(li)">
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right menu">
+							<aby-icon-color class="ptype" :type="li.icon"></aby-icon-color> {{li.title}}
+							<span class="mui-badge mui-badge-danger" v-if="li.num != 0">{{li.num}}</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</aby-tab>
+	</div>
 </template>
 
 <script>
@@ -158,6 +159,10 @@
 	}
 </script>
 <style scoped>
+	.order{
+		background-color: #f0f0f0;
+		height: 100%;
+	}
 	.top-fixed {
 		position: fixed;
 		top: 0;

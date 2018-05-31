@@ -223,7 +223,8 @@
 			this.getDetail();
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.orderId == "" || from.name == "agrList" ) {
+//			console.log(to.params.agreementId)
+			if(from.params.orderId == "" || from.name == "agrList" || to.params.agreementId) {
 				next(vm => {
 					vm.init()
 				})

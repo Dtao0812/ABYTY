@@ -470,7 +470,7 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(from.params.agreementId == ''||from.name=='orderList'){
+			if(to.params.agreementId||from.name=='orderList'){
 				next(vm => {
 					vm.init()
 				})

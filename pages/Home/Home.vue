@@ -41,7 +41,7 @@
 					<img class="mui-media-object mui-pull-left imgMsg" src="../../static/images/ico/ico_msgbar_3x.png">
 					<div class="mui-media-body aby-font-Black mui-navigate-right">
 						<mt-badge v-if="homeMsgType" size="small" type="error" class="aby-badge-nonum"></mt-badge>
-						<p class='mui-ellipsis msg' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}电饭锅和幅度搞活动覆盖和符合动覆盖和符合动覆盖和符合<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
+						<p class='mui-ellipsis msg' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
 					</div>
 				</li>
 			</ul>
@@ -147,6 +147,9 @@
 				this.getHomeMsgList();
 				return this.$store.state.homeMsgType;
 			},
+			messageNum(){
+				return this.$store.state.messageNum;
+			}
 		},
 		methods: {
 			init() {
@@ -263,6 +266,9 @@
 			},
 			homeMsgType(val){
 				if(val)this.isShowMsg = true;
+			},
+			messageNum(val){
+				this.getHomeMsgList()
 			}
 		}
 	}

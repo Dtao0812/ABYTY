@@ -66,15 +66,14 @@ var plusFun = function() {
 				});
 			}else if(msg.payload.msgType == 'system') {
 				// 系统消息
-				this.$abyDb.Msg.init((res)=>{
-					this.$abyApi.Sys.getMsgList();
-					this.$abyApi.Sys.getMsgNum();
-					alert(12)
+				Vue.$abyDb.Msg.init((res)=>{
+					Vue.$abyApi.Sys.getMsgList();
+					Vue.$abyApi.Sys.getMsgNum();
 				});
 			}else if(msg.payload.msgType == 'hotel_order') {
 				// 订单消息
-				this.$abyApi.Order.getNum('buyer');
-				if(this.$store.state.cpBtype != 10)this.$abyApi.Order.getNum('seller');
+				Vue.$abyApi.Order.getNum('buyer');
+				if(Vue.$store.state.cpBtype != 10)Vue.$abyApi.Order.getNum('seller');
 			}
 		}
 	}, false);
@@ -90,18 +89,15 @@ var plusFun = function() {
 			}else if(msg.payload.msgType == 'select') {
 				// 询价
 			}else if(msg.payload.msgType == 'system') {
-				alert(1)
 				// 系统消息
-				this.$abyDb.Msg.init((res)=>{
-					alert(2)
-					this.$abyApi.Sys.getMsgList();
-					this.$abyApi.Sys.getMsgNum();
-					alert(1)
+				Vue.$abyDb.Msg.init((res)=>{
+					Vue.$abyApi.Sys.getMsgList();
+					Vue.$abyApi.Sys.getMsgNum();
 				});
 			}else if(msg.payload.msgType == 'hotel_order') {
 				// 订单消息
-				this.$abyApi.Order.getNum('buyer');
-				if(this.$store.state.cpBtype != 10)this.$abyApi.Order.getNum('seller');
+				Vue.$abyApi.Order.getNum('buyer');
+				if(Vue.$store.state.cpBtype != 10)Vue.$abyApi.Order.getNum('seller');
 			}
 		}
 	});

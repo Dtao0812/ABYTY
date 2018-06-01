@@ -41,7 +41,7 @@
 					<img class="mui-media-object mui-pull-left imgMsg" src="../../static/images/ico/ico_msgbar_3x.png">
 					<div class="mui-media-body aby-font-Black mui-navigate-right">
 						<mt-badge v-if="homeMsgType" size="small" type="error" class="aby-badge-nonum"></mt-badge>
-						<p class='mui-ellipsis msg' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}电饭锅和幅度搞活动覆盖和符合动覆盖和符合动覆盖和符合<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
+						<p class='mui-ellipsis msg' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
 					</div>
 				</li>
 			</ul>
@@ -427,18 +427,22 @@
 	/*首页消息模块内容样式*/
 	.msg{
 		position: relative;
-		padding-right: 70px;
+		padding-right: 85px;
+	}
+	.msg-one{
+		padding-top: 10px;
 	}
 	/*首页消息模块部分时间样式*/
 	.time
 	{
 		position: absolute;
 		color: #999999;
-		right: 20px;
+		right: 32px;
+		font-size: 12px;
 	}
 	.aby-badge-nonum{
 		position: absolute;
-		left: 48px;
-		top: 10px;
+		right: 20px;
+		top: 26px;
 	}
 </style>

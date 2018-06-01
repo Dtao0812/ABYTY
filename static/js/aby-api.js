@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -339,6 +339,20 @@ const Sys = {
 		Vue.$abyDb.Msg.get((res) => {
 			if(res) {
 				list.push(res.value);
+			}
+		}, (e) => {
+			console.log(e)
+			errorCallback && errorCallback(e)
+		})
+		successCallback && successCallback(list);
+	},
+	// 获取本地消息列表
+	getMsgListLoadAll(successCallback, errorCallback) {
+		let list = [];
+		Vue.$abyDb.Msg.getAll((res) => {
+			if(res) {
+				list = res;
+				successCallback && successCallback(list);
 			}
 		}, (e) => {
 			console.log(e)

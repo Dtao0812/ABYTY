@@ -267,6 +267,39 @@ const abyDateFun = {
 		now = now + abyDateFun.setFormat(date.getMinutes()) + ":";
 		now = now + abyDateFun.setFormat(date.getSeconds()) + "";
 		return now;
+	},
+	//计算多少时间前
+	getShortTime(timestamp) {
+		var nowtime = (new Date).getTime(); /*当前时间戳*/
+		/*转换时间，计算差值*/
+		var secondNum = parseInt((nowtime - timestamp) / 1000); //计算时间戳差值 
+		if(secondNum < 0) secondNum = 1;
+		if(secondNum >= 0 && secondNum < 60) {
+			if(secondNum >= 0 && secondNum < 5) {
+				return '刚刚';
+			} else {
+				return secondNum + '秒前';
+			}
+		} else if(secondNum >= 60 && secondNum < 3600) {
+			var nTime = parseInt(secondNum / 60);
+			return nTime + '分钟前';
+		} else if(secondNum >= 3600 && secondNum < 3600 * 24) {
+			var nTime = parseInt(secondNum / 3600);
+			return nTime + '小时前';
+		} else {
+			var nTime = new Date(parseInt(timestamp));
+			var nYear = nTime.getFullYear();
+			var nMonth = nTime.getMonth() + 1;
+			var nDate = nTime.getDate();
+			var nHour = nTime.getHours();
+			var nMinute = nTime.getMinutes();
+			var year = (new Date).getFullYear();
+			if(year == nYear) {
+				return abyServer.pad(nMonth, 2) + '-' + abyServer.pad(nDate, 2) + ' ' + abyServer.pad(nHour, 2) + ':' + abyServer.pad(nMinute, 2);
+			} else {
+				return nYear + '-' + abyServer.pad(nMonth, 2) + '-' + abyServer.pad(nDate, 2) + ' ' + abyServer.pad(nHour, 2) + ':' + abyServer.pad(nMinute, 2);
+			}
+		}
 	}
 };
 
@@ -373,6 +406,15 @@ let copyContent = function(e) {
 
 };
 
+//数组反序排列
+let arrReverse = function(data){
+	let _list = [];
+	for(var i=data.length-1;i>=0;i--){
+		_list.push(data[i]);
+	}
+	return _list;
+};
+
 export default {
 	isInAarry,
 	browser,
@@ -392,5 +434,6 @@ export default {
 	copyContent,
 	getRTime,
 	abyDateFun,
-	isRealNum
+	isRealNum,
+	arrReverse
 }

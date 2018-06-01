@@ -119,6 +119,20 @@ Vue.filter('filterConvertDate', function(timestamp) {
 	return nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2);
 });
 
+// 时间转换为标准时间（YYYY-MM-DD H:m:s）
+Vue.filter('filterConvertDates', function(timestamp) {
+	var prmdate = new Date(parseInt(timestamp));
+	var nowDate = new Date();
+	var nTime = new Date(parseInt(timestamp));
+	var nYear = nTime.getFullYear();
+	var nMonth = nTime.getMonth() + 1;
+	var nDate = nTime.getDate();
+	var nHour = nTime.getHours();
+	var nMinute = nTime.getMinutes();
+	var year = (new Date).getFullYear();
+	return nYear + '-' + Vue.$tool.pad(nMonth, 2) + '-' + Vue.$tool.pad(nDate, 2) + ' ' + Vue.$tool.pad(nHour, 2) + ':' + Vue.$tool.pad(nMinute, 2);
+});
+
 // 计算时间(13位时间戳)
 Vue.filter('filterConvertDateFromNowBy13', function(timestamp) {
 	var prmdate = new Date(parseInt(timestamp));
@@ -137,14 +151,14 @@ Vue.filter('filterConvertDateFromNowBy13', function(timestamp) {
 // 计算时间
 Vue.filter('filterConvertDateFromNow', function(date) {
 	Moment.locale('zh-cn');
-	return Moment(date, "YYYYMMDD").fromNow();
+    return Moment(date, "YYYYMMDDHHMM").fromNow(); 
 });
 //计算年龄
 Vue.filter('countAge', function(date){
 	Moment.locale('zh-cn');
 	var countAge = Moment(date, "YYYYMMDD").fromNow().split('年')[0];
 	return countAge; 
-})
+});
 
 new Vue({
 	el: '#app',

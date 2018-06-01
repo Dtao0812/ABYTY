@@ -36,11 +36,12 @@
 				</li>
 			</ul>
 			<!--消息部分-->
-			<ul class="mui-table-view aby-sysMsg" v-show="homeMsgType">
+			<ul class="mui-table-view aby-sysMsg" v-show="isShowMsg">
 				<li class="mui-table-view-cell mui-media space" @click="toMsgList">
 					<img class="mui-media-object mui-pull-left imgMsg" src="../../static/images/ico/ico_msgbar_3x.png">
 					<div class="mui-media-body aby-font-Black mui-navigate-right">
-						<p class='mui-ellipsis' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}</p>
+						<mt-badge v-if="homeMsgType" size="small" type="error" class="aby-badge-nonum"></mt-badge>
+						<p class='mui-ellipsis' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
 					</div>
 				</li>
 			</ul>
@@ -136,7 +137,8 @@
 						data: ''
 					}
 				],
-				msgList: []
+				msgList: [],
+				isShowMsg:false,
 			}
 		},
 		computed: {
@@ -188,8 +190,8 @@
 			},
 			// 获得首页消息列表
 			getHomeMsgList(){
-				this.$abyApi.Sys.getMsgListLoad((res)=>{
-					this.msgList = res;
+				this.$abyApi.Sys.getMsgListLoadAll((res)=>{
+					this.msgList = this.$tool.arrReverse(res);
 				});
 			},
 			// 搜索框点击
@@ -253,6 +255,14 @@
 		watch:{
 			msgList(val){
 				this.msgList = val;
+				if(this.msgList.length > 0){
+					this.isShowMsg = true;
+				}else{
+					this.isShowMsg = false;
+				}
+			},
+			homeMsgType(val){
+				if(val)this.isShowMsg = true;
 			}
 		}
 	}

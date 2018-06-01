@@ -189,6 +189,26 @@ const Msg = {
 			};
 		})
 	},
+	// 查询数据
+	getAll(successCallback, errorCallback) {
+		Msg.init((res)=>{
+			var arr = [];
+			var transaction = ImDb.transaction('msg', 'readwrite');
+			var objStore = transaction.objectStore('msg');
+			var request = objStore.openCursor();
+			request.onsuccess = function(e) {
+				var cursor = e.target.result;
+	            if(cursor){
+	            	arr.push(cursor.value);
+	            	cursor.continue();//遍历了存储对象中的所有内容
+	            }
+	            successCallback && successCallback(arr);
+			};
+			request.onerror = function(e) {
+				errorCallback && errorCallback(e);
+			};
+		})
+	},
 	// 插入数据
 	insert(data, successCallback, errorCallback) {
 		Msg.init((res)=>{

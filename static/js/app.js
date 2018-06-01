@@ -69,6 +69,7 @@ var plusFun = function() {
 				this.$abyDb.Msg.init((res)=>{
 					this.$abyApi.Sys.getMsgList();
 					this.$abyApi.Sys.getMsgNum();
+					alert(12)
 				});
 			}else if(msg.payload.msgType == 'hotel_order') {
 				// 订单消息
@@ -80,6 +81,7 @@ var plusFun = function() {
 
 	//推送消息接收 (app打开时)
 	plus.push.addEventListener("receive", function(msg) {
+		alert(msg.payload.msgType)
 		if(msg.payload.msgType) {
 			var jsonStr = JSON.stringify(msg.payload.params);
 			var jsonObj = JSON.parse(jsonStr);
@@ -88,10 +90,13 @@ var plusFun = function() {
 			}else if(msg.payload.msgType == 'select') {
 				// 询价
 			}else if(msg.payload.msgType == 'system') {
+				alert(1)
 				// 系统消息
 				this.$abyDb.Msg.init((res)=>{
+					alert(2)
 					this.$abyApi.Sys.getMsgList();
 					this.$abyApi.Sys.getMsgNum();
+					alert(1)
 				});
 			}else if(msg.payload.msgType == 'hotel_order') {
 				// 订单消息

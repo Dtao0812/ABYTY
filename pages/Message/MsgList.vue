@@ -8,7 +8,7 @@
 						<h5>
 							<!--消息未读红点-->
 							<mt-badge v-if="li.isRead==0" size="small" type="error" class="aby-badge-nonum"></mt-badge>
-							{{li.msgTypeName}}<span class="time">{{li.publishTime|filterConvertDate}}</span>
+							{{li.msgTypeName}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span>
 							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'hotel_order'" type="msgorder"></aby-icon>
 							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'interactMsg'" type="interaction"></aby-icon>
 							<aby-icon class="mui-icon icon-order" v-if="li.msgType == 'system'" type="msgsystem"></aby-icon>
@@ -42,47 +42,20 @@
 		data() {
 			return {
 				list:[],
+				msgList:[]
 			}
 		},
 		methods: {
 			// 获得消息列表
 			getMsgList(){
 				this.$abyApi.Sys.getMsgListLoad((res)=>{
-					this.list = res;
+					this.msgList = res;
 				});
 			},
 			//查看详情
 			toDetail(li) {
 				this.$abyDb.Msg.updateIsRead({title:li.msgType,value:li.msgId});//标记已读
-				let info = JSON.parse(li.msgiOSParams);
-				if(info.msgType == 'hotel_order' && info.params.winName == 'order_detail'){
-					//订单消息
-					this.$router.push({
-						name:'orderDetails',
-						params:{
-							orderId:info.params.orderId,
-							identityType: info.params.identityType
-						}
-					});
-				}else if(info.msgType == 'hotel_order' && info.params.winName == 'agreement_detail'){
-					//协议消息
-					this.$router.push({
-						name:'agrDetail',
-						params:{
-							agreementId: info.params.agreementId,
-							identityType: info.params.identityType
-						}
-					});
-				}else if(info.msgType == 'hotel_order' && info.params.winName == 'orderorder_refund_detail'){
-					//退款消息
-					this.$router.push({
-						name:'refundDetail',
-						params:{
-							orderId: info.params.orderId,
-							identityType: info.params.identityType
-						}
-					});
-				}else if(li.msgType == 'system'){
+				if(li.msgType == 'system'){
 					// 系统消息
 					this.$router.push({
 						name:'msgDetail',
@@ -99,14 +72,50 @@
 							url: info.specialUrl,
 						}
 					});
+				}else if(li.msgiOSParams != null){
+					let info = JSON.parse(li.msgiOSParams);
+					if(info.msgType == 'hotel_order' && info.params.winName == 'order_detail'){
+						//订单消息
+						this.$router.push({
+							name:'orderDetails',
+							params:{
+								orderId:info.params.orderId,
+								identityType: info.params.identityType
+							}
+						});
+					}else if(info.msgType == 'hotel_order' && info.params.winName == 'agreement_detail'){
+						//协议消息
+						this.$router.push({
+							name:'agrDetail',
+							params:{
+								agreementId: info.params.agreementId,
+								identityType: info.params.identityType
+							}
+						});
+					}else if(info.msgType == 'hotel_order' && info.params.winName == 'orderorder_refund_detail'){
+						//退款消息
+						this.$router.push({
+							name:'refundDetail',
+							params:{
+								orderId: info.params.orderId,
+								identityType: info.params.identityType
+							}
+						});
+					}
 				}
+				
 			}
 		},
 		mounted() {
 			this.getMsgList();
 		},
 		watch: {
-			list(val) {
+			msgList(val) {
+				let _list = [];
+				for(var i=val.length-1;i>=0;i--){
+					_list.push(val[i]);
+				}
+				this.list = _list;
 			}
 		}
 	}

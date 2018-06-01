@@ -132,7 +132,7 @@
 						</li>
 						<li class="mui-table-view-cell mui-media">
 							<div class="mui-media-object mui-pull-left">人数</div>
-							<div class="mui-media-body">成人儿童</div>
+							<div class="mui-media-body">{{info.orderSummary.adultsNum}}成人 <span v-if="info.orderSummary.childNum !=0">{{info.orderSummary.childNum}}儿童</span></div>
 						</li>
 					</ul>
 				</div>
@@ -505,6 +505,7 @@
 				let reqInfo = {};
 				reqInfo.orderId = this.orderId;
 				this.$abyApi.Order.getOrderDetail(reqInfo, (res) => {
+					console.log('获取订单详情：'+JSON.stringify(res))
 					this.$refs.page.closeLoading();
 					res.data.orderInfo.proSummary = JSON.parse(res.data.orderInfo.proSummary);
 					res.data.orderSummary = JSON.parse(res.data.orderSummary);
@@ -522,7 +523,7 @@
 						let timer;
 						timer = setInterval(() => {
 							if(remainTime > 0) {
-								this.info.waitConfirmDownTimestamp = remainTime - 1;
+								this.info.countDownTimestamp = remainTime - 1;
 								remainTime = remainTime - 1;
 								if(!this.isCear) {
 									document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime + 1);
@@ -533,7 +534,6 @@
 
 						}, 1000);
 					} else if(this.info.orderState == 2) {
-
 						//待确认状态的订单
 						let remainTime = this.info.waitConfirmDownTimestamp;
 						let timer;

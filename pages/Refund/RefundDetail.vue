@@ -121,11 +121,11 @@
 					</li>
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">退款金额</div>
-						<div class="mui-media-body">￥5299.00</div>
+						<div class="mui-media-body">￥{{info.refundAmount}}</div>
 					</li>
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">手续费</div>
-						<div class="mui-media-body">￥{{info.refundAmount}}(订单总额*6‰)</div>
+						<div class="mui-media-body">￥{{serviceFee}}</div>
 					</li>
 					<li class="mui-table-view-cell mui-media">
 						<div class="mui-media-object mui-pull-left">申请时间</div>

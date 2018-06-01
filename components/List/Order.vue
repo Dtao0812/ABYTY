@@ -120,7 +120,7 @@
 						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.sellerNote = e.value;
 						this.$abyApi.Order.addIntro(reqInfo,(res)=>{
-							this.$emit("eventOrder");s
+							this.$emit("eventOrder");
 						});
 					});
 				}else if(btnObj.id == 4){

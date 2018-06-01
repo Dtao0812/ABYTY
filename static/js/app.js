@@ -80,7 +80,6 @@ var plusFun = function() {
 
 	//推送消息接收 (app打开时)
 	plus.push.addEventListener("receive", function(msg) {
-		alert(msg.payload.msgType)
 		if(msg.payload.msgType) {
 			var jsonStr = JSON.stringify(msg.payload.params);
 			var jsonObj = JSON.parse(jsonStr);

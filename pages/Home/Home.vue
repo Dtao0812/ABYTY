@@ -41,7 +41,7 @@
 					<img class="mui-media-object mui-pull-left imgMsg" src="../../static/images/ico/ico_msgbar_3x.png">
 					<div class="mui-media-body aby-font-Black mui-navigate-right">
 						<mt-badge v-if="homeMsgType" size="small" type="error" class="aby-badge-nonum"></mt-badge>
-						<p class='mui-ellipsis msg' v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
+						<p class='mui-ellipsis msg' :class="msgList.length==1?'msg-one':''" v-for="(li,i) in msgList" :key='i' v-if="i<2">· {{li.msgTitle}}<span class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</span></p>
 					</div>
 				</li>
 			</ul>
@@ -138,6 +138,7 @@
 					}
 				],
 				msgList: [],
+				dbmsgList: [],
 				isShowMsg:false,
 			}
 		},
@@ -193,9 +194,13 @@
 			},
 			// 获得首页消息列表
 			getHomeMsgList(){
-				this.$abyApi.Sys.getMsgListLoadAll((res)=>{
-					this.msgList = this.$tool.arrReverse(res);
+				let list = [];
+				this.$abyDb.Msg.getAll((res)=>{
+					res.forEach((v)=>{
+						list.push(v);
+					});
 				});
+				this.dbmsgList = list;
 			},
 			// 搜索框点击
 			onSearch() {
@@ -256,20 +261,22 @@
 			this.popupPlus = false;
 		},
 		watch:{
-			msgList(val){
-				this.msgList = val;
-				if(this.msgList.length > 0){
+			dbmsgList(val){
+				if(val.length>0){
+					setTimeout(()=>{
+						if(JSON.stringify(this.dbmsgList)!=JSON.stringify(this.msgList)){
+							this.msgList = this.$tool.arrReverse(val);
+						}
+					},300);
 					this.isShowMsg = true;
-				}else{
-					this.isShowMsg = false;
 				}
 			},
 			homeMsgType(val){
-				if(val)this.isShowMsg = true;
+				this.isShowMsg = val;
 			},
 			messageNum(val){
 				this.getHomeMsgList()
-			}
+			},
 		}
 	}
 </script>

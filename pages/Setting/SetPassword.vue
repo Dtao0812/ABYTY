@@ -35,23 +35,27 @@
 				isShowPhoneDiv:true,
 				isShowPhone:true,
 				isShowPwd:false,
+				getState: this.$route.params.state
 			}
 		},
 		methods: {
 			onGetVerifyCode() {
-				if(this.userPhone == this.$store.state.userPhone){
-					let reqInfo = {};
-					reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
-					reqInfo.smsType = 2;
-					this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
-						this.$toast("验证码已发送！")
-						this.code = res.verifyCode
-						this.$tool.disableWait(document.getElementById("btnVerificationCode"))
-					});
+				if(!this.userPhone){
+					this.$toast('请输入手机号');
 				}else{
-					this.$toast("您输入的注册号码有误，请查证后再输入！")
+					if(this.userPhone == this.$store.state.userPhone || this.getState == 0){
+						let reqInfo = {};
+						reqInfo.userPhone = this.$abyApi.Crypto.EnCrypt(this.userPhone);
+						reqInfo.smsType = 2;
+						this.$abyApi.User.getVerificationCode(reqInfo,(res)=>{
+							this.$toast("验证码已发送！")
+							this.code = res.verifyCode
+							this.$tool.disableWait(document.getElementById("btnVerificationCode"))
+						});
+					}else{
+						this.$toast("您输入的注册号码有误，请查证后再输入！")
+					}
 				}
-				
 			},
 			onSetPwd(){
 				if(this.isShowPhone && !this.isShowPwd){

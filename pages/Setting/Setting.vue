@@ -4,7 +4,7 @@
 		<div slot="content" class="mui-content">
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell" id="editPwd">
-					<router-link :to="{ name: 'setPassword' }" class="mui-navigate-right">重置登录密码</router-link>
+					<router-link :to="{ name: 'setPassword', params:{state: 1} }" class="mui-navigate-right">重置登录密码</router-link>
 				</li>
 			</ul>
 			<h5 class="mui-content-padded"></h5>

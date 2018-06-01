@@ -19,7 +19,7 @@
 				</div>
 				<div class="row-link">
 					<router-link :to="{ name: 'registerOne' }">立即注册</router-link>
-					<router-link class="mui-pull-right" :to="{ name: 'setPassword' }">忘记密码</router-link>
+					<router-link class="mui-pull-right" :to="{ name: 'setPassword', params:{state: 0}}">忘记密码</router-link>
 				</div>
 			</div>
 		</div>

@@ -117,6 +117,8 @@
 				<div class="aby-detail-linegray100"></div>
 				<div class="aby-detail-total mui-text-right">
 					合计<span class="aby-detail-price">￥{{info.strPayment}}</span>
+					<p class="aby-price-service">手续费：￥60.00</p>
+					<p class="aby-price-pro">成交后将扣除手续费(订单总额*6‰，最低20元)</p>
 				</div>
 			</div>
 			<div v-else>
@@ -137,9 +139,10 @@
 					</ul>
 				</div>
 				<div class="aby-detail-line"></div>
-				<div class="aby-detail-total mui-text-right">
-					合计<span class="aby-detail-price aby-arg-price">￥{{info.strPayment}}</span>
-					<p class="aby-price-pro">成交后平台将收取6‰的手续费，最低20元</p>
+				<div class="aby-detail-total aby-detail-total-arg mui-text-right">
+					合计<span class="aby-detail-price">￥{{info.strPayment}}</span>
+					<p class="aby-price-service">手续费：￥60.00</p>
+					<p class="aby-price-pro">成交后将扣除手续费(订单总额*6‰，最低20元)</p>
 				</div>
 				<div class="aby-detail-content space">
 					<ul class="mui-table-view">

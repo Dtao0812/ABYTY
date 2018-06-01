@@ -70,6 +70,10 @@
 				}else{
 					if(this.newPassword === '' || this.newPassword_confirm === ''){
 						return this.$toast('修改内容不能为空');
+					}else if(this.newPassword.length < 6){
+						return this.$toast('新密码不能小于6位数字');
+					}else if(this.newPassword_confirm.length < 6){
+						return this.$toast('重复密码不能小于6位数字');
 					}else if(this.newPassword !== this.newPassword_confirm){
 						return this.$toast('密码重复不正确');
 					}else{
@@ -78,10 +82,6 @@
 						reqInfo.loginPwd = this.$abyApi.Crypto.MD5(this.newPassword).toString();
 						reqInfo.verifyCode = this.verifyCode;
 						this.$abyApi.User.setLoginPwd(reqInfo,(res)=>{
-							console.log(JSON.stringify(res))
-//							if(res.errorcode == 1){
-//								
-//							}
 							this.$tool.toast('修改成功');
 							setTimeout(()=>{
 								this.$router.back();

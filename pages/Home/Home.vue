@@ -433,18 +433,22 @@
 	/*首页消息模块内容样式*/
 	.msg{
 		position: relative;
-		padding-right: 70px;
+		padding-right: 85px;
+	}
+	.msg-one{
+		padding-top: 10px;
 	}
 	/*首页消息模块部分时间样式*/
 	.time
 	{
 		position: absolute;
 		color: #999999;
-		right: 20px;
+		right: 32px;
+		font-size: 12px;
 	}
 	.aby-badge-nonum{
 		position: absolute;
-		left: 48px;
-		top: 10px;
+		right: 20px;
+		top: 26px;
 	}
 </style>

@@ -693,7 +693,9 @@ small {
 .aby-bg-white {
 	background-color: #FFFFFF;
 }
-
+.aby-bg-default {
+	background-color: #F0F0F0;
+}
 
 /*-----------------------------------------图标样式----------------------------------------*/
 

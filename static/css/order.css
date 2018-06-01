@@ -128,3 +128,14 @@
 	margin-right: 3px!important;
 	margin-left: 5px!important;
 }
+/*协议订单详情中的价格*/
+.aby-arg-price{
+	padding-right: 15px;
+}
+/*订单手续费说明*/
+.aby-price-pro{
+	padding-bottom: 10px;
+	padding-right: 15px;
+	font-size: 12px;
+	color: #999999;
+}

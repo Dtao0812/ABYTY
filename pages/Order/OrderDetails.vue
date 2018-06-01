@@ -47,8 +47,12 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat()"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
-					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.buyerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat()">
+						<aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color>
+					</aby-button>
+					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.buyerPhone)">
+						<aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color>
+					</aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
 			</div>
@@ -66,13 +70,17 @@
 				</div>
 				<div class="aby-detail-line"></div>
 				<div class="aby-detail-operation">
-					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat()"><aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color></aby-button>
-					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.sellerPhone)"><aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color></aby-button>
+					<aby-button type="default" title="在线联系" class="aby-button-contact" @click.native="toChat()">
+						<aby-icon-color type="chat" class="icochat" slot="imgs"></aby-icon-color>
+					</aby-button>
+					<aby-button type="default" title="电话联系" class="aby-button-contact" @click.native="$tool.dialTelToApp(info.sellerPhone)">
+						<aby-icon-color type="call" class="icocall" slot="imgs"></aby-icon-color>
+					</aby-button>
 					<span class="aby-line-vertical"></span>
 				</div>
 			</div>
 			<div class="space"></div>
-		
+
 			<div class="aby-detail-content" v-if="info.orderInfo.proType == 1">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-media">
@@ -111,17 +119,40 @@
 					合计<span class="aby-detail-price">￥{{info.strPayment}}</span>
 				</div>
 			</div>
-			<div class="aby-detail-content" v-else>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell mui-media" @click="toAgrDetail">
-						<div class="mui-media-object mui-pull-left">订单协议</div>
-						<div class="mui-media-body">
-							<span class="aby-font-blue mui-navigate-right">查看</span>
-						</div>
-					</li>
-				</ul>
+			<div v-else>
+				<div class="aby-detail-content">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-media">
+							<div class="mui-media-object mui-pull-left">产品标题</div>
+							<div class="mui-media-body">{{info.orderInfo.proTitle}}</div>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<div class="mui-media-object mui-pull-left">出行时间</div>
+							<div class="mui-media-body">{{info.goData}}</div>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<div class="mui-media-object mui-pull-left">人数</div>
+							<div class="mui-media-body">成人儿童</div>
+						</li>
+					</ul>
+				</div>
+				<div class="aby-detail-line"></div>
+				<div class="aby-detail-total mui-text-right">
+					合计<span class="aby-detail-price aby-arg-price">￥{{info.strPayment}}</span>
+					<p class="aby-price-pro">成交后平台将收取6‰的手续费，最低20元</p>
+				</div>
+				<div class="aby-detail-content space">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell mui-media" @click="toAgrDetail">
+							<div class="mui-media-object mui-pull-left">订单协议</div>
+							<div class="mui-media-body">
+								<span class="aby-font-blue mui-navigate-right">查看</span>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
-			
+
 			<div class="space"></div>
 			<div class="aby-detail-content" v-if="$store.state.userId == info.sellerId">
 				<ul class="mui-table-view">
@@ -156,7 +187,7 @@
 					</li>
 				</ul>
 			</div>
-			
+
 			<div class="space"></div>
 			<div class="aby-detail-content" v-if="info.orderSummary.needInvoice == 1">
 				<ul class="mui-table-view">
@@ -174,7 +205,7 @@
 					</li>
 				</ul>
 			</div>
-			
+
 			<div class="space"></div>
 			<div class="aby-detail-content">
 				<ul class="mui-table-view">
@@ -191,8 +222,7 @@
 					</li>
 				</ul>
 			</div>
-			
-			
+
 		</div>
 	</aby-page>
 </template>
@@ -202,99 +232,199 @@
 		components: {},
 		data() {
 			return {
-				orderId:this.$route.params.orderId,
+				orderId: this.$route.params.orderId,
 				cpId: '',
-				identityType:this.$route.params.identityType,
-				page:this.$route.params.page,
-				agreementId:'',
-				pageNum:1,
+				identityType: this.$route.params.identityType,
+				page: this.$route.params.page,
+				agreementId: '',
+				pageNum: 1,
 				serviceFee: '',
-				btnList:[
-					{id:1,title:'确认订单',size:'small',bclass:'aby-button-line-blue'},
-					{id:2,title:'取消订单',size:'small',bclass:'aby-button-line-default'},
-					{id:3,title:'订单备注',size:'small',bclass:'aby-button-line-default'},
-					{id:4,title:'修改价格',size:'small',bclass:'aby-button-line-blue'},
-					{id:5,title:'付款',size:'small',bclass:'aby-button-line-blue'},
-					{id:6,title:'申请退款',size:'small',bclass:'aby-button-line-default'},
-					{id:7,title:'退款处理',size:'small',bclass:'aby-button-line-blue'},
-					{id:8,title:'退款详情',size:'small',bclass:'aby-button-line-default'},
-					{id:9,title:'退款处理',size:'small',bclass:'aby-button-line-blue'},
-					{id:10,title:'确认完成',size:'small',bclass:'aby-button-line-blue'},
-					{id:11,title:'删除',size:'small',bclass:'aby-button-line-default'},
+				btnList: [{
+						id: 1,
+						title: '确认订单',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 2,
+						title: '取消订单',
+						size: 'small',
+						bclass: 'aby-button-line-default'
+					},
+					{
+						id: 3,
+						title: '订单备注',
+						size: 'small',
+						bclass: 'aby-button-line-default'
+					},
+					{
+						id: 4,
+						title: '修改价格',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 5,
+						title: '付款',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 6,
+						title: '申请退款',
+						size: 'small',
+						bclass: 'aby-button-line-default'
+					},
+					{
+						id: 7,
+						title: '退款处理',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 8,
+						title: '退款详情',
+						size: 'small',
+						bclass: 'aby-button-line-default'
+					},
+					{
+						id: 9,
+						title: '退款处理',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 10,
+						title: '确认完成',
+						size: 'small',
+						bclass: 'aby-button-line-blue'
+					},
+					{
+						id: 11,
+						title: '删除',
+						size: 'small',
+						bclass: 'aby-button-line-default'
+					},
 				],
-				info:'',
-				timer:'',
-				isCear:false,
+				info: '',
+				timer: '',
+				isCear: false,
 			}
 		},
 		methods: {
-			init(){
+			init() {
 				this.orderId = this.$route.params.orderId;
 				this.identityType = this.$route.params.identityType;
-				this.agreementId = this.$route.params.agreementId||'';
+				this.agreementId = this.$route.params.agreementId || '';
 				this.info = '';
 				this.isCear = false;
 				this.getDetail();
 			},
 			// 列表按钮显示
-			initBtn(orderState){
+			initBtn(orderState) {
 				// 处理按钮
 				let bList = [];
 				let newBtnList = [];
-				if(this.identityType == 'buyer'){
+				if(this.identityType == 'buyer') {
 					// 买家
-					switch (orderState){
-						case 0: bList = [2,5];break;// 待付款
-						case 1: bList =  [6];break;// 待出行
-						case 2: bList =  [6,10];break;// 待完成
-						case 3: bList =  [11];break;// 已完成
-						case 4: bList =  [11];break;// 已取消
-						case 5: bList =  [11];break;// 超时关闭
-						case 6: bList =  [9];break;// 退款中
-						case 7: bList =  [11];break;// 已退款
-						case 8: bList =  [7];break;// 拒绝退款
-						case 9: bList =  [2];break;// 待确认
+					switch(orderState) {
+						case 0:
+							bList = [2, 5];
+							break; // 待付款
+						case 1:
+							bList = [6];
+							break; // 待出行
+						case 2:
+							bList = [6, 10];
+							break; // 待完成
+						case 3:
+							bList = [11];
+							break; // 已完成
+						case 4:
+							bList = [11];
+							break; // 已取消
+						case 5:
+							bList = [11];
+							break; // 超时关闭
+						case 6:
+							bList = [9];
+							break; // 退款中
+						case 7:
+							bList = [11];
+							break; // 已退款
+						case 8:
+							bList = [7];
+							break; // 拒绝退款
+						case 9:
+							bList = [2];
+							break; // 待确认
 					}
-				}else if(this.identityType == 'seller'){
+				} else if(this.identityType == 'seller') {
 					// 卖家
-					switch (orderState){
-						case 0: bList = [3,4];break;// 待付款
-						case 1: bList =  [3];break;// 待出行
-						case 2: bList =  [3];break;// 待完成
-						case 3: bList =  [11];break;// 已完成
-						case 4: bList =  [11];break;// 已取消
-						case 5: bList =  [11];break;// 超时关闭
-						case 6: bList =  [7];break;// 退款中
-						case 7: bList =  [11];break;// 已退款
-						case 8: bList =  [8];break;// 拒绝退款
-						case 9: bList =  [1,2];break;// 待确认
+					switch(orderState) {
+						case 0:
+							bList = [3, 4];
+							break; // 待付款
+						case 1:
+							bList = [3];
+							break; // 待出行
+						case 2:
+							bList = [3];
+							break; // 待完成
+						case 3:
+							bList = [11];
+							break; // 已完成
+						case 4:
+							bList = [11];
+							break; // 已取消
+						case 5:
+							bList = [11];
+							break; // 超时关闭
+						case 6:
+							bList = [7];
+							break; // 退款中
+						case 7:
+							bList = [11];
+							break; // 已退款
+						case 8:
+							bList = [8];
+							break; // 拒绝退款
+						case 9:
+							bList = [1, 2];
+							break; // 待确认
 					}
 				}
-				this.btnList.forEach((v,i)=>{
-					bList.forEach((x)=>{
-						if(x == v.id)newBtnList.push(v);
+				this.btnList.forEach((v, i) => {
+					bList.forEach((x) => {
+						if(x == v.id) newBtnList.push(v);
 					})
 				});
-				
+
 				return newBtnList;
 			},
 			// 按钮事件
-			onBtn(liObj,btnObj){
-				if(btnObj.id == 3){
+			onBtn(liObj, btnObj) {
+				if(btnObj.id == 3) {
 					// 订单备注
 					let sellerNote = liObj.sellerNote ? liObj.sellerNote : '';
-					this.$tool.prompt({inputValue: sellerNote, inputPlaceholder: '请输入备注内容'}, '备注',(e)=>{
+					this.$tool.prompt({
+						inputValue: sellerNote,
+						inputPlaceholder: '请输入备注内容'
+					}, '备注', (e) => {
 						let reqInfo = {};
 						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.sellerNote = e.value;
-						this.$abyApi.Order.addIntro(reqInfo,(res)=>{
+						this.$abyApi.Order.addIntro(reqInfo, (res) => {
 							this.getDetail();
 						});
 					});
-				}else if(btnObj.id == 4){
+				} else if(btnObj.id == 4) {
 					// 修改价格
 					let payment = liObj.payment;
-					this.$tool.prompt({inputValue: payment, inputPlaceholder: '请输入新价格'},'输入价格',(e)=>{
+					this.$tool.prompt({
+						inputValue: payment,
+						inputPlaceholder: '请输入新价格'
+					}, '输入价格', (e) => {
 						let reqInfo = {};
 						reqInfo.orderId = liObj.orderInfo.orderId;
 						reqInfo.payment = e.value;
@@ -306,63 +436,63 @@
 							this.$tool.toast('金额不能低于¥100！');
 							return;
 						};
-						
-						if(parseFloat(reqInfo.payment).toFixed(2).length>10){
+
+						if(parseFloat(reqInfo.payment).toFixed(2).length > 10) {
 							this.$tool.toast('结算价格过大，暂不支持！');
 							return;
 						};
-						this.$abyApi.Order.editPrice(reqInfo,(res)=>{
+						this.$abyApi.Order.editPrice(reqInfo, (res) => {
 							this.getDetail();
 						});
 					})
-				}else if(btnObj.id == 5){
+				} else if(btnObj.id == 5) {
 					// 去支付
 					this.$router.push({
-						name:"payWay",
-						params:{
+						name: "payWay",
+						params: {
 							orderId: liObj.id,
 						}
 					})
-				}else if(btnObj.id == 6){
+				} else if(btnObj.id == 6) {
 					// 申请退款
 					this.$router.push({
 						name: 'refundApply',
 						params: {
 							orderId: liObj.id,
-							identityType:this.identityType
+							identityType: this.identityType
 						}
 					});
-				}else if(btnObj.id == 7 || btnObj.id == 8 || btnObj.id == 9){
+				} else if(btnObj.id == 7 || btnObj.id == 8 || btnObj.id == 9) {
 					// 退款处理 退款详情
 					this.$router.push({
 						name: 'refundDetail',
 						params: {
 							orderId: liObj.id,
-							identityType:this.identityType
+							identityType: this.identityType
 						}
 					});
-				}else{
-					this.$tool.confirm('您确定要'+btnObj.title+'吗？',(res)=>{
+				} else {
+					this.$tool.confirm('您确定要' + btnObj.title + '吗？', (res) => {
 						let reqInfo = {};
 						reqInfo.orderId = liObj.id;
-						if(btnObj.id == 1){
+						if(btnObj.id == 1) {
 							// 确认订单
-							this.$abyApi.Order.confirmOrder(reqInfo,(res)=>{
+							this.$abyApi.Order.confirmOrder(reqInfo, (res) => {
 								this.getDetail();
 							});
-						}else if(btnObj.id == 2){
+						} else if(btnObj.id == 2) {
 							// 取消订单
-							this.$abyApi.Order.cancelOrder(reqInfo,(res)=>{
+							this.$abyApi.Order.cancelOrder(reqInfo, (res) => {
 								this.getDetail();
 							});
-						}else if(btnObj.id == 10){
+						} else if(btnObj.id == 10) {
 							// 确认订单
-							this.$abyApi.Order.transactionCompletion(reqInfo,(res)=>{
+							this.$abyApi.Order.transactionCompletion(reqInfo, (res) => {
 								this.getDetail();
 							});
-						}else if(btnObj.id == 11){
+						} else if(btnObj.id == 11) {
 							// 删除订单
-							this.$abyApi.Order.deleteOrder(reqInfo,(res)=>{
+							this.$abyApi.Order.deleteOrder(reqInfo, (res) => {
 								this.getDetail();
 							});
 						}
@@ -370,11 +500,11 @@
 				}
 			},
 			// 获得详情
-			getDetail(){
+			getDetail() {
 				this.$refs.page.showLoading();
 				let reqInfo = {};
 				reqInfo.orderId = this.orderId;
-				this.$abyApi.Order.getOrderDetail(reqInfo,(res)=>{
+				this.$abyApi.Order.getOrderDetail(reqInfo, (res) => {
 					this.$refs.page.closeLoading();
 					res.data.orderInfo.proSummary = JSON.parse(res.data.orderInfo.proSummary);
 					res.data.orderSummary = JSON.parse(res.data.orderSummary);
@@ -383,36 +513,36 @@
 					let reqfee = {};
 					reqfee.payment = res.data.payment;
 					reqfee.identityType = this.identityType;
-					this.$abyApi.Order.getServiceFee(reqfee,(rtn)=>{
+					this.$abyApi.Order.getServiceFee(reqfee, (rtn) => {
 						this.serviceFee = rtn.data;
 					});
 					//倒计时
 					if(this.info.orderState == 0) {
 						let remainTime = this.info.countDownTimestamp;
 						let timer;
-						timer = setInterval(()=>{
-							if(remainTime > 0 ) {
+						timer = setInterval(() => {
+							if(remainTime > 0) {
 								this.info.waitConfirmDownTimestamp = remainTime - 1;
 								remainTime = remainTime - 1;
-								if(!this.isCear){
-									document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime+1);
+								if(!this.isCear) {
+									document.getElementById('countDownTimestamp').innerHTML = this.$tool.getRTime(remainTime + 1);
 								}
 							} else {
 								clearInterval(timer);
 							}
-		
+
 						}, 1000);
-					}else if(this.info.orderState == 2) {
-						
+					} else if(this.info.orderState == 2) {
+
 						//待确认状态的订单
 						let remainTime = this.info.waitConfirmDownTimestamp;
 						let timer;
-						timer = setInterval(()=>{
-							if(remainTime > 0 ) {
+						timer = setInterval(() => {
+							if(remainTime > 0) {
 								this.info.waitConfirmDownTimestamp = remainTime - 1;
 								remainTime = remainTime - 1;
-								if(!this.isCear){
-									document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime+1);
+								if(!this.isCear) {
+									document.getElementById('waitConfirmDownTimestamp').innerHTML = this.$tool.getRTime(remainTime + 1);
 								}
 							} else {
 								clearInterval(this.timer);
@@ -422,19 +552,19 @@
 				})
 			},
 			//聊天
-			toChat(){
+			toChat() {
 				this.$router.push({
 					name: 'chat',
 					params: {
-						userId:this.identityType == 'seller' ? this.info.buyerId : this.info.sellerId
+						userId: this.identityType == 'seller' ? this.info.buyerId : this.info.sellerId
 					}
 				});
 			},
 			//查看协议详情
-			toAgrDetail(){
-				if(this.agreementId != ''){
+			toAgrDetail() {
+				if(this.agreementId != '') {
 					this.$router.back();
-				}else{
+				} else {
 					this.$router.push({
 						name: 'agrDetail',
 						params: {
@@ -444,7 +574,7 @@
 					});
 				}
 			},
-			toHomepage(userId){
+			toHomepage(userId) {
 				let reqInfo = {
 					userId: userId
 				};
@@ -452,18 +582,18 @@
 					this.$refs.page.closeLoading();
 					this.cpId = res.cpUserInfo.cpId;
 					this.$router.push({
-						name:"homePage",
-						params:{
+						name: "homePage",
+						params: {
 							cpId: this.cpId
 						}
 					})
 				});
 			}
-			
+
 		},
 		mounted() {
 			this.getDetail();
-			
+
 			this.pageNum = this.page == 'agrDetail' ? 2 : 1;
 		},
 		watch: {
@@ -472,18 +602,18 @@
 			}
 		},
 		beforeRouteEnter(to, from, next) {
-			if(to.params.agreementId||from.name=='orderList'){
+			if(to.params.agreementId || from.name == 'orderList') {
 				next(vm => {
 					vm.init()
 				})
-			}else{
+			} else {
 				next(vm => {
-					vm.isCear= false
+					vm.isCear = false
 				})
 			}
 		},
-		beforeRouteLeave(to, from, next){
-			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay' || to.name == 'agrDetail' || to.name == 'chat'){
+		beforeRouteLeave(to, from, next) {
+			if(to.name == 'orderList' || to.name == 'refundApply' || to.name == 'payWay' || to.name == 'agrDetail' || to.name == 'chat') {
 				this.isCear = true;
 			}
 			next();
@@ -492,5 +622,5 @@
 </script>
 
 <style>
-	
+
 </style>

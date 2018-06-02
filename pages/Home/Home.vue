@@ -459,7 +459,7 @@
 	/*首页消息模块内容样式*/
 	.msg{
 		position: relative;
-		padding-right: 85px;
+		padding-right: 95px;
 	}
 	.msg-one{
 		padding-top: 10px;

@@ -13,7 +13,7 @@
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
 						<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
-						{{li.publisher.cpName}}
+						<div class="publisher mui-ellipsis">{{li.publisher.cpName}}</div>
 						<p class="time">{{li.publishTime | filterConvertDateFromNowBy13}}</p>
 						<aby-icon-color class="ptype" v-if="li.selectType == 10" type="line"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 20" type="hotel"></aby-icon-color>
@@ -292,5 +292,11 @@
 		height: 24px;
 		right: 0px;
 		top: 8px;
+	}
+	.publisher{
+		padding-left: 17px;
+	}
+	.aby-gold{
+		position: absolute;
 	}
 </style>

@@ -187,7 +187,7 @@
 			<div class="aby-detail-content" v-if="info.sellerNote">
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell mui-media">
-						<div class="mui-media-object mui-pull-left">特殊要求</div>
+						<div class="mui-media-object mui-pull-left">订单备注</div>
 						<div class="mui-media-body">{{info.sellerNote}}</div>
 					</li>
 				</ul>

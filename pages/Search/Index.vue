@@ -1,14 +1,17 @@
 <template>
 	<div class="aby-bg-white">
 		<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @click="goBack"></div>
-		<mt-search class="searchPanel" v-model="value" cancel-text="取消" @keyup.enter.native="onSearch" placeholder="搜索">
-			<!--<div class="type-page-item  keyWordBtn" v-for="(li,i) in list" :key="i">
+		<form action="">
+			<mt-search class="searchPanel" v-model="value" cancel-text="取消" @keyup.enter.native="onSearch" placeholder="搜索">
+				<!--<div class="type-page-item  keyWordBtn" v-for="(li,i) in list" :key="i">
 				<div class="mui-pull-left page-item-content aby-font-Black" @click="onSearchType(li.keyword,li.searchType)">
 					{{li.keyWordDescribe}}
 				</div>
 			</div>
 			<br style="clear: both;" />-->
-		</mt-search>
+			</mt-search>
+		</form>
+
 		<aby-tab :list="tabList" page="indexSearch" @eventTabBack="eventTab" slot="tab">
 			<div class="history" v-for="(li,i) in tabList" :key="i" :slot="li.id">
 				<h5>搜索历史<aby-icon type="delete" class="mui-pull-right icodelete" @click.native="clearSearch(i)"></aby-icon></h5>
@@ -66,7 +69,7 @@
 			},
 			// 键盘搜索按钮事件
 			onSearch() {
-				this.$tool.localStorage.setSearch(this.tabSelect,this.value);
+				this.$tool.localStorage.setSearch(this.tabSelect, this.value);
 				this.toResult();
 			},
 			// 搜索类型点击事件
@@ -106,15 +109,14 @@
 				this.tabSelectId = e.id;
 			},
 			// 清空搜索记录
-			clearSearch(key){
-				this.$tool.confirm('您确定要清空搜索记录吗？',(res)=>{
+			clearSearch(key) {
+				this.$tool.confirm('您确定要清空搜索记录吗？', (res) => {
 					this.tabList[key].searchList = [];
 					this.$tool.localStorage.clearSerch(this.tabSelect);
 				});
 			}
 		},
-		mounted() {
-		},
+		mounted() {},
 	}
 </script>
 

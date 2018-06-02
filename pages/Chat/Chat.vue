@@ -304,8 +304,8 @@
 	.icon-face,
 	.icon-plus,
 	.icon-send {
-		font-size: 32px;
-		margin-top: -2px;
+		font-size: 37px;
+		margin-top: -4px;
 	}
 	.icon-face,
 	.icon-plus{
@@ -350,13 +350,13 @@
 		left: 0px;
 		bottom: 0px;
 		overflow: hidden;
-		padding: 0px 80px 0 10px;
+		padding: 0px 90px 0 10px;
 		background-color: #fafafa;
 	}
 	
 	.footer-right {
 		position: absolute;
-		width: 80px;
+		width: 90px;
 		height: 50px;
 		right: 0px;
 		bottom: 0px;

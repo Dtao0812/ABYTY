@@ -58,6 +58,9 @@
 				});
 				return info;
 			},
+			chatNum(){
+				return this.$store.state.chatNum;
+			}
 		},
 		methods:{
 			init(){
@@ -136,6 +139,9 @@
 				if(val.length>0&&(JSON.stringify(val)!=JSON.stringify(this.chatList))){
 					this.chatList = val;
 				}
+			},
+			chatNum(val){
+				this.init();
 			}
 		}
 	}

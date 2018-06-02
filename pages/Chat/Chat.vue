@@ -63,6 +63,7 @@
 				userInfo: '', //用户信息
 				msgList: [], //消息列表
 				scrollTop:0,
+				pageType:'activated'
 			}
 		},
 		computed: {
@@ -249,7 +250,7 @@
 		},
 		watch: {
 			chatList(val){
-				if(val.length>0){
+				if(val.length>0 && this.pageType == 'activated'){
 					let isAdd = true;
 					this.msgList.forEach((v,i)=>{
 						val.forEach((x)=>{
@@ -271,6 +272,12 @@
 					}
 				}
 			}
+		},
+		activated() {
+			this.pageType = 'activated';
+		},
+		deactivated() {
+			this.pageType = 'deactivated';
 		},
 	}
 </script>

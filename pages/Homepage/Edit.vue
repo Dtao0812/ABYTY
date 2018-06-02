@@ -181,8 +181,8 @@
 </script>
 
 <style scoped>
-	.editBox{
-		margin-top: 45px;
+	.mui-content{
+		margin-top: 46px;
 	}
 	textarea {
 		margin: 10px 5%;

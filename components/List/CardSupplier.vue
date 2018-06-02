@@ -14,6 +14,7 @@
 						<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>{{li.cpCityName}}
 					</p>
 					<p>
+						<img class="aby-gold mui-pull-left" src="../../static/images/ico/ico_bond_3x.png" />
 						<span class="look  mui-pull-right"><aby-icon type="hot" class="icohot"></aby-icon>立即查看</span>
 					</p>
 				</div>

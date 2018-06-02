@@ -6,9 +6,9 @@
 			<div class="aby-detail-header mui-text-center">
 				<h4 id="orderStateDesc">{{info.orderStateDesc}}</h4>
 				<div v-if="identityType == 'seller'">
-					<p v-if="info.orderState==0" id="countDown">买家还有<span id="countDownTimestamp" style="display: inline-block;"></span>完成支付，超时将自动关闭</p>
+					<p v-if="info.orderState==0" id="countDown">买家还有<span id="countDownTimestamp" style="display: inline-block;color: #FF9800;"></span>完成支付，超时将自动关闭</p>
 					<p v-if="info.orderState==1">买家已付款，等待发团日期发团</p>
-					<p v-if="info.orderState==2" id="waitFinishTime">等待买家确认完成，还有<span id="waitConfirmDownTimestamp" style="display: inline-block;"></span>自动确认</p>
+					<p v-if="info.orderState==2" id="waitFinishTime">等待买家确认完成，还有<span id="waitConfirmDownTimestamp" style="display: inline-block;color: #FF9800;"></span>自动确认</p>
 					<p v-if="info.orderState==3">完成时间：{{info.endTime | filterConvertDate}}</p>
 					<p v-if="info.orderState==4">订单已被取消，取消时间：{{info.closeTime | filterConvertDate}}</p>
 					<p v-if="info.orderState==5">订单超时，已自动关闭</p>
@@ -20,7 +20,7 @@
 				<div v-if="identityType == 'buyer'">
 					<p v-if="info.orderState==0" id="countDown">您有<span id="countDownTimestamp" style="display: inline-block;"></span><br />完成支付，如果超时将自动关闭</p>
 					<p v-if="info.orderState==1">订单已支付，等待发团日期发团</p>
-					<p v-if="info.orderState==2" id="waitFinishTime">旅游团已发出，行程结束后记得确认付款喔～还有<span><span id="waitConfirmDownTimestamp" style="display: inline-block;"></span></span>自动确认</p>
+					<p v-if="info.orderState==2" id="waitFinishTime">旅游团已发出，行程结束后记得确认付款喔～还有<span><span id="waitConfirmDownTimestamp" style="display: inline-block;color: #FF9800;"></span></span>自动确认</p>
 					<p v-if="info.orderState==3">完成时间：{{info.endTime | filterConvertDate}}</p>
 					<p v-if="info.orderState==4">供应商已取消了您的订单</p>
 					<p v-if="info.orderState==5">订单超时，已自动关闭</p>
@@ -40,9 +40,9 @@
 							<img class="mui-media-object mui-pull-left" :src="info.buyerFace">
 							<div class="mui-media-body mui-ellipsis">
 								{{info.buyerCpname}}
-								<p>
+								<!--<p>
 									<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
-								</p>
+								</p>-->
 							</div>
 						</li>
 					</ul>

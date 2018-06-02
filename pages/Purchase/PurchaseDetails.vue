@@ -238,9 +238,9 @@
 							<a>
 								<img class="mui-media-object mui-pull-left" :src="data.publisher.cpLogo">
 								<div class="mui-media-body mui-ellipsis">
-									<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
+									<img v-if="data.publisher.depositType == 1" class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
 									{{data.publisher.cpName}}
-									<p>{{data.crateTime | filterConvertDateFromNow}}<span class="mui-pull-right">浏览（{{data.readCnt}}）</span></p>
+									<p>{{$tool.abyDateFun.getShortTime(data.publishTime)}}<span class="mui-pull-right">浏览（{{data.readCnt}}）</span></p>
 								</div>
 							</a>
 						</li>

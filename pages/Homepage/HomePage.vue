@@ -14,7 +14,7 @@
 						<p class='mui-ellipsis'>{{cpUserInfo.cpBasic.cpName||'未设置'}}</p>
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_ID_3x.png" />
 						<img class="aby-img-Authentication" src="../../static/images/ico/ico_license_3x.png" />
-						<img class="aby-img-gold" src="../../static/images/ico/ico_bond_3x.png" />
+						<img v-if="cpUserInfo.depositType == 1" class="aby-img-gold" src="../../static/images/ico/ico_bond_3x.png" />
 					</div>
 				</li>
 			</ul>

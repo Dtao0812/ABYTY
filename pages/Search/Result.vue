@@ -109,7 +109,7 @@
 						// 上拉
 						this.lists = this.lists.concat(res.proList);
 					}
-					callback && callback(true);
+					callback && callback(res.lists.length);
 				}, (err) => {callback && callback(false)});
 			},
 			// 获得酒店列表
@@ -124,7 +124,7 @@
 						// 上拉
 						this.lists = this.lists.concat(res.hotelList);
 					}
-					callback && callback(true);
+					callback && callback(res.lists.length);
 				}, (err) => {callback && callback(false)});
 			},
 			// 获得景点列表
@@ -154,7 +154,7 @@
 						// 上拉
 						this.lists = this.lists.concat(res.scenicList);
 					}
-					callback && callback(true);
+					callback && callback(res.lists.length);
 				}, (err) => {callback && callback(false)});
 			},
 			// 获得搜索结果
@@ -169,12 +169,12 @@
 				
 				if(this.type == 10){
 					this.getLineList(reqInfo,1,(res) => {callback && callback(res)});
-				}else if(this.type == 20){
-					
 				}else if(this.type == 30){
 					this.getHotelList(reqInfo,1,(res) => {callback && callback(res)});
 				}else if(this.type == 40){
 					this.getSportList(reqInfo,1,(res) => {callback && callback(res)});
+				}else{
+					this.isNull = true;
 				}
 			},
 			getPullUp(callback) {
@@ -187,12 +187,12 @@
 				
 				if(this.type === 10){
 					this.getLineList(reqInfo,2,(res) => {callback && callback(res)});
-				}else if(this.type === 20){
-					
 				}else if(this.type === 30){
 					this.getHotelList(reqInfo,2,(res) => {callback && callback(res)});
 				}else if(this.type === 40){
 					this.getSportList(reqInfo,2,(res) => {callback && callback(res)});
+				}else{
+					this.isNull = true;
 				}
 				
 			},

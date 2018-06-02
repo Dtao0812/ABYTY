@@ -270,7 +270,15 @@
 				if(val.length>0){
 					setTimeout(()=>{
 						if(JSON.stringify(this.dbmsgList)!=JSON.stringify(this.msgList)){
-							this.msgList = this.$tool.arrReverse(val);
+							let list = [];
+							val.forEach((v)=>{
+								let isAdd = false;
+								list.forEach((x)=>{
+									if(v.msgId == x.msgId)isAdd = true;
+								});
+								if(!isAdd)list.push(v);
+							})
+							this.msgList = this.$tool.arrReverse(list);
 						}
 					},300);
 					this.isShowMsg = true;

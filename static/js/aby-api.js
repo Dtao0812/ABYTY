@@ -13,8 +13,8 @@ const authVi = '!QAZCDE#5tgbmju7';
 // 融云key
 const RongIMKey = '6tnym1brnxe97';
 // 服务器地址
-//const AbyUrl = 'http://114.215.202.155/';
-const AbyUrl = 'http://www.ai-by.com/';
+const AbyUrl = 'http://114.215.202.155/';
+//const AbyUrl = 'http://www.ai-by.com/';
 
 // axios配置
 axios.defaults.baseURL = AbyUrl + 'aby/';
@@ -323,7 +323,7 @@ const Sys = {
 	// 获得消息数
 	getMsgNum() {
 		Vue.$abyDb.Msg.get((res) => {
-			if(res && res.value.isRead == 0) {
+			if(res && (!res.value.isRead||res.value.isRead==0)) {
 				let info = {}
 				info.title = res.value.msgType;
 				info.value = res.value.msgId;
@@ -1254,6 +1254,7 @@ const Chat = {
 							title: 'isConnectChat',
 							value: false
 						});
+						Chat.connect();
 						break;
 						//域名不正确
 					case RongIMLib.ConnectionStatus.DOMAIN_INCORRECT:
@@ -1261,6 +1262,7 @@ const Chat = {
 							title: 'isConnectChat',
 							value: false
 						});
+						Chat.init();
 						break;
 						//网络不可用
 					case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
@@ -1327,7 +1329,6 @@ const Chat = {
 					message.sendUser = JSON.parse(message.content.extra);
 					message.isRead = false;
 					Chat.setImLog(message);
-
 					callBack && callBack(message);
 				}
 				// 判断消息类型

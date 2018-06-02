@@ -166,15 +166,17 @@ const mutations = {
 	},
 	// 设置消息数量
 	setMsgNum(state,info){
-		for(let i=0;i<state.messageList.length;i++){
-			let isadd = false;
-			if(state.messageList[i].id == info.title)isadd = true;
-			for(let x=0;x<state.messageList[i].list.length;x++){
-				if(state.messageList[i].list[x] == info.value)isadd = false;
-			}
-			if(isadd){
-				state.messageList[i].list = state.messageList[i].list.concat(info.value);
-				state.messageList[i].num = state.messageList[i].list.length;
+		if(info){
+			for(let i=0;i<state.messageList.length;i++){
+				let isadd = false;
+				if(state.messageList[i].id == info.title)isadd = true;
+				for(let x=0;x<state.messageList[i].list.length;x++){
+					if(state.messageList[i].list[x] == info.value)isadd = false;
+				}
+				if(isadd){
+					state.messageList[i].list = state.messageList[i].list.concat(info.value);
+					state.messageList[i].num = state.messageList[i].list.length;
+				}
 			}
 		}
 		let messageNum = 0;

@@ -4,7 +4,7 @@
 			<slot name="loading">
 				<aby-loading v-show="isLoading"></aby-loading>
 			</slot>
-			<div id="loadDiv" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
+			<div id="loadDiv" style="height: 100%;" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
 				<slot name="loadlist" ref="loadlist"></slot>
 				<br style="clear:both"/>
 			</div>
@@ -59,8 +59,8 @@
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
-			document.getElementById('loadDiv').scrollTop = 0;
-			document.getElementById("loadDiv").style.minHeight = document.documentElement.clientHeight;
+			document.getElementById('wrapper').scrollTop = 0;
+			document.getElementById("loadDiv").style.height = document.documentElement.clientHeight;
 		},
 		watch:{
 			type(val){

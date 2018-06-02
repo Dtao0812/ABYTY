@@ -12,6 +12,7 @@
 				<div class="mui-card-header mui-card-media" @click="toHomePage(li)">
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
+						<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
 						{{li.publisher.cpName}}
 						<p class="time">{{li.publishTime | filterConvertDateFromNowBy13}}</p>
 						<aby-icon-color class="ptype" v-if="li.selectType == 10" type="line"></aby-icon-color>

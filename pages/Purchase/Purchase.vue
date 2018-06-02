@@ -12,9 +12,9 @@
 				<div class="mui-card-header mui-card-media" @click="toHomePage(li)">
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
-						<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
+						<img v-if="li.publisher.depositType == 1" class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
 						{{li.publisher.cpName}}
-						<p class="time">{{li.publishTime | filterConvertDateFromNowBy13}}</p>
+						<p class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</p>
 						<aby-icon-color class="ptype" v-if="li.selectType == 10" type="line"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 20" type="hotel"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 30" type="pticket"></aby-icon-color>

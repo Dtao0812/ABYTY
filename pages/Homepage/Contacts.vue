@@ -5,7 +5,7 @@
 			<li class="mui-table-view-cell mui-media" v-for="li in list">
 				<img class="mui-media-object mui-pull-left" :src="li.userFace">
 				<div class="mui-media-body mui-ellipsis">
-					{{li.userName}}
+					<div class="userName">{{li.userName}}</div>
 					<p class='mui-ellipsis userPost'>{{li.userPost}}</p>
 					<div class="divContact">
 						<aby-icon-color class="icocall" type="call-circle" @click.native="onTel(li.userPhone)"></aby-icon-color>
@@ -83,5 +83,7 @@
 	.userPost{
 		min-height: 23px;
 	}
-	
+	.userName{
+		min-height: 21px;
+	}
 </style>

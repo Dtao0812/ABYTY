@@ -295,9 +295,9 @@ const abyDateFun = {
 			var nMinute = nTime.getMinutes();
 			var year = (new Date).getFullYear();
 			if(year == nYear) {
-				return abyServer.pad(nMonth, 2) + '-' + abyServer.pad(nDate, 2) + ' ' + abyServer.pad(nHour, 2) + ':' + abyServer.pad(nMinute, 2);
+				return pad(nMonth, 2) + '-' + pad(nDate, 2) + ' ' + pad(nHour, 2) + ':' + pad(nMinute, 2);
 			} else {
-				return nYear + '-' + abyServer.pad(nMonth, 2) + '-' + abyServer.pad(nDate, 2) + ' ' + abyServer.pad(nHour, 2) + ':' + abyServer.pad(nMinute, 2);
+				return nYear + '-' + pad(nMonth, 2) + '-' + pad(nDate, 2) + ' ' + pad(nHour, 2) + ':' + pad(nMinute, 2);
 			}
 		}
 	}

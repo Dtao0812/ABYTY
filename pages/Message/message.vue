@@ -17,7 +17,7 @@
 				</li>
 				<li class="mui-table-view-cell mui-media" @click="toTravelList">
 					<a>
-						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/msg_interactMsg.png">
+						<img class="mui-media-object mui-pull-left" src="../../static/images/ico/ico_msginfo_3x.png">
 						<span class="mui-badge mui-badge-danger" v-show="messageList.travelNum != 0">{{messageList.travelNum}}</span>
 						<div class="mui-media-body">
 							旅游咨询

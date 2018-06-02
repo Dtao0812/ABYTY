@@ -150,6 +150,11 @@
 			},
 			messageNum(){
 				return this.$store.state.messageNum;
+			},
+			// 消息总数
+			allNum(){
+				let num = this.$store.state.messageNum + this.$store.state.orderNum + this.$store.state.chatNum;
+				return num;
 			}
 		},
 		methods: {
@@ -277,6 +282,12 @@
 			messageNum(val){
 				this.getHomeMsgList()
 			},
+			allNum(val){
+				try{
+					//设置角标
+					plus.runtime.setBadgeNumber(val);
+				}catch(e){}
+			}
 		}
 	}
 </script>

@@ -35,6 +35,10 @@
 </script>
 
 <style scoped>
+	.mui-content{
+		height: 100%;
+		background-color: #F0F0F0;
+	}
 	.divtitle{
 		background-color: #FFFFFF;
 		padding: 20px 15px 15px 15px;

@@ -931,3 +931,9 @@ small {
     height: auto;
     font-size: 13px;
 }
+/*质保金*/
+.aby-gold{
+	width: 15px;
+	vertical-align: middle;
+	margin-bottom: 3px;
+}

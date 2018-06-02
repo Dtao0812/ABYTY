@@ -7,7 +7,9 @@
 				<a href="javascript:;" @click="toHomePage(item)">
 					<img class="mui-media-object mui-pull-left aby-img-supplier" :src="item.cpLogo">
 					<div class="mui-media-body aby-list">
-						<p class="aby-list-title">{{item.cpName}}</p>
+						<p class="aby-list-title">
+							<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
+							{{item.cpName}}</p>
 						<p class="mui-ellipsis">
 							<aby-icon type="nowlocation" class="iconowlocation"></aby-icon>
 							{{item.cpCityName}}

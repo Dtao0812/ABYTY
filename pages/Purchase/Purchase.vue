@@ -13,7 +13,7 @@
 					<img :src="li.publisher.cpLogo">
 					<div class="mui-media-body mui-ellipsis">
 						<img v-if="li.publisher.depositType == 1" class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
-						<div class="publisher mui-ellipsis">{{li.publisher.cpName}}</div>
+						<div class="mui-ellipsis" :class="li.publisher.depositType == 1?'publisher':''">{{li.publisher.cpName}}</div>
 						<p class="time">{{$tool.abyDateFun.getShortTime(li.publishTime)}}</p>
 						<aby-icon-color class="ptype" v-if="li.selectType == 10" type="line"></aby-icon-color>
 						<aby-icon-color class="ptype" v-if="li.selectType == 20" type="hotel"></aby-icon-color>

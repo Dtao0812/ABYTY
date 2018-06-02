@@ -280,6 +280,11 @@
 		color: #232323;
 	}
 	
+	.time{
+		color: #999999;
+		font-weight: 400;
+	}
+	
 	.time span {
 		float: right;
 	}

@@ -7,8 +7,8 @@ require('./index.js')
 
 // 引入第三方
 // 取消移动端点击300延迟
-import fastclick from 'fastclick'
-fastclick.attach(document.body)
+//import fastclick from 'fastclick'
+//fastclick.attach(document.body)
 import Moment from 'moment'
 import axios from 'axios'
 require('./static/lib/RongImLib/RongIMLib-2.3.0.min.js')

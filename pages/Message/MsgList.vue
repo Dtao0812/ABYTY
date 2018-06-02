@@ -122,6 +122,10 @@
 </script>
 
 <style scoped>
+	.mui-content{
+		height: 100%;
+		background-color: #F0F0F0;
+	}
 	.time {
 		margin-left: 20px;
 	}

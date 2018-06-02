@@ -262,6 +262,12 @@
 			}
 		},
 		methods: {
+			init(){
+				this.$refs.page.showLoading();
+				this.selectId = this.$route.params.selectId;
+				this.data = '';
+				this.getPublishDetail();
+			},
 			onDelete(selectId){//删除询价
 				this.$tool.confirm('您确定要删除吗？', (res) => {
 					this.$abyApi.Select.delPublish(selectId, (res)=> {
@@ -302,7 +308,7 @@
 		beforeRouteEnter(to, from, next) {
 			if(from.name == 'myPurchase') {
 				next(vm => {
-					vm.getPublishDetail()
+					vm.init()
 				})
 			}else{
 				next()

@@ -40,7 +40,9 @@
 							<img class="mui-media-object mui-pull-left" :src="info.buyerFace">
 							<div class="mui-media-body mui-ellipsis">
 								{{info.buyerCpname}}
-								<p></p>
+								<p>
+									<img class="aby-gold" src="../../static/images/ico/ico_bond_3x.png" />
+								</p>
 							</div>
 						</li>
 					</ul>

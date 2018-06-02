@@ -9,7 +9,7 @@
 		</slot>
 		<div class="mui-content">
 			<div class="page-loadmore">
-				<div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }" @scroll="paperScroll" id="wrapper">
+				<div class="page-loadmore-wrapper" style="height: 100%;" ref="wrapper" :style="{ height: wrapperHeight + 'px' }" @scroll="paperScroll" id="wrapper">
 					<slot name="explain"></slot>
 					<slot name="loading">
 						<div v-if="isLoading">
@@ -125,7 +125,7 @@
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
 			document.getElementById('wrapper').scrollTop = 0;
-			document.getElementById("loadDiv").style.minHeight = document.documentElement.clientHeight;
+			document.getElementById("loadDiv").style.height = document.documentElement.clientHeight;
 		},
 		activated() {
 			document.getElementById('wrapper').scrollTop = this.$parent.scrollTop;

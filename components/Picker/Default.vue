@@ -33,7 +33,6 @@
 			}
 		},
 		mounted() {
-			
 		},
 		watch: {
 			list(val){

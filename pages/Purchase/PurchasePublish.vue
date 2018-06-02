@@ -490,16 +490,7 @@
 							this.pbLangugesList = slots;
 						});
 						// 性别
-						let dlist2 = [{
-							text: '不限',
-							value: 2
-						}, {
-							text: '男',
-							value: 1
-						}, {
-							text: '女',
-							value: 0
-						}];
+						let dlist2 = [ {text: '不限',value: 2},{text: '男',value: 1},{text: '女',value: 0}];
 						let slots2 = [{
 							flex: 1,
 							values: dlist2,
@@ -511,7 +502,8 @@
 					}
 				} else if(e.id == 'trafficType') {
 					// 选择交通方式
-					this.publishInfo.trafficType = e.selected.text;
+					this.publishInfo.trafficType = e.selected.value;
+					this.publishInfo.trafficTypeName = e.selected.text;
 					this.popupTrafficType = false;
 				} else if(e.id == 'hStarlevel') {
 					// 选择酒店标准
@@ -520,6 +512,7 @@
 				} else if(e.id == 'ticketType') {
 					// 选择航班类型
 					this.publishInfo.ticketType = e.selected.text;
+					this.publishInfo.trafficTypeName = e.selected.value;
 					this.popupTicketType = false;
 				} else if(e.id == 'pbBranched') {
 					// 选择业务范围
@@ -555,6 +548,7 @@
 					if(this.publishInfo.selectDays == '') return this.$toast("请输入行程天数");
 					if(this.publishInfo.selectDays <= 0) return this.$toast("行程天数不能小于0");
 					if(this.publishInfo.peopleNum == '') return this.$toast("请输入成人数量");
+					if(this.publishInfo.childNum < 0) return this.$toast("儿童数量不能小于0");
 					reqInfo.fromCity = this.publishInfo.fromCity;
 					reqInfo.goCity = this.publishInfo.goCity;
 					reqInfo.fromTime = this.publishInfo.fromTime;
@@ -568,7 +562,7 @@
 					if(this.publishInfo.hotelAddress == '') return this.$toast("请输入酒店地址");
 					if(this.publishInfo.liveTime == '') return this.$toast("请选择入住时间");
 					if(this.publishInfo.leaveTime == '') return this.$toast("请选择离店时间");
-					if(this.publishInfo.roomNum == 0) return this.$toast("请输入预定房间数");
+					if(this.publishInfo.roomNum <= 0) return this.$toast("请输入正确的房间数");
 					reqInfo.hotelAddress = this.publishInfo.hotelAddress;
 					reqInfo.liveTime = this.publishInfo.liveTime;
 					reqInfo.leaveTime = this.publishInfo.leaveTime;
@@ -754,6 +748,14 @@
 					if(this.$tool.abyDateFun.compareDate(this.publishInfo.leaveTime, val)) {
 						this.$toast("离店时间不能小于入住时间");
 						this.publishInfo.backTime = '';
+					}
+				}
+			},
+			leaveTime(val){
+				if(val != '' && this.publishInfo.liveTime != '') {
+					if(this.$tool.abyDateFun.compareDate(this.publishInfo.liveTime, val)) {
+						this.$toast("离店时间不能小于入住时间");
+						this.publishInfo.leaveTime = '';
 					}
 				}
 			}

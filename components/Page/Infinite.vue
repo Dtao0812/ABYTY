@@ -59,7 +59,8 @@
 		},
 		mounted() {
 			this.wrapperHeight = document.documentElement.clientHeight;
-			document.getElementById('wrapper').scrollTop = 0;
+			document.getElementById('loadDiv').scrollTop = 0;
+			console.log(document.documentElement.clientHeight)
 			document.getElementById("loadDiv").style.height = document.documentElement.clientHeight;
 		},
 		watch:{
